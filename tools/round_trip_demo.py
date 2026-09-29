@@ -7,7 +7,7 @@ import argparse
 import json
 import logging
 
-from _local import DEMO_ENV, start, wa_in
+from _local import DEMO_ENV, show_wa, start, wa_in
 
 logging.disable(logging.INFO)
 KEY = {"X-API-Key": "demo-key-rajat"}
@@ -82,7 +82,7 @@ def main():
         c.post("/whatsapp/webhook", json=wa_in("919876500001", text, f"wamid.RT{i}"))
         md.append(f"**👤 Aarav:** {text}\n")
         for m in fake.sent[before:]:
-            md.append("**🤖 Bot:**\n\n```text\n" + m["text"]["body"] + "\n```\n")
+            md.append("**🤖 Bot:**\n\n```text\n" + show_wa(m) + "\n```\n")
 
     rec2 = om["recipients"][1]
     from urllib.parse import parse_qs, urlparse
@@ -90,11 +90,12 @@ def main():
     d = call("5. Priya opens her web link (companion)", "POST", "/v1/chat/sessions", {"entry": q}, headers={},
              note="The /companion page does this call itself, passing the link's URL parameters as `entry`.")
     sid, tok = d["session_id"], d["session_token"]
-    for text in ["2", "1", "4", "1", "1"]:
+    for text in ["6", "1", "2", "1", "4", "1"]:
         r = c.post(f"/v1/chat/sessions/{sid}/messages", json={"text": text}, headers={"X-Session-Token": tok}).json()
-    md.append(f"Priya then answers `2` (Hindi), `1` (confirm class XII + Rajasthan), `4` (General), `1` (Female), "
-              f"`1` (up to ₹1 lakh). Last reply state: `{r['reply']['state']}`, "
-              f"{len(r['reply']['cards'])} scheme cards shown.\n")
+    md.append(f"Priya then picks `6` (हिंदी – the language list is alphabetical by English name), `1` (Agree to the "
+              f"consent text); Class XII and Rajasthan come from the referral, so only 3 questions are left: `2` (Female), "
+              f"`1` (up to ₹10,000 a month), `4` (General); then `1` (Proceed on the summary). Last reply state: "
+              f"`{r['reply']['state']}`, {len(r['reply']['cards'])} scheme cards shown.\n")
 
     call("6. Product 1 polls one referral", "GET", "/v1/referrals/P1-STU-0001")
     res = call("7. Product 1 polls all new results", "GET", "/v1/results?since=2026-01-01T00:00:00Z")

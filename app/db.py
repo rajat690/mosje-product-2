@@ -118,6 +118,10 @@ class ChatSession(Base):
     share_code: Mapped[Optional[str]] = mapped_column(String(20), unique=True)   # this user's REF-xxxx code
     feedback_rating: Mapped[Optional[int]] = mapped_column(Integer)
     feedback_comment: Mapped[Optional[str]] = mapped_column(String(500))
+    # --- consent (Update 1): AGREED | DECLINED | NULL (not asked yet); time in UTC; version of the notice shown
+    consent_status: Mapped[Optional[str]] = mapped_column(String(20))
+    consent_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    consent_version: Mapped[Optional[str]] = mapped_column(String(40))
     eligible_count: Mapped[Optional[int]] = mapped_column(Integer)
     started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
@@ -173,8 +177,38 @@ def init_engine(url: str | None = None):
             kwargs["poolclass"] = StaticPool
     engine = create_engine(url, **kwargs)
     SessionLocal = sessionmaker(bind=engine, expire_on_commit=False)
-    Base.metadata.create_all(engine)
+    Base.metadata.create_all(engine)          # creates missing TABLES only (never alters or drops)
+    ensure_schema(engine)                     # adds missing COLUMNS to existing tables
     return engine
+
+
+def ensure_schema(eng) -> list[str]:
+    """Safe, additive schema upgrade for an existing database (e.g. the live Neon DB).
+
+    create_all() never changes a table that already exists, so a column added to a model in a
+    later update would be missing on the old database. This adds any such column as NULLable with
+    ALTER TABLE ... ADD COLUMN (no defaults rewritten, nothing dropped, no data touched).
+    Returns the list of statements that were run (empty when the schema is already current).
+    """
+    from sqlalchemy import inspect, text
+    insp = inspect(eng)
+    done = []
+    existing_tables = set(insp.get_table_names())
+    with eng.begin() as conn:
+        for table in Base.metadata.sorted_tables:
+            if table.name not in existing_tables:
+                continue
+            have = {c["name"] for c in insp.get_columns(table.name)}
+            for col in table.columns:
+                if col.name in have or col.primary_key:
+                    continue
+                ddl = f'ALTER TABLE {table.name} ADD COLUMN {col.name} {col.type.compile(dialect=eng.dialect)}'
+                conn.execute(text(ddl))
+                done.append(ddl)
+    if done:
+        import logging
+        logging.getLogger(__name__).warning("Schema upgraded: %s", "; ".join(done))
+    return done
 
 
 def get_db():

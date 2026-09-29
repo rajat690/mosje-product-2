@@ -49,7 +49,7 @@ def admin_page(db: DB = Depends(get_db), _=Depends(admin_auth)):
     by_src: dict = {}
     for src, st, n in ref_counts:
         by_src.setdefault(src, {})[st] = n
-    statuses = ["RECEIVED", "INVITED", "IN_CONVERSATION", "COMPLETED", "OPTED_OUT"]
+    statuses = ["RECEIVED", "INVITED", "IN_CONVERSATION", "COMPLETED", "CONSENT_DECLINED", "OPTED_OUT"]
     ref_rows = [[src] + [d.get(s, 0) for s in statuses] + [sum(d.values())] for src, d in sorted(by_src.items())]
 
     sess_counts = db.execute(select(ChatSession.channel, ChatSession.status, func.count())

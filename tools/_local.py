@@ -51,6 +51,31 @@ def start():
 
 
 def wa_in(frm, text, mid):
+    """Inbound text message; 'tap:<id>' simulates tapping a reply button / list row with that id."""
+    if text.startswith("tap:"):
+        msg = {"from": frm, "id": mid, "timestamp": "1790000000", "type": "interactive",
+               "interactive": {"type": "list_reply", "list_reply": {"id": text[4:], "title": text[4:]}}}
+    else:
+        msg = {"from": frm, "id": mid, "timestamp": "1790000000", "type": "text", "text": {"body": text}}
     return {"object": "whatsapp_business_account", "entry": [{"id": "WABA", "changes": [{"field": "messages", "value": {
         "messaging_product": "whatsapp", "metadata": {"phone_number_id": DEMO_ENV["WHATSAPP_PHONE_NUMBER_ID"]},
-        "messages": [{"from": frm, "id": mid, "timestamp": "1790000000", "type": "text", "text": {"body": text}}]}}]}]}
+        "messages": [msg]}}]}]}
+
+
+def show_wa(m: dict) -> str:
+    """Readable rendering of an outbound WhatsApp message (text or interactive buttons/list)."""
+    if m.get("type") == "text":
+        return m["text"]["body"]
+    it = m.get("interactive") or {}
+    out = [it.get("body", {}).get("text", ""), ""]
+    act = it.get("action") or {}
+    if it.get("type") == "button":
+        out.append("   ".join(f"[ {b['reply']['title']} ]" for b in act.get("buttons", [])))
+    else:
+        out.append(f"[ ☰ {act.get('button', '')} ]  (list message)")
+        for sec in act.get("sections", []):
+            out.append(f"  — {sec.get('title', '')} —")
+            for r in sec["rows"]:
+                out.append(f"  • {r['title']}" + (f"  ({r['description']})" if r.get("description") else "")
+                           + f"   ‹id {r['id']}›")
+    return "\n".join(out).strip()

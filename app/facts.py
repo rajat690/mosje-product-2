@@ -56,11 +56,25 @@ def norm_state(v) -> Optional[str]:
 
 
 def norm_class(v) -> Optional[str]:
-    c = str(v or "").strip().upper().replace("CLASS", "").replace("TH", "").strip()
-    if c in {"X", "10"}:
+    """Education level: PRE (studying Class 1-10), X, XII (passed), UG, PG (studying), OTHER."""
+    raw = str(v or "").strip().upper()
+    c = re.sub(r"^(STD\.?|STANDARD|CLASS)\s*", "", raw)
+    c = re.sub(r"(\d+)\s*(ST|ND|RD|TH)\b", r"\1", c)
+    c = re.sub(r"\s*(PASSED|PASS|STANDARD|STD)$", "", c).strip()
+    if c in {"X", "10", "MATRIC", "SSLC", "SSC"}:
         return "X"
-    if c in {"XII", "12"}:
+    if c in {"XII", "12", "HSC", "INTERMEDIATE", "PLUS TWO", "+2"}:
         return "XII"
+    if c in {"PRE", "PRE-MATRIC", "PREMATRIC", "SCHOOL"} or c in {str(i) for i in range(1, 10)} or \
+            c in {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}:
+        return "PRE"
+    if c in {"UG", "GRADUATION", "GRADUATE", "UNDERGRADUATE", "DEGREE", "BACHELOR", "BA", "BSC", "BCOM", "BTECH", "DIPLOMA"}:
+        return "UG"
+    if c in {"PG", "POST GRADUATION", "POSTGRADUATE", "POST-GRADUATION", "MASTERS", "MASTER", "MA", "MSC", "MCOM",
+             "MTECH", "PHD", "M.PHIL", "MPHIL"}:
+        return "PG"
+    if c in {"OTHER", "NOT STUDYING", "NONE"}:
+        return "OTHER"
     return None
 
 

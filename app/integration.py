@@ -16,6 +16,7 @@ from sqlalchemy.orm import Session as DB
 
 from . import attribution as A
 from . import facts as F
+from .conversation.texts import LANG_CODES
 from . import results
 from .channels import whatsapp
 from .config import settings
@@ -70,8 +71,8 @@ def validate_item(raw: dict, default_source: Optional[str], caller: Caller) -> t
     if reason and reason not in REASONS:
         warns.append(f"reason '{reason}' is not a standard value ({', '.join(sorted(REASONS))}); stored as given")
     lang = str(raw.get("language") or "").strip().lower() or None
-    if lang and lang not in ("en", "hi"):
-        warns.append(f"language '{lang}' not supported (en, hi); ignored")
+    if lang and lang not in LANG_CODES:
+        warns.append(f"language '{lang}' not supported ({', '.join(LANG_CODES)}); ignored")
         lang = None
     facts, fw = F.normalise_facts(raw)
     warns += fw
@@ -456,6 +457,6 @@ def meta(caller: Caller = Depends(require_api_key)):
     e = get_engine()
     return {"api_version": "v1", "rule_version": "V3.0", "schemes_total": len(e.all_rules), "schemes_active": len(e.rules),
             "questions_asked": e.needed_facts(), "states": e.states(), "categories": F.CATEGORIES,
-            "genders": F.GENDERS, "class_passed": ["X", "XII"], "reasons": sorted(REASONS),
+            "genders": F.GENDERS, "class_passed": ["PRE", "X", "XII", "UG", "PG"], "reasons": sorted(REASONS),
             "entry_sources": ["OUTREACH", "ORGANIC", "PEER_REFERRAL"], "whatsapp_number": A.wa_number(None) or None,
-            "referral_fields": FIELDS, "languages": ["en", "hi"]}
+            "referral_fields": FIELDS, "languages": LANG_CODES}

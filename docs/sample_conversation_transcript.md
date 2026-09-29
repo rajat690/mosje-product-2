@@ -1,5 +1,7 @@
 # Sample local conversation transcripts
 
+> **Update 1 (29 Sep 2026):** these transcripts were made before Update 1 (English-first number list, no consent step, 6+ questions, plain numbered text). For the current behaviour (language first in alphabetical order, consent, max 5 questions, summary with Proceed / Edit details, short scheme cards, Share scheme, star feedback, 14 languages) see `docs/sample_update1_whatsapp_transcript.md`, `docs/sample_update1_bengali_transcript.md` and the screenshots in `docs/screenshots/`.
+
 Two scripted chats run locally (see README.md > Try it locally). Numbered replies are what the student types on WhatsApp; the web companion shows the same options as buttons. Screenshots of the web companion: docs/companion_results.png, docs/companion_share.png, docs/companion_embed_demo.png.
 
 ## A. Organic WhatsApp user (English) with feedback, share link and a friend who joins via the share code

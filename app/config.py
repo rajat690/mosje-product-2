@@ -41,6 +41,7 @@ class Settings:
     companion_public: bool = True
     public_base_url: str = ""
     max_results: int = 5
+    wa_interactive: bool = True             # WHATSAPP_INTERACTIVE=false -> plain numbered text messages
     log_level: str = "INFO"
 
     @property
@@ -71,6 +72,7 @@ def load_settings() -> Settings:
         companion_public=_env("COMPANION_PUBLIC", "true").lower() in {"1", "true", "yes"},
         public_base_url=base.rstrip("/"),
         max_results=int(_env("P2_MAX_RESULTS", "5") or 5),
+        wa_interactive=_env("WHATSAPP_INTERACTIVE", "true").lower() in {"1", "true", "yes"},
         log_level=_env("LOG_LEVEL", "INFO"),
     )
 

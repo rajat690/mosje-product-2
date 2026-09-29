@@ -33,6 +33,13 @@ COL_PORTAL = "Government Application Portal"
 COL_DOCS = "Documents Required"
 COL_BENEFITS = "Benefits Provided (≤150 chars)"
 COL_URL = "Official / Source URL"
+COL_DEPT = "Department / Agency"
+COL_TYPE = "Programme Type"
+COL_EDU_LEVEL = "Education Level / Stage"
+COL_DOMICILE = "Domicile Requirement"
+COL_MERIT = "Merit Requirement"
+COL_OTHER = "Other Eligibilities"
+COL_NOTES = "Notes / Scope"
 
 STAGES = ("Pre-Matric", "Post-Matric", "Higher Education")
 CATEGORIES = ("SC", "ST", "OBC", "General", "Minority")
@@ -74,6 +81,27 @@ class SchemeRule:
     Documents_Required: str
     Benefits: str
     Source_URL: str
+    # --- Product 2 additions: descriptive master fields (for scheme detail cards) ---
+    Department: str = ""
+    Programme_Type: str = ""
+    Education_Level_Raw: str = ""
+    Domicile_Raw: str = ""
+    Merit_Raw: str = ""
+    Other_Eligibilities: str = ""
+    Notes: str = ""
+    # --- Product 2 discovery overlay (see overlay.py); empty = master value used as is ---
+    Category_Source: str = "master"        # master | inferred-name | inferred-department | master+name-conflict
+    Gender_Source: str = "master"          # master | inferred-name
+    Target_Groups: str = ""                # '; '-joined group keys, e.g. 'disability; farmer'
+    Region_States: str = ""                # '; '-joined states for region-limited Central schemes
+    Overlay_Notes: str = ""
+    Level_Codes: str = ""                  # '; '-joined education levels (PRE X XII UG PG) when the master is specific
+    # --- Product 2 display fields (display.py), precomputed at compile time; "" = not in the master ---
+    Short_Description: str = ""            # <= 40 chars
+    Short_Eligibility: str = ""            # <= 50 chars
+    Short_Documents: str = ""              # <= 40 chars
+    Apply_URL: str = ""
+    Short_Sources: str = ""                # where each short field came from (for the audit)
 
     # parsed sets (not exported directly)
     stage_set: frozenset = field(default=frozenset(), repr=False)
@@ -85,6 +113,18 @@ class SchemeRule:
         for k in ("stage_set", "gender_set", "category_set"):
             d.pop(k)
         return d
+
+    @property
+    def target_group_set(self) -> frozenset:
+        return frozenset(g for g in self.Target_Groups.split("; ") if g)
+
+    @property
+    def level_code_set(self) -> frozenset:
+        return frozenset(g for g in self.Level_Codes.split("; ") if g)
+
+    @property
+    def region_set(self) -> frozenset:
+        return frozenset(g for g in self.Region_States.split("; ") if g)
 
 
 def _s(v) -> str:
@@ -230,6 +270,9 @@ def compile_row(row: dict, master_row: int) -> SchemeRule:
         Effective_From=config.EFFECTIVE_FROM, Effective_To="",
         Application_Portal=_s(row.get(COL_PORTAL)), Documents_Required=_s(row.get(COL_DOCS)),
         Benefits=_s(row.get(COL_BENEFITS)), Source_URL=_s(row.get(COL_URL)),
+        Department=_s(row.get(COL_DEPT)), Programme_Type=_s(row.get(COL_TYPE)),
+        Education_Level_Raw=_s(row.get(COL_EDU_LEVEL)), Domicile_Raw=_s(row.get(COL_DOMICILE)),
+        Merit_Raw=_s(row.get(COL_MERIT)), Other_Eligibilities=_s(row.get(COL_OTHER)), Notes=_s(row.get(COL_NOTES)),
         stage_set=st_set, gender_set=g_set, category_set=c_set)
 
 
@@ -248,5 +291,11 @@ def load_master(path=None, sheet=None) -> list[dict]:
     return out
 
 
-def compile_master(path=None) -> list[SchemeRule]:
-    return [compile_row(r, i) for i, r in enumerate(load_master(path), start=1)]
+def compile_master(path=None, overlay: bool = True) -> list[SchemeRule]:
+    """Compile the master. overlay=True applies Product 2's discovery overlay (overlay.py)."""
+    rules = [compile_row(r, i) for i, r in enumerate(load_master(path), start=1)]
+    if overlay:
+        from .overlay import apply_overlay
+        rules = [apply_overlay(r) for r in rules]
+    from .display import apply_display
+    return [apply_display(r) for r in rules]

@@ -29,7 +29,8 @@ router = APIRouter(prefix="/v1/chat", tags=["web chat"])
 class StartIn(BaseModel):
     external_ref: Optional[str] = Field(None, description="Referral to pre-fill from (needs X-API-Key)")
     source_system: Optional[str] = Field(None, description="Only with the admin key")
-    language: Optional[str] = Field(None, pattern="^(en|hi)$")
+    language: Optional[str] = Field(None, pattern="^(en|hi|bn|as|kn|ta|te|ml|or|bho|mai|gu|mr|pa)$",
+                                    description="Skip the language question: en hi bn as kn ta te ml or bho mai gu mr pa")
     entry: Optional[dict] = Field(None, description="Entry-source params from the page URL: src, om, r, ref, utm_*",
                                   examples=[{"src": "outreach", "om": "OM-7K3QPX", "r": "R8M2KD4TZ"}])
 

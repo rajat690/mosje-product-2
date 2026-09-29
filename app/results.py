@@ -46,6 +46,7 @@ def session_result(db: DB, s: ChatSession, referral: Referral | None = None) -> 
         "language": s.language,
         "mobile_masked": mask_mobile(s.wa_id or (referral.mobile if referral else None)),
         "prefill_used": bool(a.get("_prefill_used")),
+        "consent": {"status": s.consent_status, "at": iso(s.consent_at), "version": s.consent_version},
         "answers": public_answers(s),
         "eligible_count": s.eligible_count,
         "suggested_schemes": [{"rank": x.rank, "scheme_id": x.scheme_id, "name": x.scheme_name,

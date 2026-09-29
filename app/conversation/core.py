@@ -405,8 +405,12 @@ def _render(db: DB, s: ChatSession, tok: str) -> BotReply:
         return _reply(s, t(lang, "consent"), opts)
     if tok == "DECLINED":
         s.state = "DECLINED"
-        return _reply(s, t(lang, "consent_declined"), [item("agree", t(lang, "o_agree_now")), nav("lang", lang, "o_lang")],
-                      input_hint="text")
+        r = _reply(s, t(lang, "consent_declined"),
+                   [item("agree", t(lang, "o_agree_now")), nav("lang", lang, "o_lang")],
+                   input_hint="text")
+        r.ui = {"external_links": [{"label": "🔗 Open National Scholarship Portal",
+                                     "url": "https://scholarships.gov.in/"}]}
+        return r
     if tok == "MENU":
         s.state = "MENU"
         done = _done(s) and a.get("_summary_ok")

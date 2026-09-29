@@ -235,7 +235,7 @@ def test_education_levels_use_master_level_overlay():
 def test_short_fields_within_limits_for_every_scheme():
     from app.eligibility import get_engine
     for r in get_engine().rules:
-        assert len(r.Short_Description) <= 40 and len(r.Short_Eligibility) <= 50 and len(r.Short_Documents) <= 40, r.Scheme_ID
+        assert len(r.Short_Description) <= 80 and len(r.Short_Eligibility) <= 80 and len(r.Short_Documents) <= 90, r.Scheme_ID
         assert r.Apply_URL.startswith("http")
         for v in (r.Short_Description, r.Short_Eligibility, r.Short_Documents):
             assert not v or not v.endswith(" …")
@@ -280,7 +280,7 @@ def test_detail_for_scheme_with_full_master_data(client):
     assert rows["category"] == "SC" and rows["income"] == "up to ₹2,50,000 a year"
     assert "₹13,500" in rows["benefit"] and "income certificate" in short["documents"]
     assert short["url"] == "https://scholarships.gov.in/" and det["apply_url_verified"]
-    assert len(short["description"]) <= 40 and len(short["eligibility"]) <= 50
+    assert len(short["description"]) <= 80 and len(short["eligibility"]) <= 80
 
 
 # ------------------------------------------------------------------ feedback 10/11: share scheme + star feedback

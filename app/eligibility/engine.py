@@ -132,14 +132,19 @@ def check_jurisdiction(p: StudentProfile, s: SchemeRule):
 def check_education_stage(p: StudentProfile, s: SchemeRule):
     if p.Student_Education_Stage is None:
         return FAIL, "Education Stage: class passed not known"
+
+    # Product 2 current-education filter.  Level_Codes is finer than the broad
+    # Pre/Post-Matric/Higher-Education stage and must be enforced even when the
+    # master has no broad Education Stage value.
+    lv = level_code(p.Class_Passed)
+    if s.level_code_set and lv and lv not in s.level_code_set:
+        return FAIL, f"Education level: scheme is for {s.Level_Codes} ('{s.Education_Level_Raw}'); student level {lv}"
+
     if s.Education_Stage_Status == NO_REQ:
         return PASS, ""
     if s.Education_Stage_Status == UNRES:
         return FAIL, f"Education Stage: scheme wording '{s.Education_Stage_Raw}' not a controlled value"
     if p.Student_Education_Stage & s.stage_set:
-        lv = level_code(p.Class_Passed)
-        if s.level_code_set and lv and lv not in s.level_code_set:
-            return FAIL, f"Education level: scheme is for {s.Level_Codes} ('{s.Education_Level_Raw}'); student level {lv}"
         return PASS, ""
     return FAIL, "Education Stage: student stage not allowed by scheme"
 

@@ -1,10 +1,10 @@
 """Short display fields for scheme cards (Update 1, feedback 9).
 
 Computed once when the master is compiled (tools/compile_master.py) and stored in data/scheme_rules_v3.json:
-  Short_Description  <= 80 chars  from Benefits, else Programme Type
-  Short_Eligibility  <= 80 chars  from the structured eligibility (category, gender, level, income, groups),
+  Short_Description  <= 40 chars  from Benefits, else Programme Type
+  Short_Eligibility  <= 50 chars  from the structured eligibility (category, gender, level, income, groups),
                                   else Other Eligibilities
-  Short_Documents    <= 90 chars  from Documents Required
+  Short_Documents    <= 40 chars  from Documents Required
   Apply_URL                       Government Application Portal, else Official / Source URL
 An empty value means the master has no data; the bot then shows "See official site" (translated).
 Text is cut at a word boundary and ends with "…" when shortened.
@@ -16,7 +16,7 @@ from dataclasses import replace
 
 from .rules_compiler import NO_REQ, PARSED, SchemeRule
 
-DESC_MAX, ELIG_MAX, DOCS_MAX = 80, 80, 90
+DESC_MAX, ELIG_MAX, DOCS_MAX = 40, 50, 40
 _BOILER = " The benefit is provided to eligible students"
 GROUP_SHORT = {"disability": "students with disability", "farmer": "farmer families", "workers": "workers' children",
                "defence": "defence/police families", "school": "specific schools", "orphan": "orphans",

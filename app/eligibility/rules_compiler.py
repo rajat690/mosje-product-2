@@ -97,9 +97,9 @@ class SchemeRule:
     Overlay_Notes: str = ""
     Level_Codes: str = ""                  # '; '-joined education levels (PRE X XII UG PG) when the master is specific
     # --- Product 2 display fields (display.py), precomputed at compile time; "" = not in the master ---
-    Short_Description: str = ""            # <= 80 chars
-    Short_Eligibility: str = ""            # <= 80 chars
-    Short_Documents: str = ""              # <= 90 chars
+    Short_Description: str = ""            # <= 40 chars
+    Short_Eligibility: str = ""            # <= 50 chars
+    Short_Documents: str = ""              # <= 40 chars
     Apply_URL: str = ""
     Short_Sources: str = ""                # where each short field came from (for the audit)
 

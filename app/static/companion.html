@@ -169,16 +169,6 @@
     });
     if (r.footer) b.appendChild(el("div", "foot", r.footer));
     if (r.share) renderShare(r.share, b);
-    if (r.ui && Array.isArray(r.ui.external_links)) {
-      const links = el("div", "opts");
-      r.ui.external_links.forEach(x => {
-        if (!x || !x.url) return;
-        const a = el("a", "nav", x.label || x.url);
-        a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
-        links.appendChild(a);
-      });
-      if (links.childNodes.length) b.appendChild(links);
-    }
     log.appendChild(b);
     let opts = r.options || [];
     if (view === "LANG") {                      // language: one alphabetical dropdown + Continue

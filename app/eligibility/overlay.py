@@ -165,60 +165,12 @@ def infer_groups(name: str, dept: str) -> set:
 # Education levels asked by the bot (answers.class_passed): PRE = studying Class 1-10 (Pre-Matric),
 # X = Class 10 passed, XII = Class 12 passed, UG = studying for a degree, PG = master's / research.
 LEVELS = ["PRE", "X", "XII", "UG", "PG"]
-
-# Product 2 asks for CURRENT education level, not merely whether a scheme is broadly
-# "Post-Matric" or "Higher Education".  These controlled mappings prevent a PG student
-# from receiving UG/diploma-only schemes (and vice versa).
 LEVEL_MAP = {
-    "class 1–10": {"PRE"}, "class 1-10": {"PRE"}, "class 9–10": {"PRE"}, "class 9-10": {"PRE"},
-    "class 11–12": {"X"}, "class 11-12": {"X"},
-    "class 11 to ug": {"X", "XII", "UG"},
-    "class 11 to pg": {"X", "XII", "UG", "PG"},
-    "diploma/polytechnic": {"XII"}, "diploma / polytechnic": {"XII"}, "iti": {"XII"},
-    "ug": {"UG"}, "undergraduate": {"UG"}, "undergraduate first year": {"UG"},
-    "pg": {"PG"}, "postgraduate": {"PG"}, "post graduation": {"PG"},
-    "phd/research": {"PG"}, "phd / research": {"PG"}, "m.phil / phd": {"PG"},
-    "phd": {"PG"}, "research": {"PG"}, "postdoctoral research": {"PG"},
-    "ug/pg professional or technical course": {"UG", "PG"},
-    "undergraduate / technical": {"UG"}, "undergraduate / professional": {"UG"},
-    "higher education / research": {"PG"}, "research / higher education": {"PG"},
-    "sslc / puc / degree": {"PRE", "X", "UG"},
-    "masters / higher education": {"PG"}, "post-graduation completion": {"PG"},
-    "graduate": {"UG"}, "graduate women": {"UG"}, "m.sc. agriculture": {"PG"},
+    "postgraduate": {"PG"}, "phd / research": {"PG"}, "m.phil / phd": {"PG"}, "phd": {"PG"}, "research": {"PG"},
+    "undergraduate": {"XII", "UG"}, "undergraduate first year": {"XII", "UG"},
+    "undergraduate / technical": {"XII", "UG"}, "undergraduate / professional": {"XII", "UG"},
+    "class xi-xii": {"X"}, "class xii": {"X", "XII"}, "class 12": {"X", "XII"},
 }
-
-def infer_level_codes(name: str, raw: str) -> tuple[set, str]:
-    """Return controlled current-education codes plus an audit source.
-
-    Strong scheme-name signals override a contradictory synthetic Education Level field.
-    This is intentionally conservative: only labels that clearly identify a level are used.
-    """
-    n = (name or "").lower()
-    r = (raw or "").strip().lower()
-
-    # Explicit split variants are the strongest signal.
-    if "diploma" in n or "polytechnic" in n:
-        return {"XII"}, "scheme-name:diploma"
-    if re.search(r"\bdegree\b", n) and any(x in n for x in ("aicte", "swanath", "saksham", "pragati")):
-        return {"UG"}, "scheme-name:degree"
-    if "pre-matric" in n or "pre matric" in n:
-        return {"PRE"}, "scheme-name:pre-matric"
-    if re.search(r"post[ -]?graduate|\bpgs?\b|nts-pg", n):
-        return {"PG"}, "scheme-name:postgraduate"
-    if re.search(r"nts-ug|\bundergraduate\b|\bug scholarship\b", n):
-        return {"UG"}, "scheme-name:undergraduate"
-    if any(x in n for x in ("junior research fellowship", "senior research fellowship", "postdoctoral",
-                            "research fellowship", "research scholarship")):
-        return {"PG"}, "scheme-name:research"
-    if "fellowship" in n and not any(x in n for x in ("school", "pre-matric")):
-        return {"PG"}, "scheme-name:fellowship"
-    if "prime minister's scholarship scheme" in n or "prime ministers scholarship scheme" in n:
-        return {"UG"}, "scheme-name:PM scholarship"
-
-    lv = LEVEL_MAP.get(r)
-    if lv:
-        return set(lv), "master-education-level"
-    return set(), ""
 
 
 def apply_overlay(r: SchemeRule) -> SchemeRule:
@@ -271,10 +223,10 @@ def apply_overlay(r: SchemeRule) -> SchemeRule:
         notes.append(f"region: {upd['Region_States']}")
 
     # ---- education level (finer than the Rule 6 stage, only where the master is specific)
-    lv, lv_source = infer_level_codes(name, r.Education_Level_Raw)
+    lv = LEVEL_MAP.get((r.Education_Level_Raw or "").strip().lower())
     if lv:
         upd["Level_Codes"] = "; ".join(x for x in LEVELS if x in lv)
-        notes.append(f"education level: {upd['Level_Codes']} [{lv_source}; raw='{r.Education_Level_Raw}']")
+        notes.append(f"education level: {upd['Level_Codes']} ['{r.Education_Level_Raw}']")
 
     if not upd:
         return r

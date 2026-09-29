@@ -1,0 +1,4 @@
+external_ref,source_system,mobile,name,state,class_passed,category,gender,annual_family_income,disability,dob,reason,language
+P1-STU-0001,,9876500001,Aarav Sharma,Rajasthan,X,SC,Male,180000,no,2010-07-15,PROBABLE,en
+P1-STU-0002,,9876500002,Priya Meena,Rajasthan,XII,ST,Female,,,,PROBABLE,hi
+P1-STU-0003,,9876500003,Imran Khan,Uttar Pradesh,X,,,,,,UNLINKED,

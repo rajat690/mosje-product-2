@@ -1,0 +1,17 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Embed demo – a pretend Product 1 page</title>
+<style>body{font-family:system-ui,Arial,sans-serif;max-width:760px;margin:40px auto;padding:0 16px;color:#1f2937}code,pre{background:#f3f4f6;border-radius:6px}pre{padding:10px;overflow:auto}</style>
+</head><body>
+<h1>Pretend Product 1 page</h1>
+<p>This page shows how any Product 1 web app can embed the Scholarship Discovery Companion. Click the blue
+<b>🎓 Find scholarships</b> button in the bottom-right corner.</p>
+<h3>Option A – floating button (one line)</h3>
+<pre>&lt;script src="__BASE__/companion/embed.js" defer&gt;&lt;/script&gt;</pre>
+<h3>Option B – inline iframe</h3>
+<pre>&lt;iframe src="__BASE__/companion" style="width:380px;height:600px;border:0"&gt;&lt;/iframe&gt;</pre>
+<h3>Option C – pre-filled for a known student</h3>
+<p>Your server calls <code>POST /v1/chat/sessions</code> with your X-API-Key and <code>external_ref</code>, then puts the returned
+<code>companion_url</code> in an iframe (or passes <code>data-session</code>/<code>data-token</code> to embed.js). Never put the API key in browser code.</p>
+<script src="__BASE__/companion/embed.js" defer></script>
+</body></html>

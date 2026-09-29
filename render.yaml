@@ -1,0 +1,67 @@
+# Render Blueprint – MoSJE Product 2: Scholarship Discovery Assistant (WhatsApp + web companion)
+# SYNTHETIC / TEST DATA ONLY. Real student data must stay on NIC / MeghRaj.
+#
+# Creates: 1 free web service (mosje-p2-api) + 1 environment group (mosje-p2-shared).
+# It does NOT create a database: your Render workspace's one free Postgres is already used by
+# Product 1. Paste a Postgres URL into DATABASE_URL when Render asks (see SETUP_GUIDE.md, step 2:
+# Render paid Postgres, a free Render Postgres in a separate workspace, or free Neon Postgres).
+# Deploy: Render Dashboard -> New -> Blueprint -> paste the public GitHub repo URL -> Apply.
+# Schema: https://render.com/schema/render.yaml.json
+#
+# Notes
+# * Free web services sleep after 15 min without traffic; the first request then takes ~1 min
+#   (Meta retries webhook deliveries, so the first WhatsApp reply may be slow but still arrives).
+# * Python version comes from the .python-version file (3.13.5).
+
+envVarGroups:
+  - name: mosje-p2-shared
+    envVars:
+      - key: P2_API_KEY               # admin/master API key + admin page password (random)
+        generateValue: true
+      - key: WHATSAPP_VERIFY_TOKEN    # paste this into Meta > WhatsApp > Configuration > Verify token
+        generateValue: true
+
+services:
+  - type: web
+    name: mosje-p2-api
+    runtime: python
+    plan: free
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    autoDeployTrigger: "off"          # manual deploys only (Manual Deploy / Blueprint sync)
+    envVars:
+      - fromGroup: mosje-p2-shared
+      - key: DATABASE_URL             # Postgres connection string (asked at Blueprint creation)
+        sync: false
+      - key: WHATSAPP_TOKEN           # Meta temporary or System User access token
+        sync: false
+      - key: WHATSAPP_PHONE_NUMBER_ID # Meta > WhatsApp > API Setup > Phone number ID
+        sync: false
+      - key: WHATSAPP_APP_SECRET      # optional: Meta App settings > Basic > App secret (enables signature check)
+        sync: false
+      - key: WHATSAPP_DISPLAY_NUMBER  # optional: the test number users chat with, digits e.g. 15551234567 (for wa.me links)
+        sync: false
+      - key: P2_API_KEYS              # optional: per-Product-1 keys, e.g. p1-rajat:KEY1,p1-teamB:KEY2
+        sync: false
+      - key: ALLOWED_ORIGINS          # optional: web apps allowed to call the chat API / embed the companion
+        sync: false
+      - key: COMPANION_PUBLIC         # true = anyone with the link can try /companion (demo)
+        value: "true"
+      - key: LOG_LEVEL
+        value: INFO
+
+# Optional – ONLY if this Blueprint lives in a Render workspace that has no free Postgres yet
+# (or you want a paid one). Uncomment, and replace the DATABASE_URL entry above with:
+#      - key: DATABASE_URL
+#        fromDatabase:
+#          name: mosje-p2-db
+#          property: connectionString
+#
+# databases:
+#   - name: mosje-p2-db
+#     plan: free            # or basic-256mb (paid) – free Render Postgres expires after 30 days
+#     region: singapore
+#     databaseName: mosje_p2
+#     user: mosje_p2

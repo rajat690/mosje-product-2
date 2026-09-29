@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Scholarship Discovery Companion</title>
+<style>
+  :root{--brand:#0b5394;--bg:#f5f7fb;--bot:#ffffff;--me:#dcf2e6}
+  *{box-sizing:border-box} html,body{height:100%;margin:0}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",Arial,sans-serif;background:var(--bg);display:flex;flex-direction:column}
+  header{background:var(--brand);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
+  header .t{font-weight:600;font-size:15px} header .s{font-size:11px;opacity:.85}
+  header button{margin-left:auto;background:transparent;color:#fff;border:1px solid #ffffff88;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px}
+  #log{flex:1;overflow-y:auto;padding:12px}
+  .msg{max-width:88%;margin:6px 0;padding:9px 11px;border-radius:12px;white-space:pre-wrap;line-height:1.35;font-size:14px;box-shadow:0 1px 1px #0001}
+  .bot{background:var(--bot);border-top-left-radius:3px}
+  .me{background:var(--me);margin-left:auto;border-top-right-radius:3px}
+  .card{border:1px solid #e3e8ef;border-radius:10px;padding:8px 10px;margin-top:8px;background:#fbfdff;white-space:normal}
+  .card .n{font-weight:600;font-size:13.5px} .card .b{font-size:12.5px;color:#374151;margin-top:3px}
+  .card a{font-size:12.5px;color:var(--brand);word-break:break-all}
+  .foot{font-size:11.5px;color:#6b7280;margin-top:8px;white-space:normal}
+  .opts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+  .opts button{border:1px solid var(--brand);color:var(--brand);background:#fff;border-radius:16px;padding:6px 11px;font-size:13px;cursor:pointer}
+  .opts button:hover{background:var(--brand);color:#fff}
+  .opts.many{max-height:180px;overflow-y:auto}
+  form{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid #e5e7eb}
+  input{flex:1;padding:10px;border:1px solid #d1d5db;border-radius:20px;font-size:14px}
+  form button{background:var(--brand);color:#fff;border:0;border-radius:20px;padding:0 16px;font-size:14px;cursor:pointer}
+  .err{color:#b91c1c;font-size:12px;padding:4px 12px}
+  .typing{font-size:12px;color:#6b7280;padding:0 12px 6px}
+</style>
+</head>
+<body>
+<header>
+  <div><div class="t">🎓 Scholarship Discovery</div><div class="s">MoSJE prototype · synthetic/test use only</div></div>
+  <button id="restart" title="Start again">↻ Restart</button>
+</header>
+<div id="log" aria-live="polite"></div>
+<div id="typing" class="typing" hidden>…</div>
+<div id="err" class="err" hidden></div>
+<form id="f" autocomplete="off">
+  <input id="inp" placeholder="Type a number or a word… / नंबर या शब्द लिखें…" aria-label="Your reply">
+  <button type="submit">Send</button>
+</form>
+<script>
+(function () {
+  const qs = new URLSearchParams(location.search);
+  const API = (qs.get("api") || location.origin).replace(/\/$/, "");
+  const log = document.getElementById("log"), inp = document.getElementById("inp");
+  const errBox = document.getElementById("err"), typing = document.getElementById("typing");
+  const KEY = "mosje_p2_companion";
+  // entry-source params (outreach link, share link, utm) -> sent once when the session starts
+  const ENTRY_KEYS = ["src", "om", "r", "ref", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
+  const entry = {}; ENTRY_KEYS.forEach(k => { if (qs.get(k)) entry[k] = qs.get(k); });
+  const hasEntry = Object.keys(entry).length > 0;
+  let sid = qs.get("session"), token = qs.get("token");
+  if (!sid && !hasEntry) { try { const s = JSON.parse(sessionStorage.getItem(KEY) || "null"); if (s) { sid = s.sid; token = s.token; } } catch (e) {} }
+
+  function save() { try { sessionStorage.setItem(KEY, JSON.stringify({ sid, token })); } catch (e) {} }
+  function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+  function scroll() { log.scrollTop = log.scrollHeight; }
+  function showErr(m) { errBox.textContent = m; errBox.hidden = !m; }
+  function clearOpts() { log.querySelectorAll(".opts").forEach(o => o.remove()); }
+
+  function renderBot(r) {
+    clearOpts();
+    const b = el("div", "msg bot", (r.text || "").replace(/\*([^*\n]+)\*/g, "$1"));  // strip WhatsApp *bold*
+    (r.cards || []).forEach(c => {
+      const card = el("div", "card");
+      card.appendChild(el("div", "n", c.rank + ". " + c.name));
+      if (c.benefit) card.appendChild(el("div", "b", c.benefit));
+      if (c.apply_url) { const a = el("a", null, c.apply_url); a.href = c.apply_url; a.target = "_blank"; a.rel = "noopener"; card.appendChild(a); }
+      b.appendChild(card);
+    });
+    if (r.footer) b.appendChild(el("div", "foot", r.footer));
+    if (r.share && r.share.web_link) {
+      const sh = el("div", "card");
+      sh.appendChild(el("div", "n", "Share: " + r.share.share_code));
+      [["Web link", r.share.web_link], ["WhatsApp link", r.share.whatsapp_link]].forEach(([l, u]) => {
+        if (!u) return; const a = el("a", null, l); a.href = u; a.target = "_blank"; a.rel = "noopener";
+        sh.appendChild(el("div", null)).appendChild(a);
+      });
+      b.appendChild(sh);
+    }
+    log.appendChild(b);
+    if (r.options && r.options.length) {
+      const o = el("div", "opts" + (r.options.length > 8 ? " many" : ""));
+      r.options.forEach(op => { const btn = el("button", null, op.label); btn.type = "button"; btn.onclick = () => send(op.id, op.label); o.appendChild(btn); });
+      log.appendChild(o);
+    }
+    scroll();
+  }
+
+  async function call(method, path, body) {
+    const h = { "Content-Type": "application/json" };
+    if (token) h["X-Session-Token"] = token;
+    const res = await fetch(API + path, { method, headers: h, body: body ? JSON.stringify(body) : undefined });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) { const d = data.detail || {}; throw new Error((d.message || d || res.statusText) + " (HTTP " + res.status + ")"); }
+    return data;
+  }
+
+  async function start() {
+    showErr(""); log.innerHTML = "";
+    try {
+      const lang = qs.get("lang");
+      const body = {}; if (lang) body.language = lang; if (hasEntry) body.entry = entry;
+      const d = await call("POST", "/v1/chat/sessions", body);
+      sid = d.session_id; token = d.session_token; save(); renderBot(d.reply);
+    } catch (e) { showErr("Could not start: " + e.message); }
+  }
+
+  async function resume() {
+    try {
+      const d = await call("GET", "/v1/chat/sessions/" + encodeURIComponent(sid));
+      (d.transcript || []).slice(-12, -1).forEach(m => log.appendChild(el("div", "msg " + (m.direction === "in" ? "me" : "bot"), m.text)));
+      if (d.last_reply) renderBot(d.last_reply); else scroll();
+    } catch (e) { sid = null; token = null; start(); }
+  }
+
+  async function send(text, shown) {
+    text = (text || "").trim(); if (!text || !sid) return;
+    clearOpts(); log.appendChild(el("div", "msg me", shown || text)); scroll();
+    typing.hidden = false; showErr("");
+    try {
+      const d = await call("POST", "/v1/chat/sessions/" + encodeURIComponent(sid) + "/messages", { text });
+      if (d.session_id !== sid) { sid = d.session_id; save(); }
+      if (d.reply && d.reply.text) renderBot(d.reply);
+    } catch (e) { showErr(e.message); }
+    typing.hidden = true;
+  }
+
+  document.getElementById("f").addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value; inp.value = ""; send(v); });
+  document.getElementById("restart").onclick = () => sid ? send("restart", "↻") : start();
+  if (sid && token) { save(); resume(); } else start();
+})();
+</script>
+</body>
+</html>

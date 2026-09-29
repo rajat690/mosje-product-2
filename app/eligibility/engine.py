@@ -188,7 +188,9 @@ def check_age(p: StudentProfile, s: SchemeRule):
     if s.Age_Status == UNRES:
         return FAIL, f"Age: condition '{s.Age_Raw}' cannot be converted to a min/max age"
     if p.Calculated_Age is None:
-        return FAIL, "Age: date of birth not known"
+        # The bot does not ask date of birth (max 5 questions), so an age limit cannot be checked:
+        # the scheme is kept and the age limit is shown on the detail screen instead.
+        return PASS, ""
     if s.Age_Min is not None and p.Calculated_Age < s.Age_Min:
         return FAIL, f"Age: {p.Calculated_Age} < minimum {s.Age_Min}"
     if s.Age_Max is not None and p.Calculated_Age > s.Age_Max:

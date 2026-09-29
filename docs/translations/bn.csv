@@ -1,0 +1,199 @@
+﻿key,english,translation_bn,max_chars,length,within_limit,reviewer_correction,reviewer_comment
+welcome_named,Namaste {name}! 👋 I am the MoSJE Scholarship Discovery Assistant.,নমস্কার {name}! 👋 আমি MoSJE বৃত্তি খোঁজার সহায়ক।,,49,,,
+welcome,Namaste! 👋 I am the MoSJE Scholarship Discovery Assistant.,নমস্কার! 👋 আমি MoSJE বৃত্তি খোঁজার সহায়ক।,,42,,,
+intro,Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.,"কয়েকটি সহজ প্রশ্নের উত্তর দিন (প্রায় ২ মিনিট), আমি আপনাকে এমন বৃত্তিগুলি দেখাব যেগুলি সম্পর্কে আপনি জানতে পারেন।",,114,,,
+choose_lang,Please choose your language / कृपया भाषा चुनें:,Please choose your language / আপনার ভাষা বেছে নিন:,,50,,,
+lang_set,✅ Language: {language},✅ ভাষা: {language},,18,,,
+q_step,({n}/{total}),({n}/{total}),,13,,,
+q_class_passed,What is your current education level?,আপনার বর্তমান পড়াশোনার স্তর কী?,,32,,,
+q_state,Which state's scholarships would you like to see?,আপনি কোন রাজ্যের বৃত্তি দেখতে চান?,,34,,,
+q_category,What is your social category?,আপনার সামাজিক শ্রেণি (ক্যাটাগরি) কী?,,36,,,
+q_gender,What is your gender?,আপনার লিঙ্গ কী?,,15,,,
+q_annual_family_income,Which range best describes your family's total *monthly* income?,আপনার পরিবারের মোট *মাসিক* আয় কোন সীমার মধ্যে?,,47,,,
+current_answer,(Your current answer: {v}),(আপনার এখনকার উত্তর: {v}),,25,,,
+cls_X,Class 10 passed,দশম শ্রেণি পাস,,14,,,
+cls_XII,Class 12 passed,দ্বাদশ শ্রেণি পাস,,17,,,
+cls_PRE,Class 1–10 (Pre-Matric),শ্রেণি ১–১০ (প্রি-ম্যাট্রিক),,28,,,
+cls_UG,Graduation (UG),স্নাতক (UG),,11,,,
+cls_PG,Post Graduation (PG),স্নাতকোত্তর (PG),,16,,,
+cls_OTHER,Other / not studying,অন্য / পড়ছি না,,15,,,
+o_edu_PRE,Class 1–10 (school),শ্রেণি ১–১০ (স্কুল),20,19,yes,,
+o_edu_X,Class 10 passed,দশম শ্রেণি পাস,20,14,yes,,
+o_edu_XII,Class 12 passed,দ্বাদশ শ্রেণি পাস,20,17,yes,,
+o_edu_UG,Graduation (UG),স্নাতক (UG),20,11,yes,,
+o_edu_PG,Post Graduation (PG),স্নাতকোত্তর (PG),20,16,yes,,
+o_edu_OTHER,Other / not studying,অন্য / পড়ছি না,20,15,yes,,
+edu_d_PRE,Studying in school – Pre-Matric,স্কুলে পড়ছি – প্রি-ম্যাট্রিক,,29,,,
+edu_d_X,Matric – now in Class 11/12 (Post-Matric),মাধ্যমিক পাস – এখন একাদশ/দ্বাদশে (পোস্ট-ম্যাট্রিক),,50,,,
+edu_d_XII,"Post-Matric – college, diploma or ITI","পোস্ট-ম্যাট্রিক – কলেজ, ডিপ্লোমা বা ITI",,39,,,
+edu_d_UG,Studying for a bachelor's degree,স্নাতক ডিগ্রির পড়াশোনা,,23,,,
+edu_d_PG,"Master's degree, M.Phil or PhD","মাস্টার্স, M.Phil বা PhD",,24,,,
+edu_d_OTHER,None of the above,উপরের কোনোটিই নয়,,17,,,
+o_dont_know,Don't know,জানি না,20,7,yes,,
+o_skip,Skip,বাদ দিন,20,7,yes,,
+o_yes,Yes,হ্যাঁ,20,5,yes,,
+o_no,No,না,20,2,yes,,
+o_prefer_not,Prefer not to say,বলতে চাই না,20,11,yes,,
+cat_SC,SC,SC,20,2,yes,,
+cat_ST,ST,ST,20,2,yes,,
+cat_OBC,OBC,OBC,20,3,yes,,
+cat_General,General,সাধারণ,20,6,yes,,
+cat_Minority,Minority,সংখ্যালঘু,20,9,yes,,
+g_Female,Female,মহিলা,20,5,yes,,
+g_Male,Male,পুরুষ,20,5,yes,,
+g_Transgender,Transgender,রূপান্তরকামী,20,12,yes,,
+inc_m10k,"Up to ₹10,000","₹10,000 পর্যন্ত",24,15,yes,,
+inc_m30k,"₹10,001–₹30,000","₹10,001–₹30,000",24,15,yes,,
+inc_gt30k,"Above ₹30,000","₹30,000-এর বেশি",24,15,yes,,
+per_month,{v} a month,মাসে {v},,8,,,
+per_year,{v} a year,বছরে {v},,8,,,
+consent,"🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?","🔒 আপনার জন্য উপযোগী বৃত্তি খুঁজতে এই চ্যাটে দেওয়া তথ্য (পড়াশোনার স্তর, লিঙ্গ, পারিবারিক আয়, সামাজিক শ্রেণি ও রাজ্য) ব্যবহার করতে হবে। এগুলি শুধু প্রকল্পের পরামর্শ দিতে ব্যবহার হবে। আপনার নাম, আধার বা ব্যাঙ্কের তথ্য চাওয়া হবে না। এতে কি আপনি রাজি?",,250,,,
+o_agree,Agree,রাজি,20,4,yes,,
+o_disagree,Don't agree,রাজি নই,20,7,yes,,
+o_agree_now,I agree now,এখন রাজি,20,8,yes,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",বুঝেছি 🙏 কোনো ব্যক্তিগত তথ্য চাওয়া বা রাখা হবে না। সব বৃত্তি https://scholarships.gov.in/ -এ দেখতে পারেন। মত বদলালে নিচে ট্যাপ করুন বা HI লিখুন।,,145,,,
+summary_title,"📋 Please check your details:
+{facts}
+
+Shall I look for scholarships now?","📋 অনুগ্রহ করে আপনার তথ্য দেখে নিন:
+{facts}
+
+এখন কি বৃত্তি খুঁজব?",,64,,,
+records_note,📁 = from your records,📁 = আপনার রেকর্ড থেকে,,21,,,
+o_proceed,Proceed,এগিয়ে যান,20,10,yes,,
+o_edit,Edit details,তথ্য বদলান,20,10,yes,,
+edit_restart,"OK, let's go through the questions again.","ঠিক আছে, প্রশ্নগুলি আবার শুরু করি।",,34,,,
+fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","বুঝতে পারলাম না 🙂 নিচের একটি বিকল্পে ট্যাপ করুন বা তার নম্বর লিখুন। আপনি MENU, BACK বা HELP-ও লিখতে পারেন।",,106,,,
+nothing_back,You are at the first step.,আপনি প্রথম ধাপে আছেন।,,21,,,
+updated,✅ Updated {f}: {v},✅ {f} বদলানো হয়েছে: {v},,24,,,
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+Reply HI any time to start again.","এখন এই পরিষেবা শ্রেণি ১ থেকে স্নাতকোত্তর পর্যন্ত ছাত্রছাত্রীদের জন্য। সব বৃত্তি https://scholarships.gov.in/ -এ দেখুন।
+আবার শুরু করতে যেকোনো সময় HI লিখুন।",,155,,,
+summary,Your answers: {facts},আপনার উত্তর: {facts},,20,,,
+results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",আপনার উত্তর অনুযায়ী এই {n}টি বৃত্তি দেখতে পারেন ({total}টির মধ্যে {a}–{b}):,,76,,,
+results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,কোনো প্রকল্প নিশ্চিতভাবে আপনার সব উত্তরের সাথে মেলেনি। এই {n}টি প্রকল্প শুধু নির্দিষ্ট গোষ্ঠীর জন্য – আপনার ক্ষেত্রে প্রযোজ্য কিনা দেখুন ({total}টির মধ্যে {a}–{b}):,,164,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,আপনার সব উত্তরের সাথে মেলে এমন কোনো প্রকল্প আমাদের তালিকায় পাওয়া যায়নি। আপনি উত্তর বদলাতে পারেন বা https://scholarships.gov.in/ দেখতে পারেন।,,143,,,
+list_tap,Tap a scheme (or type its number) to see details.,বিস্তারিত দেখতে প্রকল্পে ট্যাপ করুন (বা তার নম্বর লিখুন)।,,57,,,
+check_section,Only for specific groups – check eligibility,শুধু নির্দিষ্ট গোষ্ঠীর জন্য – যোগ্যতা যাচাই করুন,,48,,,
+only_for,Only for: {groups},শুধু: {groups},,14,,,
+check_elig,check eligibility,যোগ্যতা যাচাই করুন,,18,,,
+central,Central,কেন্দ্রীয়,,10,,,
+results_foot,ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.,ℹ️ এই তালিকা শুধু আপনার উত্তর এবং বৃত্তি যোগ্যতা নিয়ম V3.0-এর উপর ভিত্তি করে। আবেদন করার পর চূড়ান্ত যোগ্যতা প্রকল্পের বিভাগ ঠিক করবে।,,135,,,
+no_more,That was the full list.,পুরো তালিকা দেখানো হয়েছে।,,26,,,
+grp_disability,students with disabilities,প্রতিবন্ধী ছাত্রছাত্রী,,22,,,
+grp_farmer,farmer families,কৃষক পরিবার,,11,,,
+grp_workers,children of specific workers,নির্দিষ্ট শ্রমিকদের সন্তান,,26,,,
+grp_defence,armed forces / police families,সেনা / পুলিশ পরিবার,,19,,,
+grp_school,students of specific schools,নির্দিষ্ট স্কুলের ছাত্রছাত্রী,,29,,,
+grp_orphan,orphans / PM CARES children,অনাথ / PM CARES শিশু,,20,,,
+grp_bpl,BPL families,BPL পরিবার,,10,,,
+grp_teachers,children of teachers,শিক্ষকদের সন্তান,,16,,,
+grp_other,a specific group,একটি নির্দিষ্ট গোষ্ঠী,,21,,,
+grp_income,family income up to {amt} a year,বছরে {amt} পর্যন্ত পারিবারিক আয়,,32,,,
+d_type,Type,ধরন,,3,,,
+d_benefit,Benefit,সুবিধা,,6,,,
+d_stage,Education stage,শিক্ষার স্তর,,12,,,
+d_category,Category,শ্রেণি (ক্যাটাগরি),,18,,,
+d_gender,Gender,লিঙ্গ,,5,,,
+d_income,Family income,পারিবারিক আয়,,13,,,
+d_income_upto,up to {amt} a year,বছরে {amt} পর্যন্ত,,18,,,
+d_age,Age,বয়স,,4,,,
+d_domicile,State / domicile,রাজ্য / বাসস্থান,,16,,,
+d_only_for,Only for,শুধু এদের জন্য,,14,,,
+d_other,Other conditions,অন্যান্য শর্ত,,13,,,
+d_deadline,Last date,শেষ তারিখ,,9,,,
+d_link,More info / apply,আরও তথ্য / আবেদন,,16,,,
+d_inferred,from scheme name – please verify,প্রকল্পের নাম থেকে – যাচাই করুন,,31,,,
+d_description,Description,বিবরণ,,5,,,
+d_eligibility,Eligibility,যোগ্যতা,,7,,,
+d_docs_short,Required documents,প্রয়োজনীয় নথি,,15,,,
+d_apply,Application,আবেদন,,5,,,
+see_site,See official site,অফিসিয়াল সাইট দেখুন,,20,,,
+more_details,More details,আরও তথ্য,,8,,,
+na,Not available – check official site,পাওয়া যায়নি – অফিসিয়াল সাইট দেখুন,,36,,,
+link_unverified,link not verified – search the scheme name on the official site,লিংক যাচাই হয়নি – অফিসিয়াল সাইটে প্রকল্পের নাম খুঁজুন,,55,,,
+guidance,ℹ️ This is guidance only – verify on the official site before applying.,ℹ️ এটি শুধু পথনির্দেশ – আবেদনের আগে অফিসিয়াল সাইটে যাচাই করুন।,,63,,,
+o_more,More schemes,আরও প্রকল্প,20,11,yes,,
+o_back,Go back,পিছনে যান,20,9,yes,,
+o_back_list,Back to list,তালিকায় ফিরুন,20,14,yes,,
+o_menu,Main menu,মূল মেনু,20,8,yes,,
+o_find,Find scholarships,বৃত্তি খুঁজুন,20,13,yes,,
+o_my_schemes,See my schemes,আমার প্রকল্প,20,12,yes,,
+o_lang,Language,ভাষা,20,4,yes,,
+o_help,Help,সাহায্য,20,7,yes,,
+o_feedback,Share feedback,মতামত দিন,20,9,yes,,
+o_share_scheme,Share scheme,প্রকল্প শেয়ার করুন,20,19,yes,,
+o_view,View details,বিস্তারিত দেখুন,20,15,yes,,
+menu_title,🏠 Main menu – what would you like to do?,🏠 মূল মেনু – আপনি কী করতে চান?,,30,,,
+help,"I help you find government scholarships in 2 minutes.
+• Tap an option or type its number.
+• BACK – previous step · MENU – main menu · HI – start again
+• LANGUAGE – change language · STOP – stop messages
+Your answers are used only to suggest schemes. Official portal: https://scholarships.gov.in/","আমি ২ মিনিটে সরকারি বৃত্তি খুঁজে পেতে আপনাকে সাহায্য করি।
+• একটি বিকল্পে ট্যাপ করুন বা তার নম্বর লিখুন।
+• BACK – আগের ধাপ · MENU – মূল মেনু · HI – আবার শুরু
+• LANGUAGE – ভাষা বদলান · STOP – বার্তা বন্ধ
+আপনার উত্তর শুধু প্রকল্প সুপারিশের জন্য ব্যবহার হয়। অফিসিয়াল পোর্টাল: https://scholarships.gov.in/",,302,,,
+stopped,You will not get more messages from us. Reply HI any time to start again.,আপনি আর আমাদের বার্তা পাবেন না। আবার শুরু করতে যেকোনো সময় HI লিখুন।,,68,,,
+reply_number,Reply with a number:,একটি নম্বর পাঠান:,,17,,,
+why,"Sorry if the list looked wrong 🙏 I only show schemes that match your answers:
+{facts}
+Schemes marked ""Only for…"" are for specific groups (for example farmer families) – check before applying. If an answer is wrong, change it below.","তালিকা ভুল মনে হলে দুঃখিত 🙏 আমি শুধু সেই প্রকল্পগুলি দেখাই যেগুলি আপনার উত্তরের সাথে মেলে:
+{facts}
+""শুধু…"" লেখা প্রকল্পগুলি নির্দিষ্ট গোষ্ঠীর জন্য (যেমন কৃষক পরিবার) – আবেদনের আগে যাচাই করুন। কোনো উত্তর ভুল হলে নিচে বদলান।",,222,,,
+why_cat_same,"Your saved category is {cat}, so schemes only for other categories are not shown.","আপনার সংরক্ষিত শ্রেণি {cat}, তাই শুধু অন্য শ্রেণির প্রকল্পগুলি দেখানো হয় না।",,77,,,
+why_cat_diff,"You mentioned {said}, but your saved category is {cat}. Tap below to update it.","আপনি {said} বলেছেন, কিন্তু সংরক্ষিত শ্রেণি {cat}। বদলাতে নিচে ট্যাপ করুন।",,73,,,
+why_early,"I show schemes after a few quick questions. Please answer the question, or change your answers any time.","কয়েকটি সহজ প্রশ্নের পরে আমি প্রকল্প দেখাই। প্রশ্নের উত্তর দিন, বা যেকোনো সময় উত্তর বদলান।",,91,,,
+q_rating,"How would you rate this service? 1 ⭐ = lowest, 5 ⭐ = highest.","এই পরিষেবাকে আপনি কত দেবেন? 1 ⭐ = সবচেয়ে কম, 5 ⭐ = সবচেয়ে ভালো।",,65,,,
+r_1,Very poor,খুব খারাপ,,9,,,
+r_2,Poor,খারাপ,,5,,,
+r_3,Okay,মোটামুটি,,8,,,
+r_4,Good,ভালো,,4,,,
+r_5,Excellent,খুব ভালো,,8,,,
+q_comment,"Thank you! Any comment or suggestion? Type it, or reply SKIP.","ধন্যবাদ! কোনো মন্তব্য বা পরামর্শ? লিখুন, বা SKIP পাঠান।",,55,,,
+share,"🙏 Thanks for your feedback!
+Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🙏 মতামতের জন্য ধন্যবাদ!
+কোনো ছাত্রছাত্রীর কাজে লাগতে পারে? আপনার ব্যক্তিগত লিঙ্ক শেয়ার করুন:
+WhatsApp: {wa}
+ওয়েব: {web}
+অথবা তাদের এই নম্বরে কোড *{code}* পাঠাতে বলুন।",,168,,,
+share_no_wa,(WhatsApp link available once the WhatsApp number is set up),(WhatsApp নম্বর সেট হলে লিংক পাওয়া যাবে),,41,,,
+share_scheme_intro,"📤 Forward this message to friends on WhatsApp, email or social media:","📤 এই বার্তাটি বন্ধুদের WhatsApp, ইমেল বা সোশ্যাল মিডিয়ায় পাঠান:",,65,,,
+share_scheme_msg,"🎓 I found this scholarship: *{name}* ({tag})
+{desc}
+Apply: {url}
+
+Find scholarships for you in 2 minutes:
+WhatsApp: {wa}
+Web: {web}","🎓 আমি এই বৃত্তিটি পেয়েছি: *{name}* ({tag})
+{desc}
+আবেদন: {url}
+
+২ মিনিটে নিজের জন্য বৃত্তি খুঁজুন:
+WhatsApp: {wa}
+ওয়েব: {web}",,127,,,
+share_subject,A scholarship you may be eligible for,একটি বৃত্তি যা আপনার কাজে লাগতে পারে,,36,,,
+share_fwd_hint,☝️ Long-press the message above and tap Forward to share it.,☝️ উপরের বার্তাটি চেপে ধরে Forward-এ ট্যাপ করুন।,,48,,,
+sh_whatsapp,WhatsApp,WhatsApp,,8,,,
+sh_email,Email,ইমেল,,4,,,
+sh_copy,Copy message,বার্তা কপি করুন,,15,,,
+sh_more,Share…,শেয়ার…,,7,,,
+sh_copied,Copied ✓,কপি হয়েছে ✓,,12,,,
+menu_hint,Type MENU for the main menu.,মূল মেনুর জন্য MENU লিখুন।,,26,,,
+lang_continue,Continue,এগিয়ে যান,,10,,,
+f_class_passed,Education level,পড়াশোনার স্তর,24,14,yes,,
+f_state,State/UT,রাজ্য/UT,24,8,yes,,
+f_category,Category,শ্রেণি (ক্যাটাগরি),24,18,yes,,
+f_gender,Gender,লিঙ্গ,24,5,yes,,
+f_annual_family_income,Family income,পারিবারিক আয়,24,13,yes,,
+wa_choose,Choose,বেছে নিন,20,8,yes,,
+wa_options,Options,বিকল্প,24,6,yes,,
+wa_nav,Navigate,নেভিগেশন,24,8,yes,,
+wa_next,More options ▶,আরও বিকল্প ▶,24,12,yes,,
+wa_prev,◀ Previous,◀ আগের,24,6,yes,,
+wa_page,Page {p} of {n} – choose an option:,পৃষ্ঠা {p} / {n} – একটি বিকল্প বেছে নিন:,,40,,,
+choose_next,What would you like to do next?,এরপর আপনি কী করতে চান?,,22,,,
+unsupported,Please reply with text (a number or a word).,অনুগ্রহ করে টেক্সটে উত্তর দিন (নম্বর বা শব্দ)।,,46,,,

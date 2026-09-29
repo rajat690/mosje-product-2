@@ -70,7 +70,7 @@ def test_income_ceiling():
 
 def test_needed_facts_derived_from_master():
     need = get_engine().needed_facts()
-    assert need[:3] == ["class_passed", "state", "category"]
-    assert "gender" in need and "annual_family_income" in need
+    # max 5 discovery questions, fixed order (Update 2: State/UT first, then education, gender, income, category)
+    assert need == ["state", "class_passed", "gender", "annual_family_income", "category"]
     # the V3.0 master has no computable age rule, so DOB is not asked
     assert "dob" not in need

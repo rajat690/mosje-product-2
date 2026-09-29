@@ -7,21 +7,47 @@
 <style>
   :root{--brand:#0b5394;--bg:#f5f7fb;--bot:#ffffff;--me:#dcf2e6}
   *{box-sizing:border-box} html,body{height:100%;margin:0}
-  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans Devanagari",Arial,sans-serif;background:var(--bg);display:flex;flex-direction:column}
+  body{font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Noto Sans","Noto Sans Devanagari","Noto Sans Bengali","Noto Sans Tamil","Noto Sans Telugu","Noto Sans Kannada","Noto Sans Malayalam","Noto Sans Oriya","Noto Sans Gujarati","Noto Sans Gurmukhi","Nirmala UI",Arial,sans-serif;background:var(--bg);display:flex;flex-direction:column}
   header{background:var(--brand);color:#fff;padding:10px 14px;display:flex;align-items:center;gap:10px}
   header .t{font-weight:600;font-size:15px} header .s{font-size:11px;opacity:.85}
-  header button{margin-left:auto;background:transparent;color:#fff;border:1px solid #ffffff88;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px}
+  header #menu{margin-left:auto} header button{background:transparent;color:#fff;border:1px solid #ffffff88;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px}
   #log{flex:1;overflow-y:auto;padding:12px}
   .msg{max-width:88%;margin:6px 0;padding:9px 11px;border-radius:12px;white-space:pre-wrap;line-height:1.35;font-size:14px;box-shadow:0 1px 1px #0001}
   .bot{background:var(--bot);border-top-left-radius:3px}
   .me{background:var(--me);margin-left:auto;border-top-right-radius:3px}
   .card{border:1px solid #e3e8ef;border-radius:10px;padding:8px 10px;margin-top:8px;background:#fbfdff;white-space:normal}
   .card .n{font-weight:600;font-size:13.5px} .card .b{font-size:12.5px;color:#374151;margin-top:3px}
+  .tag{display:inline-block;font-size:10.5px;font-weight:600;color:#0b5394;background:#e8f0fb;border-radius:8px;padding:1px 7px;margin-left:4px;vertical-align:1px}
+  .card .chk{font-size:12px;color:#92400e;background:#fef3c7;border-radius:6px;padding:3px 6px;margin-top:5px}
+  .card button.view{margin-top:7px;border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:14px;padding:4px 11px;font-size:12.5px;cursor:pointer}
+  .sec{font-size:12px;font-weight:600;color:#92400e;margin-top:10px}
+  .detail{border:1px solid #cfdcec;border-radius:12px;background:#fff;padding:10px 12px;white-space:normal}
+  .detail h3{margin:0 0 6px;font-size:15px;line-height:1.3}
+  .detail table{border-collapse:collapse;width:100%;font-size:12.8px}
+  .detail td{border-top:1px solid #eef2f7;padding:5px 4px;vertical-align:top}
+  .detail td.k{color:#6b7280;width:36%;font-weight:600}
+  .detail .na{color:#9ca3af;font-style:italic}
+  .detail .link{margin-top:8px;font-size:12.8px} .detail .link a{color:var(--brand);word-break:break-all}
+  .detail .note{margin-top:8px;font-size:12px;color:#1f2937;background:#eef6ff;border-radius:8px;padding:6px 8px}
+  .card .row{font-size:12.5px;color:#374151;margin-top:3px} .card .row b{color:#111827;font-weight:600}
+  .card .dept{font-size:11.5px;color:#4b5563;margin-top:2px}
+  .detail .short td.k{width:34%} .detail details{margin-top:8px} .detail summary{cursor:pointer;font-weight:600;font-size:13px;color:var(--brand)}
+  .langbox{display:flex;gap:6px;margin:6px 0 10px;align-items:center}
+  .langbox select{font-family:inherit;flex:1;max-width:320px;padding:8px;border:1px solid var(--brand);border-radius:10px;font-size:14px;background:#fff}
+  .langbox button,.sharebtns button,.sharebtns a{border:1px solid var(--brand);background:var(--brand);color:#fff;border-radius:16px;padding:6px 12px;font-size:13px;cursor:pointer;text-decoration:none;display:inline-block}
+  .sharemsg{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12.8px;background:#f3f4f6;border-radius:8px;padding:8px;margin-top:6px}
+  .card .sharebtns a,.card .sharebtns a:visited{color:#fff;font-size:13px;word-break:normal}
+  .sharebtns{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+  .opts.stars button{font-size:18px;padding:4px 10px;line-height:1.1;text-align:center}
+  .opts.stars button small{display:block;font-size:10.5px;color:inherit}
   .card a{font-size:12.5px;color:var(--brand);word-break:break-all}
   .foot{font-size:11.5px;color:#6b7280;margin-top:8px;white-space:normal}
   .opts{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0 10px}
+  button,select,input{font-family:inherit}
   .opts button{border:1px solid var(--brand);color:var(--brand);background:#fff;border-radius:16px;padding:6px 11px;font-size:13px;cursor:pointer}
   .opts button:hover{background:var(--brand);color:#fff}
+  .opts button.nav{border-color:#9ca3af;color:#374151;background:#f9fafb}
+  .opts button.nav:hover{background:#374151;color:#fff}
   .opts.many{max-height:180px;overflow-y:auto}
   form{display:flex;gap:6px;padding:8px;background:#fff;border-top:1px solid #e5e7eb}
   input{flex:1;padding:10px;border:1px solid #d1d5db;border-radius:20px;font-size:14px}
@@ -33,7 +59,8 @@
 <body>
 <header>
   <div><div class="t">🎓 Scholarship Discovery</div><div class="s">MoSJE prototype · synthetic/test use only</div></div>
-  <button id="restart" title="Start again">↻ Restart</button>
+  <button id="menu" title="Main menu">🏠 Menu</button>
+  <button id="restart" title="Start again" style="margin-left:6px">↻ Restart</button>
 </header>
 <div id="log" aria-live="polite"></div>
 <div id="typing" class="typing" hidden>…</div>
@@ -62,30 +89,108 @@
   function showErr(m) { errBox.textContent = m; errBox.hidden = !m; }
   function clearOpts() { log.querySelectorAll(".opts").forEach(o => o.remove()); }
 
+  const strip = t => (t || "").replace(/\*([^*\n]+)\*/g, "$1");     // strip WhatsApp *bold*
+
+  function link(u) { const a = el("a", null, u); a.href = u; a.target = "_blank"; a.rel = "noopener"; return a; }
+  const isUrl = v => /^https?:\/\//.test(v || "");
+
+  function shortRows(items, cls) {          // Description / Eligibility / Required documents / Application
+    const tb = el("table", cls);
+    items.forEach(r => {
+      const tr = el("tr"); tr.appendChild(el("td", "k", r.label));
+      const v = el("td", r.na ? "na" : null); if (isUrl(r.value)) v.appendChild(link(r.value)); else v.textContent = r.value;
+      tr.appendChild(v); tb.appendChild(tr);
+    });
+    return tb;
+  }
+
+  function renderDetail(d) {
+    const box = el("div", "msg bot detail");
+    const h = el("h3", null, d.title); if (d.tag) h.appendChild(el("span", "tag", d.tag)); box.appendChild(h);
+    if (d.department) box.appendChild(el("div", "dept", d.department));
+    box.appendChild(shortRows(d.short || [], "short"));
+    if (d.link_note) box.appendChild(el("div", "na", d.link_note));
+    const more = el("details"); more.appendChild(el("summary", null, d.more_label || "More details"));
+    const tb = el("table");
+    (d.rows || []).forEach(r => {
+      const tr = el("tr"); tr.appendChild(el("td", "k", r.label));
+      tr.appendChild(el("td", r.na ? "na" : null, r.value)); tb.appendChild(tr);
+    });
+    more.appendChild(tb); box.appendChild(more);
+    if (d.note) box.appendChild(el("div", "note", d.note));
+    return box;
+  }
+
+  function renderShare(sh, b) {
+    const L = sh.labels || {};
+    const box = el("div", "card");
+    if (sh.message) {
+      box.appendChild(el("div", "sharemsg", sh.message));
+      const btns = el("div", "sharebtns");
+      if (sh.whatsapp_share_url) { const a = link(sh.whatsapp_share_url); a.textContent = "🟢 " + (L.whatsapp || "WhatsApp"); btns.appendChild(a); }
+      if (sh.email_url) { const a = el("a", null, "✉️ " + (L.email || "Email")); a.href = sh.email_url; btns.appendChild(a); }
+      const cp = el("button", null, "📋 " + (L.copy || "Copy")); cp.type = "button";
+      cp.onclick = async () => {
+        try { await navigator.clipboard.writeText(sh.message); }
+        catch (e) { const ta = el("textarea"); ta.value = sh.message; document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove(); }
+        cp.textContent = "✅ " + (L.copied || "Copied");
+      };
+      btns.appendChild(cp);
+      if (navigator.share) {
+        const ns = el("button", null, "📤 " + (L.more || "Share…")); ns.type = "button";
+        ns.onclick = () => navigator.share({ title: sh.subject || "", text: sh.message }).catch(() => {});
+        btns.appendChild(ns);
+      }
+      box.appendChild(btns);
+    } else if (sh.web_link) {
+      box.appendChild(el("div", "n", "🔗 " + sh.share_code));
+      [sh.web_link, sh.whatsapp_link].forEach(u => { if (u) box.appendChild(el("div")).appendChild(link(u)); });
+    }
+    b.appendChild(box);
+  }
+
   function renderBot(r) {
     clearOpts();
-    const b = el("div", "msg bot", (r.text || "").replace(/\*([^*\n]+)\*/g, "$1"));  // strip WhatsApp *bold*
+    const view = r.view || "";
+    const b = r.detail ? renderDetail(r.detail) : el("div", "msg bot", strip(view.startsWith("SHARE:") && r.share ? (r.text || "").split("\n\n")[0] : r.text));
+    let sec = false;
+    const cardIds = new Set();
     (r.cards || []).forEach(c => {
+      cardIds.add(String(c.rank));
+      if (c.check && !sec && r.section_label) { b.appendChild(el("div", "sec", "⚠️ " + r.section_label)); sec = true; }
       const card = el("div", "card");
-      card.appendChild(el("div", "n", c.rank + ". " + c.name));
-      if (c.benefit) card.appendChild(el("div", "b", c.benefit));
-      if (c.apply_url) { const a = el("a", null, c.apply_url); a.href = c.apply_url; a.target = "_blank"; a.rel = "noopener"; card.appendChild(a); }
+      const n = el("div", "n", c.rank + ". " + c.name); if (c.tag) n.appendChild(el("span", "tag", c.tag));
+      card.appendChild(n);
+      if (c.department) card.appendChild(el("div", "dept", c.department));
+      // Update 2: compact listing - Description / Eligibility / Documents / Application are shown only in "View details"
+      const v = el("button", "view", "🔎 " + (c.view_label || "View details")); v.type = "button";
+      v.onclick = () => send(String(c.rank), c.rank + ". " + c.name); card.appendChild(v);
       b.appendChild(card);
     });
     if (r.footer) b.appendChild(el("div", "foot", r.footer));
-    if (r.share && r.share.web_link) {
-      const sh = el("div", "card");
-      sh.appendChild(el("div", "n", "Share: " + r.share.share_code));
-      [["Web link", r.share.web_link], ["WhatsApp link", r.share.whatsapp_link]].forEach(([l, u]) => {
-        if (!u) return; const a = el("a", null, l); a.href = u; a.target = "_blank"; a.rel = "noopener";
-        sh.appendChild(el("div", null)).appendChild(a);
-      });
-      b.appendChild(sh);
-    }
+    if (r.share) renderShare(r.share, b);
     log.appendChild(b);
-    if (r.options && r.options.length) {
-      const o = el("div", "opts" + (r.options.length > 8 ? " many" : ""));
-      r.options.forEach(op => { const btn = el("button", null, op.label); btn.type = "button"; btn.onclick = () => send(op.id, op.label); o.appendChild(btn); });
+    let opts = r.options || [];
+    if (view === "LANG") {                      // language: one alphabetical dropdown + Continue
+      const items = opts.filter(o => (o.kind || "item") === "item");
+      const box = el("div", "langbox opts");
+      const sel = el("select"); sel.setAttribute("aria-label", "Language");
+      items.forEach(o => { const op = el("option", null, o.label); op.value = o.id; if (o.selected) op.selected = true; sel.appendChild(op); });
+      const cur = (r.language || "en"), en = items.find(o => o.code === cur); if (en) sel.value = en.id;
+      const go = el("button", null, (r.ui && r.ui.continue) || "Continue ▶"); go.type = "button";
+      go.onclick = () => send(sel.value, sel.options[sel.selectedIndex].text);
+      box.appendChild(sel); box.appendChild(go); log.appendChild(box);
+      opts = opts.filter(o => o.kind === "nav");
+    }
+    if (opts.length) {
+      const stars = view === "FEEDBACK_RATING";
+      const o = el("div", "opts" + (stars ? " stars" : "") + (opts.length > 8 ? " many" : ""));
+      opts.forEach(op => {
+        if (cardIds.has(String(op.id))) return;                 // scheme rows are the cards' "View details" buttons
+        const btn = el("button", op.kind === "nav" ? "nav" : null, op.label); btn.type = "button";
+        if (stars && (op.kind || "item") === "item") { btn.title = op.desc || ""; btn.appendChild(el("small", null, (op.desc || "").replace(/^\d\s*[–-]\s*/, ""))); }
+        btn.onclick = () => send(op.id, op.label); o.appendChild(btn);
+      });
       log.appendChild(o);
     }
     scroll();
@@ -125,12 +230,13 @@
     try {
       const d = await call("POST", "/v1/chat/sessions/" + encodeURIComponent(sid) + "/messages", { text });
       if (d.session_id !== sid) { sid = d.session_id; save(); }
-      if (d.reply && d.reply.text) renderBot(d.reply);
+      if (d.reply && (d.reply.text || d.reply.detail)) { renderBot(d.reply); document.documentElement.lang = d.reply.language || "en"; }
     } catch (e) { showErr(e.message); }
     typing.hidden = true;
   }
 
   document.getElementById("f").addEventListener("submit", ev => { ev.preventDefault(); const v = inp.value; inp.value = ""; send(v); });
+  document.getElementById("menu").onclick = () => sid ? send("menu", "🏠") : start();
   document.getElementById("restart").onclick = () => sid ? send("restart", "↻") : start();
   if (sid && token) { save(); resume(); } else start();
 })();

@@ -1,0 +1,199 @@
+﻿key,english,translation_kn,max_chars,length,within_limit,reviewer_correction,reviewer_comment
+welcome_named,Namaste {name}! 👋 I am the MoSJE Scholarship Discovery Assistant.,ನಮಸ್ಕಾರ {name}! 👋 ನಾನು MoSJE ವಿದ್ಯಾರ್ಥಿವೇತನ ಹುಡುಕಾಟ ಸಹಾಯಕ.,,58,,,
+welcome,Namaste! 👋 I am the MoSJE Scholarship Discovery Assistant.,ನಮಸ್ಕಾರ! 👋 ನಾನು MoSJE ವಿದ್ಯಾರ್ಥಿವೇತನ ಹುಡುಕಾಟ ಸಹಾಯಕ.,,51,,,
+intro,Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.,"ಕೆಲವು ಸುಲಭ ಪ್ರಶ್ನೆಗಳಿಗೆ ಉತ್ತರಿಸಿ (ಸುಮಾರು 2 ನಿಮಿಷ), ನೀವು ನೋಡಬಹುದಾದ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ನಾನು ತೋರಿಸುತ್ತೇನೆ.",,105,,,
+choose_lang,Please choose your language / कृपया भाषा चुनें:,Please choose your language / ನಿಮ್ಮ ಭಾಷೆಯನ್ನು ಆಯ್ಕೆಮಾಡಿ:,,56,,,
+lang_set,✅ Language: {language},✅ ಭಾಷೆ: {language},,18,,,
+q_step,({n}/{total}),({n}/{total}),,13,,,
+q_class_passed,What is your current education level?,ನಿಮ್ಮ ಈಗಿನ ಶಿಕ್ಷಣ ಮಟ್ಟ ಯಾವುದು?,,30,,,
+q_state,Which state's scholarships would you like to see?,ನೀವು ಯಾವ ರಾಜ್ಯದ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ನೋಡಲು ಬಯಸುತ್ತೀರಿ?,,54,,,
+q_category,What is your social category?,ನಿಮ್ಮ ಸಾಮಾಜಿಕ ವರ್ಗ ಯಾವುದು?,,26,,,
+q_gender,What is your gender?,ನಿಮ್ಮ ಲಿಂಗ ಯಾವುದು?,,18,,,
+q_annual_family_income,Which range best describes your family's total *monthly* income?,ನಿಮ್ಮ ಕುಟುಂಬದ ಒಟ್ಟು *ಮಾಸಿಕ* ಆದಾಯ ಯಾವ ಮಿತಿಯಲ್ಲಿದೆ?,,49,,,
+current_answer,(Your current answer: {v}),(ನಿಮ್ಮ ಈಗಿನ ಉತ್ತರ: {v}),,23,,,
+cls_X,Class 10 passed,10ನೇ ತರಗತಿ ಪಾಸ್,,15,,,
+cls_XII,Class 12 passed,12ನೇ ತರಗತಿ ಪಾಸ್,,15,,,
+cls_PRE,Class 1–10 (Pre-Matric),1–10ನೇ ತರಗತಿ (ಪ್ರಿ-ಮೆಟ್ರಿಕ್),,28,,,
+cls_UG,Graduation (UG),ಪದವಿ (UG),,9,,,
+cls_PG,Post Graduation (PG),ಸ್ನಾತಕೋತ್ತರ (PG),,16,,,
+cls_OTHER,Other / not studying,ಇತರೆ / ಓದುತ್ತಿಲ್ಲ,,17,,,
+o_edu_PRE,Class 1–10 (school),1–10ನೇ ತರಗತಿ,20,12,yes,,
+o_edu_X,Class 10 passed,10ನೇ ತರಗತಿ ಪಾಸ್,20,15,yes,,
+o_edu_XII,Class 12 passed,12ನೇ ತರಗತಿ ಪಾಸ್,20,15,yes,,
+o_edu_UG,Graduation (UG),ಪದವಿ (UG),20,9,yes,,
+o_edu_PG,Post Graduation (PG),ಸ್ನಾತಕೋತ್ತರ (PG),20,16,yes,,
+o_edu_OTHER,Other / not studying,ಇತರೆ / ಓದುತ್ತಿಲ್ಲ,20,17,yes,,
+edu_d_PRE,Studying in school – Pre-Matric,ಶಾಲೆಯಲ್ಲಿ ಓದುತ್ತಿದ್ದೇನೆ – ಪ್ರಿ-ಮೆಟ್ರಿಕ್,,39,,,
+edu_d_X,Matric – now in Class 11/12 (Post-Matric),ಮೆಟ್ರಿಕ್ – ಈಗ 11/12ನೇ ತರಗತಿಯಲ್ಲಿ (ಪೋಸ್ಟ್-ಮೆಟ್ರಿಕ್),,50,,,
+edu_d_XII,"Post-Matric – college, diploma or ITI","ಪೋಸ್ಟ್-ಮೆಟ್ರಿಕ್ – ಕಾಲೇಜು, ಡಿಪ್ಲೊಮಾ ಅಥವಾ ITI",,43,,,
+edu_d_UG,Studying for a bachelor's degree,ಪದವಿ ಓದುತ್ತಿದ್ದೇನೆ,,18,,,
+edu_d_PG,"Master's degree, M.Phil or PhD","ಸ್ನಾತಕೋತ್ತರ, M.Phil ಅಥವಾ PhD",,28,,,
+edu_d_OTHER,None of the above,ಮೇಲಿನ ಯಾವುದೂ ಅಲ್ಲ,,17,,,
+o_dont_know,Don't know,ಗೊತ್ತಿಲ್ಲ,20,9,yes,,
+o_skip,Skip,ಬಿಟ್ಟುಬಿಡಿ,20,10,yes,,
+o_yes,Yes,ಹೌದು,20,4,yes,,
+o_no,No,ಇಲ್ಲ,20,4,yes,,
+o_prefer_not,Prefer not to say,ಹೇಳಲು ಇಷ್ಟವಿಲ್ಲ,20,15,yes,,
+cat_SC,SC,SC,20,2,yes,,
+cat_ST,ST,ST,20,2,yes,,
+cat_OBC,OBC,OBC,20,3,yes,,
+cat_General,General,ಸಾಮಾನ್ಯ,20,7,yes,,
+cat_Minority,Minority,ಅಲ್ಪಸಂಖ್ಯಾತ,20,11,yes,,
+g_Female,Female,ಹೆಣ್ಣು,20,6,yes,,
+g_Male,Male,ಗಂಡು,20,4,yes,,
+g_Transgender,Transgender,ಲಿಂಗತ್ವ ಅಲ್ಪಸಂಖ್ಯಾತ,20,19,yes,,
+inc_m10k,"Up to ₹10,000","₹10,000 ವರೆಗೆ",24,13,yes,,
+inc_m30k,"₹10,001–₹30,000","₹10,001–₹30,000",24,15,yes,,
+inc_gt30k,"Above ₹30,000","₹30,000 ಕ್ಕಿಂತ ಹೆಚ್ಚು",24,21,yes,,
+per_month,{v} a month,ತಿಂಗಳಿಗೆ {v},,12,,,
+per_year,{v} a year,ವರ್ಷಕ್ಕೆ {v},,12,,,
+consent,"🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?","🔒 ನಿಮಗೆ ಸೂಕ್ತವಾದ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ಹುಡುಕಲು, ಈ ಚಾಟ್‌ನಲ್ಲಿ ನೀವು ನೀಡುವ ಮಾಹಿತಿಯನ್ನು (ಶಿಕ್ಷಣ ಮಟ್ಟ, ಲಿಂಗ, ಕುಟುಂಬದ ಆದಾಯ, ಸಾಮಾಜಿಕ ವರ್ಗ ಮತ್ತು ರಾಜ್ಯ) ಬಳಸಬೇಕಾಗುತ್ತದೆ. ಇದನ್ನು ಯೋಜನೆಗಳನ್ನು ಸೂಚಿಸಲು ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ. ನಿಮ್ಮ ಹೆಸರು, ಆಧಾರ್ ಅಥವಾ ಬ್ಯಾಂಕ್ ವಿವರ ಕೇಳುವುದಿಲ್ಲ. ಇದು ಸರಿಯೇ?",,266,,,
+o_agree,Agree,ಒಪ್ಪುತ್ತೇನೆ,20,11,yes,,
+o_disagree,Don't agree,ಒಪ್ಪುವುದಿಲ್ಲ,20,12,yes,,
+o_agree_now,I agree now,ಈಗ ಒಪ್ಪುತ್ತೇನೆ,20,14,yes,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","ಅರ್ಥವಾಯಿತು 🙏 ಯಾವುದೇ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಕೇಳುವುದಿಲ್ಲ, ಇಟ್ಟುಕೊಳ್ಳುವುದಿಲ್ಲ. ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು https://scholarships.gov.in/ ನಲ್ಲಿ ನೋಡಬಹುದು. ಮನಸ್ಸು ಬದಲಾದರೆ ಕೆಳಗೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ HI ಎಂದು ಬರೆಯಿರಿ.",,195,,,
+summary_title,"📋 Please check your details:
+{facts}
+
+Shall I look for scholarships now?","📋 ದಯವಿಟ್ಟು ನಿಮ್ಮ ವಿವರಗಳನ್ನು ಪರಿಶೀಲಿಸಿ:
+{facts}
+
+ಈಗ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ಹುಡುಕಲೇ?",,80,,,
+records_note,📁 = from your records,📁 = ನಿಮ್ಮ ದಾಖಲೆಗಳಿಂದ,,20,,,
+o_proceed,Proceed,ಮುಂದುವರಿಸಿ,20,10,yes,,
+o_edit,Edit details,ವಿವರ ಬದಲಿಸಿ,20,11,yes,,
+edit_restart,"OK, let's go through the questions again.","ಸರಿ, ಪ್ರಶ್ನೆಗಳನ್ನು ಮತ್ತೆ ಆರಂಭಿಸೋಣ.",,34,,,
+fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","ನನಗೆ ಅರ್ಥವಾಗಲಿಲ್ಲ 🙂 ಕೆಳಗಿನ ಒಂದು ಆಯ್ಕೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ಅದರ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ. ನೀವು MENU, BACK ಅಥವಾ HELP ಎಂದೂ ಬರೆಯಬಹುದು.",,121,,,
+nothing_back,You are at the first step.,ನೀವು ಮೊದಲ ಹಂತದಲ್ಲಿದ್ದೀರಿ.,,25,,,
+updated,✅ Updated {f}: {v},✅ {f} ಬದಲಾಯಿಸಲಾಗಿದೆ: {v},,24,,,
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+Reply HI any time to start again.","ಈಗ ಈ ಸೇವೆ 1ನೇ ತರಗತಿಯಿಂದ ಸ್ನಾತಕೋತ್ತರದವರೆಗಿನ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮಾತ್ರ. ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು https://scholarships.gov.in/ ನಲ್ಲಿ ನೋಡಿ.
+ಮತ್ತೆ ಆರಂಭಿಸಲು ಯಾವಾಗ ಬೇಕಾದರೂ HI ಎಂದು ಬರೆಯಿರಿ.",,179,,,
+summary,Your answers: {facts},ನಿಮ್ಮ ಉತ್ತರಗಳು: {facts},,23,,,
+results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",ನಿಮ್ಮ ಉತ್ತರಗಳ ಆಧಾರದ ಮೇಲೆ ನೀವು ನೋಡಬಹುದಾದ {n} ವಿದ್ಯಾರ್ಥಿವೇತನ(ಗಳು) ({total} ರಲ್ಲಿ {a}–{b}):,,88,,,
+results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ಯಾವುದೇ ಯೋಜನೆ ನಿಮ್ಮ ಎಲ್ಲಾ ಉತ್ತರಗಳಿಗೆ ಖಚಿತವಾಗಿ ಹೊಂದಿಕೆಯಾಗಲಿಲ್ಲ. ಈ {n} ಯೋಜನೆ(ಗಳು) ನಿರ್ದಿಷ್ಟ ಗುಂಪುಗಳಿಗೆ ಮಾತ್ರ – ನಿಮಗೆ ಅನ್ವಯಿಸುತ್ತದೆಯೇ ನೋಡಿ ({total} ರಲ್ಲಿ {a}–{b}):,,159,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,ನಿಮ್ಮ ಎಲ್ಲಾ ಉತ್ತರಗಳಿಗೆ ಹೊಂದುವ ಯೋಜನೆ ನಮ್ಮ ಪಟ್ಟಿಯಲ್ಲಿ ಸಿಗಲಿಲ್ಲ. ನೀವು ಉತ್ತರಗಳನ್ನು ಬದಲಾಯಿಸಬಹುದು ಅಥವಾ https://scholarships.gov.in/ ನೋಡಬಹುದು.,,135,,,
+list_tap,Tap a scheme (or type its number) to see details.,ವಿವರಗಳಿಗಾಗಿ ಯೋಜನೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ (ಅಥವಾ ಅದರ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ).,,61,,,
+check_section,Only for specific groups – check eligibility,ನಿರ್ದಿಷ್ಟ ಗುಂಪುಗಳಿಗೆ ಮಾತ್ರ – ಅರ್ಹತೆ ಪರಿಶೀಲಿಸಿ,,45,,,
+only_for,Only for: {groups},ಇವರಿಗೆ ಮಾತ್ರ: {groups},,22,,,
+check_elig,check eligibility,ಅರ್ಹತೆ ಪರಿಶೀಲಿಸಿ,,16,,,
+central,Central,ಕೇಂದ್ರ,,6,,,
+results_foot,ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.,ℹ️ ಈ ಪಟ್ಟಿ ನಿಮ್ಮ ಉತ್ತರಗಳು ಮತ್ತು ವಿದ್ಯಾರ್ಥಿವೇತನ ಅರ್ಹತಾ ನಿಯಮ V3.0 ಆಧಾರಿತ ಮಾತ್ರ. ಅರ್ಜಿ ಸಲ್ಲಿಸಿದ ನಂತರ ಅಂತಿಮ ಅರ್ಹತೆಯನ್ನು ಯೋಜನೆಯ ಇಲಾಖೆ ನಿರ್ಧರಿಸುತ್ತದೆ.,,144,,,
+no_more,That was the full list.,ಸಂಪೂರ್ಣ ಪಟ್ಟಿ ತೋರಿಸಲಾಗಿದೆ.,,26,,,
+grp_disability,students with disabilities,ಅಂಗವಿಕಲ ವಿದ್ಯಾರ್ಥಿಗಳು,,21,,,
+grp_farmer,farmer families,ರೈತ ಕುಟುಂಬಗಳು,,13,,,
+grp_workers,children of specific workers,ನಿರ್ದಿಷ್ಟ ಕಾರ್ಮಿಕರ ಮಕ್ಕಳು,,25,,,
+grp_defence,armed forces / police families,ಸೇನೆ / ಪೊಲೀಸ್ ಕುಟುಂಬಗಳು,,23,,,
+grp_school,students of specific schools,ನಿರ್ದಿಷ್ಟ ಶಾಲೆಗಳ ವಿದ್ಯಾರ್ಥಿಗಳು,,30,,,
+grp_orphan,orphans / PM CARES children,ಅನಾಥರು / PM CARES ಮಕ್ಕಳು,,24,,,
+grp_bpl,BPL families,BPL ಕುಟುಂಬಗಳು,,13,,,
+grp_teachers,children of teachers,ಶಿಕ್ಷಕರ ಮಕ್ಕಳು,,14,,,
+grp_other,a specific group,ಒಂದು ನಿರ್ದಿಷ್ಟ ಗುಂಪು,,20,,,
+grp_income,family income up to {amt} a year,ವರ್ಷಕ್ಕೆ {amt} ವರೆಗಿನ ಕುಟುಂಬ ಆದಾಯ,,33,,,
+d_type,Type,ಪ್ರಕಾರ,,6,,,
+d_benefit,Benefit,ಲಾಭ,,3,,,
+d_stage,Education stage,ಶಿಕ್ಷಣ ಹಂತ,,10,,,
+d_category,Category,ವರ್ಗ,,4,,,
+d_gender,Gender,ಲಿಂಗ,,4,,,
+d_income,Family income,ಕುಟುಂಬದ ಆದಾಯ,,12,,,
+d_income_upto,up to {amt} a year,ವರ್ಷಕ್ಕೆ {amt} ವರೆಗೆ,,20,,,
+d_age,Age,ವಯಸ್ಸು,,6,,,
+d_domicile,State / domicile,ರಾಜ್ಯ / ವಾಸಸ್ಥಳ,,15,,,
+d_only_for,Only for,ಇವರಿಗೆ ಮಾತ್ರ,,12,,,
+d_other,Other conditions,ಇತರ ಷರತ್ತುಗಳು,,13,,,
+d_deadline,Last date,ಕೊನೆಯ ದಿನಾಂಕ,,12,,,
+d_link,More info / apply,ಹೆಚ್ಚಿನ ಮಾಹಿತಿ / ಅರ್ಜಿ,,22,,,
+d_inferred,from scheme name – please verify,ಯೋಜನೆಯ ಹೆಸರಿನಿಂದ – ದಯವಿಟ್ಟು ಪರಿಶೀಲಿಸಿ,,37,,,
+d_description,Description,ವಿವರಣೆ,,6,,,
+d_eligibility,Eligibility,ಅರ್ಹತೆ,,6,,,
+d_docs_short,Required documents,ಅಗತ್ಯ ದಾಖಲೆಗಳು,,14,,,
+d_apply,Application,ಅರ್ಜಿ,,5,,,
+see_site,See official site,ಅಧಿಕೃತ ಸೈಟ್ ನೋಡಿ,,16,,,
+more_details,More details,ಹೆಚ್ಚಿನ ವಿವರಗಳು,,15,,,
+na,Not available – check official site,ಲಭ್ಯವಿಲ್ಲ – ಅಧಿಕೃತ ಸೈಟ್ ನೋಡಿ,,28,,,
+link_unverified,link not verified – search the scheme name on the official site,ಲಿಂಕ್ ಪರಿಶೀಲಿಸಿಲ್ಲ – ಅಧಿಕೃತ ಸೈಟ್‌ನಲ್ಲಿ ಯೋಜನೆಯ ಹೆಸರು ಹುಡುಕಿ,,58,,,
+guidance,ℹ️ This is guidance only – verify on the official site before applying.,ℹ️ ಇದು ಕೇವಲ ಮಾರ್ಗದರ್ಶನ – ಅರ್ಜಿ ಸಲ್ಲಿಸುವ ಮೊದಲು ಅಧಿಕೃತ ಸೈಟ್‌ನಲ್ಲಿ ಪರಿಶೀಲಿಸಿ.,,74,,,
+o_more,More schemes,ಇನ್ನಷ್ಟು ಯೋಜನೆಗಳು,20,17,yes,,
+o_back,Go back,ಹಿಂದಕ್ಕೆ,20,8,yes,,
+o_back_list,Back to list,ಪಟ್ಟಿಗೆ ಹಿಂತಿರುಗಿ,20,17,yes,,
+o_menu,Main menu,ಮುಖ್ಯ ಮೆನು,20,10,yes,,
+o_find,Find scholarships,ಸ್ಕಾಲರ್‌ಶಿಪ್ ಹುಡುಕಿ,20,19,yes,,
+o_my_schemes,See my schemes,ನನ್ನ ಯೋಜನೆಗಳು,20,13,yes,,
+o_lang,Language,ಭಾಷೆ,20,4,yes,,
+o_help,Help,ಸಹಾಯ,20,4,yes,,
+o_feedback,Share feedback,ಅಭಿಪ್ರಾಯ ನೀಡಿ,20,13,yes,,
+o_share_scheme,Share scheme,ಯೋಜನೆ ಹಂಚಿಕೊಳ್ಳಿ,20,16,yes,,
+o_view,View details,ವಿವರ ನೋಡಿ,20,9,yes,,
+menu_title,🏠 Main menu – what would you like to do?,🏠 ಮುಖ್ಯ ಮೆನು – ನೀವು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?,,41,,,
+help,"I help you find government scholarships in 2 minutes.
+• Tap an option or type its number.
+• BACK – previous step · MENU – main menu · HI – start again
+• LANGUAGE – change language · STOP – stop messages
+Your answers are used only to suggest schemes. Official portal: https://scholarships.gov.in/","2 ನಿಮಿಷಗಳಲ್ಲಿ ಸರ್ಕಾರಿ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ಹುಡುಕಲು ನಾನು ಸಹಾಯ ಮಾಡುತ್ತೇನೆ.
+• ಒಂದು ಆಯ್ಕೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ಅದರ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ.
+• BACK – ಹಿಂದಿನ ಹಂತ · MENU – ಮುಖ್ಯ ಮೆನು · HI – ಮತ್ತೆ ಪ್ರಾರಂಭ
+• LANGUAGE – ಭಾಷೆ ಬದಲಿಸಿ · STOP – ಸಂದೇಶ ನಿಲ್ಲಿಸಿ
+ನಿಮ್ಮ ಉತ್ತರಗಳನ್ನು ಯೋಜನೆಗಳನ್ನು ಸೂಚಿಸಲು ಮಾತ್ರ ಬಳಸಲಾಗುತ್ತದೆ. ಅಧಿಕೃತ ಪೋರ್ಟಲ್: https://scholarships.gov.in/",,340,,,
+stopped,You will not get more messages from us. Reply HI any time to start again.,ಇನ್ನು ಮುಂದೆ ನಿಮಗೆ ನಮ್ಮ ಸಂದೇಶಗಳು ಬರುವುದಿಲ್ಲ. ಮತ್ತೆ ಪ್ರಾರಂಭಿಸಲು ಯಾವಾಗ ಬೇಕಾದರೂ HI ಬರೆಯಿರಿ.,,87,,,
+reply_number,Reply with a number:,ಒಂದು ಸಂಖ್ಯೆ ಕಳುಹಿಸಿ:,,20,,,
+why,"Sorry if the list looked wrong 🙏 I only show schemes that match your answers:
+{facts}
+Schemes marked ""Only for…"" are for specific groups (for example farmer families) – check before applying. If an answer is wrong, change it below.","ಪಟ್ಟಿ ತಪ್ಪಾಗಿ ಕಂಡರೆ ಕ್ಷಮಿಸಿ 🙏 ನಿಮ್ಮ ಉತ್ತರಗಳಿಗೆ ಹೊಂದುವ ಯೋಜನೆಗಳನ್ನು ಮಾತ್ರ ನಾನು ತೋರಿಸುತ್ತೇನೆ:
+{facts}
+""ಇವರಿಗೆ ಮಾತ್ರ…"" ಎಂದಿರುವ ಯೋಜನೆಗಳು ನಿರ್ದಿಷ್ಟ ಗುಂಪುಗಳಿಗೆ (ಉದಾ. ರೈತ ಕುಟುಂಬಗಳು) – ಅರ್ಜಿ ಸಲ್ಲಿಸುವ ಮೊದಲು ಪರಿಶೀಲಿಸಿ. ಯಾವುದಾದರೂ ಉತ್ತರ ತಪ್ಪಾಗಿದ್ದರೆ ಕೆಳಗೆ ಬದಲಾಯಿಸಿ.",,252,,,
+why_cat_same,"Your saved category is {cat}, so schemes only for other categories are not shown.","ನಿಮ್ಮ ಉಳಿಸಿದ ವರ್ಗ {cat}, ಆದ್ದರಿಂದ ಬೇರೆ ವರ್ಗಗಳಿಗೆ ಮಾತ್ರ ಇರುವ ಯೋಜನೆಗಳನ್ನು ತೋರಿಸಲಾಗುವುದಿಲ್ಲ.",,89,,,
+why_cat_diff,"You mentioned {said}, but your saved category is {cat}. Tap below to update it.","ನೀವು {said} ಎಂದು ಹೇಳಿದಿರಿ, ಆದರೆ ಉಳಿಸಿದ ವರ್ಗ {cat}. ಬದಲಾಯಿಸಲು ಕೆಳಗೆ ಟ್ಯಾಪ್ ಮಾಡಿ.",,79,,,
+why_early,"I show schemes after a few quick questions. Please answer the question, or change your answers any time.","ಕೆಲವು ಸುಲಭ ಪ್ರಶ್ನೆಗಳ ನಂತರ ನಾನು ಯೋಜನೆಗಳನ್ನು ತೋರಿಸುತ್ತೇನೆ. ಪ್ರಶ್ನೆಗೆ ಉತ್ತರಿಸಿ, ಅಥವಾ ಯಾವಾಗ ಬೇಕಾದರೂ ಉತ್ತರ ಬದಲಿಸಿ.",,109,,,
+q_rating,"How would you rate this service? 1 ⭐ = lowest, 5 ⭐ = highest.","ಈ ಸೇವೆಗೆ ನೀವು ಎಷ್ಟು ಅಂಕ ನೀಡುತ್ತೀರಿ? 1 ⭐ = ಅತಿ ಕಡಿಮೆ, 5 ⭐ = ಅತ್ಯುತ್ತಮ.",,69,,,
+r_1,Very poor,ತುಂಬಾ ಕಳಪೆ,,10,,,
+r_2,Poor,ಕಳಪೆ,,4,,,
+r_3,Okay,ಪರವಾಗಿಲ್ಲ,,9,,,
+r_4,Good,ಚೆನ್ನಾಗಿದೆ,,10,,,
+r_5,Excellent,ಅತ್ಯುತ್ತಮ,,9,,,
+q_comment,"Thank you! Any comment or suggestion? Type it, or reply SKIP.","ಧನ್ಯವಾದಗಳು! ಯಾವುದೇ ಅಭಿಪ್ರಾಯ ಅಥವಾ ಸಲಹೆ? ಬರೆಯಿರಿ, ಅಥವಾ SKIP ಕಳುಹಿಸಿ.",,66,,,
+share,"🙏 Thanks for your feedback!
+Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🙏 ಅಭಿಪ್ರಾಯಕ್ಕೆ ಧನ್ಯವಾದಗಳು!
+ಯಾವುದಾದರೂ ವಿದ್ಯಾರ್ಥಿಗೆ ಇದು ಉಪಯೋಗವಾಗಬಹುದೇ? ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ:
+WhatsApp: {wa}
+ವೆಬ್: {web}
+ಅಥವಾ ಈ ಸಂಖ್ಯೆಗೆ *{code}* ಕೋಡ್ ಕಳುಹಿಸಲು ಹೇಳಿ.",,173,,,
+share_no_wa,(WhatsApp link available once the WhatsApp number is set up),(WhatsApp ಸಂಖ್ಯೆ ಹೊಂದಿಸಿದ ನಂತರ ಲಿಂಕ್ ಲಭ್ಯವಾಗುತ್ತದೆ),,51,,,
+share_scheme_intro,"📤 Forward this message to friends on WhatsApp, email or social media:","📤 ಈ ಸಂದೇಶವನ್ನು ಸ್ನೇಹಿತರಿಗೆ WhatsApp, ಇಮೇಲ್ ಅಥವಾ ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮದಲ್ಲಿ ಕಳುಹಿಸಿ:",,76,,,
+share_scheme_msg,"🎓 I found this scholarship: *{name}* ({tag})
+{desc}
+Apply: {url}
+
+Find scholarships for you in 2 minutes:
+WhatsApp: {wa}
+Web: {web}","🎓 ನನಗೆ ಈ ವಿದ್ಯಾರ್ಥಿವೇತನ ಸಿಕ್ಕಿತು: *{name}* ({tag})
+{desc}
+ಅರ್ಜಿ: {url}
+
+2 ನಿಮಿಷದಲ್ಲಿ ನಿಮಗಾಗಿ ವಿದ್ಯಾರ್ಥಿವೇತನ ಹುಡುಕಿ:
+WhatsApp: {wa}
+ವೆಬ್: {web}",,142,,,
+share_subject,A scholarship you may be eligible for,ನಿಮಗೆ ಉಪಯೋಗವಾಗಬಹುದಾದ ವಿದ್ಯಾರ್ಥಿವೇತನ,,35,,,
+share_fwd_hint,☝️ Long-press the message above and tap Forward to share it.,☝️ ಮೇಲಿನ ಸಂದೇಶವನ್ನು ಒತ್ತಿ ಹಿಡಿದು Forward ಟ್ಯಾಪ್ ಮಾಡಿ.,,53,,,
+sh_whatsapp,WhatsApp,WhatsApp,,8,,,
+sh_email,Email,ಇಮೇಲ್,,5,,,
+sh_copy,Copy message,ಸಂದೇಶ ಕಾಪಿ ಮಾಡಿ,,15,,,
+sh_more,Share…,ಹಂಚಿಕೊಳ್ಳಿ…,,11,,,
+sh_copied,Copied ✓,ಕಾಪಿ ಆಯಿತು ✓,,12,,,
+menu_hint,Type MENU for the main menu.,ಮುಖ್ಯ ಮೆನುಗಾಗಿ MENU ಎಂದು ಬರೆಯಿರಿ.,,33,,,
+lang_continue,Continue,ಮುಂದುವರಿಸಿ,,10,,,
+f_class_passed,Education level,ಶಿಕ್ಷಣ ಮಟ್ಟ,24,11,yes,,
+f_state,State/UT,ರಾಜ್ಯ/UT,24,8,yes,,
+f_category,Category,ವರ್ಗ,24,4,yes,,
+f_gender,Gender,ಲಿಂಗ,24,4,yes,,
+f_annual_family_income,Family income,ಕುಟುಂಬದ ಆದಾಯ,24,12,yes,,
+wa_choose,Choose,ಆಯ್ಕೆಮಾಡಿ,20,9,yes,,
+wa_options,Options,ಆಯ್ಕೆಗಳು,24,8,yes,,
+wa_nav,Navigate,ನ್ಯಾವಿಗೇಷನ್,24,11,yes,,
+wa_next,More options ▶,ಇನ್ನಷ್ಟು ಆಯ್ಕೆಗಳು ▶,24,19,yes,,
+wa_prev,◀ Previous,◀ ಹಿಂದಿನ,24,8,yes,,
+wa_page,Page {p} of {n} – choose an option:,ಪುಟ {p} / {n} – ಒಂದು ಆಯ್ಕೆ ಮಾಡಿ:,,32,,,
+choose_next,What would you like to do next?,ಮುಂದೆ ನೀವು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?,,32,,,
+unsupported,Please reply with text (a number or a word).,ದಯವಿಟ್ಟು ಪಠ್ಯದಲ್ಲಿ ಉತ್ತರಿಸಿ (ಸಂಖ್ಯೆ ಅಥವಾ ಪದ).,,45,,,

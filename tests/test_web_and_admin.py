@@ -12,24 +12,32 @@ def test_public_web_session_to_results(client):
     assert r.status_code == 201
     d = r.json()
     sid, tok = d["session_id"], d["session_token"]
-    assert d["reply"]["options"][1]["label"] == "हिंदी" and d["companion_url"].endswith(f"session={sid}&token={tok}")
-    for m in ["1", "2", "Karnataka", "3", "1"]:
+    labels = [o["label"] for o in d["reply"]["options"]]
+    assert labels[3] == "English" and labels[5] == "हिंदी (Hindi)" and len(labels) == 14   # alphabetical (English name)
+    assert d["reply"]["ui"]["dropdown"] and d["companion_url"].endswith(f"session={sid}&token={tok}")
+    for m in ["4", "agree", "Karnataka", "3", "1", "1", "3"]:
         out = chat(client, sid, tok, m)
-    out = chat(client, sid, tok, "4")
+    assert out["reply"]["state"] == "SUMMARY" and [o["id"] for o in out["reply"]["options"]] == ["proceed", "edit"]
+    out = chat(client, sid, tok, "proceed")
     rep = out["reply"]
     assert out["status"] == "COMPLETED" and rep["cards"] and rep["footer"]
-    assert {"rank", "scheme_id", "name", "benefit", "apply_url"} <= set(rep["cards"][0])
-    assert [o["id"] for o in rep["options"]] == ["1", "2", "3", "4"]
+    assert {"rank", "scheme_id", "name", "benefit", "apply_url", "tag", "only_for", "check", "title_line", "description",
+            "eligibility", "documents", "url", "department"} <= set(rep["cards"][0])
+    ids = [o["id"] for o in rep["options"]]
+    assert ids[:len(rep["cards"])] == [str(c["rank"]) for c in rep["cards"]]     # tap/type a number -> details
+    assert ids[len(rep["cards"]):] == ["more", "rate", "back"]                  # Update 2: no Main menu after results
     # auth
     assert client.post(f"/v1/chat/sessions/{sid}/messages", json={"text": "1"}).status_code == 401
     assert client.post(f"/v1/chat/sessions/{sid}/messages", json={"text": "1"},
                        headers={"X-Session-Token": "bad"}).status_code == 401
     got = client.get(f"/v1/chat/sessions/{sid}", headers={"X-Session-Token": tok}).json()
-    assert got["result"]["channel"] == "web" and got["last_reply"]["cards"] and len(got["transcript"]) >= 12
+    assert got["result"]["channel"] == "web" and got["last_reply"]["cards"] and len(got["transcript"]) >= 14
     # restart creates a new session id that keeps working with the same token
     new = chat(client, sid, tok, "restart")
     assert new["new_session"] and new["session_id"] != sid
-    assert chat(client, new["session_id"], tok, "1")["reply"]["state"] == "ASK_class_passed"
+    assert new["reply"]["state"] == "ASK_state"                   # language + consent remembered -> question 1 (State)
+    assert chat(client, new["session_id"], tok, "back")["reply"]["state"] == "LANG"     # Go back -> language list
+    assert chat(client, new["session_id"], tok, "4")["reply"]["state"] == "ASK_state"
     # walk-in web sessions visible to admin only
     res = client.get("/v1/results", headers=H(ADMIN_KEY), params={"source_system": "walk-in", "channel": "web"}).json()
     assert res["count"] == 2
@@ -42,8 +50,10 @@ def test_tenant_web_session_prefilled_and_in_results(client):
     assert client.post("/v1/chat/sessions", json={"external_ref": "W-1"}).status_code == 401
     assert client.post("/v1/chat/sessions", json={"external_ref": "W-1"}, headers=H(KEY_TEAMB)).status_code == 404
     d = client.post("/v1/chat/sessions", json={"external_ref": "W-1"}, headers=H(KEY_RAJAT)).json()
-    assert "Namaste Neha" in d["reply"]["text"] and d["reply"]["state"] == "CONFIRM_PREFILL"
-    out = chat(client, d["session_id"], d["session_token"], "1")
+    assert "Namaste Neha" in d["reply"]["text"] and d["reply"]["state"] == "CONSENT"   # language given by the referral
+    out = chat(client, d["session_id"], d["session_token"], "agree")
+    assert out["reply"]["state"] == "SUMMARY"
+    out = chat(client, d["session_id"], d["session_token"], "proceed")
     assert out["status"] == "COMPLETED"
     res = client.get("/v1/results", headers=H(KEY_RAJAT), params={"channel": "web"}).json()
     assert res["count"] == 1 and res["results"][0]["external_ref"] == "W-1"

@@ -123,17 +123,17 @@ Response `201`:
 {
   "message_id": "2026-10-01-probable-wave1",
   "source_system": "p1-rajat",
-  "code": "OM-P9EVYX",
+  "code": "OM-988H3X",
   "campaign": "PROBABLE discovery – Rajasthan – wave 1",
   "channel": "sms",
   "template_version": "discovery_invite_sms_v1",
   "template_text": "Namaste {{name}}, find scholarships you can explore: {{link}} Reply STOP to opt …",
   "sent_at": "2026-10-01T04:00:00.000000Z",
-  "created_at": "2026-09-28T14:14:37.896647Z",
+  "created_at": "2026-09-29T09:10:13.778909Z",
   "links": {
-    "whatsapp_text": "Hi, I want to find scholarships. Code OM-P9EVYX",
-    "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-P9EVYX",
-    "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-P9EVYX&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-P9EVYX"
+    "whatsapp_text": "Hi, I want to find scholarships. Code OM-988H3X",
+    "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-988H3X",
+    "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-988H3X&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-988H3X"
   },
   "whatsapp_number_known": true,
   "stats": {
@@ -149,19 +149,19 @@ Response `201`:
   "recipients": [
     {
       "recipient_ref": "P1-STU-0001",
-      "code": "RY6FPKX5U",
+      "code": "RF99VN7CM",
       "referral_linked": true,
-      "whatsapp_text": "Hi, I want to find scholarships. Code OM-P9EVYX-RY6FPKX5U",
-      "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-P9EVYX-RY6FPKX5U",
-      "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-P9EVYX&r=RY6FPKX5U&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-P9EVYX"
+      "whatsapp_text": "Hi, I want to find scholarships. Code OM-988H3X-RF99VN7CM",
+      "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-988H3X-RF99VN7CM",
+      "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-988H3X&r=RF99VN7CM&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-988H3X"
     },
     {
       "recipient_ref": "P1-STU-0002",
-      "code": "RPUFK7U4G",
+      "code": "RQN9MNXXX",
       "referral_linked": true,
-      "whatsapp_text": "Hi, I want to find scholarships. Code OM-P9EVYX-RPUFK7U4G",
-      "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-P9EVYX-RPUFK7U4G",
-      "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-P9EVYX&r=RPUFK7U4G&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-P9EVYX"
+      "whatsapp_text": "Hi, I want to find scholarships. Code OM-988H3X-RQN9MNXXX",
+      "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-988H3X-RQN9MNXXX",
+      "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-988H3X&r=RQN9MNXXX&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-988H3X"
     }
   ]
 }
@@ -171,7 +171,7 @@ Response `201`:
 
 The first message is the pre-filled text from the link; the code attributes the session to the outreach message and to recipient P1-STU-0001.
 
-**👤 Aarav:** Hi, I want to find scholarships. Code OM-P9EVYX-RY6FPKX5U
+**👤 Aarav:** Hi, I want to find scholarships. Code OM-988H3X-RF99VN7CM
 
 **🤖 Bot:**
 
@@ -179,17 +179,9 @@ The first message is the pre-filled text from the link; the code attributes the 
 Namaste Aarav! 👋 I am the MoSJE Scholarship Discovery Assistant.
 Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.
 
-From your records we already have:
-• Class passed: Class 10
-• State/UT: Rajasthan
-• Category: SC
-• Gender: Male
-• Family income: ₹1,80,000
-Is this correct?
+🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?
 
-Reply with a number:
-1. Yes, correct
-2. No, let me answer
+[ Agree ]   [ Don't agree ]   [ Go back ]
 ```
 
 **👤 Aarav:** 1
@@ -197,62 +189,54 @@ Reply with a number:
 **🤖 Bot:**
 
 ```text
-Your answers: Class passed: Class 10; State/UT: Rajasthan; Category: SC; Gender: Male; Family income: ₹1,80,000
+📋 Please check your details:
+• State/UT: Rajasthan 📁
+• Education level: Class 10 passed 📁
+• Gender: Male 📁
+• Family income: ₹1,80,000 a year 📁
+• Category: SC 📁
 
-Based on your answers, here are 5 scholarship(s) you can explore (showing 1–5 of 11):
+Shall I look for scholarships now?
+📁 = from your records
 
-*1. Post-Matric Scholarship for SC Students*
-Benefit: Academic allowance ranges by course group: ₹13,500/year for Group I hostellers and ₹7,000 for day scholars; ₹…
-Apply / info: https://scholarships.gov.in/
+[ Proceed ]   [ Edit details ]
+```
 
-*2. Kali Bai Bheel Medhavi Chhatra Scooty Yojana - Passed Class 10*
-Apply / info: https://scholarship.rajasthan.gov.in/ActDeptSchemeList.aspx
+**👤 Aarav:** 1
 
-*3. CM Sarvjan Scholarship - Rajasthan*
-Apply / info: https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81
+**🤖 Bot:**
 
-*4. Free Coaching for SCs, OBCs and Beneficiaries of PM CARES Children Scheme*
-Apply / info: https://scholarships.gov.in/All-Scholarships
+```text
+Your answers: State/UT: Rajasthan; Education level: Class 10 passed; Gender: Male; Family income: ₹1,80,000 a year; Category: SC
 
-*5. Mukhyamantri Anuprati Coaching Yojana*
-Apply / info: https://sje.rajasthan.gov.in/default.aspx?pageid=86
+Based on your answers, here are 5 scholarship(s) you can explore (showing 1–5 of 6):
+Tap a scheme (or type its number) to see details.
+
+*1. Post-Matric Scholarship for SC Students · Central*
+
+*2. Free Coaching for SCs, OBCs and Beneficiaries of PM CARES Children Scheme · Central · Department of Social Justice & Empowerment*
+
+*3. CM Sarvjan Scholarship - Rajasthan · Rajasthan · Social Justice & Empowerment Department*
+
+*4. Mukhyamantri Anuprati Coaching Yojana · Rajasthan · Social Justice & Empowerment Department*
+
+— Only for specific groups – check eligibility —
+
+*5. AICTE Saksham Scholarship Scheme - Diploma · Central · AICTE*
 
 ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.
 
-Reply with a number:
-1. Show more schemes
-2. Rate this service & get your share link
-3. Start again
-4. Help
-```
-
-**👤 Aarav:** 1
-
-**🤖 Bot:**
-
-```text
-Based on your answers, here are 5 scholarship(s) you can explore (showing 6–10 of 11):
-
-*6. Post-Matric Scholarship for DNT Students - Rajasthan*
-Apply / info: https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81
-
-*7. Post-Matric Scholarship for EBC Students - Rajasthan*
-Apply / info: https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81
-
-*8. Post-Matric Scholarship for SBC Students - Rajasthan*
-Apply / info: https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81
-
-*9. AICTE Pragati Scholarship Scheme - Diploma*
-Apply / info: https://www.aicte-india.org/
-
-*10. AICTE Saksham Scholarship Scheme - Diploma*
-Apply / info: https://www.aicte-india.org/
-
-Reply with a number:
-1. Show more schemes
-2. Rate this service & get your share link
-3. Start again
-4. Help
+[ ☰ Choose ]  (list message)
+  — Options —
+  • 1. Post-Matric Scholars…  (Central)   ‹id 1›
+  • 2. Free Coaching for SC…  (Central · Department of Social Justice & Empowerment)   ‹id 2›
+  • 3. CM Sarvjan Scholarsh…  (Rajasthan · Social Justice & Empowerment Department)   ‹id 3›
+  • 4. Mukhyamantri Anuprat…  (Rajasthan · Social Justice & Empowerment Department)   ‹id 4›
+  • 5. AICTE Saksham Schola…  (Central · AICTE)   ‹id 5›
+  — Navigate —
+  • More schemes   ‹id more›
+  • Share feedback   ‹id rate›
+  • Go back   ‹id back›
 ```
 
 ## 5. Priya opens her web link (companion)
@@ -270,11 +254,11 @@ Request body:
 {
   "entry": {
     "src": "outreach",
-    "om": "OM-P9EVYX",
-    "r": "RPUFK7U4G",
+    "om": "OM-988H3X",
+    "r": "RQN9MNXXX",
     "utm_source": "p1-rajat",
     "utm_medium": "sms",
-    "utm_campaign": "OM-P9EVYX"
+    "utm_campaign": "OM-988H3X"
   }
 }
 ```
@@ -283,23 +267,99 @@ Response `201`:
 
 ```json
 {
-  "session_id": "s_Qdiqhkt6ud7NyySM",
-  "session_token": "hwNsqh7D7-OUxDorPk3arVXGp61gwbwG",
+  "session_id": "s_7O3WHuADY6pnYkqO",
+  "session_token": "UcXbo-8mI3Nt0A2y8g6ZV5K1wDP8qDfP",
   "channel": "web",
   "source_system": "p1-rajat",
   "external_ref": "P1-STU-0002",
   "entry_source": "OUTREACH",
-  "companion_url": "https://mosje-p2-api.onrender.com/companion?session=s_Qdiqhkt6ud7NyySM&token=hwNsqh7D7-OUxDorPk3arVXGp61gwbwG",
+  "companion_url": "https://mosje-p2-api.onrender.com/companion?session=s_7O3WHuADY6pnYkqO&token=UcXbo-8mI3Nt0A2y8g6ZV5K1wDP8qDfP",
   "reply": {
     "text": "Namaste Priya! 👋 I am the MoSJE Scholarship Discovery Assistant.\nAnswer a few quick questions (about 2 minutes) and I will show scholarships you can explore.\n\nPlease choose your language / कृपया भाषा चुनें:",
     "options": [
       {
         "id": "1",
-        "label": "English"
+        "label": "অসমীয়া (Assamese)",
+        "kind": "item",
+        "code": "as"
       },
       {
         "id": "2",
-        "label": "हिंदी"
+        "label": "বাংলা (Bengali)",
+        "kind": "item",
+        "code": "bn"
+      },
+      {
+        "id": "3",
+        "label": "भोजपुरी (Bhojpuri)",
+        "kind": "item",
+        "code": "bho"
+      },
+      {
+        "id": "4",
+        "label": "English",
+        "kind": "item",
+        "code": "en"
+      },
+      {
+        "id": "5",
+        "label": "ગુજરાતી (Gujarati)",
+        "kind": "item",
+        "code": "gu"
+      },
+      {
+        "id": "6",
+        "label": "हिंदी (Hindi)",
+        "kind": "item",
+        "code": "hi"
+      },
+      {
+        "id": "7",
+        "label": "ಕನ್ನಡ (Kannada)",
+        "kind": "item",
+        "code": "kn"
+      },
+      {
+        "id": "8",
+        "label": "मैथिली (Maithili)",
+        "kind": "item",
+        "code": "mai"
+      },
+      {
+        "id": "9",
+        "label": "മലയാളം (Malayalam)",
+        "kind": "item",
+        "code": "ml"
+      },
+      {
+        "id": "10",
+        "label": "मराठी (Marathi)",
+        "kind": "item",
+        "code": "mr"
+      },
+      {
+        "id": "11",
+        "label": "ଓଡ଼ିଆ (Odia)",
+        "kind": "item",
+        "code": "or"
+      },
+      {
+        "id": "12",
+        "label": "ਪੰਜਾਬੀ (Punjabi)",
+        "kind": "item",
+        "code": "pa"
+      },
+      {
+        "id": "13",
+        "label": "தமிழ் (Tamil)",
+        "kind": "item",
+        "code": "ta"
+      },
+      {
+        "id": "14",
+        "label": "తెలుగు (Telugu)",
+        "kind": "item",
+        "code": "te"
       }
     ],
     "cards": [],
@@ -308,12 +368,19 @@ Response `201`:
     "status": "ACTIVE",
     "language": "en",
     "input_hint": "choice",
-    "share": null
+    "share": null,
+    "detail": null,
+    "view": "LANG",
+    "section_label": "",
+    "ui": {
+      "continue": "Continue",
+      "dropdown": true
+    }
   }
 }
 ```
 
-Priya then answers `2` (Hindi), `1` (confirm class XII + Rajasthan), `4` (General), `1` (Female), `1` (up to ₹1 lakh). Last reply state: `RESULTS`, 5 scheme cards shown.
+Priya then picks `6` (हिंदी – the language list is alphabetical by English name), `1` (Agree to the consent text); Class XII and Rajasthan come from the referral, so only 3 questions are left: `2` (Female), `1` (up to ₹10,000 a month), `4` (General); then `1` (Proceed on the summary). Last reply state: `RESULTS`, 5 scheme cards shown.
 
 ## 6. Product 1 polls one referral
 
@@ -341,12 +408,12 @@ Response `200`:
     "annual_family_income": 180000
   },
   "invite_status": null,
-  "callback_status": "200 at 2026-09-28T14:14:37.935565Z",
-  "created_at": "2026-09-28T14:14:37.888117Z",
-  "updated_at": "2026-09-28T14:14:37.927510Z",
+  "callback_status": "200 at 2026-09-29T09:10:13.830309Z",
+  "created_at": "2026-09-29T09:10:13.772144Z",
+  "updated_at": "2026-09-29T09:10:13.821758Z",
   "sessions_count": 1,
   "latest_result": {
-    "session_id": "s_OfGQOsYfIxls_a0C",
+    "session_id": "s_cq-NpkIZHlDBoPGq",
     "channel": "whatsapp",
     "source_system": "p1-rajat",
     "external_ref": "P1-STU-0001",
@@ -356,14 +423,21 @@ Response `200`:
     "language": "en",
     "mobile_masked": "91••••••0001",
     "prefill_used": true,
+    "consent": {
+      "status": "AGREED",
+      "at": "2026-09-29T09:10:13.806124Z",
+      "version": "p2-consent-2026-09-29"
+    },
     "answers": {
       "state": "Rajasthan",
       "class_passed": "X",
       "category": "SC",
       "gender": "Male",
-      "annual_family_income": 180000
+      "annual_family_income": 180000,
+      "income_min": null,
+      "income_band": null
     },
-    "eligible_count": 11,
+    "eligible_count": 6,
     "suggested_schemes": [
       {
         "rank": 1,
@@ -375,10 +449,10 @@ Response `200`:
       },
       {
         "rank": 2,
-        "scheme_id": "MSM-0156",
-        "name": "Kali Bai Bheel Medhavi Chhatra Scooty Yojana - Passed Class 10",
+        "scheme_id": "MSM-0104",
+        "name": "Free Coaching for SCs, OBCs and Beneficiaries of PM CARES Children Scheme",
         "benefit": "",
-        "apply_url": "https://scholarship.rajasthan.gov.in/ActDeptSchemeList.aspx",
+        "apply_url": "https://scholarships.gov.in/All-Scholarships",
         "shown_to_student": true
       },
       {
@@ -389,35 +463,35 @@ Response `200`:
         "apply_url": "https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81",
         "shown_to_student": true
       },
-      "... 8 more"
+      "... 3 more"
     ],
     "entry": {
       "source": "OUTREACH",
       "channel": "whatsapp",
       "outreach_message_id": "2026-10-01-probable-wave1",
-      "outreach_code": "OM-P9EVYX",
+      "outreach_code": "OM-988H3X",
       "campaign": "PROBABLE discovery – Rajasthan – wave 1",
       "outreach_channel": "sms",
       "recipient_ref": "P1-STU-0001",
       "referrer_share_code": null,
       "first_touch": {
         "channel": "whatsapp",
-        "raw_text": "Hi, I want to find scholarships. Code OM-P9EVYX-RY6FPKX5U",
-        "om_code": "OM-P9EVYX",
-        "recipient_code": "RY6FPKX5U",
+        "raw_text": "Hi, I want to find scholarships. Code OM-988H3X-RF99VN7CM",
+        "om_code": "OM-988H3X",
+        "recipient_code": "RF99VN7CM",
         "resolved": true,
-        "at": "2026-09-28T14:14:37.912210Z"
+        "at": "2026-09-29T09:10:13.792722Z"
       },
-      "first_touch_at": "2026-09-28T14:14:37.912210Z"
+      "first_touch_at": "2026-09-29T09:10:13.792722Z"
     },
     "feedback": null,
     "share_code": null,
     "peer_referrals_count": 0,
     "rule_version": "V3.0",
     "eligibility_as_of": "2026-09-28",
-    "started_at": "2026-09-28T14:14:37.914607Z",
-    "updated_at": "2026-09-28T14:14:37.941410Z",
-    "completed_at": "2026-09-28T14:14:37.926642Z"
+    "started_at": "2026-09-29T09:10:13.795980Z",
+    "updated_at": "2026-09-29T09:10:13.825941Z",
+    "completed_at": "2026-09-29T09:10:13.820897Z"
   }
 }
 ```
@@ -434,11 +508,11 @@ Response `200`:
 ```json
 {
   "count": 2,
-  "next_since": "2026-09-28T14:14:37.980975Z",
+  "next_since": "2026-09-29T09:10:13.873482Z",
   "has_more": false,
   "results": [
     {
-      "session_id": "s_OfGQOsYfIxls_a0C",
+      "session_id": "s_cq-NpkIZHlDBoPGq",
       "channel": "whatsapp",
       "source_system": "p1-rajat",
       "external_ref": "P1-STU-0001",
@@ -448,14 +522,21 @@ Response `200`:
       "language": "en",
       "mobile_masked": "91••••••0001",
       "prefill_used": true,
+      "consent": {
+        "status": "AGREED",
+        "at": "2026-09-29T09:10:13.806124Z",
+        "version": "p2-consent-2026-09-29"
+      },
       "answers": {
         "state": "Rajasthan",
         "class_passed": "X",
         "category": "SC",
         "gender": "Male",
-        "annual_family_income": 180000
+        "annual_family_income": 180000,
+        "income_min": null,
+        "income_band": null
       },
-      "eligible_count": 11,
+      "eligible_count": 6,
       "suggested_schemes": [
         {
           "rank": 1,
@@ -467,10 +548,10 @@ Response `200`:
         },
         {
           "rank": 2,
-          "scheme_id": "MSM-0156",
-          "name": "Kali Bai Bheel Medhavi Chhatra Scooty Yojana - Passed Class 10",
+          "scheme_id": "MSM-0104",
+          "name": "Free Coaching for SCs, OBCs and Beneficiaries of PM CARES Children Scheme",
           "benefit": "",
-          "apply_url": "https://scholarship.rajasthan.gov.in/ActDeptSchemeList.aspx",
+          "apply_url": "https://scholarships.gov.in/All-Scholarships",
           "shown_to_student": true
         },
         {
@@ -481,38 +562,38 @@ Response `200`:
           "apply_url": "https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81",
           "shown_to_student": true
         },
-        "... 8 more"
+        "... 3 more"
       ],
       "entry": {
         "source": "OUTREACH",
         "channel": "whatsapp",
         "outreach_message_id": "2026-10-01-probable-wave1",
-        "outreach_code": "OM-P9EVYX",
+        "outreach_code": "OM-988H3X",
         "campaign": "PROBABLE discovery – Rajasthan – wave 1",
         "outreach_channel": "sms",
         "recipient_ref": "P1-STU-0001",
         "referrer_share_code": null,
         "first_touch": {
           "channel": "whatsapp",
-          "raw_text": "Hi, I want to find scholarships. Code OM-P9EVYX-RY6FPKX5U",
-          "om_code": "OM-P9EVYX",
-          "recipient_code": "RY6FPKX5U",
+          "raw_text": "Hi, I want to find scholarships. Code OM-988H3X-RF99VN7CM",
+          "om_code": "OM-988H3X",
+          "recipient_code": "RF99VN7CM",
           "resolved": true,
-          "at": "2026-09-28T14:14:37.912210Z"
+          "at": "2026-09-29T09:10:13.792722Z"
         },
-        "first_touch_at": "2026-09-28T14:14:37.912210Z"
+        "first_touch_at": "2026-09-29T09:10:13.792722Z"
       },
       "feedback": null,
       "share_code": null,
       "peer_referrals_count": 0,
       "rule_version": "V3.0",
       "eligibility_as_of": "2026-09-28",
-      "started_at": "2026-09-28T14:14:37.914607Z",
-      "updated_at": "2026-09-28T14:14:37.941410Z",
-      "completed_at": "2026-09-28T14:14:37.926642Z"
+      "started_at": "2026-09-29T09:10:13.795980Z",
+      "updated_at": "2026-09-29T09:10:13.825941Z",
+      "completed_at": "2026-09-29T09:10:13.820897Z"
     },
     {
-      "session_id": "s_Qdiqhkt6ud7NyySM",
+      "session_id": "s_7O3WHuADY6pnYkqO",
       "channel": "web",
       "source_system": "p1-rajat",
       "external_ref": "P1-STU-0002",
@@ -522,14 +603,21 @@ Response `200`:
       "language": "hi",
       "mobile_masked": "91••••••0002",
       "prefill_used": true,
+      "consent": {
+        "status": "AGREED",
+        "at": "2026-09-29T09:10:13.850060Z",
+        "version": "p2-consent-2026-09-29"
+      },
       "answers": {
         "state": "Rajasthan",
         "class_passed": "XII",
-        "category": "General",
         "gender": "Female",
-        "annual_family_income": 100000
+        "annual_family_income": 120000,
+        "income_min": null,
+        "income_band": "m10k",
+        "category": "General"
       },
-      "eligible_count": 29,
+      "eligible_count": 20,
       "suggested_schemes": [
         {
           "rank": 1,
@@ -555,13 +643,13 @@ Response `200`:
           "apply_url": "https://scholarship.rajasthan.gov.in/ActDeptSchemeList.aspx",
           "shown_to_student": true
         },
-        "... 26 more"
+        "... 17 more"
       ],
       "entry": {
         "source": "OUTREACH",
         "channel": "web",
         "outreach_message_id": "2026-10-01-probable-wave1",
-        "outreach_code": "OM-P9EVYX",
+        "outreach_code": "OM-988H3X",
         "campaign": "PROBABLE discovery – Rajasthan – wave 1",
         "outreach_channel": "sms",
         "recipient_ref": "P1-STU-0002",
@@ -570,27 +658,27 @@ Response `200`:
           "channel": "web",
           "params": {
             "src": "outreach",
-            "om": "OM-P9EVYX",
-            "r": "RPUFK7U4G",
+            "om": "OM-988H3X",
+            "r": "RQN9MNXXX",
             "utm_source": "p1-rajat",
             "utm_medium": "sms",
-            "utm_campaign": "OM-P9EVYX"
+            "utm_campaign": "OM-988H3X"
           },
-          "at": "2026-09-28T14:14:37.948222Z",
-          "om": "OM-P9EVYX",
-          "recipient": "RPUFK7U4G",
+          "at": "2026-09-29T09:10:13.836518Z",
+          "om": "OM-988H3X",
+          "recipient": "RQN9MNXXX",
           "resolved": true
         },
-        "first_touch_at": "2026-09-28T14:14:37.948222Z"
+        "first_touch_at": "2026-09-29T09:10:13.836518Z"
       },
       "feedback": null,
       "share_code": null,
       "peer_referrals_count": 0,
       "rule_version": "V3.0",
       "eligibility_as_of": "2026-09-28",
-      "started_at": "2026-09-28T14:14:37.949458Z",
-      "updated_at": "2026-09-28T14:14:37.980975Z",
-      "completed_at": "2026-09-28T14:14:37.979167Z"
+      "started_at": "2026-09-29T09:10:13.837612Z",
+      "updated_at": "2026-09-29T09:10:13.873482Z",
+      "completed_at": "2026-09-29T09:10:13.871526Z"
     }
   ]
 }
@@ -598,14 +686,14 @@ Response `200`:
 
 ## 8. Callback pushed to Product 1 (one per completed session)
 
-`POST https://p1-rajat.example.org/p2/callback` with header `X-P2-Signature: sha256=e8c76903fd79e228b…`
+`POST https://p1-rajat.example.org/p2/callback` with header `X-P2-Signature: sha256=bc57e32b3c2eec7a5…`
 
 ```json
 {
   "event": "discovery.result",
-  "sent_at": "2026-09-28T14:14:37.933345Z",
+  "sent_at": "2026-09-29T09:10:13.828113Z",
   "result": {
-    "session_id": "s_OfGQOsYfIxls_a0C",
+    "session_id": "s_cq-NpkIZHlDBoPGq",
     "channel": "whatsapp",
     "source_system": "p1-rajat",
     "external_ref": "P1-STU-0001",
@@ -615,14 +703,21 @@ Response `200`:
     "language": "en",
     "mobile_masked": "91••••••0001",
     "prefill_used": true,
+    "consent": {
+      "status": "AGREED",
+      "at": "2026-09-29T09:10:13.806124Z",
+      "version": "p2-consent-2026-09-29"
+    },
     "answers": {
       "state": "Rajasthan",
       "class_passed": "X",
       "category": "SC",
       "gender": "Male",
-      "annual_family_income": 180000
+      "annual_family_income": 180000,
+      "income_min": null,
+      "income_band": null
     },
-    "eligible_count": 11,
+    "eligible_count": 6,
     "suggested_schemes": [
       {
         "rank": 1,
@@ -634,10 +729,10 @@ Response `200`:
       },
       {
         "rank": 2,
-        "scheme_id": "MSM-0156",
-        "name": "Kali Bai Bheel Medhavi Chhatra Scooty Yojana - Passed Class 10",
+        "scheme_id": "MSM-0104",
+        "name": "Free Coaching for SCs, OBCs and Beneficiaries of PM CARES Children Scheme",
         "benefit": "",
-        "apply_url": "https://scholarship.rajasthan.gov.in/ActDeptSchemeList.aspx",
+        "apply_url": "https://scholarships.gov.in/All-Scholarships",
         "shown_to_student": true
       },
       {
@@ -648,35 +743,35 @@ Response `200`:
         "apply_url": "https://sje.rajasthan.gov.in/default.aspx/scolarship1/Default.aspx?PageID=81",
         "shown_to_student": true
       },
-      "... 8 more"
+      "... 3 more"
     ],
     "entry": {
       "source": "OUTREACH",
       "channel": "whatsapp",
       "outreach_message_id": "2026-10-01-probable-wave1",
-      "outreach_code": "OM-P9EVYX",
+      "outreach_code": "OM-988H3X",
       "campaign": "PROBABLE discovery – Rajasthan – wave 1",
       "outreach_channel": "sms",
       "recipient_ref": "P1-STU-0001",
       "referrer_share_code": null,
       "first_touch": {
         "channel": "whatsapp",
-        "raw_text": "Hi, I want to find scholarships. Code OM-P9EVYX-RY6FPKX5U",
-        "om_code": "OM-P9EVYX",
-        "recipient_code": "RY6FPKX5U",
+        "raw_text": "Hi, I want to find scholarships. Code OM-988H3X-RF99VN7CM",
+        "om_code": "OM-988H3X",
+        "recipient_code": "RF99VN7CM",
         "resolved": true,
-        "at": "2026-09-28T14:14:37.912210Z"
+        "at": "2026-09-29T09:10:13.792722Z"
       },
-      "first_touch_at": "2026-09-28T14:14:37.912210Z"
+      "first_touch_at": "2026-09-29T09:10:13.792722Z"
     },
     "feedback": null,
     "share_code": null,
     "peer_referrals_count": 0,
     "rule_version": "V3.0",
     "eligibility_as_of": "2026-09-28",
-    "started_at": "2026-09-28T14:14:37.914607Z",
-    "updated_at": "2026-09-28T14:14:37.929369Z",
-    "completed_at": "2026-09-28T14:14:37.926642Z"
+    "started_at": "2026-09-29T09:10:13.795980Z",
+    "updated_at": "2026-09-29T09:10:13.825941Z",
+    "completed_at": "2026-09-29T09:10:13.820897Z"
   }
 }
 ```
@@ -694,17 +789,17 @@ Response `200`:
 {
   "message_id": "2026-10-01-probable-wave1",
   "source_system": "p1-rajat",
-  "code": "OM-P9EVYX",
+  "code": "OM-988H3X",
   "campaign": "PROBABLE discovery – Rajasthan – wave 1",
   "channel": "sms",
   "template_version": "discovery_invite_sms_v1",
   "template_text": "Namaste {{name}}, find scholarships you can explore: {{link}} Reply STOP to opt …",
   "sent_at": "2026-10-01T04:00:00.000000Z",
-  "created_at": "2026-09-28T14:14:37.896647Z",
+  "created_at": "2026-09-29T09:10:13.778909Z",
   "links": {
-    "whatsapp_text": "Hi, I want to find scholarships. Code OM-P9EVYX",
-    "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-P9EVYX",
-    "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-P9EVYX&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-P9EVYX"
+    "whatsapp_text": "Hi, I want to find scholarships. Code OM-988H3X",
+    "whatsapp_link": "https://wa.me/15550001234?text=Hi%2C%20I%20want%20to%20find%20scholarships.%20Code%20OM-988H3X",
+    "web_link": "https://mosje-p2-api.onrender.com/companion?src=outreach&om=OM-988H3X&utm_source=p1-rajat&utm_medium=sms&utm_campaign=OM-988H3X"
   },
   "whatsapp_number_known": true,
   "stats": {
@@ -721,4 +816,4 @@ Response `200`:
 ```
 
 
-Next poll: pass `since=2026-09-28T14:14:37.980975Z`.
+Next poll: pass `since=2026-09-29T09:10:13.873482Z`.

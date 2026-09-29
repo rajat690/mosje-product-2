@@ -7,6 +7,11 @@ Product 1), not from Jan Aadhaar.
 Six mandatory AND checks, bulk order + fail-fast per section 7.9:
     1 Jurisdiction -> 2 Education Stage -> 3 Social Category -> 4 Gender -> 5 Family Income -> 6 Age
 Anything that cannot be evaluated is FAIL (V3.0 has no referral / manual outcome).
+
+Product 2 discovery overlay (app/eligibility/overlay.py, update 1): category / gender restrictions
+inferred from scheme names where the master says "Not specified"; a region limit for a few Central
+schemes (checked with jurisdiction); and target groups (disability asked; other groups such as
+farmer families are not asked - those schemes are shown last as "check eligibility").
 """
 from __future__ import annotations
 
@@ -34,7 +39,18 @@ def derive_education_stage(class_passed) -> Optional[frozenset]:
         return frozenset({"Post-Matric"})
     if c in {"XII", "12", "12TH"}:
         return frozenset({"Post-Matric", "Higher Education"})
+    # Product 2 Update 1: education levels beyond the Class 10/12 pass-outs of Rule V3.0 section 7.2.
+    # Pre-Matric = Class 1-10; Post-Matric covers Class 11 up to PG in scholarship usage.
+    if c == "PRE":
+        return frozenset({"Pre-Matric"})
+    if c in {"UG", "PG"}:
+        return frozenset({"Post-Matric", "Higher Education"})
     return None
+
+
+def level_code(class_passed) -> str:
+    c = str(class_passed or "").strip().upper().replace("CLASS", "").strip()
+    return {"10": "X", "10TH": "X", "12": "XII", "12TH": "XII"}.get(c, c)
 
 
 def completed_years(dob_iso: Optional[str], as_of: date) -> Optional[int]:
@@ -56,6 +72,8 @@ class StudentProfile:
     Social_Category: Optional[str]
     Student_Education_Stage: Optional[frozenset]
     Class_Passed: str = ""
+    Disability: Optional[bool] = None
+    Income_Min: Optional[int] = None       # lower end of an income band (bands straddling a ceiling -> 'check')
 
 
 def profile_from_facts(facts: dict, student_id: str = "discovery", as_of: date | None = None) -> StudentProfile:
@@ -77,12 +95,34 @@ def profile_from_facts(facts: dict, student_id: str = "discovery", as_of: date |
         Social_Category=facts.get("category") or None,
         Student_Education_Stage=derive_education_stage(facts.get("class_passed")),
         Class_Passed=str(facts.get("class_passed") or ""),
+        Disability=_bool(facts.get("disability")),
+        Income_Min=_int(facts.get("income_min")),
     )
+
+
+def _int(v) -> Optional[int]:
+    try:
+        return int(float(v)) if v not in (None, "") else None
+    except (TypeError, ValueError):
+        return None
+
+
+def _bool(v) -> Optional[bool]:
+    if isinstance(v, bool):
+        return v
+    t = str(v or "").strip().lower()
+    if t in {"yes", "y", "true", "1"}:
+        return True
+    if t in {"no", "n", "false", "0"}:
+        return False
+    return None
 
 
 # ------------------------------------------------------------------ individual checks
 def check_jurisdiction(p: StudentProfile, s: SchemeRule):
     if s.Scheme_Level == "Central":
+        if s.region_set and (p.Domicile_State_UT or "").lower() not in {x.lower() for x in s.region_set}:
+            return FAIL, f"Jurisdiction: scheme is only for {s.Region_States}; student domicile {p.Domicile_State_UT or 'unknown'}"
         return PASS, ""
     if p.Domicile_State_UT and p.Domicile_State_UT.lower() == s.Scheme_State_UT.lower():
         return PASS, ""
@@ -97,6 +137,9 @@ def check_education_stage(p: StudentProfile, s: SchemeRule):
     if s.Education_Stage_Status == UNRES:
         return FAIL, f"Education Stage: scheme wording '{s.Education_Stage_Raw}' not a controlled value"
     if p.Student_Education_Stage & s.stage_set:
+        lv = level_code(p.Class_Passed)
+        if s.level_code_set and lv and lv not in s.level_code_set:
+            return FAIL, f"Education level: scheme is for {s.Level_Codes} ('{s.Education_Level_Raw}'); student level {lv}"
         return PASS, ""
     return FAIL, "Education Stage: student stage not allowed by scheme"
 
@@ -130,10 +173,12 @@ def check_income(p: StudentProfile, s: SchemeRule):
         return PASS, ""
     if s.Income_Status == UNRES:
         return FAIL, f"Family Income: condition stated ('{s.Income_Raw}') but no numeric ceiling"
+    if p.Annual_Family_Income is not None and p.Annual_Family_Income <= s.Income_Max:
+        return PASS, ""
+    if p.Income_Min is not None and p.Income_Min <= s.Income_Max:
+        return PASS, "Family Income: ceiling falls inside the student's income band – shown as 'check eligibility'"
     if p.Annual_Family_Income is None:
         return FAIL, "Family Income: not known"
-    if p.Annual_Family_Income <= s.Income_Max:
-        return PASS, ""
     return FAIL, f"Family Income: {p.Annual_Family_Income:,} > ceiling {s.Income_Max:,}"
 
 
@@ -151,11 +196,36 @@ def check_age(p: StudentProfile, s: SchemeRule):
     return PASS, ""
 
 
+def check_target_groups(p: StudentProfile, s: SchemeRule):
+    """P2 overlay. Disability-only schemes fail when the student said 'No'. Other groups are not
+    asked (unknown = shown with 'check eligibility')."""
+    if "disability" in s.target_group_set and p.Disability is False:
+        return FAIL, "Target group: scheme is only for students with disabilities"
+    return PASS, ""
+
+
+def check_groups_open(p: StudentProfile, s: SchemeRule) -> list[str]:
+    """Groups the student still has to confirm themselves (drives the 'check eligibility' tag)."""
+    g = set(s.target_group_set)
+    if p.Disability is True:
+        g.discard("disability")
+    if income_open(p, s):
+        g.add("income")
+    return sorted(g)
+
+
+def income_open(p: StudentProfile, s: SchemeRule) -> bool:
+    """True when the scheme's income ceiling lies inside the student's income band (can't tell for sure)."""
+    return (s.Income_Status == PARSED and s.Income_Max is not None and p.Income_Min is not None
+            and p.Income_Min <= s.Income_Max and (p.Annual_Family_Income is None or p.Annual_Family_Income > s.Income_Max))
+
+
 BULK_ORDER = [("Education_Stage_Result", check_education_stage),
               ("Social_Category_Result", check_category),
               ("Gender_Result", check_gender),
               ("Income_Result", check_income),
-              ("Age_Result", check_age)]
+              ("Age_Result", check_age),
+              ("Target_Group_Result", check_target_groups)]
 
 
 def evaluate_pair(p: StudentProfile, s: SchemeRule, fail_fast: bool = True) -> dict:
@@ -199,15 +269,53 @@ def apply_where(s: SchemeRule) -> str:
     return ""
 
 
-def scheme_card(s: SchemeRule, rank: int) -> dict:
+def _given(v: str) -> str:
+    v = (v or "").strip()
+    return "" if (not v or v.lower().startswith("not specified") or v.lower() in {"n/a", "na", "-"}) else v
+
+
+def scheme_card(s: SchemeRule, rank: int, only_for: list | None = None) -> dict:
+    only_for = list(s.target_group_set) if only_for is None else only_for
     return {"rank": rank, "scheme_id": s.Scheme_ID, "name": s.Scheme_Name,
             "level": s.Scheme_Level, "state_ut": s.Scheme_State_UT,
             "benefit": short_benefit(s), "apply_url": apply_where(s),
             "apply_url_verified": bool(s.Application_Portal and s.Application_Portal.lower().startswith("http")),
-            "documents": (s.Documents_Required or "")[:200]}
+            "documents": (s.Documents_Required or "")[:200],
+            "only_for": sorted(only_for), "check": bool(only_for),
+            "department": _given(s.Department), "short_description": s.Short_Description,
+            "short_eligibility": s.Short_Eligibility, "short_documents": s.Short_Documents}
 
 
-def _rank_key(s: SchemeRule):
+def scheme_detail(s: SchemeRule) -> dict:
+    """Raw detail fields for the detail card. Empty string = not available in the master."""
+    other = "; ".join(x for x in (_given(s.Merit_Raw), _given(s.Other_Eligibilities)) if x)
+    return {
+        "scheme_id": s.Scheme_ID, "name": s.Scheme_Name, "level": s.Scheme_Level, "state_ut": s.Scheme_State_UT,
+        "department": _given(s.Department), "short_description": s.Short_Description,
+        "short_eligibility": s.Short_Eligibility, "short_documents": s.Short_Documents,
+        "income_max_raw": s.Income_Max if s.Income_Status == PARSED else None,
+        "type": " / ".join(x for x in (_given(s.Programme_Type), _given(s.Department)) if x),
+        "benefit": short_benefit(s, limit=400),
+        "stage": _given(s.Education_Level_Raw) or _given(s.Education_Stage_Raw) or
+        ("" if s.Education_Stage_Status == NO_REQ else s.Education_Stage_Allowed),
+        "category": "" if s.Category_Status == NO_REQ else s.Categories_Allowed,
+        "category_inferred": s.Category_Source != "master",
+        "gender": "" if s.Gender_Status == NO_REQ else s.Gender_Allowed,
+        "income_max": s.Income_Max if s.Income_Status == PARSED else None,
+        "income_raw": _given(s.Income_Raw),
+        "age": _given(s.Age_Raw),
+        "domicile": _given(s.Domicile_Raw) or (s.Region_States if s.Region_States else
+                                               ("" if s.Scheme_Level == "Central" else s.Scheme_State_UT)),
+        "only_for": sorted(s.target_group_set),
+        "other": other[:400],
+        "documents": _given(s.Documents_Required)[:400],
+        "deadline": "",                       # the V3.0 master has no deadline column
+        "apply_url": apply_where(s),
+        "apply_url_verified": bool(s.Application_Portal and s.Application_Portal.lower().startswith("http")),
+    }
+
+
+def _rank_key(s: SchemeRule, open_groups: bool = False):
     score = 0
     if s.Category_Status == PARSED:
         score += 2          # targeted at the student's category
@@ -219,7 +327,7 @@ def _rank_key(s: SchemeRule):
         score += 1
     if short_benefit(s):
         score += 1
-    return (-score, s.Scheme_Name.lower())
+    return (1 if open_groups else 0, -score, s.Scheme_Name.lower())
 
 
 # ------------------------------------------------------------------ engine
@@ -236,14 +344,9 @@ class EligibilityEngine:
 
     # which facts can change an outcome with the loaded master ("minimum questions")
     def needed_facts(self) -> list[str]:
-        need = ["class_passed", "state", "category"]
-        if any(r.Gender_Status == PARSED for r in self.rules):
-            need.append("gender")
-        if any(r.Income_Status == PARSED for r in self.rules):
-            need.append("annual_family_income")
-        if any(r.Age_Status == PARSED for r in self.rules):
-            need.append("dob")
-        return need
+        """The discovery questions (hard maximum of 5, in this order; Update 2: State/UT first). Date of birth
+        and disability are never asked: schemes limited by them are shown as 'check eligibility'."""
+        return ["state", "class_passed", "gender", "annual_family_income", "category"]
 
     def states(self) -> list[str]:
         return sorted({r.Scheme_State_UT for r in self.rules if r.Scheme_Level != "Central"})
@@ -260,12 +363,14 @@ class EligibilityEngine:
             audits.append(a)
             if a["Final_Result"] == ELIGIBLE:
                 eligible.append(s)
-        eligible.sort(key=_rank_key)
+        opened = {s.Scheme_ID: check_groups_open(p, s) for s in eligible}
+        eligible.sort(key=lambda s: _rank_key(s, bool(opened[s.Scheme_ID])))
         return {"rule_version": settings.RULE_VERSION,
                 "as_of": settings.as_of_date().isoformat(),
                 "candidate_schemes_checked": len(audits),
                 "eligible_count": len(eligible),
-                "schemes": [scheme_card(s, i + 1) for i, s in enumerate(eligible)],
+                "check_count": sum(1 for v in opened.values() if v),
+                "schemes": [scheme_card(s, i + 1, opened[s.Scheme_ID]) for i, s in enumerate(eligible)],
                 "audit": audits}
 
 

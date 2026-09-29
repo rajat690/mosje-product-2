@@ -1,16 +1,16 @@
 """Chat with the bot locally (no WhatsApp account needed).
 
 Interactive:   python tools/local_chat.py
-Scripted:      python tools/local_chat.py --script "hi,1,1,Rajasthan,1,2,180000" [--number 919876543210] [--md out.md]
+Scripted:      python tools/local_chat.py --script "hi,4,1,Rajasthan,2,1,1,1,1" [--number 919876543210] [--md out.md]
 Every message goes through the real /whatsapp/webhook endpoint; replies are captured from a fake Graph API.
-Script extras: "[919811112222] text" sends as another number; "{REF}" is replaced by the last REF- share code seen;
+Script extras: "tap:<id>" taps a button / list row (e.g. tap:more, tap:menu, tap:3); "[919811112222] text" sends as another number; "{REF}" is replaced by the last REF- share code seen;
 separate messages with "|" instead of "," when a message itself contains commas (use --sep "|").
 """
 import argparse
 import logging
 import re
 
-from _local import start, wa_in
+from _local import show_wa, start, wa_in
 
 logging.disable(logging.INFO)
 
@@ -33,7 +33,7 @@ def main():
         i += 1
         before = len(fake.sent)
         c.post("/whatsapp/webhook", json=wa_in(number, text, f"wamid.IN{i}"))
-        out = [m["text"]["body"] for m in fake.sent[before:] if m.get("type") == "text"]
+        out = [show_wa(m) for m in fake.sent[before:] if m.get("type") in ("text", "interactive")]
         for o in out:
             m = re.search(r"REF-[A-Z0-9]+", o)
             if m:
@@ -62,7 +62,7 @@ def main():
         print(f"\n👤 {text}")
         for r in replies:
             print(f"🤖 {r}")
-        lines.append(f"**👤 {who}:** {text}\n")
+        lines.append(f"**👤 {who}:** {'(taps) ' + text[4:] if text.startswith('tap:') else text}\n")
         for r in replies:
             lines.append("**🤖 Bot:**\n\n```text\n" + r + "\n```\n")
     if args.md:

@@ -1,0 +1,199 @@
+﻿key,english,translation_ml,max_chars,length,within_limit,reviewer_correction,reviewer_comment
+welcome_named,Namaste {name}! 👋 I am the MoSJE Scholarship Discovery Assistant.,നമസ്കാരം {name}! 👋 ഞാൻ MoSJE സ്കോളർഷിപ്പ് കണ്ടെത്തൽ സഹായി ആണ്.,,62,,,
+welcome,Namaste! 👋 I am the MoSJE Scholarship Discovery Assistant.,നമസ്കാരം! 👋 ഞാൻ MoSJE സ്കോളർഷിപ്പ് കണ്ടെത്തൽ സഹായി ആണ്.,,55,,,
+intro,Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.,"കുറച്ച് ലളിതമായ ചോദ്യങ്ങൾക്ക് ഉത്തരം നൽകൂ (ഏകദേശം 2 മിനിറ്റ്), നിങ്ങൾക്ക് നോക്കാവുന്ന സ്കോളർഷിപ്പുകൾ ഞാൻ കാണിക്കാം.",,115,,,
+choose_lang,Please choose your language / कृपया भाषा चुनें:,Please choose your language / നിങ്ങളുടെ ഭാഷ തിരഞ്ഞെടുക്കുക:,,59,,,
+lang_set,✅ Language: {language},✅ ഭാഷ: {language},,17,,,
+q_step,({n}/{total}),({n}/{total}),,13,,,
+q_class_passed,What is your current education level?,നിങ്ങളുടെ ഇപ്പോഴത്തെ വിദ്യാഭ്യാസ നില എന്താണ്?,,45,,,
+q_state,Which state's scholarships would you like to see?,ഏത് സംസ്ഥാനത്തെ സ്കോളർഷിപ്പുകൾ കാണാനാണ് നിങ്ങൾ ആഗ്രഹിക്കുന്നത്?,,63,,,
+q_category,What is your social category?,നിങ്ങളുടെ സാമൂഹിക വിഭാഗം ഏതാണ്?,,31,,,
+q_gender,What is your gender?,നിങ്ങളുടെ ലിംഗം ഏതാണ്?,,22,,,
+q_annual_family_income,Which range best describes your family's total *monthly* income?,നിങ്ങളുടെ കുടുംബത്തിന്റെ ആകെ *പ്രതിമാസ* വരുമാനം ഏത് പരിധിയിലാണ്?,,64,,,
+current_answer,(Your current answer: {v}),(നിങ്ങളുടെ ഇപ്പോഴത്തെ ഉത്തരം: {v}),,34,,,
+cls_X,Class 10 passed,പത്താം ക്ലാസ് പാസ്,,18,,,
+cls_XII,Class 12 passed,പന്ത്രണ്ടാം ക്ലാസ് പാസ്,,23,,,
+cls_PRE,Class 1–10 (Pre-Matric),1–10 ക്ലാസ് (പ്രീ-മെട്രിക്),,27,,,
+cls_UG,Graduation (UG),ബിരുദം (UG),,11,,,
+cls_PG,Post Graduation (PG),ബിരുദാനന്തരം (PG),,17,,,
+cls_OTHER,Other / not studying,മറ്റുള്ളവ / പഠിക്കുന്നില്ല,,26,,,
+o_edu_PRE,Class 1–10 (school),1–10 ക്ലാസ് (സ്കൂൾ),20,19,yes,,
+o_edu_X,Class 10 passed,10-ാം ക്ലാസ് പാസ്,20,17,yes,,
+o_edu_XII,Class 12 passed,12-ാം ക്ലാസ് പാസ്,20,17,yes,,
+o_edu_UG,Graduation (UG),ബിരുദം (UG),20,11,yes,,
+o_edu_PG,Post Graduation (PG),ബിരുദാനന്തരം (PG),20,17,yes,,
+o_edu_OTHER,Other / not studying,മറ്റുള്ളവ,20,9,yes,,
+edu_d_PRE,Studying in school – Pre-Matric,സ്കൂളിൽ പഠിക്കുന്നു – പ്രീ-മെട്രിക്,,35,,,
+edu_d_X,Matric – now in Class 11/12 (Post-Matric),മെട്രിക് – ഇപ്പോൾ 11/12 ക്ലാസിൽ (പോസ്റ്റ്-മെട്രിക്),,51,,,
+edu_d_XII,"Post-Matric – college, diploma or ITI","പോസ്റ്റ്-മെട്രിക് – കോളേജ്, ഡിപ്ലോമ അല്ലെങ്കിൽ ITI",,50,,,
+edu_d_UG,Studying for a bachelor's degree,ബിരുദ പഠനം,,10,,,
+edu_d_PG,"Master's degree, M.Phil or PhD","ബിരുദാനന്തരം, M.Phil അല്ലെങ്കിൽ PhD",,35,,,
+edu_d_OTHER,None of the above,മുകളിൽ ഒന്നുമല്ല / പഠിക്കുന്നില്ല,,33,,,
+o_dont_know,Don't know,അറിയില്ല,20,8,yes,,
+o_skip,Skip,ഒഴിവാക്കുക,20,10,yes,,
+o_yes,Yes,അതെ,20,3,yes,,
+o_no,No,ഇല്ല,20,4,yes,,
+o_prefer_not,Prefer not to say,പറയാൻ താൽപ്പര്യമില്ല,20,20,yes,,
+cat_SC,SC,SC,20,2,yes,,
+cat_ST,ST,ST,20,2,yes,,
+cat_OBC,OBC,OBC,20,3,yes,,
+cat_General,General,ജനറൽ,20,4,yes,,
+cat_Minority,Minority,ന്യൂനപക്ഷം,20,10,yes,,
+g_Female,Female,സ്ത്രീ,20,6,yes,,
+g_Male,Male,പുരുഷൻ,20,6,yes,,
+g_Transgender,Transgender,ട്രാൻസ്ജെൻഡർ,20,12,yes,,
+inc_m10k,"Up to ₹10,000","₹10,000 വരെ",24,11,yes,,
+inc_m30k,"₹10,001–₹30,000","₹10,001–₹30,000",24,15,yes,,
+inc_gt30k,"Above ₹30,000","₹30,000-ൽ കൂടുതൽ",24,16,yes,,
+per_month,{v} a month,മാസം {v},,8,,,
+per_year,{v} a year,വർഷം {v},,8,,,
+consent,"🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?","🔒 നിങ്ങൾക്ക് അനുയോജ്യമായ സ്കോളർഷിപ്പുകൾ കണ്ടെത്താൻ, ഈ ചാറ്റിൽ നിങ്ങൾ നൽകുന്ന വിവരങ്ങൾ (വിദ്യാഭ്യാസ നില, ലിംഗം, കുടുംബ വരുമാനം, സാമൂഹിക വിഭാഗം, സംസ്ഥാനം) ഉപയോഗിക്കണം. പദ്ധതികൾ നിർദ്ദേശിക്കാൻ മാത്രമാണ് ഇവ ഉപയോഗിക്കുക. നിങ്ങളുടെ പേര്, ആധാർ, ബാങ്ക് വിവരങ്ങൾ ചോദിക്കില്ല. ഇത് ശരിയാണോ?",,279,,,
+o_agree,Agree,സമ്മതം,20,6,yes,,
+o_disagree,Don't agree,സമ്മതമല്ല,20,9,yes,,
+o_agree_now,I agree now,ഇപ്പോൾ സമ്മതം,20,13,yes,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",മനസ്സിലായി 🙏 വ്യക്തിപരമായ വിവരങ്ങൾ ചോദിക്കുകയോ സൂക്ഷിക്കുകയോ ഇല്ല. എല്ലാ സ്കോളർഷിപ്പുകളും https://scholarships.gov.in/ ൽ കാണാം. മനസ്സ് മാറിയാൽ താഴെ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ HI എന്ന് എഴുതുക.,,190,,,
+summary_title,"📋 Please check your details:
+{facts}
+
+Shall I look for scholarships now?","📋 ദയവായി നിങ്ങളുടെ വിവരങ്ങൾ പരിശോധിക്കുക:
+{facts}
+
+ഇപ്പോൾ സ്കോളർഷിപ്പുകൾ തിരയട്ടെ?",,82,,,
+records_note,📁 = from your records,📁 = നിങ്ങളുടെ രേഖകളിൽ നിന്ന്,,28,,,
+o_proceed,Proceed,തുടരുക,20,6,yes,,
+o_edit,Edit details,വിവരങ്ങൾ മാറ്റുക,20,16,yes,,
+edit_restart,"OK, let's go through the questions again.","ശരി, ചോദ്യങ്ങൾ വീണ്ടും തുടങ്ങാം.",,32,,,
+fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","എനിക്ക് മനസ്സിലായില്ല 🙂 താഴെയുള്ള ഒരു ഓപ്ഷൻ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ അതിന്റെ നമ്പർ ടൈപ്പ് ചെയ്യുക. MENU, BACK അല്ലെങ്കിൽ HELP എന്നും ടൈപ്പ് ചെയ്യാം.",,149,,,
+nothing_back,You are at the first step.,നിങ്ങൾ ആദ്യ ഘട്ടത്തിലാണ്.,,25,,,
+updated,✅ Updated {f}: {v},✅ {f} മാറ്റി: {v},,17,,,
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+Reply HI any time to start again.","ഇപ്പോൾ ഈ സേവനം 1-ാം ക്ലാസ് മുതൽ ബിരുദാനന്തര തലം വരെയുള്ള വിദ്യാർത്ഥികൾക്കാണ്. എല്ലാ സ്കോളർഷിപ്പുകളും https://scholarships.gov.in/ ൽ കാണുക.
+വീണ്ടും തുടങ്ങാൻ എപ്പോൾ വേണമെങ്കിലും HI എന്ന് എഴുതുക.",,192,,,
+summary,Your answers: {facts},നിങ്ങളുടെ ഉത്തരങ്ങൾ: {facts},,28,,,
+results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",നിങ്ങളുടെ ഉത്തരങ്ങൾ അനുസരിച്ച് നോക്കാവുന്ന {n} സ്കോളർഷിപ്പ്(കൾ) ({total} ൽ {a}–{b}):,,84,,,
+results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ഒരു പദ്ധതിയും നിങ്ങളുടെ എല്ലാ ഉത്തരങ്ങളുമായി ഉറപ്പായി പൊരുത്തപ്പെട്ടില്ല. ഈ {n} പദ്ധതി(കൾ) പ്രത്യേക വിഭാഗങ്ങൾക്ക് മാത്രം – നിങ്ങൾക്ക് ബാധകമാണോ എന്ന് നോക്കുക ({total} ൽ {a}–{b}):,,177,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,നിങ്ങളുടെ എല്ലാ ഉത്തരങ്ങളുമായി പൊരുത്തപ്പെടുന്ന പദ്ധതി ഞങ്ങളുടെ പട്ടികയിൽ ഇല്ല. ഉത്തരങ്ങൾ മാറ്റാം അല്ലെങ്കിൽ https://scholarships.gov.in/ കാണാം.,,144,,,
+list_tap,Tap a scheme (or type its number) to see details.,വിശദാംശങ്ങൾക്ക് പദ്ധതിയിൽ ടാപ്പ് ചെയ്യുക (അല്ലെങ്കിൽ അതിന്റെ നമ്പർ ടൈപ്പ് ചെയ്യുക).,,83,,,
+check_section,Only for specific groups – check eligibility,പ്രത്യേക വിഭാഗങ്ങൾക്ക് മാത്രം – യോഗ്യത പരിശോധിക്കുക,,51,,,
+only_for,Only for: {groups},ഇവർക്ക് മാത്രം: {groups},,24,,,
+check_elig,check eligibility,യോഗ്യത പരിശോധിക്കുക,,19,,,
+central,Central,കേന്ദ്ര,,7,,,
+results_foot,ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.,ℹ️ ഈ പട്ടിക നിങ്ങളുടെ ഉത്തരങ്ങളും സ്കോളർഷിപ്പ് യോഗ്യതാ നിയമം V3.0 ഉം മാത്രം അടിസ്ഥാനമാക്കിയുള്ളതാണ്. അപേക്ഷിച്ച ശേഷം അന്തിമ യോഗ്യത പദ്ധതിയുടെ വകുപ്പ് തീരുമാനിക്കും.,,164,,,
+no_more,That was the full list.,മുഴുവൻ പട്ടികയും കാണിച്ചു.,,26,,,
+grp_disability,students with disabilities,ഭിന്നശേഷിയുള്ള വിദ്യാർത്ഥികൾ,,28,,,
+grp_farmer,farmer families,കർഷക കുടുംബങ്ങൾ,,15,,,
+grp_workers,children of specific workers,പ്രത്യേക തൊഴിലാളികളുടെ മക്കൾ,,28,,,
+grp_defence,armed forces / police families,സൈനിക / പോലീസ് കുടുംബങ്ങൾ,,25,,,
+grp_school,students of specific schools,പ്രത്യേക സ്കൂളുകളിലെ വിദ്യാർത്ഥികൾ,,34,,,
+grp_orphan,orphans / PM CARES children,അനാഥർ / PM CARES കുട്ടികൾ,,25,,,
+grp_bpl,BPL families,BPL കുടുംബങ്ങൾ,,14,,,
+grp_teachers,children of teachers,അധ്യാപകരുടെ മക്കൾ,,17,,,
+grp_other,a specific group,ഒരു പ്രത്യേക വിഭാഗം,,19,,,
+grp_income,family income up to {amt} a year,വർഷം {amt} വരെ കുടുംബ വരുമാനം,,29,,,
+d_type,Type,തരം,,3,,,
+d_benefit,Benefit,ആനുകൂല്യം,,9,,,
+d_stage,Education stage,വിദ്യാഭ്യാസ ഘട്ടം,,17,,,
+d_category,Category,വിഭാഗം,,6,,,
+d_gender,Gender,ലിംഗം,,5,,,
+d_income,Family income,കുടുംബ വരുമാനം,,14,,,
+d_income_upto,up to {amt} a year,വർഷം {amt} വരെ,,14,,,
+d_age,Age,പ്രായം,,6,,,
+d_domicile,State / domicile,സംസ്ഥാനം / താമസം,,16,,,
+d_only_for,Only for,ഇവർക്ക് മാത്രം,,14,,,
+d_other,Other conditions,മറ്റ് നിബന്ധനകൾ,,15,,,
+d_deadline,Last date,അവസാന തീയതി,,11,,,
+d_link,More info / apply,കൂടുതൽ വിവരം / അപേക്ഷ,,21,,,
+d_inferred,from scheme name – please verify,പദ്ധതിയുടെ പേരിൽ നിന്ന് – ദയവായി പരിശോധിക്കുക,,45,,,
+d_description,Description,വിവരണം,,6,,,
+d_eligibility,Eligibility,യോഗ്യത,,6,,,
+d_docs_short,Required documents,ആവശ്യമായ രേഖകൾ,,14,,,
+d_apply,Application,അപേക്ഷ,,6,,,
+see_site,See official site,ഔദ്യോഗിക സൈറ്റ് കാണുക,,21,,,
+more_details,More details,കൂടുതൽ വിവരങ്ങൾ,,15,,,
+na,Not available – check official site,ലഭ്യമല്ല – ഔദ്യോഗിക സൈറ്റ് കാണുക,,32,,,
+link_unverified,link not verified – search the scheme name on the official site,ലിങ്ക് പരിശോധിച്ചിട്ടില്ല – ഔദ്യോഗിക സൈറ്റിൽ പദ്ധതിയുടെ പേര് തിരയുക,,67,,,
+guidance,ℹ️ This is guidance only – verify on the official site before applying.,ℹ️ ഇത് മാർഗ്ഗനിർദ്ദേശം മാത്രമാണ് – അപേക്ഷിക്കുന്നതിന് മുമ്പ് ഔദ്യോഗിക സൈറ്റിൽ പരിശോധിക്കുക.,,91,,,
+o_more,More schemes,കൂടുതൽ പദ്ധതികൾ,20,15,yes,,
+o_back,Go back,പിന്നോട്ട്,20,10,yes,,
+o_back_list,Back to list,പട്ടികയിലേക്ക്,20,14,yes,,
+o_menu,Main menu,പ്രധാന മെനു,20,11,yes,,
+o_find,Find scholarships,സ്കോളർഷിപ്പ് തിരയുക,20,19,yes,,
+o_my_schemes,See my schemes,എന്റെ പദ്ധതികൾ,20,14,yes,,
+o_lang,Language,ഭാഷ,20,3,yes,,
+o_help,Help,സഹായം,20,5,yes,,
+o_feedback,Share feedback,അഭിപ്രായം നൽകുക,20,15,yes,,
+o_share_scheme,Share scheme,പദ്ധതി പങ്കിടുക,20,15,yes,,
+o_view,View details,വിശദാംശങ്ങൾ,20,11,yes,,
+menu_title,🏠 Main menu – what would you like to do?,🏠 പ്രധാന മെനു – നിങ്ങൾക്ക് എന്ത് ചെയ്യണം?,,41,,,
+help,"I help you find government scholarships in 2 minutes.
+• Tap an option or type its number.
+• BACK – previous step · MENU – main menu · HI – start again
+• LANGUAGE – change language · STOP – stop messages
+Your answers are used only to suggest schemes. Official portal: https://scholarships.gov.in/","2 മിനിറ്റിൽ സർക്കാർ സ്കോളർഷിപ്പുകൾ കണ്ടെത്താൻ ഞാൻ സഹായിക്കും.
+• ഒരു ഓപ്ഷൻ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ അതിന്റെ നമ്പർ ടൈപ്പ് ചെയ്യുക.
+• BACK – മുമ്പത്തെ ഘട്ടം · MENU – പ്രധാന മെനു · HI – വീണ്ടും തുടങ്ങുക
+• LANGUAGE – ഭാഷ മാറ്റുക · STOP – സന്ദേശങ്ങൾ നിർത്തുക
+നിങ്ങളുടെ ഉത്തരങ്ങൾ പദ്ധതികൾ നിർദ്ദേശിക്കാൻ മാത്രം ഉപയോഗിക്കുന്നു. ഔദ്യോഗിക പോർട്ടൽ: https://scholarships.gov.in/",,367,,,
+stopped,You will not get more messages from us. Reply HI any time to start again.,ഇനി നിങ്ങൾക്ക് ഞങ്ങളുടെ സന്ദേശങ്ങൾ ലഭിക്കില്ല. വീണ്ടും തുടങ്ങാൻ എപ്പോൾ വേണമെങ്കിലും HI അയയ്ക്കുക.,,97,,,
+reply_number,Reply with a number:,ഒരു നമ്പർ അയയ്ക്കുക:,,20,,,
+why,"Sorry if the list looked wrong 🙏 I only show schemes that match your answers:
+{facts}
+Schemes marked ""Only for…"" are for specific groups (for example farmer families) – check before applying. If an answer is wrong, change it below.","പട്ടിക തെറ്റായി തോന്നിയെങ്കിൽ ക്ഷമിക്കണം 🙏 നിങ്ങളുടെ ഉത്തരങ്ങളുമായി പൊരുത്തപ്പെടുന്ന പദ്ധതികൾ മാത്രമേ ഞാൻ കാണിക്കൂ:
+{facts}
+""ഇവർക്ക് മാത്രം…"" എന്ന് അടയാളപ്പെടുത്തിയ പദ്ധതികൾ പ്രത്യേക വിഭാഗങ്ങൾക്കുള്ളതാണ് (ഉദാ. കർഷക കുടുംബങ്ങൾ) – അപേക്ഷിക്കും മുമ്പ് പരിശോധിക്കുക. ഏതെങ്കിലും ഉത്തരം തെറ്റാണെങ്കിൽ താഴെ മാറ്റുക.",,308,,,
+why_cat_same,"Your saved category is {cat}, so schemes only for other categories are not shown.","നിങ്ങൾ സേവ് ചെയ്ത വിഭാഗം {cat} ആണ്, അതിനാൽ മറ്റ് വിഭാഗങ്ങൾക്ക് മാത്രമുള്ള പദ്ധതികൾ കാണിക്കില്ല.",,95,,,
+why_cat_diff,"You mentioned {said}, but your saved category is {cat}. Tap below to update it.","നിങ്ങൾ {said} എന്ന് പറഞ്ഞു, പക്ഷേ സേവ് ചെയ്ത വിഭാഗം {cat} ആണ്. മാറ്റാൻ താഴെ ടാപ്പ് ചെയ്യുക.",,91,,,
+why_early,"I show schemes after a few quick questions. Please answer the question, or change your answers any time.","കുറച്ച് ലളിതമായ ചോദ്യങ്ങൾക്ക് ശേഷം ഞാൻ പദ്ധതികൾ കാണിക്കും. ചോദ്യത്തിന് ഉത്തരം നൽകുക, അല്ലെങ്കിൽ എപ്പോൾ വേണമെങ്കിലും ഉത്തരങ്ങൾ മാറ്റുക.",,134,,,
+q_rating,"How would you rate this service? 1 ⭐ = lowest, 5 ⭐ = highest.","ഈ സേവനത്തിന് നിങ്ങൾ എത്ര മാർക്ക് നൽകും? 1 ⭐ = ഏറ്റവും കുറവ്, 5 ⭐ = ഏറ്റവും മികച്ചത്.",,84,,,
+r_1,Very poor,വളരെ മോശം,,9,,,
+r_2,Poor,മോശം,,4,,,
+r_3,Okay,തരക്കേടില്ല,,11,,,
+r_4,Good,നല്ലത്,,6,,,
+r_5,Excellent,മികച്ചത്,,8,,,
+q_comment,"Thank you! Any comment or suggestion? Type it, or reply SKIP.","നന്ദി! എന്തെങ്കിലും അഭിപ്രായമോ നിർദ്ദേശമോ? ടൈപ്പ് ചെയ്യുക, അല്ലെങ്കിൽ SKIP അയയ്ക്കുക.",,85,,,
+share,"🙏 Thanks for your feedback!
+Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🙏 അഭിപ്രായത്തിന് നന്ദി!
+ഏതെങ്കിലും വിദ്യാർത്ഥിക്ക് ഇത് ഉപകാരപ്പെടുമോ? നിങ്ങളുടെ സ്വന്തം ലിങ്ക് പങ്കിടുക:
+WhatsApp: {wa}
+വെബ്: {web}
+അല്ലെങ്കിൽ ഈ നമ്പറിലേക്ക് *{code}* കോഡ് അയക്കാൻ പറയുക.",,186,,,
+share_no_wa,(WhatsApp link available once the WhatsApp number is set up),(WhatsApp നമ്പർ സജ്ജമാക്കിയ ശേഷം ലിങ്ക് ലഭ്യമാകും),,50,,,
+share_scheme_intro,"📤 Forward this message to friends on WhatsApp, email or social media:","📤 ഈ സന്ദേശം സുഹൃത്തുക്കൾക്ക് WhatsApp, ഇമെയിൽ അല്ലെങ്കിൽ സോഷ്യൽ മീഡിയ വഴി അയക്കുക:",,82,,,
+share_scheme_msg,"🎓 I found this scholarship: *{name}* ({tag})
+{desc}
+Apply: {url}
+
+Find scholarships for you in 2 minutes:
+WhatsApp: {wa}
+Web: {web}","🎓 ഈ സ്കോളർഷിപ്പ് കണ്ടെത്തി: *{name}* ({tag})
+{desc}
+അപേക്ഷ: {url}
+
+2 മിനിറ്റിൽ നിങ്ങൾക്കുള്ള സ്കോളർഷിപ്പുകൾ കണ്ടെത്തൂ:
+WhatsApp: {wa}
+വെബ്: {web}",,145,,,
+share_subject,A scholarship you may be eligible for,നിങ്ങൾക്ക് ഉപകാരപ്പെടാവുന്ന ഒരു സ്കോളർഷിപ്പ്,,44,,,
+share_fwd_hint,☝️ Long-press the message above and tap Forward to share it.,☝️ മുകളിലെ സന്ദേശം അമർത്തിപ്പിടിച്ച് Forward ടാപ്പ് ചെയ്യുക.,,60,,,
+sh_whatsapp,WhatsApp,WhatsApp,,8,,,
+sh_email,Email,ഇമെയിൽ,,6,,,
+sh_copy,Copy message,സന്ദേശം പകർത്തുക,,16,,,
+sh_more,Share…,പങ്കിടുക…,,9,,,
+sh_copied,Copied ✓,പകർത്തി ✓,,9,,,
+menu_hint,Type MENU for the main menu.,പ്രധാന മെനുവിന് MENU എന്ന് എഴുതുക.,,34,,,
+lang_continue,Continue,തുടരുക,,6,,,
+f_class_passed,Education level,വിദ്യാഭ്യാസ നില,24,15,yes,,
+f_state,State/UT,സംസ്ഥാനം/UT,24,11,yes,,
+f_category,Category,വിഭാഗം,24,6,yes,,
+f_gender,Gender,ലിംഗം,24,5,yes,,
+f_annual_family_income,Family income,കുടുംബ വരുമാനം,24,14,yes,,
+wa_choose,Choose,തിരഞ്ഞെടുക്കുക,20,14,yes,,
+wa_options,Options,ഓപ്ഷനുകൾ,24,8,yes,,
+wa_nav,Navigate,നാവിഗേഷൻ,24,8,yes,,
+wa_next,More options ▶,കൂടുതൽ ഓപ്ഷനുകൾ ▶,24,17,yes,,
+wa_prev,◀ Previous,◀ മുമ്പത്തേത്,24,13,yes,,
+wa_page,Page {p} of {n} – choose an option:,പേജ് {p} / {n} – ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക:,,42,,,
+choose_next,What would you like to do next?,അടുത്തതായി നിങ്ങൾക്ക് എന്ത് ചെയ്യണം?,,36,,,
+unsupported,Please reply with text (a number or a word).,ദയവായി ടെക്സ്റ്റായി മറുപടി നൽകുക (നമ്പർ അല്ലെങ്കിൽ വാക്ക്).,,59,,,

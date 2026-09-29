@@ -1,0 +1,199 @@
+﻿key,english,translation_bho,max_chars,length,within_limit,reviewer_correction,reviewer_comment
+welcome_named,Namaste {name}! 👋 I am the MoSJE Scholarship Discovery Assistant.,प्रणाम {name}! 👋 हम MoSJE छात्रवृत्ति खोज सहायक बानी।,,53,,,
+welcome,Namaste! 👋 I am the MoSJE Scholarship Discovery Assistant.,प्रणाम! 👋 हम MoSJE छात्रवृत्ति खोज सहायक बानी।,,46,,,
+intro,Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.,"कुछ आसान सवाल के जवाब दीं (लगभग 2 मिनट), आ हम रउआ के ऊ छात्रवृत्ति देखाइब जेकरा बारे में रउआ जान सकीले।",,103,,,
+choose_lang,Please choose your language / कृपया भाषा चुनें:,Please choose your language / आपन भाषा चुनीं:,,45,,,
+lang_set,✅ Language: {language},✅ भाषा: {language},,18,,,
+q_step,({n}/{total}),({n}/{total}),,13,,,
+q_class_passed,What is your current education level?,रउआ अभी कवना स्तर के पढ़ाई करत बानी?,,36,,,
+q_state,Which state's scholarships would you like to see?,रउआ कवना राज्य के छात्रवृत्ति देखे के चाहत बानी?,,48,,,
+q_category,What is your social category?,रउआ के सामाजिक श्रेणी का बा?,,28,,,
+q_gender,What is your gender?,रउआ के लिंग का बा?,,18,,,
+q_annual_family_income,Which range best describes your family's total *monthly* income?,रउआ परिवार के कुल *महीना* के कमाई कवना दायरा में बा?,,52,,,
+current_answer,(Your current answer: {v}),(रउआ के अभी के जवाब: {v}),,25,,,
+cls_X,Class 10 passed,कक्षा 10 पास,,12,,,
+cls_XII,Class 12 passed,कक्षा 12 पास,,12,,,
+cls_PRE,Class 1–10 (Pre-Matric),कक्षा 1–10 (प्री-मैट्रिक),,25,,,
+cls_UG,Graduation (UG),स्नातक (UG),,11,,,
+cls_PG,Post Graduation (PG),स्नातकोत्तर (PG),,16,,,
+cls_OTHER,Other / not studying,दोसर / पढ़ाई ना,,15,,,
+o_edu_PRE,Class 1–10 (school),कक्षा 1–10 (स्कूल),20,18,yes,,
+o_edu_X,Class 10 passed,कक्षा 10 पास,20,12,yes,,
+o_edu_XII,Class 12 passed,कक्षा 12 पास,20,12,yes,,
+o_edu_UG,Graduation (UG),स्नातक (UG),20,11,yes,,
+o_edu_PG,Post Graduation (PG),स्नातकोत्तर (PG),20,16,yes,,
+o_edu_OTHER,Other / not studying,दोसर / पढ़ाई ना,20,15,yes,,
+edu_d_PRE,Studying in school – Pre-Matric,स्कूल में पढ़ाई – प्री-मैट्रिक,,30,,,
+edu_d_X,Matric – now in Class 11/12 (Post-Matric),मैट्रिक – अभी कक्षा 11/12 में (पोस्ट-मैट्रिक),,45,,,
+edu_d_XII,"Post-Matric – college, diploma or ITI","पोस्ट-मैट्रिक – कॉलेज, डिप्लोमा भा ITI",,38,,,
+edu_d_UG,Studying for a bachelor's degree,स्नातक डिग्री के पढ़ाई,,22,,,
+edu_d_PG,"Master's degree, M.Phil or PhD","मास्टर डिग्री, M.Phil भा PhD",,28,,,
+edu_d_OTHER,None of the above,एह में से कवनो ना,,17,,,
+o_dont_know,Don't know,पता नइखे,20,8,yes,,
+o_skip,Skip,छोड़ीं,20,6,yes,,
+o_yes,Yes,हँ,20,2,yes,,
+o_no,No,ना,20,2,yes,,
+o_prefer_not,Prefer not to say,ना बताइब,20,8,yes,,
+cat_SC,SC,SC,20,2,yes,,
+cat_ST,ST,ST,20,2,yes,,
+cat_OBC,OBC,OBC,20,3,yes,,
+cat_General,General,सामान्य,20,7,yes,,
+cat_Minority,Minority,अल्पसंख्यक,20,10,yes,,
+g_Female,Female,महिला,20,5,yes,,
+g_Male,Male,पुरुष,20,5,yes,,
+g_Transgender,Transgender,ट्रांसजेंडर,20,11,yes,,
+inc_m10k,"Up to ₹10,000","₹10,000 ले",24,10,yes,,
+inc_m30k,"₹10,001–₹30,000","₹10,001–₹30,000",24,15,yes,,
+inc_gt30k,"Above ₹30,000","₹30,000 से जादे",24,15,yes,,
+per_month,{v} a month,{v} महीना,,9,,,
+per_year,{v} a year,{v} साल,,7,,,
+consent,"🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?","🔒 रउआ खातिर काम के छात्रवृत्ति खोजे खातिर एह चैट में दिहल जानकारी (पढ़ाई के स्तर, लिंग, परिवार के कमाई, सामाजिक वर्ग आ राज्य) के इस्तेमाल करे के पड़ी। एकर इस्तेमाल खाली योजना बतावे खातिर होई। रउआ नाम, आधार भा बैंक के जानकारी ना पूछल जाई। का ई ठीक बा?",,250,,,
+o_agree,Agree,सहमत बानी,20,9,yes,,
+o_disagree,Don't agree,सहमत नइखीं,20,10,yes,,
+o_agree_now,I agree now,अब सहमत बानी,20,12,yes,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","समझ गइनी 🙏 कवनो निजी जानकारी ना पूछल जाई, ना राखल जाई। सब छात्रवृत्ति https://scholarships.gov.in/ पर देख सकेनी। मन बदले त नीचे टैप करीं भा HI लिखीं।",,149,,,
+summary_title,"📋 Please check your details:
+{facts}
+
+Shall I look for scholarships now?","📋 आपन जानकारी जाँच लीं:
+{facts}
+
+का अब छात्रवृत्ति खोजल जाव?",,60,,,
+records_note,📁 = from your records,📁 = रउआ रिकॉर्ड से,,18,,,
+o_proceed,Proceed,आगे बढ़ीं,20,9,yes,,
+o_edit,Edit details,जानकारी बदलीं,20,13,yes,,
+edit_restart,"OK, let's go through the questions again.","ठीक बा, सवाल फेर से शुरू करत बानी।",,34,,,
+fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","हम समझ ना पवनी 🙂 नीचे कवनो विकल्प चुनीं भा ओकर नंबर लिखीं। रउआ MENU, BACK भा HELP भी लिख सकीले।",,95,,,
+nothing_back,You are at the first step.,रउआ पहिला चरण पर बानी।,,22,,,
+updated,✅ Updated {f}: {v},✅ {f} बदल गइल: {v},,18,,,
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+Reply HI any time to start again.","अभी ई सेवा कक्षा 1 से स्नातकोत्तर तक के विद्यार्थी लोग खातिर बा। सब छात्रवृत्ति https://scholarships.gov.in/ पर देखीं।
+फेर से शुरू करे खातिर कबो HI लिखीं।",,154,,,
+summary,Your answers: {facts},रउआ के जवाब: {facts},,20,,,
+results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",रउआ जवाब के आधार पर ई {n} छात्रवृत्ति देखीं ({total} में से {a}–{b}):,,69,,,
+results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,कवनो योजना रउआ सगरी जवाब से पक्का मेल ना खाइल। ई {n} योजना खाली कुछ खास समूह खातिर बा – देखीं कि रउआ पर लागू होला कि ना ({total} में से {a}–{b}):,,145,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,रउआ सगरी जवाब से मेल खाए वाला कवनो योजना हमनी के सूची में ना मिलल। रउआ जवाब बदल सकीले भा https://scholarships.gov.in/ देख सकीले।,,128,,,
+list_tap,Tap a scheme (or type its number) to see details.,जानकारी देखे खातिर योजना पर टैप करीं (भा ओकर नंबर लिखीं)।,,57,,,
+check_section,Only for specific groups – check eligibility,खाली खास समूह खातिर – पात्रता जाँचीं,,36,,,
+only_for,Only for: {groups},खाली: {groups},,14,,,
+check_elig,check eligibility,पात्रता जाँचीं,,14,,,
+central,Central,केंद्रीय,,8,,,
+results_foot,ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.,ℹ️ ई सूची खाली रउआ जवाब आ छात्रवृत्ति पात्रता नियम V3.0 पर आधारित बा। आवेदन कइला पर आखिरी पात्रता योजना के विभाग तय करी।,,120,,,
+no_more,That was the full list.,पूरा सूची देखा दिहल गइल।,,24,,,
+grp_disability,students with disabilities,दिव्यांग विद्यार्थी,,19,,,
+grp_farmer,farmer families,किसान परिवार,,12,,,
+grp_workers,children of specific workers,खास मजदूर लोग के बच्चा,,22,,,
+grp_defence,armed forces / police families,सेना / पुलिस परिवार,,19,,,
+grp_school,students of specific schools,खास स्कूल के विद्यार्थी,,23,,,
+grp_orphan,orphans / PM CARES children,अनाथ / PM CARES बच्चा,,21,,,
+grp_bpl,BPL families,BPL परिवार,,10,,,
+grp_teachers,children of teachers,शिक्षक लोग के बच्चा,,19,,,
+grp_other,a specific group,एगो खास समूह,,12,,,
+grp_income,family income up to {amt} a year,परिवार के कमाई {amt} साल ले,,27,,,
+d_type,Type,प्रकार,,6,,,
+d_benefit,Benefit,लाभ,,3,,,
+d_stage,Education stage,पढ़ाई के स्तर,,13,,,
+d_category,Category,श्रेणी,,6,,,
+d_gender,Gender,लिंग,,4,,,
+d_income,Family income,परिवार के आमदनी,,15,,,
+d_income_upto,up to {amt} a year,{amt} सालाना ले,,15,,,
+d_age,Age,उमिर,,4,,,
+d_domicile,State / domicile,राज्य / निवास,,13,,,
+d_only_for,Only for,खाली एह लोग खातिर,,17,,,
+d_other,Other conditions,दोसर शर्त,,9,,,
+d_deadline,Last date,आखिरी तारीख,,11,,,
+d_link,More info / apply,जानकारी / आवेदन,,15,,,
+d_inferred,from scheme name – please verify,योजना के नाम से – जाँच लीं,,26,,,
+d_description,Description,विवरण,,5,,,
+d_eligibility,Eligibility,पात्रता,,7,,,
+d_docs_short,Required documents,जरूरी कागजात,,12,,,
+d_apply,Application,आवेदन,,5,,,
+see_site,See official site,सरकारी साइट देखीं,,17,,,
+more_details,More details,अउर जानकारी,,11,,,
+na,Not available – check official site,उपलब्ध नइखे – आधिकारिक साइट देखीं,,33,,,
+link_unverified,link not verified – search the scheme name on the official site,लिंक जाँचल नइखे – आधिकारिक साइट पर योजना के नाम खोजीं,,53,,,
+guidance,ℹ️ This is guidance only – verify on the official site before applying.,ℹ️ ई खाली मार्गदर्शन ह – आवेदन से पहिले आधिकारिक साइट पर जाँच लीं।,,66,,,
+o_more,More schemes,अउरी योजना,20,10,yes,,
+o_back,Go back,पाछे जाईं,20,9,yes,,
+o_back_list,Back to list,सूची पर लवटीं,20,13,yes,,
+o_menu,Main menu,मुख्य मेनू,20,10,yes,,
+o_find,Find scholarships,छात्रवृत्ति खोजीं,20,17,yes,,
+o_my_schemes,See my schemes,हमार योजना,20,10,yes,,
+o_lang,Language,भाषा,20,4,yes,,
+o_help,Help,मदद,20,3,yes,,
+o_feedback,Share feedback,राय दीं,20,7,yes,,
+o_share_scheme,Share scheme,योजना शेयर करीं,20,15,yes,,
+o_view,View details,विवरण देखीं,20,11,yes,,
+menu_title,🏠 Main menu – what would you like to do?,🏠 मुख्य मेनू – रउआ का करे के चाहत बानी?,,39,,,
+help,"I help you find government scholarships in 2 minutes.
+• Tap an option or type its number.
+• BACK – previous step · MENU – main menu · HI – start again
+• LANGUAGE – change language · STOP – stop messages
+Your answers are used only to suggest schemes. Official portal: https://scholarships.gov.in/","हम 2 मिनट में सरकारी छात्रवृत्ति खोजे में रउआ के मदद करीले।
+• कवनो विकल्प टैप करीं भा ओकर नंबर लिखीं।
+• BACK – पिछिला चरण · MENU – मुख्य मेनू · HI – फेर से सुरू
+• LANGUAGE – भाषा बदलीं · STOP – संदेश बंद
+रउआ के जवाब खाली योजना सुझावे खातिर इस्तेमाल होला। आधिकारिक पोर्टल: https://scholarships.gov.in/",,300,,,
+stopped,You will not get more messages from us. Reply HI any time to start again.,अब रउआ के हमनी के संदेश ना मिली। फेर से सुरू करे खातिर कबो HI लिखीं।,,68,,,
+reply_number,Reply with a number:,नंबर भेजीं:,,11,,,
+why,"Sorry if the list looked wrong 🙏 I only show schemes that match your answers:
+{facts}
+Schemes marked ""Only for…"" are for specific groups (for example farmer families) – check before applying. If an answer is wrong, change it below.","अगर सूची गलत लागल त माफ करीं 🙏 हम खाली उहे योजना देखाइले जवन रउआ जवाब से मेल खाला:
+{facts}
+जवना योजना पर ""खाली…"" लिखल बा ऊ खास समूह (जइसे किसान परिवार) खातिर बा – आवेदन से पहिले जाँच लीं। अगर कवनो जवाब गलत बा त नीचे बदलीं।",,222,,,
+why_cat_same,"Your saved category is {cat}, so schemes only for other categories are not shown.","रउआ के सहेजल श्रेणी {cat} बा, एह से खाली दोसर श्रेणी वाला योजना ना देखावल जाला।",,79,,,
+why_cat_diff,"You mentioned {said}, but your saved category is {cat}. Tap below to update it.","रउआ {said} बतवनी, बाकिर सहेजल श्रेणी {cat} बा। बदले खातिर नीचे टैप करीं।",,72,,,
+why_early,"I show schemes after a few quick questions. Please answer the question, or change your answers any time.","कुछ आसान सवाल के बाद हम योजना देखाइले। सवाल के जवाब दीं, भा कबो आपन जवाब बदलीं।",,79,,,
+q_rating,"How would you rate this service? 1 ⭐ = lowest, 5 ⭐ = highest.","एह सेवा के रउआ केतना नंबर देब? 1 ⭐ = सबसे कम, 5 ⭐ = सबसे बढ़िया।",,64,,,
+r_1,Very poor,बहुत खराब,,9,,,
+r_2,Poor,खराब,,4,,,
+r_3,Okay,ठीक-ठाक,,7,,,
+r_4,Good,बढ़िया,,6,,,
+r_5,Excellent,बहुत बढ़िया,,11,,,
+q_comment,"Thank you! Any comment or suggestion? Type it, or reply SKIP.","धन्यवाद! कवनो टिप्पणी भा सुझाव? लिखीं, भा SKIP भेजीं।",,53,,,
+share,"🙏 Thanks for your feedback!
+Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🙏 राय खातिर धन्यवाद!
+कवनो विद्यार्थी के एकर जरूरत हो सकेला? आपन निजी लिंक शेयर करीं:
+WhatsApp: {wa}
+वेब: {web}
+भा उनका से कहीं कि एह नंबर पर कोड *{code}* भेजस।",,159,,,
+share_no_wa,(WhatsApp link available once the WhatsApp number is set up),(WhatsApp नंबर सेट भइला पर लिंक मिली),,37,,,
+share_scheme_intro,"📤 Forward this message to friends on WhatsApp, email or social media:","📤 ई संदेश दोस्तन के WhatsApp, ईमेल भा सोशल मीडिया पर भेजीं:",,59,,,
+share_scheme_msg,"🎓 I found this scholarship: *{name}* ({tag})
+{desc}
+Apply: {url}
+
+Find scholarships for you in 2 minutes:
+WhatsApp: {wa}
+Web: {web}","🎓 हमरा ई छात्रवृत्ति मिलल: *{name}* ({tag})
+{desc}
+आवेदन: {url}
+
+2 मिनट में अपना खातिर छात्रवृत्ति खोजीं:
+WhatsApp: {wa}
+वेब: {web}",,131,,,
+share_subject,A scholarship you may be eligible for,एगो छात्रवृत्ति जवन रउआ काम के हो सकेला,,39,,,
+share_fwd_hint,☝️ Long-press the message above and tap Forward to share it.,☝️ ऊपर वाला संदेश के दबा के राखीं आ Forward पर टैप करीं।,,56,,,
+sh_whatsapp,WhatsApp,WhatsApp,,8,,,
+sh_email,Email,ईमेल,,4,,,
+sh_copy,Copy message,संदेश कॉपी करीं,,15,,,
+sh_more,Share…,शेयर…,,5,,,
+sh_copied,Copied ✓,कॉपी हो गइल ✓,,13,,,
+menu_hint,Type MENU for the main menu.,मुख्य मेनू खातिर MENU लिखीं।,,28,,,
+lang_continue,Continue,आगे बढ़ीं,,9,,,
+f_class_passed,Education level,पढ़ाई के स्तर,24,13,yes,,
+f_state,State/UT,राज्य/UT,24,8,yes,,
+f_category,Category,श्रेणी,24,6,yes,,
+f_gender,Gender,लिंग,24,4,yes,,
+f_annual_family_income,Family income,परिवार के आमदनी,24,15,yes,,
+wa_choose,Choose,चुनीं,20,5,yes,,
+wa_options,Options,विकल्प,24,6,yes,,
+wa_nav,Navigate,आगे-पाछे,24,8,yes,,
+wa_next,More options ▶,अउरी विकल्प ▶,24,13,yes,,
+wa_prev,◀ Previous,◀ पिछिला,24,8,yes,,
+wa_page,Page {p} of {n} – choose an option:,पेज {p} / {n} – कवनो विकल्प चुनीं:,,34,,,
+choose_next,What would you like to do next?,अब रउआ का करे के चाहत बानी?,,27,,,
+unsupported,Please reply with text (a number or a word).,किरपा करके टेक्स्ट में जवाब दीं (नंबर भा शब्द)।,,47,,,

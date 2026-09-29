@@ -67,16 +67,16 @@ A referral is one student that a Product 1 wants Product 2 to reach. It is ident
 | `mobile` | string | recommended | 10-digit Indian mobile (`9876543210`) or with country code (`+91 98765 43210`). Stored as digits with country code (`919876543210`). Needed to recognise the student on WhatsApp. |
 | `name` | string ≤200 | no | Used only for the greeting ("Namaste Aarav!"); only the first name is shown. |
 | `state` | string | no | State/UT of domicile. Canonical names as in `GET /v1/meta` (`Rajasthan`, `Delhi`, `Dadra & Nagar Haveli and Daman & Diu` …). Common aliases (NCT of Delhi, Orissa, UP) are accepted. |
-| `class_passed` (alias `class`) | string | no | `X` or `XII` (also `10`, `12`, `Class 10`). Used for the Education Stage check. |
+| `class_passed` (alias `class`) | string | no | Education level (Update 1): `PRE` (studying in Class 1–10), `X` (Class 10 passed), `XII` (Class 12 passed), `UG` (studying for a bachelor's degree/diploma), `PG` (master's, M.Phil, PhD). Also accepted: `10`, `12`, `Class 10`, `Matric`, `9`, `Graduation`, `PG` … Used for the Education Stage check. |
 | `category` | string | no | `SC`, `ST`, `OBC`, `General`, `Minority` (`Gen` is accepted). |
 | `gender` | string | no | `Male`, `Female`, `Transgender` (`M`/`F`/`T` accepted). |
-| `annual_family_income` (alias `income`) | integer (₹) | no | Annual family income in rupees. `180000`, `"1.8 lakh"`, `"₹1,80,000"` are accepted. |
+| `annual_family_income` (alias `income`) | integer (₹) | no | **Annual** family income in rupees. `180000`, `"1.8 lakh"`, `"₹1,80,000"` are accepted. (The chat itself asks SETU's monthly bands – see section 9.) |
 | `dob` | date | no | `YYYY-MM-DD` (or `DD-MM-YYYY`). Stored; used only if a scheme has a computable age rule (none in the current V3.0 master). |
-| `disability` | boolean | no | `true`/`false`/`yes`/`no`. Stored and returned. **Not evaluated** (V3.0 does not evaluate disability). |
+| `disability` | boolean | no | `true`/`false`/`yes`/`no`. Not asked in the chat (max 5 questions), but used if you send it: schemes **only for students with disabilities** move to the main list (`true`) or are hidden (`false`); if unknown they are shown under “check eligibility”. |
 | `reason` | string ≤50 | no | Why you refer the student. Standard values: `PROBABLE` (linkage score 70–89.99, not linked), `UNLINKED`, `MATCHED`, `NO_SCHEMES`, `OTHER`. Other values are stored with a warning. |
-| `language` | string | no | `en` or `hi`. If set, the bot skips the language question. |
+| `language` | string | no | One of `en`, `hi`, `bn`, `as`, `kn`, `ta`, `te`, `ml`, `or`, `bho`, `mai`, `gu`, `mr`, `pa` (English, Hindi, Bengali, Assamese, Kannada, Tamil, Telugu, Malayalam, Odia, Bhojpuri, Maithili, Gujarati, Marathi, Punjabi). If set, the bot skips the language question (the consent question is always asked). |
 
-**Facts and pre-filling.** Known facts are shown to the student for confirmation ("From your records we already have: … Is this correct?"). If the student says yes, those questions are skipped. If no, all questions are asked. A value that cannot be recognised is dropped and reported in `warnings`; the student will simply be asked.
+**Facts and pre-filling.** After language and consent, known facts fill the matching questions silently; only the missing ones are asked. The summary screen then lists all 5 answers (facts from your records are marked 📁) with **Proceed** / **Edit details**. *Proceed* = `prefill_used: true`; *Edit details* asks all 5 questions again (the current answer is shown as a hint). A value that cannot be recognised is dropped and reported in `warnings`; the student will simply be asked.
 
 **PROBABLE records.** Per Record Linkage Rules V3.0, PROBABLE-band records are not linked, so **send only facts from the CBSE record** (name, mobile, class passed, and state if it comes from the school). Do not send Jan Aadhaar attributes for them.
 
@@ -153,7 +153,7 @@ Query parameters:
 | Param | Meaning |
 |---|---|
 | `since` | ISO-8601 time. Returns sessions **updated after** this time. Use the `next_since` value from the previous response. |
-| `status` | `ACTIVE`, `COMPLETED`, `OPTED_OUT`, `RESTARTED` |
+| `status` | `ACTIVE`, `COMPLETED`, `CONSENT_DECLINED`, `OPTED_OUT`, `RESTARTED` |
 | `channel` | `whatsapp` or `web` |
 | `entry_source` | `OUTREACH`, `ORGANIC`, `PEER_REFERRAL` |
 | `source_system` | Admin key only. `walk-in` = sessions not tied to any source system. |
@@ -222,26 +222,51 @@ The conversation engine is **channel-agnostic**. The same dialogue, state machin
 
 | Endpoint | Auth | Purpose |
 |---|---|---|
-| `POST /v1/chat/sessions` | `X-API-Key` **or none** (public, if `COMPANION_PUBLIC=true`) | Start a session. Body: `external_ref` (key needed, pre-fills from that referral), `language` (`en`/`hi`), `entry` (attribution params, section 7). Returns `session_id`, `session_token`, `companion_url`, `entry_source` and the first `reply`. |
+| `POST /v1/chat/sessions` | `X-API-Key` **or none** (public, if `COMPANION_PUBLIC=true`) | Start a session. Body: `external_ref` (key needed, pre-fills from that referral), `language` (any code from section 4), `entry` (attribution params, section 7). Returns `session_id`, `session_token`, `companion_url`, `entry_source` and the first `reply`. |
 | `POST /v1/chat/sessions/{id}/messages` | `X-Session-Token` (or the owning `X-API-Key`) | Body `{"text": "..."}`: an option `id` (for example `"2"`) or free text. Returns `reply`, `status`, and `session_id`. If `new_session` is true (after restart), use the new `session_id`; the same token keeps working. |
 | `GET /v1/chat/sessions/{id}` | same | Result object, transcript and `last_reply` (to resume a widget). |
 
-Reply object:
+Reply object (results page):
 
 ```json
 {
-  "text": "Based on your answers, here are 5 scholarship(s) you can explore (showing 1–5 of 11):",
-  "options": [{"id": "1", "label": "Show more schemes"}, {"id": "2", "label": "Rate this service & get your share link"},
-              {"id": "3", "label": "Start again"}, {"id": "4", "label": "Help"}],
+  "text": "Based on your answers, here are 5 scholarship(s) you can explore (showing 1–5 of 6):",
+  "options": [{"id": "1", "label": "1. Post-Matric Scholarship for SC Students", "kind": "item", "desc": "Central · Department of Social Justice and Empowerment"},
+              {"id": "more", "label": "More schemes", "kind": "nav"}, {"id": "rate", "label": "Share feedback", "kind": "nav"},
+              {"id": "back", "label": "Go back", "kind": "nav"}],
   "cards": [{"rank": 1, "scheme_id": "MSM-0004", "name": "Post-Matric Scholarship for SC Students",
-             "benefit": "Academic allowance ...", "apply_url": "https://scholarships.gov.in/"}],
+             "tag": "Central", "department": "", "title_line": "Post-Matric Scholarship for SC Students · Central",
+             "description": "Academic allowance ranges by course…", "eligibility": "SC, Post-Matric, income ≤ ₹2.5L",
+             "documents": "SC certificate, income certificate…", "url": "https://scholarships.gov.in/",
+             "labels": {"description": "Description", "eligibility": "Eligibility", "documents": "Required documents", "url": "Application"},
+             "benefit": "Academic allowance ...", "apply_url": "https://scholarships.gov.in/",
+             "only_for": [], "check": false, "check_note": "", "view_label": "View details"}],
+  "detail": null, "share": null, "ui": null, "view": "RESULTS:0", "section_label": "",
   "footer": "ℹ️ This list is based only on your answers ... Final eligibility is decided by the scheme's department.",
-  "state": "RESULTS", "status": "COMPLETED", "language": "en", "input_hint": "choice",
-  "share": null
+  "state": "RESULTS", "status": "COMPLETED", "language": "en", "input_hint": "choice"
 }
 ```
 
-`input_hint` is `choice` (show buttons), or `text` (also allow typing: state name, income amount, comment). `share` carries `share_code`, `web_link`, `whatsapp_link` after feedback.
+**Conversation flow (Update 2).** Language → consent → 5 questions (State/UT first) → summary → results → scheme details → share / feedback.
+
+| Step (`view`) | Options (`id`) | Notes |
+|---|---|---|
+| `LANG` | `1`…`14` (each option also has `code`) | Alphabetical by English name, label = native script + English name. `ui.dropdown: true` and `ui.continue` = label for a *Continue* button (the companion shows a dropdown). Skipped if the language is known. |
+| `CONSENT` | `agree`, `disagree` (+ `back`) | SETU-style consent text. The decision and its time are stored (`consent` in the result object). |
+| `DECLINED` | `agree` (changed my mind), `lang` | After *Don't agree* nothing personal is kept: answers and pre-filled facts are deleted, later messages are logged as “[not stored: consent declined]”, session and referral status = `CONSENT_DECLINED`. |
+| `ASK_state`, `ASK_class_passed`, `ASK_gender`, `ASK_annual_family_income`, `ASK_category` | `1`…`n`, `back`, `menu` | Always these 5, in this order (Update 2: State/UT first – “Which state's scholarships would you like to see?”); text starts with “(n/5)”. State can also be typed (typos are fixed). |
+| `SUMMARY` | `proceed`, `edit` | All 5 answers, State first. *Edit details* restarts at question 1 (State/UT), keeping language and consent. |
+| `RESULTS:<offset>` | scheme ranks, `more`, `rate`, `back` | Cards as above. Update 2: the listing shows only number + name, State/Central tag, department and *View details*; description, eligibility, documents and application appear only in the detail view (the card JSON still carries them for compatibility). WhatsApp list rows show name · State/Central · Department. |
+| `DETAIL:<rank>` | `back`, `share`, `rate` | `detail` object below. WhatsApp shows these 3 as buttons and adds “Type MENU for the main menu.” |
+| `SHARE:<rank>` | `back`, `rate` | `share` carries a ready-made `message` (scheme name, short description, apply link and the student's personal REF links), `subject`, `whatsapp_share_url` (`https://wa.me/?text=…`), `email_url` (`mailto:`), `labels` (for WhatsApp / Email / Copy / Share buttons), `share_code`, `web_link`, `whatsapp_link`. On WhatsApp the message is sent on its own so it can be forwarded as-is. |
+| `FEEDBACK_RATING` | `1`…`5` (labels ⭐ … ⭐⭐⭐⭐⭐, `desc` “1 – Very poor” … “5 – Excellent”) | Stars or digits are accepted. |
+| `FEEDBACK_COMMENT` | `0` (Skip) | Optional comment; then `SHARED` with the personal share links. |
+
+**Detail card** (`detail`): `{title, tag, department, title_line, short: [{key, label, value, na}], more_label, rows: [{key, label, value, na}], apply_url, apply_url_verified, link_label, link_note, note}`. `short` keys: `description` (≤40 characters), `eligibility` (≤50), `documents` (≤40), `url`. These come from the master and are prepared when the rules are compiled; `na: true` / “See official site” means the master has no value. `rows` (“More details”) keys: `type`, `benefit`, `stage`, `category`, `gender`, `income`, `age` (if any), `domicile`, `only_for` (if any), `other`, `deadline`; for these, “Not available – check official site” marks a missing value. Cards with `check: true` are schemes the student may or may not qualify for: only for a specific group (farmer families, students with disabilities, orphans …), or an income limit inside the student's income band. `section_label` is the heading to show above them.
+
+Each option has `kind`: `item` (an answer or a scheme) or `nav` (navigation). Send the option `id` (or its label, or its number) as the next message. Typing `menu`, `back`, `help`, `language` works at any step after consent.
+
+`input_hint` is `choice` (show buttons) or `text` (typing also allowed: state name, income amount, comment).
 
 ### 6.2 Embedding the companion in a Product 1 web app
 
@@ -344,7 +369,7 @@ With a Meta **test** number, only verified recipient phones can chat. Real campa
 
 ### 7.4 Feedback and peer referral
 
-After the results, the student can choose "Rate this service & get your share link": a rating 1–5, then an optional comment (or SKIP). The bot then sends a personal share code `REF-XXXXXX` with WhatsApp and web links. Sessions started with that code are `PEER_REFERRAL`, and `entry.referrer_share_code` shows the code. The referrer's result shows `share_code`, `feedback` and `peer_referrals_count`. Restarts are not counted twice.
+From the results or any scheme card the student can choose **Share feedback**: a 1–5 star rating, then an optional comment (or SKIP). The bot then sends a personal share code `REF-XXXXXX` with WhatsApp and web links. **Share scheme** (on a scheme card) gives a ready-made message with the same personal links, to forward on WhatsApp, email or social media. Sessions started with that code are `PEER_REFERRAL`, and `entry.referrer_share_code` shows the code. The referrer's result shows `share_code`, `feedback` and `peer_referrals_count`. Restarts are not counted twice.
 
 ## 8. Result object
 
@@ -354,12 +379,13 @@ After the results, the student can choose "Rate this service & get your share li
 | `channel` | `whatsapp` \| `web` | |
 | `source_system` | string \| null | null = walk-in |
 | `external_ref`, `referral_reason` | string \| null | When linked to your referral |
-| `status` | string | `ACTIVE`, `COMPLETED`, `OPTED_OUT`, `RESTARTED` (session replaced by a new one) |
-| `state` | string | Current step: `LANG`, `CONFIRM_PREFILL`, `ASK_<fact>`, `RESULTS`, `FEEDBACK_RATING`, `FEEDBACK_COMMENT`, `ENDED` |
-| `language` | `en` \| `hi` | |
+| `status` | string | `ACTIVE`, `COMPLETED`, `CONSENT_DECLINED`, `OPTED_OUT`, `RESTARTED` (session replaced by a new one) |
+| `state` | string | Current step: `LANG`, `CONSENT`, `DECLINED`, `MENU`, `ASK_<fact>`, `SUMMARY`, `RESULTS`, `DETAIL`, `SHARE`, `WHY`, `FEEDBACK_RATING`, `FEEDBACK_COMMENT`, `SHARED`, `ENDED` |
+| `language` | string | One of the 14 codes in section 4 |
 | `mobile_masked` | string | For example `91••••••0001`. Full numbers are never returned. |
-| `prefill_used` | boolean | The student confirmed the facts you sent. |
-| `answers` | object | Facts used: `class_passed`, `state`, `category`, `gender`, `annual_family_income` (a range's upper bound, or the typed amount, or null = "don't know"). `class_passed: "OTHER"` = not a Class 10/12 pass-out (no schemes shown). |
+| `prefill_used` | boolean | The student pressed *Proceed* on a summary that still had all the facts you sent. |
+| `consent` | object | `status` (`AGREED`, `DECLINED` or null = not answered yet), `at` (UTC, e.g. `2026-09-29T08:21:05.123456Z`), `version` (consent text version, e.g. `p2-consent-2026-09-29`) |
+| `answers` | object | Facts used: `class_passed` (`PRE`, `X`, `XII`, `UG`, `PG`, or `OTHER` = not studying – no schemes shown), `gender`, `annual_family_income` (upper bound of the chosen band in ₹ a year, or the typed amount, or null for the top band), `income_min` (lower bound, if a band was chosen), `income_band` (`m10k`, `m30k`, `gt30k`), `category`, `state`. |
 | `eligible_count` | integer \| null | Number of schemes whose six V3.0 checks all pass for these answers |
 | `suggested_schemes` | list | `rank`, `scheme_id` (`MSM-0001` … = master row), `name`, `benefit`, `apply_url`, `shown_to_student` |
 | `entry` | object | `source`, `channel`, `outreach_message_id`, `outreach_code`, `campaign`, `outreach_channel`, `recipient_ref`, `referrer_share_code`, `first_touch` (raw text or URL params, `utm_*`, codes, `resolved`, `at`), `first_touch_at`. Outreach details are shown only to the source system that owns the message. |
@@ -368,17 +394,21 @@ After the results, the student can choose "Rate this service & get your share li
 | `rule_version`, `eligibility_as_of` | | `V3.0`, date |
 | `started_at`, `updated_at`, `completed_at` | UTC | |
 
-Referral `status` values: `RECEIVED` → `INVITED` (template accepted by Meta) → `IN_CONVERSATION` → `COMPLETED`, or `OPTED_OUT`.
+Referral `status` values: `RECEIVED` → `INVITED` (template accepted by Meta) → `IN_CONVERSATION` → `COMPLETED`, or `CONSENT_DECLINED`, or `OPTED_OUT`.
 
 ## 9. Which questions the bot asks, and why
 
-The V3.0 rule has six mandatory AND checks: Jurisdiction, Age (from DOB), Gender, Family Income, Social Category and Education Stage. Product 2 asks only what can change an outcome with the **loaded master**:
+**Update 1 – category overlay.** In the V3.0 master, 297 of 525 active schemes have the category “Not specified in verified source”, which Rule V3.0 treats as open to everyone. Product 2 now adds a transparent overlay when the rules are compiled (`app/eligibility/overlay.py`): if the master gives no category, it is inferred from the scheme name (SC, ST, OBC, Backward Class, BC, Minority, Scheduled Caste/Tribe, Dalit, Adivasi, DNT/VJNT/Nomadic → OBC, EBC/EWS → General …) or, as a last resort, from the department; gender is inferred from words such as girls/women; schemes only for students with disabilities, farmer families, workers' children, defence families, orphans etc. are tagged. A master value always wins over an inference. Every change is listed in `docs/CATEGORY_AUDIT.md` / `docs/category_audit.csv` for the data team to confirm in the master. Disability is not asked; disability-only schemes are shown under “check eligibility” unless a referral says `disability: false`. The audit (`POST /v1/discover`) has a new column `Target_Group_Result` (`PASS`, or `FAIL` when the scheme is only for students with disabilities and the student answered “No”).
 
-* always: class passed (X / XII → Education Stage), State/UT (Jurisdiction), social category;
-* gender and income: asked because some active schemes have a parsed gender or income condition;
-* date of birth: **not asked**, because no scheme in the current master has a computable age rule. (Schemes with an age condition that cannot be computed fail under V3.0 in any case.) If a future master adds computable age rules, the bot starts asking for DOB automatically.
+The V3.0 rule has six mandatory AND checks: Jurisdiction, Age (from DOB), Gender, Family Income, Social Category and Education Stage. **The chat asks at most 5 questions, always in this order (Update 2: State/UT moved to question 1)** (`GET /v1/meta` → `questions_asked`):
 
-Income is chosen from ranges (up to ₹1 lakh, 1–2.5, 2.5–3.5, 3.5–4.5, 4.5–8, above 8 lakh, don't know), or typed as an amount. The upper bound of a range is used. This is conservative, so a scheme is never shown because of rounding down. "Don't know" fails only the schemes that have an income ceiling. Only Class 10 and Class 12 pass-outs are covered, matching the V3.0 Education Stage derivation.
+1. **State/UT** – asked as “Which state's scholarships would you like to see?”; the answer is used as the student's domicile for the Jurisdiction check and State schemes.
+2. **Education level** – Class 1–10 (school) / Class 10 passed / Class 12 passed / Graduation (UG) / Post Graduation (PG) / Other – not studying. `PRE` → Pre-Matric stage; `X`, `XII` → Post-Matric; `UG`, `PG` → Post-Matric + Higher Education. The master's `Education_Level_Raw` (e.g. “Postgraduate”, “Class XI-XII”) is also mapped to these levels, so a PG-only scheme is not shown to a UG student. *Other* ends the chat politely. (This extends V3.0's Class 10/12 derivation – a product decision to confirm.)
+3. **Gender** – Male / Female (as requested; a referral may still send `Transgender`).
+4. **Family income** – SETU's monthly bands: *Up to ₹10,000*, *₹10,001–₹30,000*, *Above ₹30,000* a month, i.e. up to ₹1.2 lakh, ₹1.2–3.6 lakh and above ₹3.6 lakh a year. A typed amount is also accepted (under ₹1,00,000 without “lakh” is read as monthly and multiplied by 12). A scheme's yearly income ceiling above the band passes, below the band fails, **inside the band** is shown under “check eligibility” (“Only for: family income up to ₹X a year”).
+5. **Social category** – SC / ST / OBC / General / Minority (SETU's options).
+
+Date of birth, disability, farmer family and other groups are **not asked**. Schemes that depend on them are shown in the “check eligibility” section with a note, never hidden without a reason. No scheme in the current master has a computable age rule.
 
 ## 10. Errors
 
@@ -408,7 +438,7 @@ Errors return JSON: `{"detail": {"error": "<code>", "message": "<human text>"}}`
 * Mobile numbers are masked in every API response and on the admin page. Full numbers are stored only to recognise WhatsApp users.
 * Tenancy: each source-system key sees only its own data.
 * STOP opts the student out: the bot stops replying, and invites are refused with `409`. Sending "hi" again opts back in.
-* Retention and consent wording are still to be decided (to-do list, section 1). The prototype keeps data until the database is deleted.
+* **Consent (Update 1):** after choosing a language, every student sees a short consent text (SETU wording) with *Agree* / *Don't agree*. The decision, its UTC time and the text version are stored. If the student does not agree, nothing personal is kept (answers and pre-filled facts are deleted; later messages are not stored). The final consent wording and retention period still need legal review (to-do list, section 1). The prototype keeps data until the database is deleted.
 
 ## 13. Quick test checklist for a Product 1 team
 

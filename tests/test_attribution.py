@@ -1,6 +1,6 @@
 from urllib.parse import parse_qs, urlparse
 
-from conftest import ADMIN_KEY, KEY_RAJAT, KEY_TEAMB, WA, H, make_client
+from conftest import ADMIN_KEY, EN, KEY_RAJAT, KEY_TEAMB, WA, H, make_client
 
 REF = {"external_ref": "STU-001", "mobile": "9876500001", "name": "Aarav Sharma", "state": "Rajasthan",
        "class_passed": "X", "category": "SC", "gender": "Male", "annual_family_income": 180000}
@@ -21,9 +21,10 @@ def result_for(client, key, **params):
 
 
 def finish_flow(wa_or_chat):
-    for m in ["1", "1", "Rajasthan", "1", "2"]:
+    """After the language step: Agree, 5 answers (Rajasthan, Class 10 passed, Male, <=₹10k/month, SC), Proceed."""
+    for m in ["agree", "Rajasthan", "2", "1", "1", "1"]:
         wa_or_chat(m)
-    return wa_or_chat("180000")
+    return wa_or_chat("1")                            # summary: Proceed -> results
 
 
 # ------------------------------------------------------------------ OUTREACH
@@ -54,8 +55,10 @@ def test_outreach_whatsapp_per_recipient_link(client):
     wa = WA(client, "919876500001")                   # different phone than the referral's
     first = wa.send(text)
     assert "Namaste Aarav!" in first                  # recipient code linked the referral
-    wa.send("1")
-    wa.send("1")                                      # confirm pre-filled facts -> results
+    wa.send(EN)                                       # language
+    summary = wa.send("1")                            # Agree -> all 5 facts known from the referral -> summary
+    assert "Rajasthan" in summary and "Proceed" in summary
+    wa.send("1")                                      # Proceed -> results
     r = result_for(client, KEY_RAJAT, entry_source="OUTREACH")
     assert len(r) == 1
     e = r[0]["entry"]
@@ -71,7 +74,7 @@ def test_outreach_whatsapp_generic_code_and_code_restarts_journey(client):
     om = register(client)
     wa = WA(client, "919811111111")
     wa.send("hi")                                     # organic first
-    wa.send("1")
+    wa.send(EN)
     assert "Namaste" in wa.send(om["links"]["whatsapp_text"])   # code mid-journey -> fresh attributed session
     r = result_for(client, KEY_RAJAT)
     assert len(r) == 1 and r[0]["entry"]["source"] == "OUTREACH" and r[0]["external_ref"] is None
@@ -117,8 +120,9 @@ def test_organic_both_channels(client):
 def test_feedback_share_and_peer_referrals(client):
     wa = WA(client, "919844444444")
     wa.send("hi")
+    wa.send(EN)
     finish_flow(wa.send)
-    assert "How useful" in wa.send("2")               # option 2 = rate & share
+    assert "How would you rate" in wa.tap("rate")      # Share feedback (list row id) -> 1-5 stars
     assert "comment" in wa.send("4")
     share_msg = wa.send("Very helpful, thanks")
     assert "https://wa.me/15550000000?text=" in share_msg          # number learned from webhook metadata
@@ -126,7 +130,7 @@ def test_feedback_share_and_peer_referrals(client):
     code = res["share_code"]
     assert code.startswith("REF-") and code in share_msg and "src=referral&ref=" + code in share_msg
     assert res["feedback"] == {"rating": 4, "comment": "Very helpful, thanks"}
-    assert "Rate this service" not in share_msg        # feedback option disappears once given
+    assert "Share feedback" not in wa.send("menu")     # feedback option disappears once given
     # friend 1 on WhatsApp with the share text
     WA(client, "919855555555").send(f"Hi, my friend suggested this scholarship helper. Code {code}")
     # friend 2 on the web share link
@@ -146,14 +150,14 @@ def test_rating_values_and_web_share_payload(client):
     sid, tok = d["session_id"], d["session_token"]
     say = lambda m: client.post(f"/v1/chat/sessions/{sid}/messages", json={"text": m},
                                 headers={"X-Session-Token": tok}).json()
-    say("1")
+    say(EN)
     finish_flow(say)
-    assert say("2")["reply"]["state"] == "FEEDBACK_RATING"
-    assert "did not understand" in say("9")["reply"]["text"]
+    assert say("rate")["reply"]["state"] == "FEEDBACK_RATING"
+    assert "didn't get that" in say("9")["reply"]["text"]
     assert say("5")["reply"]["state"] == "FEEDBACK_COMMENT"
     out = say("SKIP")["reply"]
     assert out["share"]["share_code"].startswith("REF-") and "src=referral" in out["share"]["web_link"]
-    assert out["state"] == "RESULTS"
+    assert out["state"] == "SHARED"
     r = client.get(f"/v1/chat/sessions/{sid}", headers={"X-Session-Token": tok}).json()["result"]
     assert r["feedback"] == {"rating": 5, "comment": None}
 

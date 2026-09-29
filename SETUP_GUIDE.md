@@ -106,8 +106,8 @@ Keep both private.
 
 ## Step 5 – Test the web companion, API docs and admin page (no WhatsApp needed)
 
-1. Open `<service URL>/companion`. A chat opens: tap **English** → **Class 10** → type `Rajasthan` → **SC** → **Female** → **₹1 – 2.5 lakh**. You see scheme cards with links. (The first load after a pause can take up to 1 minute: the free service was asleep.)
-2. Tap **Rate this service & get your share link** → pick stars → type a comment or `SKIP`. You get your personal share code `REF-…` and links.
+1. Open `<service URL>/companion`. A chat opens: pick **English** in the language dropdown → **Continue** → **Agree** (consent) → **Class 10 passed** → **Female** → **Up to ₹10,000** → **SC** → type `Rajasthan` → check the summary → **Proceed**. You see scheme cards (name, State/Central, department, description, eligibility, documents, application link). Tap **View details** → **Share scheme** shows WhatsApp / Email / Copy / Share buttons. (The first load after a pause can take up to 1 minute: the free service was asleep.)
+2. Tap **Share feedback** → pick 1–5 stars → type a comment or `SKIP`. You get your personal share code `REF-…` and links.
 3. Open `<service URL>/companion/demo`. This is a pretend Product 1 page showing the blue **🎓 Find scholarships** button (the embed snippet).
 4. Open `<service URL>/admin`. The browser asks for a login: user name `admin` (anything works), password = **P2_API_KEY**. You see referral counts per source system, sessions by channel and **by entry source**, outreach messages, peer referrers, and recent suggestions (masked numbers, India time).
 5. Open `<service URL>/docs` → click the green **Authorize** button (top right) → paste **P2_API_KEY** into the **X-API-Key** box → **Authorize** → **Close**. Then open **GET /v1/meta** → **Try it out** → **Execute**. You should get the list of states.
@@ -141,7 +141,8 @@ Meta changes screen labels from time to time. If a label differs slightly, look 
 **8.1 ORGANIC (found the bot on their own)**
 
 * On your phone, open WhatsApp and send `hi` to the test number (save it as a contact, for example "MoSJE P2 test").
-* The bot replies with the language menu. Answer with numbers: `1` (English) → `1` (Class 10) → `Rajasthan` → `1` (SC) → `2` (Male) → `2` (₹1–2.5 lakh). You get up to 5 schemes with links. `1` = more, `2` = rate & share, `3` = start again, `4` = help. `STOP` stops messages, and `hi` starts again.
+* The bot replies with the language list (tap **Choose**; 14 languages in alphabetical order over 2 pages; English is 4th). Then a short consent message → **Agree**. Then 5 questions: `Rajasthan` (which state's scholarships) → Class 10 passed → Male → Up to ₹10,000 → SC. A summary follows → **Proceed** (or **Edit details** to answer again from the State question). You get up to 5 schemes, each with only its name, State/Central and department (description, eligibility, documents and application link are in the detail card). Tap a scheme in the list (or type its number) to open its detail card, which has the buttons **Go back / Share scheme / Share feedback** (type `MENU` for the main menu). **Share scheme** sends a ready-made message you can long-press → Forward. **Share feedback** = 1–5 stars. The main menu has See my schemes / Edit details / Language / Help. `STOP` stops messages, and `hi` starts again (language and consent are remembered; after STOP the consent question is asked again).
+* Optional setting **WHATSAPP_INTERACTIVE** (default `true`): set it to `false` only if interactive list/button messages ever cause problems; the bot then sends plain numbered text.
 * In the admin page: **Sessions by entry source** shows `ORGANIC / whatsapp`. Opening `/companion` directly counts as `ORGANIC / web`.
 * The first message after the service has been idle can take up to 1 minute. Meta keeps retrying, and duplicates are ignored.
 
@@ -162,13 +163,13 @@ Meta changes screen labels from time to time. If a label differs slightly, look 
    ```
 
    → **Execute**. In the response, find `recipients[0].whatsapp_link` and `recipients[0].web_link`.
-4. Send the **whatsapp_link** to yourself (for example in an e-mail or WhatsApp note) and tap it on your phone. WhatsApp opens with the text "Hi, I want to find scholarships. Code OM-…-R…" → press **Send**. The bot greets you by first name and shows the facts from the referral → `1` to confirm → remaining questions → schemes.
+4. Send the **whatsapp_link** to yourself (for example in an e-mail or WhatsApp note) and tap it on your phone. WhatsApp opens with the text "Hi, I want to find scholarships. Code OM-…-R…" → press **Send**. The bot greets you by first name → consent → **Agree** → only the questions the referral did not answer → summary (facts from the referral marked 📁) → **Proceed** → schemes.
 5. Open the **web_link** in a browser. The companion greets "Rajat" and shows the same facts.
 6. **GET /v1/results** with `source_system=p1-rajat` → your sessions show `"entry": {"source": "OUTREACH", "outreach_message_id": "test-wave-1", "recipient_ref": "TEST-001", ...}`. **GET /v1/outreach-messages/test-wave-1** (with `source_system=p1-rajat`) shows `sessions_started`.
 
 **8.3 PEER_REFERRAL (came via a friend's share link)**
 
-1. Finish a chat (WhatsApp or web), choose **Rate this service & get your share link**, rate, then comment or `SKIP`.
+1. Finish a chat (WhatsApp or web), open a scheme and choose **Share scheme** (or **Share feedback** → stars → comment or `SKIP`).
 2. Copy the web share link (`…/companion?src=referral&ref=REF-…`) and open it in another browser or a private window. Or send the WhatsApp share link to a second tester phone.
 3. Admin page → **Peer referrers** shows your code with "friends who started = 1". **Sessions by entry source** shows `PEER_REFERRAL`.
 
@@ -214,6 +215,7 @@ Meta changes screen labels from time to time. If a label differs slightly, look 
 | No reply on WhatsApp | Not subscribed to `messages`, number not a verified recipient, or token expired | Step 7.6; step 6.7; step 10 |
 | Admin shows `not_sent: WhatsApp not configured` | WhatsApp env vars empty | Step 6.10 |
 | Webhook returns 401 in Meta logs | App secret set but wrong | Copy the App secret again, or clear WHATSAPP_APP_SECRET |
+| Buttons/lists do not appear on WhatsApp | Old WhatsApp app version | Update WhatsApp, or set `WHATSAPP_INTERACTIVE=false` (plain text menus) |
 | `whatsapp_link` is null | WHATSAPP_DISPLAY_NUMBER not set and no message received yet | Set WHATSAPP_DISPLAY_NUMBER (step 6.6) |
 | Product 1 gets 401 | Wrong key or P2_API_KEYS not saved | Check P2_API_KEYS spelling `source:key,source:key`, then redeploy |
 | Embedded widget blocked | ALLOWED_ORIGINS set without that site | Add the site's origin (`https://…`, no trailing slash) |

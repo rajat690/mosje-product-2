@@ -50,10 +50,28 @@ class GraphMock:
                                              "messages": [{"id": f"wamid.OUT{self.n}"}]})
         return httpx.Response(200, json={"ok": True})
 
-    def graph_texts(self, to=None):
-        return [r["json"]["text"]["body"] for r in self.requests
-                if "graph.facebook.com" in r["url"] and r["json"].get("type") == "text"
+    @staticmethod
+    def as_text(j: dict) -> str:
+        """Readable text of a text OR interactive message (body + button / row titles)."""
+        if j.get("type") == "text":
+            return j["text"]["body"]
+        it = j.get("interactive") or {}
+        parts = [it.get("body", {}).get("text", "")]
+        act = it.get("action") or {}
+        for b in act.get("buttons", []):
+            parts.append(b["reply"]["title"])
+        for sec in act.get("sections", []):
+            for r in sec["rows"]:
+                parts.append(r["title"] + (" " + r["description"] if r.get("description") else ""))
+        return "\n".join(parts)
+
+    def wa_messages(self, to=None):
+        return [r["json"] for r in self.requests
+                if "graph.facebook.com" in r["url"] and r["json"].get("type") in ("text", "interactive")
                 and (to is None or r["json"]["to"] == to)]
+
+    def graph_texts(self, to=None):
+        return [self.as_text(j) for j in self.wa_messages(to)]
 
     def last_text(self, to=None):
         t = self.graph_texts(to)
@@ -111,13 +129,32 @@ class WA:
     """Helper to chat with the bot over the (mocked) WhatsApp webhook."""
 
     def __init__(self, client, number="919876543210"):
-        self.c, self.number, self.i = client, number, 0
+        self.c, self.number, self.i, self.last = client, number, 0, []
 
     def send(self, text, kind="text"):
+        """Send one inbound message; returns the text of ALL messages the bot sent back (joined)."""
         self.i += 1
+        before = len(self.c.graph.wa_messages(self.number))
         r = self.c.post("/whatsapp/webhook", json=wa_payload(self.number, text, f"wamid.IN{self.number}{self.i}", kind))
         assert r.status_code == 200, r.text
-        return self.c.graph.last_text(self.number)
+        new = self.c.graph.wa_messages(self.number)[before:]
+        self.last = new
+        return "\n\n".join(self.c.graph.as_text(j) for j in new) if new else None
+
+    def tap(self, reply_id, title=""):
+        """Simulate tapping a reply button / list row (interactive reply carrying the option id)."""
+        self.i += 1
+        before = len(self.c.graph.wa_messages(self.number))
+        payload = wa_payload(self.number, "", f"wamid.IN{self.number}{self.i}")
+        msg = payload["entry"][0]["changes"][0]["value"]["messages"][0]
+        msg.pop("text")
+        msg["type"] = "interactive"
+        msg["interactive"] = {"type": "list_reply", "list_reply": {"id": reply_id, "title": title or reply_id}}
+        r = self.c.post("/whatsapp/webhook", json=payload)
+        assert r.status_code == 200, r.text
+        new = self.c.graph.wa_messages(self.number)[before:]
+        self.last = new
+        return "\n\n".join(self.c.graph.as_text(j) for j in new) if new else None
 
 
 def sign(secret: str, raw: bytes) -> str:
@@ -126,3 +163,25 @@ def sign(secret: str, raw: bytes) -> str:
 
 def H(key):
     return {"X-API-Key": key}
+
+
+# ---- flow helpers: language (alphabetical list: English = 4) -> consent -> 5 questions (State first) -> summary
+EN = "4"
+HI = "6"
+BN = "2"
+
+
+def wa_start(wa, lang=EN, greet="hi"):
+    """Greeting -> language -> Agree. Returns the text of the first question."""
+    wa.send(greet)
+    wa.send(lang)
+    return wa.send("1")                       # Agree
+
+
+def wa_answers(wa, edu="4", gender="1", income="1", category="4", state="Karnataka", proceed=True):
+    """Answer the 5 questions (Update 2 order: State, education level, gender, monthly income band, category)
+    and Proceed."""
+    for m in (state, edu, gender, income):
+        wa.send(m)
+    out = wa.send(category)
+    return wa.send("1") if proceed else out

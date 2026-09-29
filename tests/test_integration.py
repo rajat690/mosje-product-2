@@ -3,7 +3,7 @@ import json
 
 import openpyxl
 
-from conftest import ADMIN_KEY, KEY_RAJAT, KEY_TEAMB, WA, H, sign
+from conftest import ADMIN_KEY, EN, HI, KEY_RAJAT, KEY_TEAMB, WA, H, sign
 
 REF = {"external_ref": "STU-001", "mobile": "9876500001", "name": "aarav sharma", "state": "Rajasthan",
        "class": "X", "category": "SC", "gender": "M", "income": "1.8 lakh", "reason": "PROBABLE"}
@@ -74,10 +74,11 @@ def test_referral_prefill_whatsapp_round_trip_with_callback(client):
     post(client, KEY_RAJAT, [REF])
     wa = WA(client, "919876500001")
     first = wa.send("hi")
-    assert "Namaste Aarav!" in first and "1. English" in first
-    confirm = wa.send("1")                         # English
-    assert "From your records" in confirm and "Rajasthan" in confirm and "₹1,80,000" in confirm
-    assert "you can explore" in wa.send("1")       # facts confirmed -> results straight away
+    assert "Namaste Aarav!" in first and "English" in first
+    assert "Agree" in wa.send(EN)                  # English -> consent
+    confirm = wa.send("1")                         # Agree -> all facts known from the records -> summary
+    assert "from your records" in confirm and "Rajasthan" in confirm and "₹1,80,000" in confirm
+    assert "you can explore" in wa.send("1")       # Proceed
     ref = client.get("/v1/referrals/STU-001", headers=H(KEY_RAJAT)).json()
     assert ref["status"] == "COMPLETED" and ref["latest_result"]["prefill_used"] is True
     assert ref["latest_result"]["suggested_schemes"][0]["name"]
@@ -95,12 +96,16 @@ def test_referral_prefill_whatsapp_round_trip_with_callback(client):
     assert client.get("/v1/results", headers=H(KEY_RAJAT), params={"since": "yesterday"}).status_code == 400
 
 
-def test_prefill_rejected_asks_all(client):
+def test_prefill_edit_details_asks_all(client):
     post(client, KEY_RAJAT, [REF])
     wa = WA(client, "919876500001")
     wa.send("hi")
-    wa.send("2")                                   # Hindi
-    assert "कौन सी कक्षा" in wa.send("2")           # "No, let me answer"
+    wa.send(HI)                                    # Hindi
+    assert "आगे बढ़ें" in wa.send("1")              # Agree -> summary of the records (Proceed / Edit details)
+    q = wa.send("2")                               # Edit details -> restart at question 1 (State)
+    assert "(1/5)" in q and "किस राज्य की छात्रवृत्तियाँ" in q and "Rajasthan" in q   # current answer shown
+    ref = client.get("/v1/referrals/STU-001", headers=H(KEY_RAJAT)).json()
+    assert ref["status"] == "IN_CONVERSATION"
 
 
 def test_invite(client):

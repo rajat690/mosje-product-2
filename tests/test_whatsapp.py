@@ -32,20 +32,34 @@ def test_verify_handshake(client):
 def test_full_conversation_and_graph_request_format(client):
     wa = WA(client)
     first = wa.send("hi")
-    assert "Discovery Assistant" in first and "1. English" in first
+    assert "Discovery Assistant" in first and "English" in first and "हिंदी (Hindi)" in first
+    lst = wa.last[-1]
+    assert lst["type"] == "interactive" and lst["interactive"]["type"] == "list"
+    rows = [r for sec in lst["interactive"]["action"]["sections"] for r in sec["rows"]]
+    assert len(rows) <= 10 and rows[-1]["id"] == "__pg:2"               # 14 languages -> 2 pages
     req = client.graph.requests[-1]
     assert req["url"] == f"https://graph.facebook.com/v21.0/{PHONE_ID}/messages"
     assert req["headers"]["authorization"] == "Bearer EAAG-test-token"
     assert req["json"]["messaging_product"] == "whatsapp" and req["json"]["to"] == "919876543210"
-    assert "Which class" in wa.send("1")
-    assert "State/UT" in wa.send("1")
-    assert "social category" in wa.send("Rajasthan")
-    assert "gender" in wa.send("1")
-    assert "annual income" in wa.send("2")
-    final = wa.send("180000")
+    consent = wa.send("4")                          # English (alphabetical list: 4th)
+    assert "Agree" in consent and "Don't agree" in consent
+    assert wa.last[-1]["interactive"]["type"] == "button"
+    assert "(1/5) Which state's scholarships would you like to see?" in wa.send("1")
+    assert "(2/5) What is your current education level" in wa.send("Rajasthan")
+    assert "gender" in wa.send("2")                  # Class 10 passed
+    assert "monthly" in wa.send("2")                 # Female
+    assert "social category" in wa.send("15000")     # typed monthly income -> ₹1,80,000 a year
+    summary = wa.send("SC")
+    assert "Please check your details" in summary and "Edit details" in summary
+    assert [b["reply"]["id"] for b in wa.last[-1]["interactive"]["action"]["buttons"]] == ["proceed", "edit"]
+    assert summary.index("State/UT: Rajasthan") < summary.index("Education level")
+    final = wa.send("1")                             # Proceed
     assert "scholarship(s) you can explore" in final and "Post-Matric Scholarship for SC Students" in final
     assert "Final eligibility is decided" in final
-    more = wa.send("1")
+    # Update 2: compact listing - name · State/Central · Department only
+    assert "*1. Post-Matric Scholarship for SC Students · Central*" in final
+    assert "Eligibility:" not in final and "Required documents:" not in final and "Application:" not in final
+    more = wa.tap("more")
     assert "showing 6–" in more
     r = client.get("/v1/results", headers=H(ADMIN_KEY), params={"source_system": "walk-in"}).json()
     assert r["count"] == 1 and r["results"][0]["status"] == "COMPLETED" and r["results"][0]["channel"] == "whatsapp"

@@ -1,0 +1,199 @@
+﻿key,english,translation_te,max_chars,length,within_limit,reviewer_correction,reviewer_comment
+welcome_named,Namaste {name}! 👋 I am the MoSJE Scholarship Discovery Assistant.,నమస్తే {name}! 👋 నేను MoSJE స్కాలర్‌షిప్ అన్వేషణ సహాయకుడిని.,,60,,,
+welcome,Namaste! 👋 I am the MoSJE Scholarship Discovery Assistant.,నమస్తే! 👋 నేను MoSJE స్కాలర్‌షిప్ అన్వేషణ సహాయకుడిని.,,53,,,
+intro,Answer a few quick questions (about 2 minutes) and I will show scholarships you can explore.,"కొన్ని సులభమైన ప్రశ్నలకు జవాబు ఇవ్వండి (సుమారు 2 నిమిషాలు), మీరు చూడగల స్కాలర్‌షిప్‌లను నేను చూపిస్తాను.",,104,,,
+choose_lang,Please choose your language / कृपया भाषा चुनें:,Please choose your language / మీ భాషను ఎంచుకోండి:,,49,,,
+lang_set,✅ Language: {language},✅ భాష: {language},,17,,,
+q_step,({n}/{total}),({n}/{total}),,13,,,
+q_class_passed,What is your current education level?,మీ ప్రస్తుత విద్యా స్థాయి ఏమిటి?,,32,,,
+q_state,Which state's scholarships would you like to see?,మీరు ఏ రాష్ట్రం స్కాలర్‌షిప్‌లను చూడాలనుకుంటున్నారు?,,52,,,
+q_category,What is your social category?,మీ సామాజిక వర్గం ఏమిటి?,,23,,,
+q_gender,What is your gender?,మీ లింగం ఏమిటి?,,15,,,
+q_annual_family_income,Which range best describes your family's total *monthly* income?,మీ కుటుంబ మొత్తం *నెలవారీ* ఆదాయం ఏ పరిధిలో ఉంది?,,48,,,
+current_answer,(Your current answer: {v}),(మీ ప్రస్తుత జవాబు: {v}),,24,,,
+cls_X,Class 10 passed,10వ తరగతి పాస్,,14,,,
+cls_XII,Class 12 passed,12వ తరగతి పాస్,,14,,,
+cls_PRE,Class 1–10 (Pre-Matric),1–10వ తరగతి (ప్రీ-మెట్రిక్),,27,,,
+cls_UG,Graduation (UG),డిగ్రీ (UG),,11,,,
+cls_PG,Post Graduation (PG),పోస్ట్ గ్రాడ్యుయేషన్ (PG),,25,,,
+cls_OTHER,Other / not studying,ఇతర / చదవడం లేదు,,16,,,
+o_edu_PRE,Class 1–10 (school),1–10వ తరగతి,20,11,yes,,
+o_edu_X,Class 10 passed,10వ తరగతి పాస్,20,14,yes,,
+o_edu_XII,Class 12 passed,12వ తరగతి పాస్,20,14,yes,,
+o_edu_UG,Graduation (UG),డిగ్రీ (UG),20,11,yes,,
+o_edu_PG,Post Graduation (PG),పీజీ (PG),20,9,yes,,
+o_edu_OTHER,Other / not studying,ఇతర / చదవడం లేదు,20,16,yes,,
+edu_d_PRE,Studying in school – Pre-Matric,పాఠశాలలో చదువుతున్నాను – ప్రీ-మెట్రిక్,,38,,,
+edu_d_X,Matric – now in Class 11/12 (Post-Matric),మెట్రిక్ – ఇప్పుడు 11/12వ తరగతి (పోస్ట్-మెట్రిక్),,49,,,
+edu_d_XII,"Post-Matric – college, diploma or ITI","పోస్ట్-మెట్రిక్ – కాలేజీ, డిప్లొమా లేదా ITI",,43,,,
+edu_d_UG,Studying for a bachelor's degree,డిగ్రీ చదువుతున్నాను,,20,,,
+edu_d_PG,"Master's degree, M.Phil or PhD","మాస్టర్స్, M.Phil లేదా PhD",,26,,,
+edu_d_OTHER,None of the above,పైవేవీ కావు,,11,,,
+o_dont_know,Don't know,తెలియదు,20,7,yes,,
+o_skip,Skip,దాటవేయి,20,7,yes,,
+o_yes,Yes,అవును,20,5,yes,,
+o_no,No,కాదు,20,4,yes,,
+o_prefer_not,Prefer not to say,చెప్పదలచుకోలేదు,20,15,yes,,
+cat_SC,SC,SC,20,2,yes,,
+cat_ST,ST,ST,20,2,yes,,
+cat_OBC,OBC,OBC,20,3,yes,,
+cat_General,General,జనరల్,20,5,yes,,
+cat_Minority,Minority,మైనారిటీ,20,8,yes,,
+g_Female,Female,స్త్రీ,20,6,yes,,
+g_Male,Male,పురుషుడు,20,8,yes,,
+g_Transgender,Transgender,ట్రాన్స్‌జెండర్,20,15,yes,,
+inc_m10k,"Up to ₹10,000","₹10,000 వరకు",24,12,yes,,
+inc_m30k,"₹10,001–₹30,000","₹10,001–₹30,000",24,15,yes,,
+inc_gt30k,"Above ₹30,000","₹30,000 కంటే ఎక్కువ",24,19,yes,,
+per_month,{v} a month,నెలకు {v},,9,,,
+per_year,{v} a year,సంవత్సరానికి {v},,16,,,
+consent,"🔒 To find scholarships that may be relevant, I need to use the details you share in this chat (education level, gender, family income, social category and State). They are used only to suggest schemes. I will not ask for your name, Aadhaar or bank details. Is that okay?","🔒 మీకు సరిపోయే స్కాలర్‌షిప్‌లు కనుగొనడానికి, ఈ చాట్‌లో మీరు ఇచ్చే వివరాలను (విద్యా స్థాయి, లింగం, కుటుంబ ఆదాయం, సామాజిక వర్గం, రాష్ట్రం) ఉపయోగించాలి. వీటిని పథకాలు సూచించడానికి మాత్రమే ఉపయోగిస్తాము. మీ పేరు, ఆధార్ లేదా బ్యాంక్ వివరాలు అడగము. ఇది సరేనా?",,252,,,
+o_agree,Agree,అంగీకారం,20,8,yes,,
+o_disagree,Don't agree,అంగీకరించను,20,11,yes,,
+o_agree_now,I agree now,ఇప్పుడు అంగీకారం,20,16,yes,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","అర్థమైంది 🙏 ఎలాంటి వ్యక్తిగత వివరాలు అడగము, ఉంచము. అన్ని స్కాలర్‌షిప్‌లు https://scholarships.gov.in/ లో చూడవచ్చు. మనసు మారితే కింద ట్యాప్ చేయండి లేదా HI అని రాయండి.",,165,,,
+summary_title,"📋 Please check your details:
+{facts}
+
+Shall I look for scholarships now?","📋 దయచేసి మీ వివరాలు సరిచూసుకోండి:
+{facts}
+
+ఇప్పుడు స్కాలర్‌షిప్‌లు వెతకమా?",,74,,,
+records_note,📁 = from your records,📁 = మీ రికార్డుల నుండి,,22,,,
+o_proceed,Proceed,కొనసాగించండి,20,12,yes,,
+o_edit,Edit details,వివరాలు మార్చండి,20,16,yes,,
+edit_restart,"OK, let's go through the questions again.","సరే, ప్రశ్నలు మళ్లీ మొదలుపెడదాం.",,32,,,
+fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","నాకు అర్థం కాలేదు 🙂 కింద ఒక ఆప్షన్‌ను నొక్కండి లేదా దాని నంబర్ టైప్ చేయండి. మీరు MENU, BACK లేదా HELP అని కూడా టైప్ చేయవచ్చు.",,125,,,
+nothing_back,You are at the first step.,మీరు మొదటి దశలో ఉన్నారు.,,24,,,
+updated,✅ Updated {f}: {v},✅ {f} మార్చబడింది: {v},,22,,,
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+Reply HI any time to start again.","ప్రస్తుతం ఈ సేవ 1వ తరగతి నుండి పోస్ట్ గ్రాడ్యుయేషన్ వరకు విద్యార్థుల కోసం. అన్ని స్కాలర్‌షిప్‌లు https://scholarships.gov.in/ లో చూడండి.
+మళ్లీ మొదలుపెట్టడానికి ఎప్పుడైనా HI అని రాయండి.",,184,,,
+summary,Your answers: {facts},మీ జవాబులు: {facts},,19,,,
+results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",మీ జవాబుల ఆధారంగా మీరు చూడగల {n} స్కాలర్‌షిప్(లు) ({total} లో {a}–{b}):,,71,,,
+results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ఏ పథకమూ మీ అన్ని జవాబులకు ఖచ్చితంగా సరిపోలలేదు. ఈ {n} పథకం(లు) నిర్దిష్ట వర్గాల వారికి మాత్రమే – మీకు వర్తిస్తుందో చూడండి ({total} లో {a}–{b}):,,143,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,మీ అన్ని జవాబులకు సరిపోయే పథకం మా జాబితాలో దొరకలేదు. మీరు జవాబులు మార్చవచ్చు లేదా https://scholarships.gov.in/ చూడవచ్చు.,,120,,,
+list_tap,Tap a scheme (or type its number) to see details.,వివరాల కోసం పథకాన్ని నొక్కండి (లేదా దాని నంబర్ టైప్ చేయండి).,,60,,,
+check_section,Only for specific groups – check eligibility,నిర్దిష్ట వర్గాలకు మాత్రమే – అర్హత తనిఖీ చేయండి,,47,,,
+only_for,Only for: {groups},వీరికి మాత్రమే: {groups},,24,,,
+check_elig,check eligibility,అర్హత తనిఖీ చేయండి,,18,,,
+central,Central,కేంద్ర,,6,,,
+results_foot,ℹ️ This list is based only on your answers and the Scholarship Eligibility Rule V3.0. Final eligibility is decided by the scheme's department when you apply.,ℹ️ ఈ జాబితా మీ జవాబులు మరియు స్కాలర్‌షిప్ అర్హత నియమం V3.0 ఆధారంగా మాత్రమే. దరఖాస్తు చేసిన తర్వాత తుది అర్హతను పథకం శాఖ నిర్ణయిస్తుంది.,,135,,,
+no_more,That was the full list.,పూర్తి జాబితా చూపించబడింది.,,27,,,
+grp_disability,students with disabilities,దివ్యాంగ విద్యార్థులు,,21,,,
+grp_farmer,farmer families,రైతు కుటుంబాలు,,14,,,
+grp_workers,children of specific workers,నిర్దిష్ట కార్మికుల పిల్లలు,,27,,,
+grp_defence,armed forces / police families,సైన్యం / పోలీసు కుటుంబాలు,,25,,,
+grp_school,students of specific schools,నిర్దిష్ట పాఠశాలల విద్యార్థులు,,30,,,
+grp_orphan,orphans / PM CARES children,అనాథలు / PM CARES పిల్లలు,,25,,,
+grp_bpl,BPL families,BPL కుటుంబాలు,,13,,,
+grp_teachers,children of teachers,ఉపాధ్యాయుల పిల్లలు,,18,,,
+grp_other,a specific group,ఒక నిర్దిష్ట వర్గం,,18,,,
+grp_income,family income up to {amt} a year,సంవత్సరానికి {amt} వరకు కుటుంబ ఆదాయం,,36,,,
+d_type,Type,రకం,,3,,,
+d_benefit,Benefit,ప్రయోజనం,,8,,,
+d_stage,Education stage,విద్యా స్థాయి,,13,,,
+d_category,Category,వర్గం,,5,,,
+d_gender,Gender,లింగం,,5,,,
+d_income,Family income,కుటుంబ ఆదాయం,,12,,,
+d_income_upto,up to {amt} a year,సంవత్సరానికి {amt} వరకు,,23,,,
+d_age,Age,వయస్సు,,6,,,
+d_domicile,State / domicile,రాష్ట్రం / నివాసం,,17,,,
+d_only_for,Only for,వీరికి మాత్రమే,,14,,,
+d_other,Other conditions,ఇతర షరతులు,,10,,,
+d_deadline,Last date,చివరి తేదీ,,10,,,
+d_link,More info / apply,మరింత సమాచారం / దరఖాస్తు,,24,,,
+d_inferred,from scheme name – please verify,పథకం పేరు ఆధారంగా – దయచేసి తనిఖీ చేయండి,,39,,,
+d_description,Description,వివరణ,,5,,,
+d_eligibility,Eligibility,అర్హత,,5,,,
+d_docs_short,Required documents,కావలసిన పత్రాలు,,15,,,
+d_apply,Application,దరఖాస్తు,,8,,,
+see_site,See official site,అధికారిక సైట్ చూడండి,,20,,,
+more_details,More details,మరిన్ని వివరాలు,,15,,,
+na,Not available – check official site,అందుబాటులో లేదు – అధికారిక సైట్ చూడండి,,38,,,
+link_unverified,link not verified – search the scheme name on the official site,లింక్ ధృవీకరించబడలేదు – అధికారిక సైట్‌లో పథకం పేరు వెతకండి,,58,,,
+guidance,ℹ️ This is guidance only – verify on the official site before applying.,ℹ️ ఇది మార్గదర్శనం మాత్రమే – దరఖాస్తు చేసే ముందు అధికారిక సైట్‌లో తనిఖీ చేయండి.,,79,,,
+o_more,More schemes,మరిన్ని పథకాలు,20,14,yes,,
+o_back,Go back,వెనక్కి,20,7,yes,,
+o_back_list,Back to list,జాబితాకు వెనక్కి,20,16,yes,,
+o_menu,Main menu,ప్రధాన మెనూ,20,11,yes,,
+o_find,Find scholarships,స్కాలర్‌షిప్ వెతకండి,20,20,yes,,
+o_my_schemes,See my schemes,నా పథకాలు,20,9,yes,,
+o_lang,Language,భాష,20,3,yes,,
+o_help,Help,సహాయం,20,5,yes,,
+o_feedback,Share feedback,అభిప్రాయం ఇవ్వండి,20,17,yes,,
+o_share_scheme,Share scheme,పథకం షేర్ చేయండి,20,16,yes,,
+o_view,View details,వివరాలు చూడండి,20,14,yes,,
+menu_title,🏠 Main menu – what would you like to do?,🏠 ప్రధాన మెనూ – మీరు ఏమి చేయాలనుకుంటున్నారు?,,44,,,
+help,"I help you find government scholarships in 2 minutes.
+• Tap an option or type its number.
+• BACK – previous step · MENU – main menu · HI – start again
+• LANGUAGE – change language · STOP – stop messages
+Your answers are used only to suggest schemes. Official portal: https://scholarships.gov.in/","2 నిమిషాల్లో ప్రభుత్వ స్కాలర్‌షిప్‌లను కనుగొనడంలో నేను సహాయం చేస్తాను.
+• ఒక ఆప్షన్‌ను నొక్కండి లేదా దాని నంబర్ టైప్ చేయండి.
+• BACK – మునుపటి దశ · MENU – ప్రధాన మెనూ · HI – మళ్లీ ప్రారంభం
+• LANGUAGE – భాష మార్చండి · STOP – సందేశాలు ఆపండి
+మీ జవాబులు పథకాలను సూచించడానికి మాత్రమే ఉపయోగించబడతాయి. అధికారిక పోర్టల్: https://scholarships.gov.in/",,339,,,
+stopped,You will not get more messages from us. Reply HI any time to start again.,ఇకపై మీకు మా సందేశాలు రావు. మళ్లీ ప్రారంభించడానికి ఎప్పుడైనా HI అని పంపండి.,,75,,,
+reply_number,Reply with a number:,ఒక నంబర్ పంపండి:,,16,,,
+why,"Sorry if the list looked wrong 🙏 I only show schemes that match your answers:
+{facts}
+Schemes marked ""Only for…"" are for specific groups (for example farmer families) – check before applying. If an answer is wrong, change it below.","జాబితా తప్పుగా అనిపిస్తే క్షమించండి 🙏 మీ జవాబులకు సరిపోయే పథకాలను మాత్రమే నేను చూపిస్తాను:
+{facts}
+""వీరికి మాత్రమే…"" అని ఉన్న పథకాలు నిర్దిష్ట వర్గాలకు (ఉదా. రైతు కుటుంబాలు) – దరఖాస్తుకు ముందు తనిఖీ చేయండి. ఏదైనా జవాబు తప్పు అయితే కింద మార్చండి.",,245,,,
+why_cat_same,"Your saved category is {cat}, so schemes only for other categories are not shown.","మీరు సేవ్ చేసిన వర్గం {cat}, కాబట్టి ఇతర వర్గాలకు మాత్రమే ఉన్న పథకాలు చూపించబడవు.",,81,,,
+why_cat_diff,"You mentioned {said}, but your saved category is {cat}. Tap below to update it.","మీరు {said} అని చెప్పారు, కానీ సేవ్ చేసిన వర్గం {cat}. మార్చడానికి కింద నొక్కండి.",,81,,,
+why_early,"I show schemes after a few quick questions. Please answer the question, or change your answers any time.","కొన్ని సులభమైన ప్రశ్నల తర్వాత నేను పథకాలు చూపిస్తాను. ప్రశ్నకు జవాబు ఇవ్వండి, లేదా ఎప్పుడైనా జవాబులు మార్చండి.",,110,,,
+q_rating,"How would you rate this service? 1 ⭐ = lowest, 5 ⭐ = highest.","ఈ సేవకు మీరు ఎన్ని మార్కులు ఇస్తారు? 1 ⭐ = అతి తక్కువ, 5 ⭐ = అత్యుత్తమం.",,72,,,
+r_1,Very poor,చాలా బాగాలేదు,,13,,,
+r_2,Poor,బాగాలేదు,,8,,,
+r_3,Okay,పర్వాలేదు,,9,,,
+r_4,Good,బాగుంది,,7,,,
+r_5,Excellent,అద్భుతం,,7,,,
+q_comment,"Thank you! Any comment or suggestion? Type it, or reply SKIP.","ధన్యవాదాలు! ఏదైనా అభిప్రాయం లేదా సూచన? టైప్ చేయండి, లేదా SKIP పంపండి.",,69,,,
+share,"🙏 Thanks for your feedback!
+Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🙏 మీ అభిప్రాయానికి ధన్యవాదాలు!
+ఎవరైనా విద్యార్థికి ఇది ఉపయోగపడుతుందా? మీ వ్యక్తిగత లింక్ షేర్ చేయండి:
+WhatsApp: {wa}
+వెబ్: {web}
+లేదా ఈ నంబర్‌కు *{code}* కోడ్ పంపమని చెప్పండి.",,175,,,
+share_no_wa,(WhatsApp link available once the WhatsApp number is set up),(WhatsApp నంబర్ సెట్ అయిన తర్వాత లింక్ అందుబాటులో ఉంటుంది),,58,,,
+share_scheme_intro,"📤 Forward this message to friends on WhatsApp, email or social media:","📤 ఈ సందేశాన్ని స్నేహితులకు WhatsApp, ఈమెయిల్ లేదా సోషల్ మీడియాలో పంపండి:",,72,,,
+share_scheme_msg,"🎓 I found this scholarship: *{name}* ({tag})
+{desc}
+Apply: {url}
+
+Find scholarships for you in 2 minutes:
+WhatsApp: {wa}
+Web: {web}","🎓 నాకు ఈ స్కాలర్‌షిప్ దొరికింది: *{name}* ({tag})
+{desc}
+దరఖాస్తు: {url}
+
+2 నిమిషాల్లో మీ కోసం స్కాలర్‌షిప్‌లు వెతకండి:
+WhatsApp: {wa}
+వెబ్: {web}",,146,,,
+share_subject,A scholarship you may be eligible for,మీకు ఉపయోగపడే ఒక స్కాలర్‌షిప్,,29,,,
+share_fwd_hint,☝️ Long-press the message above and tap Forward to share it.,☝️ పై సందేశాన్ని నొక్కి పట్టి Forward ట్యాప్ చేయండి.,,52,,,
+sh_whatsapp,WhatsApp,WhatsApp,,8,,,
+sh_email,Email,ఈమెయిల్,,7,,,
+sh_copy,Copy message,సందేశం కాపీ చేయండి,,18,,,
+sh_more,Share…,షేర్…,,5,,,
+sh_copied,Copied ✓,కాపీ అయింది ✓,,13,,,
+menu_hint,Type MENU for the main menu.,ప్రధాన మెనూ కోసం MENU అని రాయండి.,,33,,,
+lang_continue,Continue,కొనసాగించండి,,12,,,
+f_class_passed,Education level,విద్యా స్థాయి,24,13,yes,,
+f_state,State/UT,రాష్ట్రం/UT,24,11,yes,,
+f_category,Category,వర్గం,24,5,yes,,
+f_gender,Gender,లింగం,24,5,yes,,
+f_annual_family_income,Family income,కుటుంబ ఆదాయం,24,12,yes,,
+wa_choose,Choose,ఎంచుకోండి,20,9,yes,,
+wa_options,Options,ఆప్షన్లు,24,8,yes,,
+wa_nav,Navigate,నావిగేషన్,24,9,yes,,
+wa_next,More options ▶,మరిన్ని ఆప్షన్లు ▶,24,18,yes,,
+wa_prev,◀ Previous,◀ మునుపటి,24,9,yes,,
+wa_page,Page {p} of {n} – choose an option:,పేజీ {p} / {n} – ఒక ఆప్షన్ ఎంచుకోండి:,,37,,,
+choose_next,What would you like to do next?,తర్వాత మీరు ఏమి చేయాలనుకుంటున్నారు?,,35,,,
+unsupported,Please reply with text (a number or a word).,దయచేసి టెక్స్ట్‌లో జవాబు ఇవ్వండి (నంబర్ లేదా పదం).,,50,,,

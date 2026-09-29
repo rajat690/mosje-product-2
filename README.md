@@ -1,6 +1,6 @@
 # MoSJE Product 2 – Scholarship Discovery Assistant
 
-WhatsApp + web chat companion that helps students (Class 10 / 12 pass-outs) discover government scholarships using **Scholarship Eligibility Rule V3.0** and the **547-row MoSJE Scholarship Master V3.0**.
+WhatsApp + web chat companion that helps students (Class 1 to Post Graduation) discover government scholarships using **Scholarship Eligibility Rule V3.0** and the **547-row MoSJE Scholarship Master V3.0**.
 
 * **Standalone.** It does not import or depend on Product 1. Product 1 systems (for example `p1-rajat`, `p1-teamB`) connect through the versioned **integration contract** in [INTEGRATION_SPEC.md](INTEGRATION_SPEC.md).
 * **Channel-agnostic conversation engine** (`app/conversation/`), with adapters for **WhatsApp** (Meta Cloud API) and the **web** (REST chat API + embeddable `/companion` widget).
@@ -37,7 +37,7 @@ app/
   facts.py                normalisers (state, class, category, income, mobile ...)
   attribution.py          entry-source attribution, OM/REF codes, link builders
   conversation/core.py    channel-agnostic dialogue engine (BotReply)
-  conversation/texts.py   English + Hindi wording
+  conversation/texts.py   English wording + language list; conversation/i18n/<code>.py = 13 other languages
   channels/whatsapp.py    WhatsApp adapter (webhook, Graph API client)
   channels/web.py         web chat adapter (REST)
   integration.py          /v1 integration contract
@@ -58,7 +58,7 @@ render.yaml               Render Blueprint (1 free web service + env group; no d
 ```bash
 python3.13 -m venv .venv && . .venv/bin/activate
 pip install -r requirements-dev.txt
-pytest                                           # 51 tests, SQLite, Graph API mocked
+pytest                                           # 101 tests, SQLite, Graph API mocked
 P2_TEST_DATABASE_URL=postgresql://user@localhost/db pytest   # same suite on Postgres
 python tools/local_chat.py                       # chat with the bot in the terminal (fake WhatsApp)
 python tools/round_trip_demo.py                  # Product 1 -> Product 2 -> Product 1 sample

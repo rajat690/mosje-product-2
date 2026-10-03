@@ -1,0 +1,2 @@
+scheme_id,last_date,renewal,amount_per_year,last_verified,notes
+SCH-EXAMPLE-01,2026-10-31,2027-07-15,25000,2026-09-30,"Example row - replace SCH-EXAMPLE-01 with a real Scheme_ID from the master sheet; dates as YYYY-MM-DD"

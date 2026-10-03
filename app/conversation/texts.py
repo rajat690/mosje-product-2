@@ -86,7 +86,8 @@ EN = {
     "o_disagree": "Don't agree",
     "o_agree_now": "I agree now",
     "consent_declined": ("Understood 🙏 I won't ask for or keep any personal details. You can still explore all "
-                         "scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI."),
+                         "scholarships on the National Scholarship Portal: https://scholarships.gov.in/\n"
+                         "If you change your mind, tap below or reply HI."),
     # --- summary before matching
     "summary_title": "📋 Please check your details:\n{facts}\n\nShall I look for scholarships now?",
     "records_note": "📁 = from your records",
@@ -98,14 +99,14 @@ EN = {
     "nothing_back": "You are at the first step.",
     "updated": "✅ Updated {f}: {v}",
     "class_other": ("Right now I can help students from Class 1 up to Post Graduation. "
-                    "You can explore all scholarships at https://scholarships.gov.in/ .\nReply HI any time to start again."),
+                    "You can explore all scholarships at https://scholarships.gov.in/\nReply HI any time to start again."),
     # --- results list
     "summary": "Your answers: {facts}",
     "results_head": "Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",
     "results_head_check_only": ("No scheme matched all your answers for certain. These {n} scheme(s) are only for "
                                 "specific groups – check if one applies to you (showing {a}–{b} of {total}):"),
     "results_none": ("I could not find a scheme in our list that matches all your answers. "
-                     "You can change your answers or explore https://scholarships.gov.in/ ."),
+                     "You can change your answers or explore https://scholarships.gov.in/"),
     "list_tap": "Tap a scheme (or type its number) to see details.",
     "check_section": "Only for specific groups – check eligibility",
     "only_for": "Only for: {groups}",
@@ -189,6 +190,7 @@ EN = {
     "share_fwd_hint": "☝️ Long-press the message above and tap Forward to share it.",
     "sh_whatsapp": "WhatsApp", "sh_email": "Email", "sh_copy": "Copy message", "sh_more": "Share…",
     "sh_copied": "Copied ✓",
+    "share_invite": "🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}",   # refer a friend: forwarded message (Update 3)
     "menu_hint": "Type MENU for the main menu.",
     "lang_continue": "Continue",
     # --- labels
@@ -203,6 +205,17 @@ EN = {
     "wa_page": "Page {p} of {n} – choose an option:",
     "choose_next": "What would you like to do next?",
     "unsupported": "Please reply with text (a number or a word).",
+    # --- Update 3: refer a friend, one-time web link, Save on WhatsApp, voice notes
+    'o_refer': 'Refer a friend',
+    'refer': '🤝 Know a student who could use this? Share your personal link:\nWhatsApp: {wa}\nWeb: {web}\nOr ask them to send the code *{code}* to this number.',
+    'web_link': '📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):\n{url}',
+    'my_link': '📋 Your saved schemes, reminders and application tracker (one-time link, only for you):\n{url}',
+    'save_ok': "✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.\n{url}",
+    'save_bad': 'This code is not valid or has expired. Please tap Save again on the web page.',
+    'parent_ok': "✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.",
+    'voice_soon': '🎤 Voice notes are coming soon. Please type your answer for now.',
+    'voice_heard': '🎤 I heard: “{text}”',
+    'no_saved': 'You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.',
 }
 
 T = {"en": EN}

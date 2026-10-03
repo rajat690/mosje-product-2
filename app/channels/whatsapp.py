@@ -11,6 +11,13 @@ Replies are sent as WhatsApp *interactive* messages (update 1):
                                            answered here from the stored last reply (no bot step)
   * body longer than 1024 characters    -> the text is sent first, then a short interactive message
 Set WHATSAPP_INTERACTIVE=false to fall back to plain numbered text.
+
+Update 3 (Product Vision V1.0):
+  * after the language is chosen the consent message also carries a one-time web link (/companion?c=WL-...,
+    tied to this number, expires) - WHATSAPP_WEB_LINK=offer (default) | off
+  * "SAVE-XXXXX" / "OK-XXXXX" codes sent from the web companion's Save sheet confirm Save on WhatsApp / parent OK
+  * "MY SCHEMES" -> one-time link to My schemes; STOP also stops reminders
+  * voice notes -> speech-to-text when SPEECH_ENABLED (else a polite "type for now" reply)
 """
 from __future__ import annotations
 
@@ -34,6 +41,7 @@ from ..conversation import core
 from ..conversation.texts import t
 from ..db import Message, ProcessedEvent
 from ..facts import norm_mobile
+from .. import students as ST
 from ..security import Caller, require_admin, require_api_key
 
 log = logging.getLogger(__name__)
@@ -101,8 +109,15 @@ def signature_ok(raw: bytes, header: Optional[str]) -> bool:
     return hmac.compare_digest(expected, header[7:])
 
 
+AUDIO_PREFIX = "__audio:"
+MY_SCHEMES = {"my schemes", "my scheme", "saved schemes", "my saved schemes", "मेरी योजनाएँ", "मेरी योजनाएं"}
+
+
 def extract_text(msg: dict) -> Optional[str]:
     typ = msg.get("type")
+    if typ in ("audio", "voice"):                     # Update 3: voice note -> routed to STT (hook point)
+        media = msg.get("audio") or msg.get("voice") or {}
+        return f"{AUDIO_PREFIX}{media.get('id', '')}|{media.get('mime_type', 'audio/ogg')}"
     if typ == "text":
         return (msg.get("text") or {}).get("body", "")
     if typ == "button":
@@ -222,12 +237,80 @@ def send_reply(db, s, to: str, reply: "core.BotReply", page: int = 1) -> None:
         core.log_message(db, s, "out", payload_text(p), channel="whatsapp", external_id=mid, status=st)
 
 
+# ------------------------------------------------------------------ voice notes (Update 3 hook point)
+def download_media(media_id: str) -> tuple[bytes, str]:
+    """Graph API: GET /{media-id} -> url, then GET url (same bearer token)."""
+    with results.http_client(timeout=20.0) as c:
+        h = {"Authorization": f"Bearer {settings.wa_token}"}
+        meta = c.get(f"{settings.graph_base}/{settings.graph_version}/{media_id}", headers=h)
+        meta.raise_for_status()
+        info = meta.json()
+        r = c.get(info["url"], headers=h)
+        r.raise_for_status()
+        return r.content, info.get("mime_type") or "audio/ogg"
+
+
+def voice_to_text(media: str, lang: str) -> tuple[Optional[str], str]:
+    """(transcript or None, reason). Off unless SPEECH_ENABLED + a working SPEECH_PROVIDER."""
+    from ..speech import SpeechError, get_provider
+    if not settings.speech_ready:
+        return None, "speech_off"
+    media_id, _, mime = media.partition("|")
+    try:
+        audio, mime2 = download_media(media_id)
+        return (get_provider().stt(audio, mime=mime2 or mime, lang=lang).text or "").strip() or None, "ok"
+    except SpeechError as e:
+        return None, getattr(e, "code", "speech_failed")
+    except Exception as e:  # noqa: BLE001
+        log.warning("voice note STT failed: %s", e)
+        return None, f"failed: {type(e).__name__}"
+
+
+def _send_plain(db, s, wa_id: str, msg: str) -> None:
+    st, mid = send_text(wa_id, msg)
+    core.log_message(db, s, "out", msg, channel="whatsapp", external_id=mid, status=st)
+
+
 # ------------------------------------------------------------------ inbound processing (background)
 def process_inbound(wa_id: str, msg_id: str, text: Optional[str]) -> None:
     db = dbm.SessionLocal()
     callbacks = []
     try:
         s = core.latest_session_for_wa(db, wa_id)
+        ST.touch_inbound(db, wa_id)
+        heard = ""
+        if text is not None and text.startswith(AUDIO_PREFIX):
+            lang = s.language if s is not None else "en"
+            core.log_message(db, s, "in", "[voice note]", channel="whatsapp", external_id=msg_id)
+            said, why = voice_to_text(text[len(AUDIO_PREFIX):], lang)
+            if not said:
+                _send_plain(db, s, wa_id, t(lang, "voice_soon"))
+                db.commit()
+                return
+            text, heard = said, t(lang, "voice_heard", text=said[:200])
+        if text is not None and not text.startswith(PAGE_PREFIX):
+            coded = ST.handle_wa_code(db, wa_id, text)          # SAVE-XXXXX / OK-XXXXX from the web Save sheet
+            if coded is not None:
+                lang = s.language if s is not None else ((coded.get("student") and coded["student"].language) or "en")
+                core.log_message(db, s, "in", text, channel="whatsapp", external_id=msg_id)
+                _send_plain(db, s, wa_id, t(lang, coded["key"], **coded["kw"]))
+                db.commit()
+                return
+            if core._clean(text) in MY_SCHEMES:
+                lang = s.language if s is not None else "en"
+                core.log_message(db, s, "in", text, channel="whatsapp", external_id=msg_id)
+                stu = ST.student_for_wa(db, wa_id)
+                if stu is not None and stu.status != "DELETED":
+                    lc = ST.new_code(db, "WEB_LINK", wa_id=wa_id, session_id=s.id if s else None, student_id=stu.id,
+                                     payload={"screen": "my", "language": stu.language})
+                    _send_plain(db, s, wa_id, t(stu.language or lang, "my_link",
+                                                url=f"{settings.public_base_url}/companion?c={lc.code}"))
+                else:
+                    _send_plain(db, s, wa_id, t(lang, "no_saved"))
+                db.commit()
+                return
+            if core._clean(text) in core.STOP:                 # STOP always stops reminders, even with no chat
+                ST.stop_student(db, wa_id)
         if text is None:
             core.log_message(db, s, "in", "[non-text message]", channel="whatsapp", external_id=msg_id)
             msg = t(s.language, "unsupported") if s is not None and s.language != "en" else UNSUPPORTED
@@ -261,6 +344,11 @@ def process_inbound(wa_id: str, msg_id: str, text: Optional[str]) -> None:
             s, reply = core.handle_message(db, s, text)
         if "completed" in reply.events or "opted_out" in reply.events:
             callbacks.append(s.id)
+        if "opted_out" in reply.events:
+            ST.stop_student(db, wa_id)
+        if heard:
+            reply.text = f"{heard}\n\n{reply.text}" if reply.text else heard
+        _maybe_offer_web_link(db, s, reply)
         db.commit()
         if not reply.silent:
             s.last_reply = reply.to_dict()
@@ -273,6 +361,17 @@ def process_inbound(wa_id: str, msg_id: str, text: Optional[str]) -> None:
         db.close()
     for sid in callbacks:
         results.push_callback(sid)
+
+
+def _maybe_offer_web_link(db, s, reply: "core.BotReply") -> None:
+    """Journey 2: right after the language is chosen, offer the one-time web link (once per session)."""
+    if settings.wa_web_link == "off" or reply.view != "CONSENT" or not settings.public_base_url:
+        return
+    if (s.answers or {}).get("_wl_sent"):
+        return
+    url = ST.web_link_url(db, s, "chat")
+    core._set_answers(s, _wl_sent=True)
+    reply.text = f"{reply.text}\n\n{t(s.language, 'web_link', h=settings.link_ttl_hours, url=url)}"
 
 
 def process_status(msg_id: str, status: str, errors: list | None) -> None:

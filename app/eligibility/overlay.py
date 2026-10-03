@@ -29,7 +29,7 @@ from __future__ import annotations
 import re
 from dataclasses import replace
 
-from .rules_compiler import CATEGORIES, NO_REQ, PARSED, SchemeRule
+from .rules_compiler import CATEGORIES, NO_REQ, PARSED, STAGES, SchemeRule
 
 NE_STATES = ("Arunachal Pradesh", "Assam", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Sikkim", "Tripura")
 
@@ -56,6 +56,10 @@ CURATED = [
     ("nijut babu", {"gender": "Male", "note": "Assam scheme for boys"}),
     ("kalpana chawla", {"gender": "Female", "note": "Himachal scheme for girls"}),
     ("single girl child", {"gender": "Female", "groups": {"other"}, "note": "only-child girls"}),
+    ("bc/ebc students - bihar", {"categories": {"OBC"}, "note": "Bihar BC/EBC = Backward / Extremely Backward Classes (both OBC lists)"}),
+    ("open category students affected by", {"categories": {"General"}, "note": "for open-category (General) students"}),
+    ("balak/balika", {"gender": "All", "note": "for boys and girls (balak/balika)"}),
+    ("kanyashree", {"gender": "Female", "note": "West Bengal scheme for girls"}),
     ("north eastern region", {"region": NE_STATES}),
     ("nec merit", {"region": NE_STATES}),
     ("jammu & kashmir and ladakh", {"region": ("Jammu and Kashmir", "Ladakh")}),
@@ -74,7 +78,7 @@ TOKENS = [
 PHRASES = [
     (r"(other\s+)?economically\s+(backward|weaker)(\s+class(es)?|\s+section(s)?)?", {"General"}, "economically backward/weaker"),
     (r"brahmin", {"General"}, "Brahmin"),
-    (r"scheduled\s+castes?|annu?s[ua]chit\s+jati|dalit", {"SC"}, "Scheduled Caste"),
+    (r"scheduled\s+castes?|annu?s[ua]chit\s+jati|dalit|adi\s+dravidar", {"SC"}, "Scheduled Caste / Adi Dravidar"),
     (r"(nomadic|de-?notified)([\s/&,-]+(and\s+)?(nomadic|de-?notified))*[\s/&,-]*(tribes?)?|most\s+backward|other\s+backward|backward\s+class(es)?|developing\s+castes|\bkapu\b",
      {"OBC"}, "Backward Class / DNT / Nomadic / Kapu / Developing Castes"),
     (r"scheduled\s+tribes?|\btribal\b|\btribes?\b|adivasi", {"ST"}, "Scheduled Tribe / tribal"),
@@ -165,12 +169,149 @@ def infer_groups(name: str, dept: str) -> set:
 # Education levels asked by the bot (answers.class_passed): PRE = studying Class 1-10 (Pre-Matric),
 # X = Class 10 passed, XII = Class 12 passed, UG = studying for a degree, PG = master's / research.
 LEVELS = ["PRE", "X", "XII", "UG", "PG"]
+
+# Product 2 asks for CURRENT education level, not merely whether a scheme is broadly
+# "Post-Matric" or "Higher Education".  These controlled mappings prevent a PG student
+# from receiving UG/diploma-only schemes (and vice versa).
 LEVEL_MAP = {
-    "postgraduate": {"PG"}, "phd / research": {"PG"}, "m.phil / phd": {"PG"}, "phd": {"PG"}, "research": {"PG"},
-    "undergraduate": {"XII", "UG"}, "undergraduate first year": {"XII", "UG"},
-    "undergraduate / technical": {"XII", "UG"}, "undergraduate / professional": {"XII", "UG"},
-    "class xi-xii": {"X"}, "class xii": {"X", "XII"}, "class 12": {"X", "XII"},
+    "class 1–10": {"PRE"}, "class 1-10": {"PRE"}, "class 9–10": {"PRE"}, "class 9-10": {"PRE"},
+    "class 11–12": {"X"}, "class 11-12": {"X"},
+    "class 11 to ug": {"X", "XII", "UG"},
+    "class 11 to pg": {"X", "XII", "UG", "PG"},
+    "diploma/polytechnic": {"XII"}, "diploma / polytechnic": {"XII"}, "iti": {"XII"},
+    "ug": {"UG"}, "undergraduate": {"UG"}, "undergraduate first year": {"UG"},
+    "pg": {"PG"}, "postgraduate": {"PG"}, "post graduation": {"PG"},
+    "phd/research": {"PG"}, "phd / research": {"PG"}, "m.phil / phd": {"PG"},
+    "phd": {"PG"}, "research": {"PG"}, "postdoctoral research": {"PG"},
+    "ug/pg professional or technical course": {"UG", "PG"},
+    "undergraduate / technical": {"UG"}, "undergraduate / professional": {"UG"},
+    "higher education / research": {"PG"}, "research / higher education": {"PG"},
+    "sslc / puc / degree": {"PRE", "X", "UG"},
+    "masters / higher education": {"PG"}, "post-graduation completion": {"PG"},
+    "graduate": {"UG"}, "graduate women": {"UG"}, "m.sc. agriculture": {"PG"},
 }
+
+ALL_LEVELS = frozenset(LEVELS)
+POST = frozenset({"X", "XII", "UG", "PG"})
+COLLEGE = frozenset({"XII", "UG", "PG"})
+# Levels whose derived Rule-6 stage (engine.derive_education_stage) meets each broad stage.
+STAGE_LEVELS = {"Pre-Matric": {"PRE"}, "Post-Matric": {"X", "XII", "UG", "PG"}, "Higher Education": {"XII", "UG", "PG"}}
+LEVEL_STAGES = {"PRE": {"Pre-Matric"}, "X": {"Post-Matric"}, "XII": {"Post-Matric", "Higher Education"},
+                "UG": {"Post-Matric", "Higher Education"}, "PG": {"Post-Matric", "Higher Education"}}
+
+# Curated education levels for names whose wording would otherwise be misread (checked first).
+LEVEL_CURATED = [
+    ("fellowship and scholarship for higher education of st students - scholarship", {"UG", "PG"},
+     "NFST scholarship component (top-class degree/PG study), not the fellowship"),
+    ("other than intermediate", {"XII", "UG", "PG"}, "UP post-matric for courses other than Class 11-12"),
+    ("sslc/puc/degree", {"X", "XII", "UG"}, "incentive after passing SSLC / PUC / degree"),
+]
+
+# STRONG name signals: an explicit class, course or degree in the scheme name. They replace a
+# contradictory synthetic 'Education Level / Stage' value. Evaluated in order; first match wins.
+LEVEL_STRONG = [
+    (r"pre[- ]?(matric|ssc)\b.*post[- ]?(matric|ssc)|pre\s*/\s*post[- ]?matric", ALL_LEVELS, "pre- and post-matric"),
+    (r"undergraduate and postgraduate|graduate and postgraduate|\bug\s*(/|and|&)\s*pg\b", {"UG", "PG"}, "UG and PG"),
+    (r"\bb\.sc\.?.*\bm\.sc\b", {"UG", "PG"}, "B.Sc. and M.Sc."),
+    (r"degree\s*/\s*diploma|diploma\s*/\s*degree", {"XII", "UG"}, "degree or diploma"),
+    (r"medical,\s*engineering and diploma", {"XII", "UG", "PG"}, "medical, engineering and diploma"),
+    (r"pre[- ]?(matric|ssc)", {"PRE"}, "pre-matric"),
+    (r"diploma|polytechnic|\biti\b.*trainee|\biti trainees\b|craftsman training", {"XII"}, "diploma / polytechnic / ITI"),
+    (r"class i-viii and iti", {"PRE", "XII"}, "Class I-VIII and ITI"),
+    (r"master degree|master'?s degree|post[ -]?graduat|\bp\.?g\.?\s+research|\bpgs?\b|nts-pg|m\.phil|ph\.?\s?d|"
+     r"doctoral|thesis|m\.sc\.? agriculture", {"PG"}, "postgraduate / M.Phil / PhD"),
+    (r"junior research fellowship|senior research fellowship|research fellowship|research scholarship|"
+     r"postdoctoral|\bresearch\b", {"PG"}, "research"),
+    (r"\bfellowship\b", {"PG"}, "fellowship"),
+    (r"medical|dental|engineering|mbbs", {"UG", "PG"}, "medical / dental / engineering course"),
+    (r"\bdegree\b|nts-ug|\bundergraduate\b|\bug\b|graduation incentive", {"UG"}, "degree / undergraduate"),
+    (r"prime minister'?s scholarship scheme", {"UG"}, "PM scholarship (professional degree)"),
+    (r"first year girls", {"XII", "UG"}, "first-year college"),
+    (r"intermediate passed|passed class 12|class 12 passed|post plus two|10\+2 passed", {"XII", "UG"}, "Class 12 passed"),
+    (r"class x (&|and) xii passed|std\.? ?(10|x) and (12|xii)|sslc/ssc/intermediate", {"X", "XII"}, "Class 10 / Class 12 exam"),
+    (r"matric passed|passed class 10", {"X"}, "Class 10 passed"),
+    (r"\b(class(es)?|std\.?)\s*(i|1|iii|v|vi)\s*(-|to)\s*(xii|12)\b|\b(vi|ix)-xii\b|\(i-xii\)", {"PRE", "X"}, "Class up to XII"),
+    (r"\b(xi|11)\s*-\s*(xii|12)\b|higher secondary|10\+2 education|junior college|\bhsslc\b|intermediate scholarship|"
+     r"std\.? ?12\b|class 12 students", {"X"}, "Class 11-12"),
+    (r"\b(class(es)?|std\.?)?\s*(i|iii|v|vi|ix)\s*-\s*(vi|viii|x)\b|\bstd\.? ?(9|ix)\b|primary|middle stage|madhyamik",
+     {"PRE"}, "Class 1-10"),
+]
+# RANGE name signals: a broad band. Intersected with the synthetic level when they overlap.
+LEVEL_RANGE = [
+    (r"post[- ]?(matric|ssc)|after secondary", POST, "post-matric"),
+    (r"sainik school|military college|\brimc\b|\bschools?\b(?! teachers)", {"PRE", "X"}, "school"),
+    (r"college|university|higher (education|studies)|uchch?a? shiksha|ucch shiksha|professional course", COLLEGE,
+     "college / higher education"),
+]
+
+
+def _match(rules, n):
+    for pat, lv, label in rules:
+        if re.search(pat, n):
+            return set(lv), label
+    return None, ""
+
+
+def infer_level_codes(name: str, raw: str) -> tuple[set, str]:
+    """Current-education codes before the Rule-6 stage consistency step (kept for callers/tests)."""
+    codes, _stage, source = resolve_education(name, raw, "Not specified", frozenset())
+    return codes, source
+
+
+def resolve_education(name: str, raw: str, stage_status: str, stage_set) -> tuple[set, set | None, str]:
+    """Return (level codes, stage override or None, audit source).
+
+    Order of trust: curated name > strong scheme-name signal > broad name band intersected with the
+    synthetic 'Education Level / Stage' > synthetic value alone. The original 'Education Stage (Rule 6)'
+    (derived from name/notes before the synthetic fill) is used as a consistency check: a synthetic
+    level that contradicts it is dropped; a name signal that contradicts it replaces the stage.
+    """
+    n = (name or "").lower()
+    r = (raw or "").strip().lower()
+    synth = set(LEVEL_MAP.get(r, set()))
+    allowed = set(ALL_LEVELS)
+    if stage_status == PARSED and stage_set:
+        allowed = set().union(*(STAGE_LEVELS[x] for x in stage_set if x in STAGE_LEVELS))
+
+    kind, codes, label = "", set(), ""
+    for key, lv, note in LEVEL_CURATED:
+        if key in n:
+            kind, codes, label = "curated", set(lv), f"curated: {note}"
+            break
+    if not kind:
+        lv, lab = _match(LEVEL_STRONG, n)
+        if lv:
+            kind, codes, label = "strong", lv, f"scheme-name: {lab}"
+    if not kind:
+        lv, lab = _match(LEVEL_RANGE, n)
+        if lv:
+            both = lv & synth
+            kind = "range"
+            if both:
+                codes, label = both, f"scheme-name band '{lab}' ∩ master level"
+            elif synth:
+                codes, label = lv, f"scheme-name band '{lab}' (master level '{raw}' contradicts it)"
+            else:
+                codes, label = lv, f"scheme-name band '{lab}'"
+    if not kind:
+        if not synth:
+            return set(), None, ""
+        if synth & allowed:
+            return synth, None, "master-education-level"
+        return set(), None, f"master level '{raw}' dropped: contradicts Rule-6 stage"
+
+    if kind == "range":
+        if codes & allowed:
+            return codes & allowed, None, label
+        lv, _ = _match(LEVEL_RANGE, n)
+        if lv & allowed:                      # band ∩ synthetic contradicts the stage: fall back to band ∩ stage
+            return lv & allowed, None, f"scheme-name band ∩ Rule-6 stage (master level '{raw}' dropped)"
+    if not codes - allowed:
+        return codes, None, label
+    # name signal is stronger than the Rule-6 stage: widen/replace the stage so every named level can pass
+    need = set().union(*(LEVEL_STAGES[x] for x in codes))
+    stage = need | (set(stage_set) if (stage_status == PARSED and codes & allowed) else set())
+    return codes, stage, label + "; Rule-6 stage adjusted"
 
 
 def apply_overlay(r: SchemeRule) -> SchemeRule:
@@ -189,6 +330,10 @@ def apply_overlay(r: SchemeRule) -> SchemeRule:
     source = None
     if cats and not master_restricts:
         source = "master+name-conflict" if master_explicit_all else "inferred-name"
+    elif cats and r.Category_Status == PARSED and set(r.category_set) != cats:
+        # Update 3: the (synthetic) master names other categories than the scheme name -> the name wins.
+        source = "name-overrides-master"
+        why = why + [f"master said {r.Categories_Allowed}"]
     elif not cats and not master_restricts and not master_explicit_all \
             and not infer_groups(name, r.Department):   # occupation/school schemes are open to all castes
         dcats = infer_department(r.Department)
@@ -203,11 +348,19 @@ def apply_overlay(r: SchemeRule) -> SchemeRule:
         notes.append(f"category {label} [{source}: {', '.join(why)}]")
 
     # ---- gender
+    g = cur.get("gender") if cur and "gender" in cur else infer_gender(name)
     if r.Gender_Status == NO_REQ:
-        g = cur.get("gender") if cur and "gender" in cur else infer_gender(name)
-        if g:
+        if g and g != "All":
             upd.update(gender_set=frozenset({g}), Gender_Status=PARSED, Gender_Allowed=g, Gender_Source="inferred-name")
             notes.append(f"gender {g} [name]")
+    elif r.Gender_Status == PARSED and g and set(r.gender_set) != ({g} if g != "All" else set()):
+        # Update 3: the (synthetic) master gender contradicts the scheme name -> the name wins.
+        if g == "All":
+            upd.update(gender_set=frozenset(), Gender_Status=NO_REQ, Gender_Allowed="All")
+        else:
+            upd.update(gender_set=frozenset({g}), Gender_Allowed=g)
+        upd["Gender_Source"] = "name-overrides-master"
+        notes.append(f"gender {g} [name overrides master '{r.Gender_Raw}']")
 
     # ---- target groups
     groups = set(cur["groups"]) if cur and "groups" in cur else infer_groups(name, r.Department)
@@ -222,11 +375,17 @@ def apply_overlay(r: SchemeRule) -> SchemeRule:
         upd["Region_States"] = "; ".join(cur["region"])
         notes.append(f"region: {upd['Region_States']}")
 
-    # ---- education level (finer than the Rule 6 stage, only where the master is specific)
-    lv = LEVEL_MAP.get((r.Education_Level_Raw or "").strip().lower())
+    # ---- education level (finer than the Rule 6 stage)
+    lv, stage, lv_source = resolve_education(name, r.Education_Level_Raw, r.Education_Stage_Status, r.stage_set)
     if lv:
         upd["Level_Codes"] = "; ".join(x for x in LEVELS if x in lv)
-        notes.append(f"education level: {upd['Level_Codes']} ['{r.Education_Level_Raw}']")
+        notes.append(f"education level: {upd['Level_Codes']} [{lv_source}; raw='{r.Education_Level_Raw}']")
+    elif lv_source:
+        notes.append(f"education level: stage only [{lv_source}]")
+    if stage:
+        label = "; ".join(x for x in STAGES if x in stage)
+        upd.update(stage_set=frozenset(stage), Education_Stage_Status=PARSED, Education_Stage_Allowed=label)
+        notes.append(f"education stage: {label} [was '{r.Education_Stage_Raw}']")
 
     if not upd:
         return r

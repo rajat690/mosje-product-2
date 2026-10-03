@@ -1,3 +1,4 @@
+import re
 """Update 2 (29 Sep 2026): State/UT is question 1, no Main menu on the summary and after the results,
 compact scheme listing (details only on 'View details'), detail card with exactly 3 CTAs."""
 from pathlib import Path
@@ -90,7 +91,7 @@ def test_compact_listing_web_and_whatsapp(client):
     wa = WA(client, "919711100001")
     wa_start(wa)
     final = wa_answers(wa, edu="2", gender="2", income="1", category="1", state="Rajasthan")
-    assert "*1. Post-Matric Scholarship for SC Students · Central*" in final
+    assert re.search(r"\*\d\. Post-Matric Scholarship for SC Students · Central", final)   # compact card line
     for gone in ("Description:", "Eligibility:", "Required documents:", "Application:"):
         assert gone not in final
     rows = [r for m in wa.last if m["type"] == "interactive"

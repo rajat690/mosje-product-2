@@ -132,14 +132,19 @@ def check_jurisdiction(p: StudentProfile, s: SchemeRule):
 def check_education_stage(p: StudentProfile, s: SchemeRule):
     if p.Student_Education_Stage is None:
         return FAIL, "Education Stage: class passed not known"
+
+    # Product 2 current-education filter.  Level_Codes is finer than the broad
+    # Pre/Post-Matric/Higher-Education stage and must be enforced even when the
+    # master has no broad Education Stage value.
+    lv = level_code(p.Class_Passed)
+    if s.level_code_set and lv and lv not in s.level_code_set:
+        return FAIL, f"Education level: scheme is for {s.Level_Codes} ('{s.Education_Level_Raw}'); student level {lv}"
+
     if s.Education_Stage_Status == NO_REQ:
         return PASS, ""
     if s.Education_Stage_Status == UNRES:
         return FAIL, f"Education Stage: scheme wording '{s.Education_Stage_Raw}' not a controlled value"
     if p.Student_Education_Stage & s.stage_set:
-        lv = level_code(p.Class_Passed)
-        if s.level_code_set and lv and lv not in s.level_code_set:
-            return FAIL, f"Education level: scheme is for {s.Level_Codes} ('{s.Education_Level_Raw}'); student level {lv}"
         return PASS, ""
     return FAIL, "Education Stage: student stage not allowed by scheme"
 
@@ -317,7 +322,9 @@ def scheme_detail(s: SchemeRule) -> dict:
     }
 
 
-def _rank_key(s: SchemeRule, open_groups: bool = False):
+def _rank_key(s: SchemeRule, open_groups: bool = False, state_first: bool = False):
+    """Sort key. 'check eligibility' schemes last; Update 3 (Product Vision V1.0 section 9): the student's own
+    State schemes first (P2_RANK_STATE_FIRST, default on), then best match (targeted category / gender ...)."""
     score = 0
     if s.Category_Status == PARSED:
         score += 2          # targeted at the student's category
@@ -329,7 +336,8 @@ def _rank_key(s: SchemeRule, open_groups: bool = False):
         score += 1
     if short_benefit(s):
         score += 1
-    return (1 if open_groups else 0, -score, s.Scheme_Name.lower())
+    own_state = 0 if (state_first and s.Scheme_Level != "Central") else 1
+    return (1 if open_groups else 0, own_state, -score, s.Scheme_Name.lower())
 
 
 # ------------------------------------------------------------------ engine
@@ -366,7 +374,8 @@ class EligibilityEngine:
             if a["Final_Result"] == ELIGIBLE:
                 eligible.append(s)
         opened = {s.Scheme_ID: check_groups_open(p, s) for s in eligible}
-        eligible.sort(key=lambda s: _rank_key(s, bool(opened[s.Scheme_ID])))
+        from ..config import settings as app_settings
+        eligible.sort(key=lambda s: _rank_key(s, bool(opened[s.Scheme_ID]), app_settings.rank_state_first))
         return {"rule_version": settings.RULE_VERSION,
                 "as_of": settings.as_of_date().isoformat(),
                 "candidate_schemes_checked": len(audits),

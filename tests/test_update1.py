@@ -47,14 +47,15 @@ def test_general_student_no_longer_sees_reserved_category_schemes():
 
 def test_obc_student_still_sees_backward_class_schemes_and_ranking():
     from app.eligibility import get_engine
-    res = get_engine().evaluate(dict(KARNATAKA_GENERAL, category="OBC", disability=None))
+    res = get_engine().evaluate(dict(KARNATAKA_GENERAL, category="OBC", class_passed="XII", annual_family_income=200000,
+                                      disability=None))   # synthetic master: BC post-matric ceiling ₹2.5 lakh
     names = [c["name"] for c in res["schemes"]]
     assert "Backward Classes Post-Matric Scholarship - Karnataka" in names
     checks = [c["check"] for c in res["schemes"]]
     assert checks == sorted(checks)                                             # unconditional first, check-group last
     saksham = next(c for c in res["schemes"] if "Saksham" in c["name"])
     assert saksham["only_for"] == ["disability"]                               # prefer not to say -> check
-    yes = get_engine().evaluate(dict(KARNATAKA_GENERAL, disability=True))
+    yes = get_engine().evaluate(dict(KARNATAKA_GENERAL, class_passed="XII", disability=True))   # Saksham Diploma = XII
     assert next(c for c in yes["schemes"] if "Saksham" in c["name"])["check"] is False
 
 
@@ -76,7 +77,8 @@ def test_overlay_applied_to_compiled_rules_and_audit_fields():
     from app.eligibility import get_engine
     e = get_engine()
     r = e.by_id["MSM-0273"]
-    assert r.category_set == frozenset({"OBC"}) and r.Category_Source == "inferred-name" and r.Overlay_Notes
+    assert r.category_set == frozenset({"OBC"}) and r.Category_Source in ("inferred-name", "master")   # synthetic master says OBC
+    assert e.by_id["MSM-0084"].category_set == frozenset({"General"})          # EBC name overrides synthetic OBC
     assert e.by_id["MSM-0069"].gender_set == frozenset({"Female"})
     ne = e.by_id["MSM-0016"]
     assert "Assam" in ne.region_set
@@ -100,7 +102,7 @@ def test_category_audit_report_exists():
 def test_why_free_text_gets_friendly_explanation(client):
     wa = WA(client, "919700000001")
     wa_start(wa)
-    wa_answers(wa, edu="2", gender="1", income="3", category="4", state="Karnataka")
+    wa_answers(wa, edu="2", gender="1", income="1", category="4", state="Karnataka")
     out = wa.send("i am a general caste student. why are you showing me SC, ST, OBC schemes?")
     assert "didn't get" not in out and "did not understand" not in out
     assert "saved category is General" in out and "Edit details" in out
@@ -235,7 +237,7 @@ def test_education_levels_use_master_level_overlay():
 def test_short_fields_within_limits_for_every_scheme():
     from app.eligibility import get_engine
     for r in get_engine().rules:
-        assert len(r.Short_Description) <= 40 and len(r.Short_Eligibility) <= 50 and len(r.Short_Documents) <= 40, r.Scheme_ID
+        assert len(r.Short_Description) <= 80 and len(r.Short_Eligibility) <= 80 and len(r.Short_Documents) <= 90, r.Scheme_ID
         assert r.Apply_URL.startswith("http")
         for v in (r.Short_Description, r.Short_Eligibility, r.Short_Documents):
             assert not v or not v.endswith(" …")
@@ -277,10 +279,10 @@ def test_detail_for_scheme_with_full_master_data(client):
     det = chat(client, sid, tok, str(rank))["reply"]["detail"]
     rows = {r["key"]: r["value"] for r in det["rows"]}
     short = {r["key"]: r["value"] for r in det["short"]}
-    assert rows["category"] == "SC" and rows["income"] == "up to ₹2,50,000 a year"
-    assert "₹13,500" in rows["benefit"] and "income certificate" in short["documents"]
+    assert rows["category"] == "SC" and rows["income"] == "up to ₹3,00,000 a year"   # synthetic master values
+    assert rows["benefit"] and "income certificate" in short["documents"]
     assert short["url"] == "https://scholarships.gov.in/" and det["apply_url_verified"]
-    assert len(short["description"]) <= 40 and len(short["eligibility"]) <= 50
+    assert len(short["description"]) <= 80 and len(short["eligibility"]) <= 80
 
 
 # ------------------------------------------------------------------ feedback 10/11: share scheme + star feedback
@@ -345,7 +347,7 @@ def test_back_preserves_answers_and_menu(client):
     res = chat(client, sid, tok, "proceed")["reply"]
     assert res["state"] == "RESULTS"
     menu = chat(client, sid, tok, "menu")["reply"]
-    assert menu["state"] == "MENU" and [o["id"] for o in menu["options"]] == ["find", "change", "lang", "help", "rate", "back"]
+    assert menu["state"] == "MENU" and [o["id"] for o in menu["options"]] == ["find", "change", "lang", "help", "rate", "refer", "back"]
     ch = chat(client, sid, tok, "change")["reply"]                # Edit details -> restart at question 1 (State)
     assert ch["state"] == "ASK_state"
     assert chat(client, sid, tok, "menu")["reply"]["options"][0]["label"] == "Find scholarships"

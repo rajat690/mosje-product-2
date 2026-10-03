@@ -37,6 +37,25 @@ def states() -> list[str]:
     return get_engine().states()
 
 
+_NATIVE_STATES: dict = {}
+
+
+def native_state_names() -> dict:
+    """State names in Indian scripts -> canonical English name, read from the companion UI language packs
+    (app/static/companion/lang/*.json, key "states"), so typed answers like "राजस्थान" or "தமிழ்நாடு" work too."""
+    if not _NATIVE_STATES:
+        import json
+        from pathlib import Path
+        for f in sorted((Path(__file__).resolve().parent / "static" / "companion" / "lang").glob("*.json")):
+            try:
+                for en, nat in (json.loads(f.read_text(encoding="utf-8")).get("states") or {}).items():
+                    _NATIVE_STATES[re.sub(r"\s+", " ", nat.strip()).lower()] = en
+            except (OSError, ValueError):
+                continue
+        _NATIVE_STATES.setdefault("", "")
+    return _NATIVE_STATES
+
+
 def norm_state(v) -> Optional[str]:
     s = re.sub(r"\s+", " ", str(v or "").strip())
     if not s:
@@ -49,6 +68,9 @@ def norm_state(v) -> Optional[str]:
         return STATE_ALIASES[low]
     if s in STATE_ALIASES:
         return STATE_ALIASES[s]
+    native = native_state_names().get(low)       # 2 Oct: State typed in Hindi/Bengali/Tamil/... script
+    if native:
+        return native
     close = difflib.get_close_matches(low, [x.lower() for x in states()], n=1, cutoff=0.82)
     if close:
         return next(x for x in states() if x.lower() == close[0])
@@ -68,8 +90,10 @@ def norm_class(v) -> Optional[str]:
     if c in {"PRE", "PRE-MATRIC", "PREMATRIC", "SCHOOL"} or c in {str(i) for i in range(1, 10)} or \
             c in {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX"}:
         return "PRE"
-    if c in {"UG", "GRADUATION", "GRADUATE", "UNDERGRADUATE", "DEGREE", "BACHELOR", "BA", "BSC", "BCOM", "BTECH", "DIPLOMA"}:
+    if c in {"UG", "GRADUATION", "GRADUATE", "UNDERGRADUATE", "DEGREE", "BACHELOR", "BA", "BSC", "BCOM", "BTECH"}:
         return "UG"
+    if c in {"DIPLOMA", "POLYTECHNIC", "ITI"}:      # Update 3: diploma / ITI = after Class 10/12 -> Post-Matric (XII)
+        return "XII"
     if c in {"PG", "POST GRADUATION", "POSTGRADUATE", "POST-GRADUATION", "MASTERS", "MASTER", "MA", "MSC", "MCOM",
              "MTECH", "PHD", "M.PHIL", "MPHIL"}:
         return "PG"

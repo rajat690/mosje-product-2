@@ -207,11 +207,18 @@ def ensure_share_code(db: DB, s: ChatSession) -> str:
     return s.share_code
 
 
-def share_links(db: DB, s: ChatSession) -> dict:
-    code = ensure_share_code(db, s)
+def share_links(db: DB, s: ChatSession | None, code: str | None = None, lang: str | None = None) -> dict:
+    """Personal refer-a-friend links. `code` overrides the session's own code (a saved student keeps one code).
+    The ready-to-forward message is in the student's language (`lang`, else the session's language)."""
+    from .conversation.texts import t as _t
+    code = code or ensure_share_code(db, s)
     text = f"Hi, my friend suggested this scholarship helper. Code {code}"
-    return {"share_code": code, "whatsapp_link": wa_link(db, text), "whatsapp_text": text,
-            "web_link": web_link({"src": "referral", "ref": code})}
+    web = web_link({"src": "referral", "ref": code})
+    wa = wa_link(db, text)
+    # Update 3 'Refer a friend': a ready-to-forward message for the WhatsApp share intent (wa.me/?text=...)
+    msg = _t(lang or (s.language if s is not None else None) or "en", "share_invite", link=wa or web) + (f"\n🌐 {web}" if wa else "")
+    return {"share_code": code, "whatsapp_link": wa, "whatsapp_text": text, "web_link": web,
+            "share_message": msg, "whatsapp_share_url": "https://wa.me/?text=" + quote(msg)}
 
 
 def peer_referral_count(db: DB, s: ChatSession) -> int:

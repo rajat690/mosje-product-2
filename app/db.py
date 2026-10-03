@@ -1,10 +1,10 @@
 """Database: SQLAlchemy 2.x, Postgres in production (DATABASE_URL), SQLite locally/tests."""
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import date, datetime, timezone
 from typing import Optional
 
-from sqlalchemy import (JSON, Boolean, DateTime, ForeignKey, Integer, String, Text,
+from sqlalchemy import (JSON, Boolean, Date, DateTime, ForeignKey, Integer, String, Text,
                         UniqueConstraint, create_engine, event)
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, sessionmaker
 
@@ -123,6 +123,9 @@ class ChatSession(Base):
     consent_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
     consent_version: Mapped[Optional[str]] = mapped_column(String(40))
     eligible_count: Mapped[Optional[int]] = mapped_column(Integer)
+    # --- Update 3: link to a saved student profile ("Save on WhatsApp") and the one-time link it came from
+    student_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    opened_via: Mapped[Optional[str]] = mapped_column(String(20))     # one_time_link | direct | embed
     started_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
     updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
     completed_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
@@ -152,6 +155,132 @@ class Suggestion(Base):
     apply_url: Mapped[Optional[str]] = mapped_column(String(500))
     shown: Mapped[bool] = mapped_column(Boolean, default=False)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+# ------------------------------------------------------------------ Update 3: Save on WhatsApp, feedback, referrals
+class Student(Base):
+    """A student who chose "Save on WhatsApp" (opt-in). Only the number, language, the 5 answers, saved schemes,
+    dates and alert settings are kept - never name, Aadhaar, bank details or documents."""
+    __tablename__ = "p2_students"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    public_id: Mapped[str] = mapped_column(String(40), unique=True, index=True)
+    wa_id: Mapped[str] = mapped_column(String(20), unique=True, index=True)          # digits with country code
+    token_hash: Mapped[Optional[str]] = mapped_column(String(64))                    # student (My schemes) token
+    language: Mapped[str] = mapped_column(String(5), default="en")
+    answers: Mapped[dict] = mapped_column(JSON, default=dict)
+    age_band: Mapped[Optional[str]] = mapped_column(String(10))                     # 18plus | u18
+    parent_wa_id: Mapped[Optional[str]] = mapped_column(String(20))                 # under-18: parent who confirmed
+    status: Mapped[str] = mapped_column(String(20), default="ACTIVE", index=True)    # ACTIVE | STOPPED
+    remind_deadline: Mapped[bool] = mapped_column(Boolean, default=True)
+    remind_new: Mapped[bool] = mapped_column(Boolean, default=True)
+    remind_renew: Mapped[bool] = mapped_column(Boolean, default=True)
+    consent_text_version: Mapped[Optional[str]] = mapped_column(String(40))
+    consent_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    entry_source: Mapped[Optional[str]] = mapped_column(String(20))
+    source_system: Mapped[Optional[str]] = mapped_column(String(64), index=True)
+    first_session_id: Mapped[Optional[int]] = mapped_column(Integer)
+    share_code: Mapped[Optional[str]] = mapped_column(String(20), index=True)
+    seen_scheme_ids: Mapped[list] = mapped_column(JSON, default=list)              # for new-scheme alerts
+    last_inbound_at: Mapped[Optional[datetime]] = mapped_column(DateTime)            # WhatsApp 24-hour window
+    last_alert_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
+
+
+class SavedScheme(Base):
+    """Application tracker row: Saved / Documents pending / Applied / Result / Approved / Rejected."""
+    __tablename__ = "p2_saved_schemes"
+    __table_args__ = (UniqueConstraint("student_id", "scheme_id", name="uq_saved_student_scheme"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("p2_students.id"), index=True)
+    scheme_id: Mapped[str] = mapped_column(String(20))
+    scheme_name: Mapped[str] = mapped_column(String(300))
+    status: Mapped[str] = mapped_column(String(20), default="saved")    # saved docs applied result approved rejected
+    docs_have: Mapped[dict] = mapped_column(JSON, default=dict)         # {"aadhaar": true, ...}
+    last_date: Mapped[Optional[date]] = mapped_column(Date)             # from scheme data or entered by the student
+    renewal_needed: Mapped[Optional[bool]] = mapped_column(Boolean)
+    renewal_date: Mapped[Optional[date]] = mapped_column(Date)
+    status_changed_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+    updated_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, onupdate=utcnow)
+
+
+class LinkCode(Base):
+    """One-time, expiring codes.
+
+    WEB_LINK      WhatsApp -> web: link /companion?c=<code> sent by the bot (tied to the phone, never shows it)
+    SAVE_CONFIRM  web -> WhatsApp: the student sends "Hi ... Code SAVE-XXXX" from WhatsApp (proves the number, no OTP)
+    PARENT_OK     under 18: a parent sends "YES ... Code OK-XXXX" from WhatsApp before anything is stored
+    """
+    __tablename__ = "p2_link_codes"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    code: Mapped[str] = mapped_column(String(40), unique=True, index=True)
+    kind: Mapped[str] = mapped_column(String(20), index=True)
+    wa_id: Mapped[Optional[str]] = mapped_column(String(20))
+    session_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    student_id: Mapped[Optional[int]] = mapped_column(Integer)
+    payload: Mapped[dict] = mapped_column(JSON, default=dict)
+    expires_at: Mapped[datetime] = mapped_column(DateTime)
+    used_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Reminder(Base):
+    """A reminder / alert for a saved student. Sent by POST /v1/jobs/run-reminders (schedule it with a cron)."""
+    __tablename__ = "p2_reminders"
+    __table_args__ = (UniqueConstraint("student_id", "dedupe_key", name="uq_reminder_dedupe"),)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    student_id: Mapped[int] = mapped_column(ForeignKey("p2_students.id"), index=True)
+    saved_id: Mapped[Optional[int]] = mapped_column(Integer)
+    kind: Mapped[str] = mapped_column(String(30))       # deadline_7 deadline_2 result_check renewal_30 new_schemes docs_nudge
+    dedupe_key: Mapped[str] = mapped_column(String(120))
+    due_on: Mapped[date] = mapped_column(Date, index=True)
+    status: Mapped[str] = mapped_column(String(20), default="PENDING", index=True)  # PENDING SENT SKIPPED NOT_SENT
+    channel_status: Mapped[Optional[str]] = mapped_column(String(200))
+    message: Mapped[Optional[str]] = mapped_column(Text)
+    sent_at: Mapped[Optional[datetime]] = mapped_column(DateTime)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Feedback(Base):
+    """Rating (1-5) + optional comment + context, from the web companion or WhatsApp."""
+    __tablename__ = "p2_feedback"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    session_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    student_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    source_system: Mapped[Optional[str]] = mapped_column(String(64), index=True)
+    channel: Mapped[str] = mapped_column(String(20), default="web")
+    rating: Mapped[int] = mapped_column(Integer)
+    comment: Mapped[Optional[str]] = mapped_column(String(1000))
+    context: Mapped[dict] = mapped_column(JSON, default=dict)      # {"screen": "summary", "scheme_id": ..., ...}
+    language: Mapped[Optional[str]] = mapped_column(String(5))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, index=True)
+
+
+class ShareEvent(Base):
+    """'Refer a friend' / share actions (the REF code itself lives on the session: ChatSession.share_code)."""
+    __tablename__ = "p2_share_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    share_code: Mapped[str] = mapped_column(String(20), index=True)
+    session_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    student_id: Mapped[Optional[int]] = mapped_column(Integer)
+    kind: Mapped[str] = mapped_column(String(30), default="refer")      # refer | scheme | parent
+    via: Mapped[Optional[str]] = mapped_column(String(30))              # whatsapp | copy | native | email
+    scheme_id: Mapped[Optional[str]] = mapped_column(String(20))
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow)
+
+
+class Event(Base):
+    """Funnel events from the web companion: web_opened, questions_done, scheme_viewed, apply_clicked, saved, shared,
+    listen, mic ... (per session; joined to the outreach message through the session's attribution)."""
+    __tablename__ = "p2_events"
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    session_id: Mapped[Optional[int]] = mapped_column(Integer, index=True)
+    student_id: Mapped[Optional[int]] = mapped_column(Integer)
+    name: Mapped[str] = mapped_column(String(40), index=True)
+    scheme_id: Mapped[Optional[str]] = mapped_column(String(20))
+    data: Mapped[dict] = mapped_column(JSON, default=dict)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=utcnow, index=True)
 
 
 class ProcessedEvent(Base):

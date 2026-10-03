@@ -43,6 +43,22 @@ class Settings:
     max_results: int = 5
     wa_interactive: bool = True             # WHATSAPP_INTERACTIVE=false -> plain numbered text messages
     log_level: str = "INFO"
+    # --- Update 3
+    wa_web_link: str = "offer"              # WHATSAPP_WEB_LINK: offer | only | off  (one-time web companion link)
+    link_ttl_hours: int = 48                # ONE_TIME_LINK_TTL_HOURS: how long a one-time link / SAVE code is valid
+    rank_state_first: bool = True           # P2_RANK_STATE_FIRST: own State's schemes before Central ones
+    reminder_template: str = ""             # WHATSAPP_REMINDER_TEMPLATE: approved utility template (integration later)
+    reminder_template_lang: str = "en"
+    speech_enabled: bool = False            # SPEECH_ENABLED: feature flag for TTS / STT (off by default)
+    speech_provider: str = "none"           # SPEECH_PROVIDER: none | mock | http | bhashini | google | elevenlabs | sarvam
+    speech_api_key: str = ""                # SPEECH_API_KEY
+    speech_api_url: str = ""                # SPEECH_API_URL
+    speech_max_chars: int = 1500            # SPEECH_MAX_CHARS: longest text sent to TTS in one call
+    speech_max_audio_bytes: int = 5_000_000
+
+    @property
+    def speech_ready(self) -> bool:
+        return bool(self.speech_enabled and self.speech_provider not in ("", "none"))
 
     @property
     def whatsapp_configured(self) -> bool:
@@ -74,6 +90,17 @@ def load_settings() -> Settings:
         max_results=int(_env("P2_MAX_RESULTS", "5") or 5),
         wa_interactive=_env("WHATSAPP_INTERACTIVE", "true").lower() in {"1", "true", "yes"},
         log_level=_env("LOG_LEVEL", "INFO"),
+        wa_web_link=(_env("WHATSAPP_WEB_LINK", "offer").lower() if _env("WHATSAPP_WEB_LINK", "offer").lower()
+                     in {"offer", "only", "off"} else "offer"),
+        link_ttl_hours=int(_env("ONE_TIME_LINK_TTL_HOURS", "48") or 48),
+        rank_state_first=_env("P2_RANK_STATE_FIRST", "true").lower() in {"1", "true", "yes"},
+        reminder_template=_env("WHATSAPP_REMINDER_TEMPLATE"),
+        reminder_template_lang=_env("WHATSAPP_REMINDER_TEMPLATE_LANG", "en"),
+        speech_enabled=_env("SPEECH_ENABLED", "false").lower() in {"1", "true", "yes"},
+        speech_provider=_env("SPEECH_PROVIDER", "none").lower(),
+        speech_api_key=_env("SPEECH_API_KEY"),
+        speech_api_url=_env("SPEECH_API_URL"),
+        speech_max_chars=int(_env("SPEECH_MAX_CHARS", "1500") or 1500),
     )
 
 

@@ -12,6 +12,7 @@
   header .t{font-weight:600;font-size:15px} header .s{font-size:11px;opacity:.85}
   header #menu{margin-left:auto} header button{background:transparent;color:#fff;border:1px solid #ffffff88;border-radius:6px;padding:4px 8px;cursor:pointer;font-size:12px}
   #log{flex:1;overflow-y:auto;padding:12px}
+  .msg a.lnk{color:#0b57d0;text-decoration:underline;word-break:break-all}
   .msg{max-width:88%;margin:6px 0;padding:9px 11px;border-radius:12px;white-space:pre-wrap;line-height:1.35;font-size:14px;box-shadow:0 1px 1px #0001}
   .bot{background:var(--bot);border-top-left-radius:3px}
   .me{background:var(--me);margin-left:auto;border-top-right-radius:3px}
@@ -91,7 +92,28 @@
 
   const strip = t => (t || "").replace(/\*([^*\n]+)\*/g, "$1");     // strip WhatsApp *bold*
 
-  function link(u) { const a = el("a", null, u); a.href = u; a.target = "_blank"; a.rel = "noopener"; return a; }
+  function link(u) { const a = el("a", null, u); a.href = u; a.target = "_blank"; a.rel = "noopener noreferrer"; return a; }
+  // Update 3: make http(s) URLs inside message text clickable (all languages). Built with DOM text nodes,
+  // never innerHTML, so message text cannot inject markup. Trailing punctuation stays outside the link.
+  const URL_RE = /https?:\/\/[^\s<>"'`]+/g;
+  function linkify(text) {
+    const frag = document.createDocumentFragment();
+    const t = text || "";
+    let last = 0, m;
+    URL_RE.lastIndex = 0;
+    while ((m = URL_RE.exec(t))) {
+      let u = m[0];
+      const trail = (u.match(/[.,;:!?)\]}’”'"।॥]+$/) || [""])[0];
+      if (trail) u = u.slice(0, -trail.length);
+      if (m.index > last) frag.appendChild(document.createTextNode(t.slice(last, m.index)));
+      if (/^https?:\/\/[^/\s]+\.[^/\s]+/.test(u)) { const a = link(u); a.className = "lnk"; frag.appendChild(a); } else frag.appendChild(document.createTextNode(u));
+      if (trail) frag.appendChild(document.createTextNode(trail));
+      last = m.index + m[0].length;
+    }
+    if (last < t.length) frag.appendChild(document.createTextNode(t.slice(last)));
+    return frag;
+  }
+  function textMsg(cls, text) { const d = el("div", cls); d.appendChild(linkify(text)); return d; }
   const isUrl = v => /^https?:\/\//.test(v || "");
 
   function shortRows(items, cls) {          // Description / Eligibility / Required documents / Application
@@ -152,7 +174,8 @@
   function renderBot(r) {
     clearOpts();
     const view = r.view || "";
-    const b = r.detail ? renderDetail(r.detail) : el("div", "msg bot", strip(view.startsWith("SHARE:") && r.share ? (r.text || "").split("\n\n")[0] : r.text));
+    const shown = strip(view.startsWith("SHARE:") && r.share ? (r.text || "").split("\n\n")[0] : r.text);
+    const b = r.detail ? renderDetail(r.detail) : textMsg("msg bot", shown);
     let sec = false;
     const cardIds = new Set();
     (r.cards || []).forEach(c => {
@@ -169,6 +192,16 @@
     });
     if (r.footer) b.appendChild(el("div", "foot", r.footer));
     if (r.share) renderShare(r.share, b);
+    if (r.ui && Array.isArray(r.ui.external_links)) {
+      const links = el("div", "opts");
+      r.ui.external_links.forEach(x => {
+        if (!x || !x.url || (!r.detail && shown.includes(x.url.replace(/\/$/, "")))) return;   // already a link in the text
+        const a = el("a", "nav", x.label || x.url);
+        a.href = x.url; a.target = "_blank"; a.rel = "noopener noreferrer";
+        links.appendChild(a);
+      });
+      if (links.childNodes.length) b.appendChild(links);
+    }
     log.appendChild(b);
     let opts = r.options || [];
     if (view === "LANG") {                      // language: one alphabetical dropdown + Continue
@@ -218,7 +251,7 @@
   async function resume() {
     try {
       const d = await call("GET", "/v1/chat/sessions/" + encodeURIComponent(sid));
-      (d.transcript || []).slice(-12, -1).forEach(m => log.appendChild(el("div", "msg " + (m.direction === "in" ? "me" : "bot"), m.text)));
+      (d.transcript || []).slice(-12, -1).forEach(m => log.appendChild(m.direction === "in" ? el("div", "msg me", m.text) : textMsg("msg bot", strip(m.text))));
       if (d.last_reply) renderBot(d.last_reply); else scroll();
     } catch (e) { sid = null; token = null; start(); }
   }

@@ -12,7 +12,11 @@ Share feedback (1-5 stars), friendly fallback + "why am I seeing this" handling,
 
 Views ("_view" in the session answers, previous views in "_hist"):
     LANG, CONSENT, DECLINED, MENU, ASK_<fact>, SUMMARY, RESULTS:<offset>, DETAIL:<rank>, SHARE:<rank>,
-    WHY, FEEDBACK_RATING, FEEDBACK_COMMENT, SHARED, ENDED
+    WHY, FEEDBACK_RATING, FEEDBACK_COMMENT, SHARED, REFER, ENDED
+
+Update 3 (2 Oct 2026, Product Vision V1.0): typed answers are understood ("I am in 2nd year BA" -> Graduation),
+"edit:<question>" edits one answer from the review card, feedback is stored in p2_feedback (any time after consent),
+"refer" shows the student's personal refer-a-friend links (REF code -> PEER_REFERRAL entry source).
 """
 from __future__ import annotations
 
@@ -28,10 +32,11 @@ from sqlalchemy.orm import Session as DB
 from .. import attribution as A
 from .. import facts as F
 from ..config import settings
-from ..db import ChatSession, Message, Referral, Suggestion, utcnow
+from ..db import ChatSession, Feedback, Message, Referral, Suggestion, utcnow
 from ..eligibility import get_engine
 from ..eligibility.engine import check_groups_open, profile_from_facts, scheme_detail, short_benefit
 from .texts import LANG_CODES, LANG_ORDER, LANGS, lang_label, t
+from .understand import extract_all, understand
 
 HIST_MAX = 30
 
@@ -88,6 +93,8 @@ SKIP = {"skip", "छोड़ें", "छोड़े"}
 BACK = {"back", "go back", "previous", "पीछे", "वापस", "पीछे जाएँ"}
 MENU = {"menu", "main menu", "मेनू", "मेन्यू", "मुख्य मेनू"}
 LANGW = {"language", "lang", "languages", "भाषा", "change language"}
+REFER = {"refer", "refer a friend", "invite", "share app", "दोस्त को बताएं"}
+FEEDBACK = {"rate", "feedback", "share feedback"}
 CHANGE = {"change", "change my answers", "edit", "बदलें"}
 
 WHY_RX = re.compile(r"\bwhy\b|\bwrong\b|galat|incorrect|mistake|not (for )?me\b|showing me|\bnot eligible\b|"
@@ -353,6 +360,18 @@ def _back(db: DB, s: ChatSession) -> BotReply:
     return _go(db, s, cur or "MENU", t(s.language, "nothing_back"), push=False)
 
 
+def _edit_one(db: DB, s: ChatSession, key: str) -> BotReply:
+    """Update 3: 'Edit' on one row of the review card -> ask only that question, then back to the review."""
+    a = dict(s.answers or {})
+    keys = ["annual_family_income", "income_min", "income_band"] if key == "annual_family_income" else [key]
+    a["_prev"] = dict(a.get("_prev") or {}, **{k: a[k] for k in keys if k in a})
+    for k in keys + ["_summary_ok"]:
+        a.pop(k, None)
+    s.answers = a
+    s.status = "ACTIVE" if s.status == "COMPLETED" else s.status
+    return _go(db, s, f"ASK_{key}")
+
+
 def _view_ok(db: DB, s: ChatSession, tok: str) -> bool:
     if tok.startswith(("RESULTS", "DETAIL", "SHARE")):
         return _done(s) and bool((s.answers or {}).get("_summary_ok"))
@@ -371,7 +390,7 @@ def _nav(s: ChatSession, *extra: str, menu: bool = True) -> list[dict]:
     out = []
     for e in extra:
         out.append(nav(e, lang, {"more": "o_more", "rate": "o_feedback", "change": "o_edit",
-                                 "list": "o_back_list", "share": "o_share_scheme"}[e]))
+                                 "list": "o_back_list", "share": "o_share_scheme", "refer": "o_refer"}[e]))
     if (s.answers or {}).get("_hist"):
         out.append(nav("back", lang, "o_back"))
     if menu:
@@ -405,8 +424,12 @@ def _render(db: DB, s: ChatSession, tok: str) -> BotReply:
         return _reply(s, t(lang, "consent"), opts)
     if tok == "DECLINED":
         s.state = "DECLINED"
-        return _reply(s, t(lang, "consent_declined"), [item("agree", t(lang, "o_agree_now")), nav("lang", lang, "o_lang")],
-                      input_hint="text")
+        r = _reply(s, t(lang, "consent_declined"),
+                   [item("agree", t(lang, "o_agree_now")), nav("lang", lang, "o_lang")],
+                   input_hint="text")
+        r.ui = {"external_links": [{"label": "🔗 Open National Scholarship Portal",
+                                     "url": "https://scholarships.gov.in/"}]}
+        return r
     if tok == "MENU":
         s.state = "MENU"
         done = _done(s) and a.get("_summary_ok")
@@ -416,6 +439,8 @@ def _render(db: DB, s: ChatSession, tok: str) -> BotReply:
         opts += [nav("lang", lang, "o_lang"), nav("help", lang, "o_help")]
         if done and s.feedback_rating is None:
             opts.append(nav("rate", lang, "o_feedback"))
+        if done:
+            opts.append(nav("refer", lang, "o_refer"))
         if a.get("_hist"):
             opts.append(nav("back", lang, "o_back"))
         return _reply(s, t(lang, "menu_title"), opts)
@@ -453,6 +478,13 @@ def _render(db: DB, s: ChatSession, tok: str) -> BotReply:
     if tok == "FEEDBACK_COMMENT":
         s.state = "FEEDBACK_COMMENT"
         return _reply(s, t(lang, "q_comment"), [item(0, t(lang, "o_skip"))] + _nav(s, menu=False), input_hint="text")
+    if tok == "REFER":
+        s.state = "REFER"
+        links = A.share_links(db, s)
+        text = t(lang, "refer", wa=links["whatsapp_link"] or t(lang, "share_no_wa"), web=links["web_link"],
+                 code=links["share_code"])
+        return BotReply(text=text, options=_nav(s), state=s.state, status=s.status, language=lang, view="REFER",
+                        share=links, events=["refer"])
     if tok == "ENDED":
         s.state = "ENDED"
         return _reply(s, t(lang, "class_other"), [nav("change", lang, "o_edit"), nav("menu", lang, "o_menu")],
@@ -728,12 +760,24 @@ def _finish(db: DB, s: ChatSession) -> BotReply:
     s.completed_at = utcnow()
     _set_answers(s, _rule_version=result["rule_version"], _as_of=result["as_of"])
     _mark_referral(db, s, "COMPLETED")
+    _refresh_saved_profile(db, s, facts)
     summary = t(lang, "summary", facts=facts_inline(facts, lang))
     reply = _go(db, s, "RESULTS:0")
     reply.text = f"{summary}\n\n{reply.text}"
     reply.status = "COMPLETED"
     reply.events.append("completed")
     return reply
+
+
+def _refresh_saved_profile(db: DB, s: ChatSession, facts: dict) -> None:
+    """Update 3: a saved student who answers again (e.g. "Are you now in 2nd year?" -> EDIT) gets the new answers
+    in My schemes / new-scheme alerts too. Only for the same WhatsApp number or the linked student."""
+    from ..db import Student
+    st = db.get(Student, s.student_id) if s.student_id else None
+    if st is None and s.wa_id:
+        st = db.query(Student).filter(Student.wa_id == s.wa_id).one_or_none()
+    if st is not None and st.status == "ACTIVE" and facts:
+        st.answers = dict(facts)
 
 
 # ------------------------------------------------------------------ why / fallback
@@ -826,6 +870,19 @@ def _set_consent(db: DB, s: ChatSession, agreed: bool):
         _mark_referral(db, s, "IN_CONVERSATION")
 
 
+def record_feedback(db: DB, s: Optional[ChatSession], rating: int, comment: Optional[str], *, channel: str,
+                    context: dict | None = None, student_id: int | None = None) -> Feedback:
+    fb = Feedback(session_id=s.id if s else None, student_id=student_id or (getattr(s, "student_id", None) if s else None),
+                  source_system=s.source_system if s else None, channel=channel, rating=int(rating),
+                  comment=(comment or "").strip()[:1000] or None, context=context or {},
+                  language=s.language if s else None)
+    db.add(fb)
+    if s is not None:
+        s.feedback_rating, s.feedback_comment = int(rating), fb.comment or s.feedback_comment
+    db.flush()
+    return fb
+
+
 def handle_message(db: DB, s: ChatSession, text: str) -> tuple[ChatSession, BotReply]:
     """Process one user input for session s. May return a NEW session (after hi/restart)."""
     text = _resolve(s, text)
@@ -891,8 +948,12 @@ def handle_message(db: DB, s: ChatSession, text: str) -> tuple[ChatSession, BotR
         if a.get("class_passed") == "OTHER" and all(k in a for k in _needed()):
             return s, _go(db, s, "ENDED")
         return s, (_go(db, s, "RESULTS:0") if done else _advance(db, s))
-    if low in {"rate", "feedback", "share feedback"} and done:
+    if low in FEEDBACK:                      # Update 3: feedback any time after consent (not only after results)
         return s, _go(db, s, "FEEDBACK_RATING")
+    if low in REFER:
+        return s, _go(db, s, "REFER")
+    if low.startswith("edit:") and low[5:] in QUESTION_KEYS:
+        return s, _edit_one(db, s, low[5:])
     if low in {"share", "share scheme"} and view.startswith(("DETAIL", "SHARE")) and done:
         return s, _go(db, s, "SHARE:" + view.split(":")[1])
     if low == "list" and done:
@@ -923,13 +984,20 @@ def handle_message(db: DB, s: ChatSession, text: str) -> tuple[ChatSession, BotR
     if view.startswith("ASK_"):
         key = view[4:]
         v = parse_answer(key, text, lang)
+        if v is MISSING and not WHY_RX.search(text or ""):
+            u = understand(key, text)                 # Update 3: "I am in 2nd year BA" -> Graduation (UG)
+            v = MISSING if u is None else u
         if v is MISSING:
             return s, _fallback(db, s, text)
         kv = income_facts(v) if key == "annual_family_income" else {key: v}
+        if len((text or "").split()) >= 3:            # a sentence: pre-fill other unanswered questions too
+            for k2, v2 in extract_all(text).items():
+                if k2 != key and k2 in _needed() and k2 not in (s.answers or {}) and k2 not in kv:
+                    kv.update(income_facts(v2) if k2 == "annual_family_income" else {k2: v2})
         _set_answers(s, _summary_ok=False, **kv)
         return s, _advance(db, s)
 
-    if view in ("MENU", "ENDED", "SHARED") or view.startswith("SHARE:"):
+    if view in ("MENU", "ENDED", "SHARED", "REFER") or view.startswith("SHARE:"):
         return s, _fallback(db, s, text)
 
     if view.startswith(("RESULTS", "DETAIL", "WHY")):
@@ -948,6 +1016,9 @@ def handle_message(db: DB, s: ChatSession, text: str) -> tuple[ChatSession, BotR
     if view == "FEEDBACK_COMMENT":
         if low not in SKIP | {"0"}:
             s.feedback_comment = text.strip()[:500]
+        if s.feedback_rating:                     # Update 3: every rating is also a p2_feedback row
+            record_feedback(db, s, s.feedback_rating, s.feedback_comment if low not in SKIP | {"0"} else None,
+                            channel=s.channel, context={"screen": "chat", "view_before": (a.get("_hist") or [""])[-1]})
         links = A.share_links(db, s)
         share = t(lang, "share", wa=links["whatsapp_link"] or t(lang, "share_no_wa"), web=links["web_link"],
                   code=links["share_code"])

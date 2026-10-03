@@ -1,3 +1,4 @@
+import re
 import json
 
 from conftest import ADMIN_KEY, APP_SECRET, KEY_RAJAT, PHONE_ID, WA, H, make_client, sign, wa_payload
@@ -46,7 +47,7 @@ def test_full_conversation_and_graph_request_format(client):
     assert wa.last[-1]["interactive"]["type"] == "button"
     assert "(1/5) Which state's scholarships would you like to see?" in wa.send("1")
     assert "(2/5) What is your current education level" in wa.send("Rajasthan")
-    assert "gender" in wa.send("2")                  # Class 10 passed
+    assert "gender" in wa.send("3")                  # Class 12 passed (more than 5 schemes -> "More schemes")
     assert "monthly" in wa.send("2")                 # Female
     assert "social category" in wa.send("15000")     # typed monthly income -> ₹1,80,000 a year
     summary = wa.send("SC")
@@ -54,13 +55,18 @@ def test_full_conversation_and_graph_request_format(client):
     assert [b["reply"]["id"] for b in wa.last[-1]["interactive"]["action"]["buttons"]] == ["proceed", "edit"]
     assert summary.index("State/UT: Rajasthan") < summary.index("Education level")
     final = wa.send("1")                             # Proceed
-    assert "scholarship(s) you can explore" in final and "Post-Matric Scholarship for SC Students" in final
+    assert "scholarship(s) you can explore" in final
     assert "Final eligibility is decided" in final
     # Update 2: compact listing - name · State/Central · Department only
-    assert "*1. Post-Matric Scholarship for SC Students · Central*" in final
+    assert re.search(r"\*1\. [^*\n]+ · (Central|Rajasthan)", final)   # compact card line
     assert "Eligibility:" not in final and "Required documents:" not in final and "Application:" not in final
     more = wa.tap("more")
     assert "showing 6–" in more
+    # Update 3 (Product Vision s.9): the student's own State schemes are listed first
+    assert re.search(r"\*1\. [^*\n]+ · Rajasthan", final)
+    more2 = wa.tap("more")
+    more3 = wa.tap("more")
+    assert "Post-Matric Scholarship for SC Students" in final + more + more2 + more3
     r = client.get("/v1/results", headers=H(ADMIN_KEY), params={"source_system": "walk-in"}).json()
     assert r["count"] == 1 and r["results"][0]["status"] == "COMPLETED" and r["results"][0]["channel"] == "whatsapp"
     assert r["results"][0]["answers"]["annual_family_income"] == 180000

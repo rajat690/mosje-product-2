@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,ಒಪ್ಪುತ್ತೇನೆ,20,11,yes,,
 o_disagree,Don't agree,ಒಪ್ಪುವುದಿಲ್ಲ,20,12,yes,,
 o_agree_now,I agree now,ಈಗ ಒಪ್ಪುತ್ತೇನೆ,20,14,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","ಅರ್ಥವಾಯಿತು 🙏 ಯಾವುದೇ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಕೇಳುವುದಿಲ್ಲ, ಇಟ್ಟುಕೊಳ್ಳುವುದಿಲ್ಲ. ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು https://scholarships.gov.in/ ನಲ್ಲಿ ನೋಡಬಹುದು. ಮನಸ್ಸು ಬದಲಾದರೆ ಕೆಳಗೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ HI ಎಂದು ಬರೆಯಿರಿ.",,195,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.","ಅರ್ಥವಾಯಿತು 🙏 ಯಾವುದೇ ವೈಯಕ್ತಿಕ ಮಾಹಿತಿ ಕೇಳುವುದಿಲ್ಲ, ಇಟ್ಟುಕೊಳ್ಳುವುದಿಲ್ಲ. ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು https://scholarships.gov.in/ ನಲ್ಲಿ ನೋಡಬಹುದು. ಮನಸ್ಸು ಬದಲಾದರೆ ಕೆಳಗೆ ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ HI ಎಂದು ಬರೆಯಿರಿ.",,195,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ಸರಿ, ಪ್ರ�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","ನನಗೆ ಅರ್ಥವಾಗಲಿಲ್ಲ 🙂 ಕೆಳಗಿನ ಒಂದು ಆಯ್ಕೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ ಅಥವಾ ಅದರ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ. ನೀವು MENU, BACK ಅಥವಾ HELP ಎಂದೂ ಬರೆಯಬಹುದು.",,121,,,
 nothing_back,You are at the first step.,ನೀವು ಮೊದಲ ಹಂತದಲ್ಲಿದ್ದೀರಿ.,,25,,,
 updated,✅ Updated {f}: {v},✅ {f} ಬದಲಾಯಿಸಲಾಗಿದೆ: {v},,24,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","ಈಗ ಈ ಸೇವೆ 1ನೇ ತರಗತಿಯಿಂದ ಸ್ನಾತಕೋತ್ತರದವರೆಗಿನ ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಮಾತ್ರ. ಎಲ್ಲಾ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು https://scholarships.gov.in/ ನಲ್ಲಿ ನೋಡಿ.
 ಮತ್ತೆ ಆರಂಭಿಸಲು ಯಾವಾಗ ಬೇಕಾದರೂ HI ಎಂದು ಬರೆಯಿರಿ.",,179,,,
 summary,Your answers: {facts},ನಿಮ್ಮ ಉತ್ತರಗಳು: {facts},,23,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",ನಿಮ್ಮ ಉತ್ತರಗಳ ಆಧಾರದ ಮೇಲೆ ನೀವು ನೋಡಬಹುದಾದ {n} ವಿದ್ಯಾರ್ಥಿವೇತನ(ಗಳು) ({total} ರಲ್ಲಿ {a}–{b}):,,88,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ಯಾವುದೇ ಯೋಜನೆ ನಿಮ್ಮ ಎಲ್ಲಾ ಉತ್ತರಗಳಿಗೆ ಖಚಿತವಾಗಿ ಹೊಂದಿಕೆಯಾಗಲಿಲ್ಲ. ಈ {n} ಯೋಜನೆ(ಗಳು) ನಿರ್ದಿಷ್ಟ ಗುಂಪುಗಳಿಗೆ ಮಾತ್ರ – ನಿಮಗೆ ಅನ್ವಯಿಸುತ್ತದೆಯೇ ನೋಡಿ ({total} ರಲ್ಲಿ {a}–{b}):,,159,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,ನಿಮ್ಮ ಎಲ್ಲಾ ಉತ್ತರಗಳಿಗೆ ಹೊಂದುವ ಯೋಜನೆ ನಮ್ಮ ಪಟ್ಟಿಯಲ್ಲಿ ಸಿಗಲಿಲ್ಲ. ನೀವು ಉತ್ತರಗಳನ್ನು ಬದಲಾಯಿಸಬಹುದು ಅಥವಾ https://scholarships.gov.in/ ನೋಡಬಹುದು.,,135,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,ನಿಮ್ಮ ಎಲ್ಲಾ ಉತ್ತರಗಳಿಗೆ ಹೊಂದುವ ಯೋಜನೆ ನಮ್ಮ ಪಟ್ಟಿಯಲ್ಲಿ ಸಿಗಲಿಲ್ಲ. ನೀವು ಉತ್ತರಗಳನ್ನು ಬದಲಾಯಿಸಬಹುದು ಅಥವಾ https://scholarships.gov.in/ ನೋಡಬಹುದು.,,135,,,
 list_tap,Tap a scheme (or type its number) to see details.,ವಿವರಗಳಿಗಾಗಿ ಯೋಜನೆಯನ್ನು ಟ್ಯಾಪ್ ಮಾಡಿ (ಅಥವಾ ಅದರ ಸಂಖ್ಯೆ ಬರೆಯಿರಿ).,,61,,,
 check_section,Only for specific groups – check eligibility,ನಿರ್ದಿಷ್ಟ ಗುಂಪುಗಳಿಗೆ ಮಾತ್ರ – ಅರ್ಹತೆ ಪರಿಶೀಲಿಸಿ,,45,,,
 only_for,Only for: {groups},ಇವರಿಗೆ ಮಾತ್ರ: {groups},,22,,,
@@ -182,6 +183,7 @@ sh_email,Email,ಇಮೇಲ್,,5,,,
 sh_copy,Copy message,ಸಂದೇಶ ಕಾಪಿ ಮಾಡಿ,,15,,,
 sh_more,Share…,ಹಂಚಿಕೊಳ್ಳಿ…,,11,,,
 sh_copied,Copied ✓,ಕಾಪಿ ಆಯಿತು ✓,,12,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 2 ನಿಮಿಷದಲ್ಲಿ ನನಗೆ ಸರ್ಕಾರಿ ವಿದ್ಯಾರ್ಥಿವೇತನಗಳು ಸಿಕ್ಕವು – ಉಚಿತ, ಪರಿಶೀಲಿಸಲು ಯಾವುದೇ ದಾಖಲೆ ಬೇಡ. ನೀವೂ ಪ್ರಯತ್ನಿಸಿ: {link}",,114,,,
 menu_hint,Type MENU for the main menu.,ಮುಖ್ಯ ಮೆನುಗಾಗಿ MENU ಎಂದು ಬರೆಯಿರಿ.,,33,,,
 lang_continue,Continue,ಮುಂದುವರಿಸಿ,,10,,,
 f_class_passed,Education level,ಶಿಕ್ಷಣ ಮಟ್ಟ,24,11,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ ಹಿಂದಿನ,24,8,yes,,
 wa_page,Page {p} of {n} – choose an option:,ಪುಟ {p} / {n} – ಒಂದು ಆಯ್ಕೆ ಮಾಡಿ:,,32,,,
 choose_next,What would you like to do next?,ಮುಂದೆ ನೀವು ಏನು ಮಾಡಲು ಬಯಸುತ್ತೀರಿ?,,32,,,
 unsupported,Please reply with text (a number or a word).,ದಯವಿಟ್ಟು ಪಠ್ಯದಲ್ಲಿ ಉತ್ತರಿಸಿ (ಸಂಖ್ಯೆ ಅಥವಾ ಪದ).,,45,,,
+o_refer,Refer a friend,ಸ್ನೇಹಿತರಿಗೆ ತಿಳಿಸಿ,20,18,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 ಯಾವುದೇ ವಿದ್ಯಾರ್ಥಿಗೆ ಇದು ಉಪಯೋಗವಾಗಬಹುದೇ? ನಿಮ್ಮ ವೈಯಕ್ತಿಕ ಲಿಂಕ್ ಹಂಚಿಕೊಳ್ಳಿ:
+WhatsApp: {wa}
+ವೆಬ್: {web}
+ಅಥವಾ ಈ ಸಂಖ್ಯೆಗೆ *{code}* ಕೋಡ್ ಕಳುಹಿಸಲು ಹೇಳಿ.",,145,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 ದೊಡ್ಡ ಪರದೆಯಲ್ಲಿ ನೋಡಬೇಕೇ? ನಿಮ್ಮ ಒಂದು-ಬಾರಿಯ ಲಿಂಕ್ ತೆರೆಯಿರಿ (ನಿಮಗೆ ಮಾತ್ರ, {h} ಗಂಟೆಗಳಲ್ಲಿ ಅವಧಿ ಮುಗಿಯುತ್ತದೆ):
+{url}",,112,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 ನೀವು ಉಳಿಸಿದ ಯೋಜನೆಗಳು, ಜ್ಞಾಪನೆಗಳು ಮತ್ತು ಅರ್ಜಿ ಟ್ರ್ಯಾಕರ್ (ಒಂದು-ಬಾರಿಯ ಲಿಂಕ್, ನಿಮಗೆ ಮಾತ್ರ):
+{url}",,95,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ ಉಳಿಸಲಾಗಿದೆ! {n} ಯೋಜನೆ(ಗಳು) ನನ್ನ ಯೋಜನೆಗಳಲ್ಲಿ ಇವೆ. ಕೊನೆಯ ದಿನಾಂಕದ ಮೊದಲು ನೆನಪಿಸುತ್ತೇವೆ. ಯಾವಾಗ ಬೇಕಾದರೂ STOP ಕಳುಹಿಸಿ.
+{url}",,119,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ಈ ಕೋಡ್ ಮಾನ್ಯವಲ್ಲ ಅಥವಾ ಅವಧಿ ಮುಗಿದಿದೆ. ದಯವಿಟ್ಟು ವೆಬ್ ಪುಟದಲ್ಲಿ ಮತ್ತೆ ಉಳಿಸಿ ಒತ್ತಿ.,,78,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ ಧನ್ಯವಾದಗಳು. ನಿಮ್ಮ ಒಪ್ಪಿಗೆ ದಾಖಲಾಗಿದೆ. ಇನ್ನು ಜ್ಞಾಪನೆಗಳು ನಿಮ್ಮ ಮಗುವಿನ ಸಂಖ್ಯೆಗೆ ಹೋಗುತ್ತವೆ.,,88,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 ಧ್ವನಿ ಸಂದೇಶಗಳು ಶೀಘ್ರದಲ್ಲೇ ಬರಲಿವೆ. ಈಗ ದಯವಿಟ್ಟು ನಿಮ್ಮ ಉತ್ತರ ಟೈಪ್ ಮಾಡಿ.,,70,,,
+voice_heard,🎤 I heard: “{text}”,🎤 ನಾನು ಕೇಳಿದ್ದು: “{text}”,,25,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","ನೀವು ಇನ್ನೂ ಯಾವುದೇ ಯೋಜನೆ ಉಳಿಸಿಲ್ಲ. ಮೊದಲು ವಿದ್ಯಾರ್ಥಿವೇತನಗಳನ್ನು ಹುಡುಕಿ, ನಂತರ ವೆಬ್ ಪುಟದಲ್ಲಿ ಉಳಿಸಿ ಒತ್ತಿ.",,100,,,

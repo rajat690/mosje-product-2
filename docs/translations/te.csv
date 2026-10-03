@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,అంగీకారం,20,8,yes,,
 o_disagree,Don't agree,అంగీకరించను,20,11,yes,,
 o_agree_now,I agree now,ఇప్పుడు అంగీకారం,20,16,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","అర్థమైంది 🙏 ఎలాంటి వ్యక్తిగత వివరాలు అడగము, ఉంచము. అన్ని స్కాలర్‌షిప్‌లు https://scholarships.gov.in/ లో చూడవచ్చు. మనసు మారితే కింద ట్యాప్ చేయండి లేదా HI అని రాయండి.",,165,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.","అర్థమైంది 🙏 ఎలాంటి వ్యక్తిగత వివరాలు అడగము, ఉంచము. అన్ని స్కాలర్‌షిప్‌లు https://scholarships.gov.in/ లో చూడవచ్చు. మనసు మారితే కింద ట్యాప్ చేయండి లేదా HI అని రాయండి.",,165,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","సరే, ప్ర�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","నాకు అర్థం కాలేదు 🙂 కింద ఒక ఆప్షన్‌ను నొక్కండి లేదా దాని నంబర్ టైప్ చేయండి. మీరు MENU, BACK లేదా HELP అని కూడా టైప్ చేయవచ్చు.",,125,,,
 nothing_back,You are at the first step.,మీరు మొదటి దశలో ఉన్నారు.,,24,,,
 updated,✅ Updated {f}: {v},✅ {f} మార్చబడింది: {v},,22,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","ప్రస్తుతం ఈ సేవ 1వ తరగతి నుండి పోస్ట్ గ్రాడ్యుయేషన్ వరకు విద్యార్థుల కోసం. అన్ని స్కాలర్‌షిప్‌లు https://scholarships.gov.in/ లో చూడండి.
 మళ్లీ మొదలుపెట్టడానికి ఎప్పుడైనా HI అని రాయండి.",,184,,,
 summary,Your answers: {facts},మీ జవాబులు: {facts},,19,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",మీ జవాబుల ఆధారంగా మీరు చూడగల {n} స్కాలర్‌షిప్(లు) ({total} లో {a}–{b}):,,71,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ఏ పథకమూ మీ అన్ని జవాబులకు ఖచ్చితంగా సరిపోలలేదు. ఈ {n} పథకం(లు) నిర్దిష్ట వర్గాల వారికి మాత్రమే – మీకు వర్తిస్తుందో చూడండి ({total} లో {a}–{b}):,,143,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,మీ అన్ని జవాబులకు సరిపోయే పథకం మా జాబితాలో దొరకలేదు. మీరు జవాబులు మార్చవచ్చు లేదా https://scholarships.gov.in/ చూడవచ్చు.,,120,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,మీ అన్ని జవాబులకు సరిపోయే పథకం మా జాబితాలో దొరకలేదు. మీరు జవాబులు మార్చవచ్చు లేదా https://scholarships.gov.in/ చూడవచ్చు.,,120,,,
 list_tap,Tap a scheme (or type its number) to see details.,వివరాల కోసం పథకాన్ని నొక్కండి (లేదా దాని నంబర్ టైప్ చేయండి).,,60,,,
 check_section,Only for specific groups – check eligibility,నిర్దిష్ట వర్గాలకు మాత్రమే – అర్హత తనిఖీ చేయండి,,47,,,
 only_for,Only for: {groups},వీరికి మాత్రమే: {groups},,24,,,
@@ -182,6 +183,7 @@ sh_email,Email,ఈమెయిల్,,7,,,
 sh_copy,Copy message,సందేశం కాపీ చేయండి,,18,,,
 sh_more,Share…,షేర్…,,5,,,
 sh_copied,Copied ✓,కాపీ అయింది ✓,,13,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 2 నిమిషాల్లో నాకు సరిపోయే ప్రభుత్వ స్కాలర్‌షిప్‌లు దొరికాయి – ఉచితం, చూడటానికి ఏ పత్రాలూ అక్కర్లేదు. మీరూ ప్రయత్నించండి: {link}",,129,,,
 menu_hint,Type MENU for the main menu.,ప్రధాన మెనూ కోసం MENU అని రాయండి.,,33,,,
 lang_continue,Continue,కొనసాగించండి,,12,,,
 f_class_passed,Education level,విద్యా స్థాయి,24,13,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ మునుపటి,24,9,yes,,
 wa_page,Page {p} of {n} – choose an option:,పేజీ {p} / {n} – ఒక ఆప్షన్ ఎంచుకోండి:,,37,,,
 choose_next,What would you like to do next?,తర్వాత మీరు ఏమి చేయాలనుకుంటున్నారు?,,35,,,
 unsupported,Please reply with text (a number or a word).,దయచేసి టెక్స్ట్‌లో జవాబు ఇవ్వండి (నంబర్ లేదా పదం).,,50,,,
+o_refer,Refer a friend,మిత్రుడికి చెప్పండి,20,19,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 ఏ విద్యార్థికైనా ఇది ఉపయోగపడవచ్చా? మీ వ్యక్తిగత లింక్‌ను షేర్ చేయండి:
+WhatsApp: {wa}
+వెబ్: {web}
+లేదా ఈ నంబర్‌కు *{code}* కోడ్ పంపమని చెప్పండి.",,145,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 పెద్ద స్క్రీన్‌పై చూడాలా? మీ ఒకసారి లింక్‌ను తెరవండి (మీకు మాత్రమే, {h} గంటల్లో గడువు ముగుస్తుంది):
+{url}",,107,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 మీరు సేవ్ చేసిన పథకాలు, రిమైండర్లు, దరఖాస్తు ట్రాకర్ (ఒకసారి లింక్, మీకు మాత్రమే):
+{url}",,90,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ సేవ్ అయింది! {n} పథకం(లు) నా పథకాలు లో ఉన్నాయి. చివరి తేదీకి ముందు గుర్తు చేస్తాం. ఎప్పుడైనా STOP అని పంపండి.
+{url}",,117,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ఈ కోడ్ చెల్లదు లేదా గడువు ముగిసింది. దయచేసి వెబ్ పేజీలో మళ్లీ సేవ్ నొక్కండి.,,76,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ ధన్యవాదాలు. మీ సమ్మతి నమోదైంది. ఇకపై రిమైండర్లు మీ పిల్లల నంబర్‌కు వెళ్తాయి.,,78,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 వాయిస్ నోట్లు త్వరలో వస్తాయి. ఇప్పుడు దయచేసి మీ జవాబు టైప్ చేయండి.,,68,,,
+voice_heard,🎤 I heard: “{text}”,🎤 నేను విన్నది: “{text}”,,24,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","మీరు ఇంకా ఏ పథకాన్నీ సేవ్ చేయలేదు. ముందుగా స్కాలర్‌షిప్‌లు వెతకండి, తర్వాత వెబ్ పేజీలో సేవ్ నొక్కండి.",,101,,,

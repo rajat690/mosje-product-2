@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,സമ്മതം,20,6,yes,,
 o_disagree,Don't agree,സമ്മതമല്ല,20,9,yes,,
 o_agree_now,I agree now,ഇപ്പോൾ സമ്മതം,20,13,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",മനസ്സിലായി 🙏 വ്യക്തിപരമായ വിവരങ്ങൾ ചോദിക്കുകയോ സൂക്ഷിക്കുകയോ ഇല്ല. എല്ലാ സ്കോളർഷിപ്പുകളും https://scholarships.gov.in/ ൽ കാണാം. മനസ്സ് മാറിയാൽ താഴെ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ HI എന്ന് എഴുതുക.,,190,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",മനസ്സിലായി 🙏 വ്യക്തിപരമായ വിവരങ്ങൾ ചോദിക്കുകയോ സൂക്ഷിക്കുകയോ ഇല്ല. എല്ലാ സ്കോളർഷിപ്പുകളും https://scholarships.gov.in/ ൽ കാണാം. മനസ്സ് മാറിയാൽ താഴെ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ HI എന്ന് എഴുതുക.,,190,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ശരി, ചോദ�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","എനിക്ക് മനസ്സിലായില്ല 🙂 താഴെയുള്ള ഒരു ഓപ്ഷൻ ടാപ്പ് ചെയ്യുക അല്ലെങ്കിൽ അതിന്റെ നമ്പർ ടൈപ്പ് ചെയ്യുക. MENU, BACK അല്ലെങ്കിൽ HELP എന്നും ടൈപ്പ് ചെയ്യാം.",,149,,,
 nothing_back,You are at the first step.,നിങ്ങൾ ആദ്യ ഘട്ടത്തിലാണ്.,,25,,,
 updated,✅ Updated {f}: {v},✅ {f} മാറ്റി: {v},,17,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","ഇപ്പോൾ ഈ സേവനം 1-ാം ക്ലാസ് മുതൽ ബിരുദാനന്തര തലം വരെയുള്ള വിദ്യാർത്ഥികൾക്കാണ്. എല്ലാ സ്കോളർഷിപ്പുകളും https://scholarships.gov.in/ ൽ കാണുക.
 വീണ്ടും തുടങ്ങാൻ എപ്പോൾ വേണമെങ്കിലും HI എന്ന് എഴുതുക.",,192,,,
 summary,Your answers: {facts},നിങ്ങളുടെ ഉത്തരങ്ങൾ: {facts},,28,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",നിങ്ങളുടെ ഉത്തരങ്ങൾ അനുസരിച്ച് നോക്കാവുന്ന {n} സ്കോളർഷിപ്പ്(കൾ) ({total} ൽ {a}–{b}):,,84,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ഒരു പദ്ധതിയും നിങ്ങളുടെ എല്ലാ ഉത്തരങ്ങളുമായി ഉറപ്പായി പൊരുത്തപ്പെട്ടില്ല. ഈ {n} പദ്ധതി(കൾ) പ്രത്യേക വിഭാഗങ്ങൾക്ക് മാത്രം – നിങ്ങൾക്ക് ബാധകമാണോ എന്ന് നോക്കുക ({total} ൽ {a}–{b}):,,177,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,നിങ്ങളുടെ എല്ലാ ഉത്തരങ്ങളുമായി പൊരുത്തപ്പെടുന്ന പദ്ധതി ഞങ്ങളുടെ പട്ടികയിൽ ഇല്ല. ഉത്തരങ്ങൾ മാറ്റാം അല്ലെങ്കിൽ https://scholarships.gov.in/ കാണാം.,,144,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,നിങ്ങളുടെ എല്ലാ ഉത്തരങ്ങളുമായി പൊരുത്തപ്പെടുന്ന പദ്ധതി ഞങ്ങളുടെ പട്ടികയിൽ ഇല്ല. ഉത്തരങ്ങൾ മാറ്റാം അല്ലെങ്കിൽ https://scholarships.gov.in/ കാണാം.,,144,,,
 list_tap,Tap a scheme (or type its number) to see details.,വിശദാംശങ്ങൾക്ക് പദ്ധതിയിൽ ടാപ്പ് ചെയ്യുക (അല്ലെങ്കിൽ അതിന്റെ നമ്പർ ടൈപ്പ് ചെയ്യുക).,,83,,,
 check_section,Only for specific groups – check eligibility,പ്രത്യേക വിഭാഗങ്ങൾക്ക് മാത്രം – യോഗ്യത പരിശോധിക്കുക,,51,,,
 only_for,Only for: {groups},ഇവർക്ക് മാത്രം: {groups},,24,,,
@@ -182,6 +183,7 @@ sh_email,Email,ഇമെയിൽ,,6,,,
 sh_copy,Copy message,സന്ദേശം പകർത്തുക,,16,,,
 sh_more,Share…,പങ്കിടുക…,,9,,,
 sh_copied,Copied ✓,പകർത്തി ✓,,9,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 2 മിനിറ്റിൽ എനിക്കുള്ള സർക്കാർ സ്കോളർഷിപ്പുകൾ കണ്ടെത്തി – സൗജന്യം, പരിശോധിക്കാൻ രേഖകൾ ഒന്നും വേണ്ട. നിങ്ങളും നോക്കൂ: {link}",,125,,,
 menu_hint,Type MENU for the main menu.,പ്രധാന മെനുവിന് MENU എന്ന് എഴുതുക.,,34,,,
 lang_continue,Continue,തുടരുക,,6,,,
 f_class_passed,Education level,വിദ്യാഭ്യാസ നില,24,15,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ മുമ്പത്തേത്,24,13,yes,,
 wa_page,Page {p} of {n} – choose an option:,പേജ് {p} / {n} – ഒരു ഓപ്ഷൻ തിരഞ്ഞെടുക്കുക:,,42,,,
 choose_next,What would you like to do next?,അടുത്തതായി നിങ്ങൾക്ക് എന്ത് ചെയ്യണം?,,36,,,
 unsupported,Please reply with text (a number or a word).,ദയവായി ടെക്സ്റ്റായി മറുപടി നൽകുക (നമ്പർ അല്ലെങ്കിൽ വാക്ക്).,,59,,,
+o_refer,Refer a friend,സുഹൃത്തിനോട് പറയൂ,20,17,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 ഏതെങ്കിലും വിദ്യാർത്ഥിക്ക് ഇത് ഉപകാരപ്പെടുമോ? നിങ്ങളുടെ വ്യക്തിഗത ലിങ്ക് പങ്കിടൂ:
+WhatsApp: {wa}
+വെബ്: {web}
+അല്ലെങ്കിൽ ഈ നമ്പറിലേക്ക് *{code}* കോഡ് അയയ്ക്കാൻ പറയൂ.",,166,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 വലിയ സ്ക്രീനിൽ കാണണോ? നിങ്ങളുടെ ഒറ്റത്തവണ ലിങ്ക് തുറക്കൂ (നിങ്ങൾക്ക് മാത്രം, {h} മണിക്കൂറിൽ കാലഹരണപ്പെടും):
+{url}",,115,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 നിങ്ങൾ സേവ് ചെയ്ത പദ്ധതികൾ, ഓർമ്മപ്പെടുത്തലുകൾ, അപേക്ഷാ ട്രാക്കർ (ഒറ്റത്തവണ ലിങ്ക്, നിങ്ങൾക്ക് മാത്രം):
+{url}",,111,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ സേവ് ചെയ്തു! {n} പദ്ധതി(കൾ) എന്റെ പദ്ധതികളിൽ ഉണ്ട്. അവസാന തീയതിക്ക് മുമ്പ് ഓർമ്മിപ്പിക്കും. എപ്പോൾ വേണമെങ്കിലും STOP അയയ്ക്കൂ.
+{url}",,134,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ഈ കോഡ് സാധുവല്ല അല്ലെങ്കിൽ കാലഹരണപ്പെട്ടു. ദയവായി വെബ് പേജിൽ വീണ്ടും സേവ് അമർത്തൂ.,,82,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ നന്ദി. നിങ്ങളുടെ സമ്മതം രേഖപ്പെടുത്തി. ഇനി ഓർമ്മപ്പെടുത്തലുകൾ നിങ്ങളുടെ കുട്ടിയുടെ നമ്പറിലേക്ക് പോകും.,,104,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 വോയ്സ് നോട്ടുകൾ ഉടൻ വരുന്നു. ഇപ്പോൾ ദയവായി നിങ്ങളുടെ മറുപടി ടൈപ്പ് ചെയ്യൂ.,,76,,,
+voice_heard,🎤 I heard: “{text}”,🎤 ഞാൻ കേട്ടത്: “{text}”,,23,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","നിങ്ങൾ ഇതുവരെ ഒരു പദ്ധതിയും സേവ് ചെയ്തിട്ടില്ല. ആദ്യം സ്കോളർഷിപ്പുകൾ കണ്ടെത്തൂ, പിന്നെ വെബ് പേജിൽ സേവ് അമർത്തൂ.",,111,,,

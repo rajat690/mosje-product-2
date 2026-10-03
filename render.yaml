@@ -51,6 +51,19 @@ services:
         value: "true"
       - key: LOG_LEVEL
         value: INFO
+      # --- Update 3: one-time web links, reminders, speech (all optional) ---
+      - key: WHATSAPP_WEB_LINK        # offer = after "Hi", also send a one-time link to the web companion; off = never
+        value: offer
+      - key: WHATSAPP_REMINDER_TEMPLATE  # optional: Meta-approved utility template for reminders outside the 24-hour window
+        sync: false
+      - key: SPEECH_ENABLED           # TTS / STT feature flag. Keep "false" until a speech provider is contracted
+        value: "false"
+      - key: SPEECH_PROVIDER          # none | mock | http | bhashini | google | elevenlabs | sarvam (integration later)
+        sync: false
+      - key: SPEECH_API_KEY           # speech vendor / gateway key (integration later)
+        sync: false
+      - key: SPEECH_API_URL           # speech vendor / gateway base URL (integration later)
+        sync: false
 
 # Optional – ONLY if this Blueprint lives in a Render workspace that has no free Postgres yet
 # (or you want a paid one). Uncomment, and replace the DATABASE_URL entry above with:

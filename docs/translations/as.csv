@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,সন্মত,20,5,yes,,
 o_disagree,Don't agree,সন্মত নহয়,20,10,yes,,
 o_agree_now,I agree now,এতিয়া সন্মত,20,12,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",বুজি পালোঁ 🙏 কোনো ব্যক্তিগত তথ্য বিচৰা বা ৰখা নহ'ব। সকলো বৃত্তি https://scholarships.gov.in/ ত চাব পাৰে। মত সলনি হ'লে তলত টেপ কৰক বা HI লিখক।,,141,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",বুজি পালোঁ 🙏 কোনো ব্যক্তিগত তথ্য বিচৰা বা ৰখা নহ'ব। সকলো বৃত্তি https://scholarships.gov.in/ ত চাব পাৰে। মত সলনি হ'লে তলত টেপ কৰক বা HI লিখক।,,141,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ঠিক আছে, �
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","বুজি নাপালোঁ 🙂 তলৰ এটা বিকল্পত টেপ কৰক বা তাৰ নম্বৰ লিখক। আপুনি MENU, BACK বা HELP-ও লিখিব পাৰে।",,96,,,
 nothing_back,You are at the first step.,আপুনি প্ৰথম পদক্ষেপত আছে।,,25,,,
 updated,✅ Updated {f}: {v},✅ {f} সলনি কৰা হ'ল: {v},,23,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","এতিয়া এই সেৱা শ্ৰেণী ১ৰ পৰা স্নাতকোত্তৰলৈকে ছাত্ৰ-ছাত্ৰীৰ বাবে। সকলো বৃত্তি https://scholarships.gov.in/ ত চাওক।
 আকৌ আৰম্ভ কৰিবলৈ যিকোনো সময়ত HI লিখক।",,152,,,
 summary,Your answers: {facts},আপোনাৰ উত্তৰ: {facts},,21,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",আপোনাৰ উত্তৰ অনুসৰি এই {n}টা বৃত্তি চাব পাৰে ({total}টাৰ ভিতৰত {a}–{b}):,,72,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,কোনো আঁচনি নিশ্চিতভাৱে আপোনাৰ সকলো উত্তৰৰ লগত মিল নাখালে। এই {n}টা আঁচনি কেৱল নিৰ্দিষ্ট গোটৰ বাবে – আপোনাৰ ক্ষেত্ৰত প্ৰযোজ্য নেকি চাওক ({total}টাৰ ভিতৰত {a}–{b}):,,162,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,আপোনাৰ সকলো উত্তৰৰ লগত মিলা কোনো আঁচনি আমাৰ তালিকাত পোৱা নগ'ল। আপুনি উত্তৰ সলনি কৰিব পাৰে বা https://scholarships.gov.in/ চাব পাৰে।,,131,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,আপোনাৰ সকলো উত্তৰৰ লগত মিলা কোনো আঁচনি আমাৰ তালিকাত পোৱা নগ'ল। আপুনি উত্তৰ সলনি কৰিব পাৰে বা https://scholarships.gov.in/ চাব পাৰে।,,131,,,
 list_tap,Tap a scheme (or type its number) to see details.,বিতং চাবলৈ আঁচনিত টেপ কৰক (বা তাৰ নম্বৰ লিখক)।,,46,,,
 check_section,Only for specific groups – check eligibility,কেৱল নিৰ্দিষ্ট গোটৰ বাবে – যোগ্যতা পৰীক্ষা কৰক,,46,,,
 only_for,Only for: {groups},কেৱল: {groups},,14,,,
@@ -182,6 +183,7 @@ sh_email,Email,ইমেইল,,5,,,
 sh_copy,Copy message,বাৰ্তা কপি কৰক,,14,,,
 sh_more,Share…,শ্বেয়াৰ…,,9,,,
 sh_copied,Copied ✓,কপি হ'ল ✓,,9,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 ২ মিনিটতে মোৰ বাবে চৰকাৰী বৃত্তি বিচাৰি পালোঁ – বিনামূলীয়া, পৰীক্ষা কৰিবলৈ কোনো নথি নালাগে। আপুনিও চাওক: {link}",,114,,,
 menu_hint,Type MENU for the main menu.,মূল মেনুৰ বাবে MENU লিখক।,,25,,,
 lang_continue,Continue,আগবাঢ়ক,,7,,,
 f_class_passed,Education level,পঢ়াৰ স্তৰ,24,10,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ আগৰ,24,5,yes,,
 wa_page,Page {p} of {n} – choose an option:,পৃষ্ঠা {p} / {n} – এটা বিকল্প বাছনি কৰক:,,40,,,
 choose_next,What would you like to do next?,ইয়াৰ পিছত আপুনি কি কৰিব বিচাৰে?,,32,,,
 unsupported,Please reply with text (a number or a word).,অনুগ্ৰহ কৰি টেক্সটত উত্তৰ দিয়ক (নম্বৰ বা শব্দ)।,,48,,,
+o_refer,Refer a friend,বন্ধুক জনাওক,20,12,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 কোনো ছাত্ৰ-ছাত্ৰীৰ ইয়াৰ প্ৰয়োজন হ'ব পাৰে? আপোনাৰ ব্যক্তিগত লিংক শ্বেয়াৰ কৰক:
+WhatsApp: {wa}
+ৱেব: {web}
+নাইবা তেওঁলোকক এই নম্বৰলৈ কোড *{code}* পঠিয়াবলৈ কওক।",,161,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 ডাঙৰ স্ক্ৰীণত চাব বিচাৰে? আপোনাৰ এবাৰৰ লিংক খোলক (কেৱল আপোনাৰ বাবে, {h} ঘণ্টাত ম্যাদ শেষ):
+{url}",,98,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 আপোনাৰ ছেভ কৰা আঁচনি, ৰিমাইণ্ডাৰ আৰু আবেদন ট্ৰেকাৰ (এবাৰৰ লিংক, কেৱল আপোনাৰ বাবে):
+{url}",,90,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ ছেভ হ'ল! {n}টা আঁচনি মোৰ আঁচনিত আছে। শেষ তাৰিখৰ আগতে আমি মনত পেলাই দিম। যিকোনো সময়ত STOP লিখক।
+{url}",,103,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,এই কোড বৈধ নহয় বা ম্যাদ উকলিছে। ৱেব পেজত পুনৰ ছেভ টিপক।,,56,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ ধন্যবাদ। আপোনাৰ সন্মতি ৰেকৰ্ড কৰা হ'ল। এতিয়া ৰিমাইণ্ডাৰ আপোনাৰ সন্তানৰ নম্বৰলৈ যাব।,,86,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 ভইচ নোট সোনকালে আহিব। এতিয়া অনুগ্ৰহ কৰি উত্তৰ টাইপ কৰক।,,58,,,
+voice_heard,🎤 I heard: “{text}”,🎤 মই শুনিলোঁ: “{text}”,,22,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","আপুনি এতিয়ালৈকে কোনো আঁচনি ছেভ কৰা নাই। প্ৰথমে বৃত্তি বিচাৰক, তাৰ পিছত ৱেব পেজত ছেভ টিপক।",,90,,,

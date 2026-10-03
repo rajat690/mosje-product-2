@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,सहमत बानी,20,9,yes,,
 o_disagree,Don't agree,सहमत नइखीं,20,10,yes,,
 o_agree_now,I agree now,अब सहमत बानी,20,12,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","समझ गइनी 🙏 कवनो निजी जानकारी ना पूछल जाई, ना राखल जाई। सब छात्रवृत्ति https://scholarships.gov.in/ पर देख सकेनी। मन बदले त नीचे टैप करीं भा HI लिखीं।",,149,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.","समझ गइनी 🙏 कवनो निजी जानकारी ना पूछल जाई, ना राखल जाई। सब छात्रवृत्ति https://scholarships.gov.in/ पर देख सकेनी। मन बदले त नीचे टैप करीं भा HI लिखीं।",,149,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ठीक बा, स�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","हम समझ ना पवनी 🙂 नीचे कवनो विकल्प चुनीं भा ओकर नंबर लिखीं। रउआ MENU, BACK भा HELP भी लिख सकीले।",,95,,,
 nothing_back,You are at the first step.,रउआ पहिला चरण पर बानी।,,22,,,
 updated,✅ Updated {f}: {v},✅ {f} बदल गइल: {v},,18,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","अभी ई सेवा कक्षा 1 से स्नातकोत्तर तक के विद्यार्थी लोग खातिर बा। सब छात्रवृत्ति https://scholarships.gov.in/ पर देखीं।
 फेर से शुरू करे खातिर कबो HI लिखीं।",,154,,,
 summary,Your answers: {facts},रउआ के जवाब: {facts},,20,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",रउआ जवाब के आधार पर ई {n} छात्रवृत्ति देखीं ({total} में से {a}–{b}):,,69,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,कवनो योजना रउआ सगरी जवाब से पक्का मेल ना खाइल। ई {n} योजना खाली कुछ खास समूह खातिर बा – देखीं कि रउआ पर लागू होला कि ना ({total} में से {a}–{b}):,,145,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,रउआ सगरी जवाब से मेल खाए वाला कवनो योजना हमनी के सूची में ना मिलल। रउआ जवाब बदल सकीले भा https://scholarships.gov.in/ देख सकीले।,,128,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,रउआ सगरी जवाब से मेल खाए वाला कवनो योजना हमनी के सूची में ना मिलल। रउआ जवाब बदल सकीले भा https://scholarships.gov.in/ देख सकीले।,,128,,,
 list_tap,Tap a scheme (or type its number) to see details.,जानकारी देखे खातिर योजना पर टैप करीं (भा ओकर नंबर लिखीं)।,,57,,,
 check_section,Only for specific groups – check eligibility,खाली खास समूह खातिर – पात्रता जाँचीं,,36,,,
 only_for,Only for: {groups},खाली: {groups},,14,,,
@@ -182,6 +183,7 @@ sh_email,Email,ईमेल,,4,,,
 sh_copy,Copy message,संदेश कॉपी करीं,,15,,,
 sh_more,Share…,शेयर…,,5,,,
 sh_copied,Copied ✓,कॉपी हो गइल ✓,,13,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 हमरा 2 मिनट में अपना खातिर सरकारी छात्रवृत्ति मिल गइल – मुफ़्त, जाँचे खातिर कवनो कागज ना चाहीं। रउओ आजमाईं: {link}",,116,,,
 menu_hint,Type MENU for the main menu.,मुख्य मेनू खातिर MENU लिखीं।,,28,,,
 lang_continue,Continue,आगे बढ़ीं,,9,,,
 f_class_passed,Education level,पढ़ाई के स्तर,24,13,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ पिछिला,24,8,yes,,
 wa_page,Page {p} of {n} – choose an option:,पेज {p} / {n} – कवनो विकल्प चुनीं:,,34,,,
 choose_next,What would you like to do next?,अब रउआ का करे के चाहत बानी?,,27,,,
 unsupported,Please reply with text (a number or a word).,किरपा करके टेक्स्ट में जवाब दीं (नंबर भा शब्द)।,,47,,,
+o_refer,Refer a friend,दोस्त के बताईं,20,14,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 कवनो विद्यार्थी के एकर जरूरत हो सकेला? आपन निजी लिंक शेयर करीं:
+WhatsApp: {wa}
+वेब: {web}
+या उनसे कहीं कि एह नंबर पर कोड *{code}* भेजस।",,137,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 बड़ स्क्रीन पर देखे के बा? आपन एक-बेर के लिंक खोलीं (खाली रउआ खातिर, {h} घंटा में खतम):
+{url}",,95,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 रउआ के सेव कइल योजना, रिमाइंडर आ आवेदन ट्रैकर (एक-बेर के लिंक, खाली रउआ खातिर):
+{url}",,87,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ सेव हो गइल! {n} योजना हमार योजना में बा। अंतिम तारीख से पहिले हम याद दिलाइब। कबो STOP लिखीं।
+{url}",,100,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ई कोड सही नइखे या खतम हो गइल बा। वेब पेज पर फेर से सेव दबाईं।,,61,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ धन्यवाद। रउआ के सहमति दर्ज हो गइल। अब रिमाइंडर रउआ के बच्चा के नंबर पर जाई।,,77,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 वॉइस नोट जल्दी आई। अबहीं आपन जवाब टाइप करीं।,,46,,,
+voice_heard,🎤 I heard: “{text}”,🎤 हम सुननी: “{text}”,,20,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","रउआ अबहीं कवनो योजना सेव नइखीं कइले। पहिले छात्रवृत्ति खोजीं, फेर वेब पेज पर सेव दबाईं।",,87,,,

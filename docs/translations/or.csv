@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,ରାଜି,20,4,yes,,
 o_disagree,Don't agree,ରାଜି ନୁହେଁ,20,10,yes,,
 o_agree_now,I agree now,ଏବେ ରାଜି,20,8,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",ବୁଝିଲି 🙏 କୌଣସି ବ୍ୟକ୍ତିଗତ ତଥ୍ୟ ପଚରାଯିବ ନାହିଁ କି ରଖାଯିବ ନାହିଁ। ସମସ୍ତ ଛାତ୍ରବୃତ୍ତି https://scholarships.gov.in/ ରେ ଦେଖିପାରିବେ। ମନ ବଦଳିଲେ ତଳେ ଟ୍ୟାପ୍ କରନ୍ତୁ କିମ୍ବା HI ଲେଖନ୍ତୁ।,,169,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",ବୁଝିଲି 🙏 କୌଣସି ବ୍ୟକ୍ତିଗତ ତଥ୍ୟ ପଚରାଯିବ ନାହିଁ କି ରଖାଯିବ ନାହିଁ। ସମସ୍ତ ଛାତ୍ରବୃତ୍ତି https://scholarships.gov.in/ ରେ ଦେଖିପାରିବେ। ମନ ବଦଳିଲେ ତଳେ ଟ୍ୟାପ୍ କରନ୍ତୁ କିମ୍ବା HI ଲେଖନ୍ତୁ।,,169,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ଠିକ୍ ଅଛି
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","ମୁଁ ବୁଝିପାରିଲି ନାହିଁ 🙂 ତଳେ ଥିବା ଏକ ବିକଳ୍ପ ଟ୍ୟାପ୍ କରନ୍ତୁ କିମ୍ବା ତାହାର ନମ୍ବର ଲେଖନ୍ତୁ। ଆପଣ MENU, BACK କିମ୍ବା HELP ମଧ୍ୟ ଲେଖିପାରିବେ।",,127,,,
 nothing_back,You are at the first step.,ଆପଣ ପ୍ରଥମ ପର୍ଯ୍ୟାୟରେ ଅଛନ୍ତି।,,28,,,
 updated,✅ Updated {f}: {v},✅ {f} ବଦଳାଗଲା: {v},,18,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","ଏବେ ଏହି ସେବା ଶ୍ରେଣୀ ୧ରୁ ସ୍ନାତକୋତ୍ତର ପର୍ଯ୍ୟନ୍ତ ଛାତ୍ରଛାତ୍ରୀଙ୍କ ପାଇଁ। ସମସ୍ତ ଛାତ୍ରବୃତ୍ତି https://scholarships.gov.in/ ରେ ଦେଖନ୍ତୁ।
 ପୁଣି ଆରମ୍ଭ କରିବାକୁ ଯେକୌଣସି ସମୟରେ HI ଲେଖନ୍ତୁ।",,170,,,
 summary,Your answers: {facts},ଆପଣଙ୍କ ଉତ୍ତର: {facts},,21,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",ଆପଣଙ୍କ ଉତ୍ତର ଅନୁସାରେ ଆପଣ ଦେଖିପାରୁଥିବା {n}ଟି ଛାତ୍ରବୃତ୍ତି ({total}ଟି ମଧ୍ୟରୁ {a}–{b}):,,83,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,କୌଣସି ଯୋଜନା ଆପଣଙ୍କ ସମସ୍ତ ଉତ୍ତର ସହ ନିଶ୍ଚିତ ଭାବେ ମେଳ ଖାଇଲା ନାହିଁ। ଏହି {n}ଟି ଯୋଜନା କେବଳ ନିର୍ଦ୍ଦିଷ୍ଟ ଗୋଷ୍ଠୀ ପାଇଁ – ଆପଣଙ୍କ ପାଇଁ ପ୍ରଯୁଜ୍ୟ କି ଦେଖନ୍ତୁ ({total}ଟି ମଧ୍ୟରୁ {a}–{b}):,,170,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,ଆପଣଙ୍କ ସମସ୍ତ ଉତ୍ତର ସହ ମେଳ ଖାଉଥିବା କୌଣସି ଯୋଜନା ଆମ ତାଲିକାରେ ମିଳିଲା ନାହିଁ। ଆପଣ ଉତ୍ତର ବଦଳାଇପାରିବେ କିମ୍ବା https://scholarships.gov.in/ ଦେଖିପାରିବେ।,,141,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,ଆପଣଙ୍କ ସମସ୍ତ ଉତ୍ତର ସହ ମେଳ ଖାଉଥିବା କୌଣସି ଯୋଜନା ଆମ ତାଲିକାରେ ମିଳିଲା ନାହିଁ। ଆପଣ ଉତ୍ତର ବଦଳାଇପାରିବେ କିମ୍ବା https://scholarships.gov.in/ ଦେଖିପାରିବେ।,,141,,,
 list_tap,Tap a scheme (or type its number) to see details.,ବିବରଣୀ ଦେଖିବାକୁ ଯୋଜନା ଟ୍ୟାପ୍ କରନ୍ତୁ (କିମ୍ବା ତାହାର ନମ୍ବର ଲେଖନ୍ତୁ)।,,65,,,
 check_section,Only for specific groups – check eligibility,କେବଳ ନିର୍ଦ୍ଦିଷ୍ଟ ଗୋଷ୍ଠୀ ପାଇଁ – ଯୋଗ୍ୟତା ଯାଞ୍ଚ କରନ୍ତୁ,,51,,,
 only_for,Only for: {groups},କେବଳ: {groups},,14,,,
@@ -182,6 +183,7 @@ sh_email,Email,ଇମେଲ୍,,5,,,
 sh_copy,Copy message,ବାର୍ତ୍ତା କପି କରନ୍ତୁ,,19,,,
 sh_more,Share…,ସେୟାର୍…,,7,,,
 sh_copied,Copied ✓,କପି ହେଲା ✓,,10,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 2 ମିନିଟରେ ମୋ ପାଇଁ ସରକାରୀ ଛାତ୍ରବୃତ୍ତି ପାଇଲି – ମାଗଣା, ଯାଞ୍ଚ ପାଇଁ କୌଣସି କାଗଜପତ୍ର ଦରକାର ନାହିଁ। ଆପଣ ବି ଚେଷ୍ଟା କରନ୍ତୁ: {link}",,121,,,
 menu_hint,Type MENU for the main menu.,ମୁଖ୍ୟ ମେନୁ ପାଇଁ MENU ଲେଖନ୍ତୁ।,,29,,,
 lang_continue,Continue,ଆଗକୁ ଯାଆନ୍ତୁ,,12,,,
 f_class_passed,Education level,ଶିକ୍ଷା ସ୍ତର,24,11,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ ପୂର୍ବ,24,7,yes,,
 wa_page,Page {p} of {n} – choose an option:,ପୃଷ୍ଠା {p} / {n} – ଏକ ବିକଳ୍ପ ବାଛନ୍ତୁ:,,37,,,
 choose_next,What would you like to do next?,ଏହା ପରେ ଆପଣ କ'ଣ କରିବାକୁ ଚାହୁଁଛନ୍ତି?,,35,,,
 unsupported,Please reply with text (a number or a word).,ଦୟାକରି ଟେକ୍ସଟରେ ଉତ୍ତର ଦିଅନ୍ତୁ (ନମ୍ବର କିମ୍ବା ଶବ୍ଦ)।,,50,,,
+o_refer,Refer a friend,ବନ୍ଧୁଙ୍କୁ କୁହନ୍ତୁ,20,17,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 କୌଣସି ଛାତ୍ରଛାତ୍ରୀଙ୍କ ଏହା ଦରକାର ହୋଇପାରେ? ଆପଣଙ୍କ ବ୍ୟକ୍ତିଗତ ଲିଙ୍କ ସେୟାର କରନ୍ତୁ:
+WhatsApp: {wa}
+ୱେବ: {web}
+କିମ୍ବା ତାଙ୍କୁ ଏହି ନମ୍ବରକୁ କୋଡ୍ *{code}* ପଠାଇବାକୁ କୁହନ୍ତୁ।",,162,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 ବଡ ସ୍କ୍ରିନରେ ଦେଖିବାକୁ ଚାହାଁନ୍ତି? ଆପଣଙ୍କ ଏକଥର ଲିଙ୍କ ଖୋଲନ୍ତୁ (କେବଳ ଆପଣଙ୍କ ପାଇଁ, {h} ଘଣ୍ଟାରେ ଶେଷ):
+{url}",,103,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 ଆପଣଙ୍କ ସେଭ୍ ହୋଇଥିବା ଯୋଜନା, ରିମାଇଣ୍ଡର ଓ ଆବେଦନ ଟ୍ରାକର (ଏକଥର ଲିଙ୍କ, କେବଳ ଆପଣଙ୍କ ପାଇଁ):
+{url}",,91,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ ସେଭ୍ ହେଲା! {n}ଟି ଯୋଜନା ମୋ ଯୋଜନାରେ ଅଛି। ଶେଷ ତାରିଖ ପୂର୍ବରୁ ଆମେ ମନେ ପକାଇଦେବୁ। ଯେକୌଣସି ସମୟରେ STOP ଲେଖନ୍ତୁ।
+{url}",,110,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ଏହି କୋଡ୍ ବୈଧ ନୁହେଁ କିମ୍ବା ମିଆଦ ଶେଷ। ୱେବ ପେଜରେ ପୁଣି ସେଭ୍ ଦବାନ୍ତୁ।,,64,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ ଧନ୍ୟବାଦ। ଆପଣଙ୍କ ସମ୍ମତି ରେକର୍ଡ ହେଲା। ଏବେ ରିମାଇଣ୍ଡର ଆପଣଙ୍କ ପିଲାଙ୍କ ନମ୍ବରକୁ ଯିବ।,,79,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 ଭଏସ୍ ନୋଟ୍ ଶୀଘ୍ର ଆସୁଛି। ଏବେ ଦୟାକରି ଉତ୍ତର ଟାଇପ୍ କରନ୍ତୁ।,,55,,,
+voice_heard,🎤 I heard: “{text}”,🎤 ମୁଁ ଶୁଣିଲି: “{text}”,,22,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","ଆପଣ ଏପର୍ଯ୍ୟନ୍ତ କୌଣସି ଯୋଜନା ସେଭ୍ କରିନାହାଁନ୍ତି। ପ୍ରଥମେ ଛାତ୍ରବୃତ୍ତି ଖୋଜନ୍ତୁ, ତାପରେ ୱେବ ପେଜରେ ସେଭ୍ ଦବାନ୍ତୁ।",,103,,,

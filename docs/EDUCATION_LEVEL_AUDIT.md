@@ -1,5 +1,7 @@
 # Product 2 education-level audit — 29 Sep 2026
 
+> **Update 3 (29 Sep 2026, later):** this fix was on GitHub but `data/scheme_rules_v3.json` had not been rebuilt, so the live bot did not use it. The rules are now rebuilt and the audit extended to the whole database (category, gender, State, income too). See `docs/SCHEME_DATA_AUDIT.md`; the Karnataka PG example now returns 12 schemes (UG+PG schemes such as the ISI stipend are kept for PG).
+
 ## Defect found
 The discovery engine first checked broad scholarship stages (`Pre-Matric`, `Post-Matric`, `Higher Education`).
 A PG answer is represented as both `Post-Matric` and `Higher Education`, so a PG student could pass schemes that were actually Degree/UG-only or Diploma-only. The finer `Education Level / Stage` value existed in the scheme data but most of its synthetic labels were not converted into `Level_Codes`.

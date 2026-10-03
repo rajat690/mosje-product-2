@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,સંમત છું,20,8,yes,,
 o_disagree,Don't agree,સંમત નથી,20,8,yes,,
 o_agree_now,I agree now,હવે સંમત છું,20,12,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",સમજાયું 🙏 કોઈ અંગત વિગતો પૂછવામાં કે રાખવામાં નહીં આવે. બધી શિષ્યવૃત્તિઓ https://scholarships.gov.in/ પર જોઈ શકો છો. વિચાર બદલાય તો નીચે ટૅપ કરો અથવા HI લખો.,,157,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",સમજાયું 🙏 કોઈ અંગત વિગતો પૂછવામાં કે રાખવામાં નહીં આવે. બધી શિષ્યવૃત્તિઓ https://scholarships.gov.in/ પર જોઈ શકો છો. વિચાર બદલાય તો નીચે ટૅપ કરો અથવા HI લખો.,,157,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ઠીક છે, પ�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","હું સમજી શક્યો નહીં 🙂 નીચે કોઈ વિકલ્પ પર ટૅપ કરો અથવા તેનો નંબર લખો. તમે MENU, BACK અથવા HELP પણ લખી શકો છો.",,108,,,
 nothing_back,You are at the first step.,તમે પહેલા પગલા પર છો.,,21,,,
 updated,✅ Updated {f}: {v},✅ {f} બદલાયું: {v},,18,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","હાલ આ સેવા ધોરણ 1 થી અનુસ્નાતક સુધીના વિદ્યાર્થીઓ માટે છે. બધી શિષ્યવૃત્તિઓ https://scholarships.gov.in/ પર જુઓ.
 ફરી શરૂ કરવા ગમે ત્યારે HI લખો.",,144,,,
 summary,Your answers: {facts},તમારા જવાબો: {facts},,20,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",તમારા જવાબોના આધારે તમે જોઈ શકો તેવી {n} શિષ્યવૃત્તિ(ઓ) ({total} માંથી {a}–{b}):,,80,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,કોઈ યોજના તમારા બધા જવાબો સાથે ચોક્કસ મેળ ખાતી નથી. આ {n} યોજના(ઓ) ફક્ત ચોક્કસ જૂથો માટે છે – તમને લાગુ પડે છે કે નહીં તે જુઓ ({total} માંથી {a}–{b}):,,150,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,તમારા બધા જવાબો સાથે મેળ ખાતી કોઈ યોજના અમારી યાદીમાં મળી નથી. તમે જવાબો બદલી શકો છો અથવા https://scholarships.gov.in/ જોઈ શકો છો.,,130,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,તમારા બધા જવાબો સાથે મેળ ખાતી કોઈ યોજના અમારી યાદીમાં મળી નથી. તમે જવાબો બદલી શકો છો અથવા https://scholarships.gov.in/ જોઈ શકો છો.,,130,,,
 list_tap,Tap a scheme (or type its number) to see details.,વિગતો જોવા માટે યોજના પર ટૅપ કરો (અથવા તેનો નંબર લખો).,,54,,,
 check_section,Only for specific groups – check eligibility,ફક્ત ચોક્કસ જૂથો માટે – પાત્રતા તપાસો,,37,,,
 only_for,Only for: {groups},ફક્ત: {groups},,14,,,
@@ -182,6 +183,7 @@ sh_email,Email,ઇમેઇલ,,5,,,
 sh_copy,Copy message,સંદેશ કૉપિ કરો,,14,,,
 sh_more,Share…,શેર…,,4,,,
 sh_copied,Copied ✓,કૉપિ થયું ✓,,11,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 મને 2 મિનિટમાં મારા માટે સરકારી શિષ્યવૃત્તિઓ મળી – મફત, તપાસવા માટે કોઈ દસ્તાવેજ જોઈતો નથી. તમે પણ અજમાવો: {link}",,115,,,
 menu_hint,Type MENU for the main menu.,મુખ્ય મેનુ માટે MENU લખો.,,25,,,
 lang_continue,Continue,આગળ વધો,,7,,,
 f_class_passed,Education level,શિક્ષણ સ્તર,24,11,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ પાછલા,24,7,yes,,
 wa_page,Page {p} of {n} – choose an option:,પાનું {p} / {n} – કોઈ વિકલ્પ પસંદ કરો:,,38,,,
 choose_next,What would you like to do next?,હવે તમે શું કરવા માંગો છો?,,26,,,
 unsupported,Please reply with text (a number or a word).,કૃપા કરી ટેક્સ્ટમાં જવાબ આપો (નંબર અથવા શબ્દ).,,46,,,
+o_refer,Refer a friend,મિત્રને જણાવો,20,13,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 કોઈ વિદ્યાર્થીને આની જરૂર હોઈ શકે? તમારી વ્યક્તિગત લિંક શેર કરો:
+WhatsApp: {wa}
+વેબ: {web}
+અથવા તેમને આ નંબર પર કોડ *{code}* મોકલવા કહો.",,138,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 મોટી સ્ક્રીન પર જોવું છે? તમારી એક-વખતની લિંક ખોલો (ફક્ત તમારા માટે, {h} કલાકમાં સમાપ્ત):
+{url}",,97,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 તમારી સેવ કરેલી યોજનાઓ, રિમાઇન્ડર અને અરજી ટ્રેકર (એક-વખતની લિંક, ફક્ત તમારા માટે):
+{url}",,91,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ સેવ થયું! {n} યોજના મારી યોજનાઓમાં છે. છેલ્લી તારીખ પહેલાં અમે યાદ અપાવીશું. ગમે ત્યારે STOP લખો.
+{url}",,105,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,આ કોડ માન્ય નથી અથવા સમાપ્ત થઈ ગયો છે. કૃપા કરીને વેબ પેજ પર ફરી સેવ દબાવો.,,75,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ આભાર. તમારી સંમતિ નોંધાઈ ગઈ છે. હવે રિમાઇન્ડર તમારા બાળકના નંબર પર જશે.,,73,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 વૉઇસ નોટ ટૂંક સમયમાં આવી રહ્યા છે. હમણાં કૃપા કરીને જવાબ ટાઇપ કરો.,,68,,,
+voice_heard,🎤 I heard: “{text}”,🎤 મેં સાંભળ્યું: “{text}”,,25,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","તમે હજી કોઈ યોજના સેવ કરી નથી. પહેલાં શિષ્યવૃત્તિ શોધો, પછી વેબ પેજ પર સેવ દબાવો.",,81,,,

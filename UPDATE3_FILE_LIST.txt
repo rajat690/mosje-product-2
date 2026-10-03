@@ -1,0 +1,121 @@
+Product 2 - Update 3 (2 Oct 2026): files new or changed compared with GitHub main (commit 9ed1d1b)
+The zip has the COMPLETE repository (185 files). Upload everything (keep the folders); this list is only for reference.
+Nothing needs to be deleted on GitHub. No settings are required; optional ones are in UPDATE_NOTES_3.md.
+
+NEW (56)
+  UPDATE3_FILE_LIST.txt                                      this list
+  UPDATE_NOTES_3.md                                          what changed in this update, how to upload, decisions needed
+  app/companion_api.py                                       new: web companion API (results, details, save on WhatsApp, My schemes, feedback, refer, funnel, daily reminders job)
+  app/conversation/understand.py                             new: understands typed answers ("2nd year BA", "8000 per month")
+  app/scheme_view.py                                         new: scheme cards / details / summary for the new page (amount, "up to" biggest amount, last date, why you match, documents)
+  app/speech/__init__.py                                     new: speech (TTS/STT) module – switched off
+  app/speech/api.py                                          new: speech endpoints /v1/speech/...
+  app/speech/base.py                                         new: speech provider interface
+  app/speech/providers.py                                    new: speech providers (none / mock / http gateway / vendor placeholders)
+  app/static/companion/app.js                                new web companion page (behaviour, wired to the API; page languages; "Up to ₹X a year")
+  app/static/companion/icons.js                              new web companion page (icons)
+  app/static/companion/index.html                            new web companion page (layout)
+  app/static/companion/lang/bn.json                          new: web page texts in bn (machine-drafted, please review)
+  app/static/companion/lang/hi.json                          new: web page texts in hi (machine-drafted, please review)
+  app/static/companion/lang/kn.json                          new: web page texts in kn (machine-drafted, please review)
+  app/static/companion/lang/mr.json                          new: web page texts in mr (machine-drafted, please review)
+  app/static/companion/lang/ta.json                          new: web page texts in ta (machine-drafted, please review)
+  app/static/companion/lang/te.json                          new: web page texts in te (machine-drafted, please review)
+  app/static/companion/strings.js                            new web companion page (English + Hindi labels; other languages in lang/*.json)
+  app/static/companion/styles.css                            new web companion page (look)
+  app/students.py                                            new: Save on WhatsApp, one-time codes, My schemes, tracker, reminders
+  data/scheme_dates.csv                                      new, empty: last dates / renewal per scheme (to be filled)
+  docs/COMPANION_TRANSLATIONS.md                             new: web page languages – what is translated, machine-drafted, how to review
+  docs/SCHEME_DATA_AUDIT.md                                  new: scheme data audit of 29 Sep
+  docs/SPEECH_API.md                                         new: how to switch on speech later
+  docs/scheme_data_audit_changes.xlsx                        new: list of scheme data corrections
+  docs/screenshots/update3_01_typed_answer.png               new screenshot of the new page
+  docs/screenshots/update3_02_review_edit.png                new screenshot of the new page
+  docs/screenshots/update3_03_summary.png                    new screenshot of the new page
+  docs/screenshots/update3_04_scheme_details.png             new screenshot of the new page
+  docs/screenshots/update3_05_save_hi_code.png               new screenshot of the new page
+  docs/screenshots/update3_06_one_tap_save.png               new screenshot of the new page
+  docs/screenshots/update3_07_my_schemes_reminders.png       new screenshot of the new page
+  docs/screenshots/update3_08_feedback.png                   new screenshot of the new page
+  docs/screenshots/update3_09_refer_friend.png               new screenshot of the new page
+  docs/screenshots/update3_10_hindi_my_schemes.png           new screenshot of the new page
+  docs/screenshots/update3_11_mic_speech_off.png             new screenshot of the new page
+  docs/screenshots/update3_lang_bn_summary.png               new screenshot: summary page in bn
+  docs/screenshots/update3_lang_en_summary.png               new screenshot: summary page in en
+  docs/screenshots/update3_lang_hi_summary.png               new screenshot: summary page in hi
+  docs/screenshots/update3_lang_kn_summary.png               new screenshot: summary page in kn
+  docs/screenshots/update3_lang_mr_summary.png               new screenshot: summary page in mr
+  docs/screenshots/update3_lang_ta_summary.png               new screenshot: summary page in ta
+  docs/screenshots/update3_lang_te_summary.png               new screenshot: summary page in te
+  docs/translations/companion/bn.csv                         new: web page translation review sheet (bn)
+  docs/translations/companion/hi.csv                         new: web page translation review sheet (hi)
+  docs/translations/companion/kn.csv                         new: web page translation review sheet (kn)
+  docs/translations/companion/mr.csv                         new: web page translation review sheet (mr)
+  docs/translations/companion/ta.csv                         new: web page translation review sheet (ta)
+  docs/translations/companion/te.csv                         new: web page translation review sheet (te)
+  templates/scheme_dates_template.csv                        new: example row for scheme_dates.csv
+  tests/test_update3_companion.py                            new automated tests for this update
+  tests/test_update3_data_audit.py                           new automated tests for the data audit
+  tests/test_update3_languages.py                            new automated tests for page languages and the "Up to" amount
+  tools/companion_translations.py                            new: export / import the web page translation review sheets
+  tools/scheme_data_audit.py                                 new: re-run the scheme data audit
+
+CHANGED (56)
+  .env.example                                               sample settings file: new optional Update 3 settings listed
+  INTEGRATION_SPEC.docx                                      Word copy of the API guide
+  INTEGRATION_SPEC.md                                        API guide for other teams: new section 6.3 (companion / My schemes / feedback / refer API) and 6.4 (speech)
+  README.md                                                  overview: new features, endpoints, settings, what is stubbed
+  SETUP_GUIDE.docx                                           Word copy of the setup guide
+  SETUP_GUIDE.md                                             click-by-click guide: new Step 5 test, "Update 3 – new settings", daily reminders, troubleshooting
+  app/attribution.py                                         refer-a-friend links: ready WhatsApp share message in the student's language
+  app/channels/whatsapp.py                                   WhatsApp: one-time web link, SAVE / OK codes, MY SCHEMES, voice-note hook, STOP stops reminders
+  app/config.py                                              new optional settings
+  app/conversation/core.py                                   chat: typed answers, edit one answer, feedback any time, REFER, saved profile refresh
+  app/conversation/i18n/as.py                                chat texts in as: new messages (machine-drafted, please review)
+  app/conversation/i18n/bho.py                               chat texts in bho: new messages (machine-drafted, please review)
+  app/conversation/i18n/bn.py                                chat texts in bn: new messages (machine-drafted, please review)
+  app/conversation/i18n/gu.py                                chat texts in gu: new messages (machine-drafted, please review)
+  app/conversation/i18n/hi.py                                chat texts in hi: new messages (machine-drafted, please review)
+  app/conversation/i18n/kn.py                                chat texts in kn: new messages (machine-drafted, please review)
+  app/conversation/i18n/mai.py                               chat texts in mai: new messages (machine-drafted, please review)
+  app/conversation/i18n/ml.py                                chat texts in ml: new messages (machine-drafted, please review)
+  app/conversation/i18n/mr.py                                chat texts in mr: new messages (machine-drafted, please review)
+  app/conversation/i18n/or.py                                chat texts in or: new messages (machine-drafted, please review)
+  app/conversation/i18n/pa.py                                chat texts in pa: new messages (machine-drafted, please review)
+  app/conversation/i18n/ta.py                                chat texts in ta: new messages (machine-drafted, please review)
+  app/conversation/i18n/te.py                                chat texts in te: new messages (machine-drafted, please review)
+  app/conversation/texts.py                                  English chat texts: new messages (one-time link, saved, refer, voice notes ...)
+  app/db.py                                                  new database tables (students, saved schemes, codes, reminders, feedback, shares, events) – created automatically
+  app/eligibility/display.py                                 card text limits 80 / 80 / 90 (data audit)
+  app/eligibility/engine.py                                  own State schemes first; education-level filtering (data audit)
+  app/eligibility/overlay.py                                 scheme data corrections (data audit)
+  app/eligibility/rules_compiler.py                          education-level fields when building the rules file (data audit)
+  app/facts.py                                               Diploma / Polytechnic / ITI answers understood; State names typed in Indian scripts understood
+  app/main.py                                                serves the new page and its language files, new API routes, health shows speech status
+  app/static/companion.html                                  previous companion page, now served at /companion/classic
+  data/scheme_rules_v3.json                                  rebuilt scheme rules file (data audit)
+  docs/EDUCATION_LEVEL_AUDIT.md                              updated education-level audit
+  docs/TRANSLATIONS_REVIEW.md                                translation review guide: pointer to the web page translations
+  docs/screenshots/update1_12_consent_declined.png           updated screenshot (consent declined with scholarships.gov.in link)
+  docs/translations/as.csv                                   translation review sheet (regenerated)
+  docs/translations/bho.csv                                  translation review sheet (regenerated)
+  docs/translations/bn.csv                                   translation review sheet (regenerated)
+  docs/translations/gu.csv                                   translation review sheet (regenerated)
+  docs/translations/hi.csv                                   translation review sheet (regenerated)
+  docs/translations/kn.csv                                   translation review sheet (regenerated)
+  docs/translations/mai.csv                                  translation review sheet (regenerated)
+  docs/translations/ml.csv                                   translation review sheet (regenerated)
+  docs/translations/mr.csv                                   translation review sheet (regenerated)
+  docs/translations/or.csv                                   translation review sheet (regenerated)
+  docs/translations/pa.csv                                   translation review sheet (regenerated)
+  docs/translations/ta.csv                                   translation review sheet (regenerated)
+  docs/translations/te.csv                                   translation review sheet (regenerated)
+  docs/translations/translations_all.csv                     translation review sheet (regenerated)
+  docs/translations/translations_review.xlsx                 translation review sheet (regenerated)
+  render.yaml                                                Render Blueprint: new optional settings (speech, one-time link, reminder template)
+  tests/test_facts.py                                        automated tests updated
+  tests/test_update1.py                                      automated tests updated
+  tests/test_update2.py                                      automated tests updated
+  tests/test_whatsapp.py                                     automated tests updated
+
+Unchanged files (73) are in the zip too, so a full upload is safe.

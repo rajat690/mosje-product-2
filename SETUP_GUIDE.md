@@ -44,7 +44,7 @@ Product 2 is completely separate from Product 1: separate repository, separate R
      .env
      ```
 
-8. Check that these exist on GitHub: `render.yaml`, `requirements.txt`, `.python-version`, `app/main.py`, `app/static/companion.html`, `data/scheme_rules_v3.json`, `data/MoSJE_Scholarship_Master_V3.0.xlsx`.
+8. Check that these exist on GitHub: `render.yaml`, `requirements.txt`, `.python-version`, `app/main.py`, `app/static/companion/index.html`, `data/scheme_rules_v3.json`, `data/MoSJE_Scholarship_Master_V3.0.xlsx`.
 9. Copy the repository URL from the browser address bar, for example `https://github.com/rajat690/mosje-product-2`.
 
 ## Step 2 – Choose a database and get its link
@@ -106,11 +106,13 @@ Keep both private.
 
 ## Step 5 – Test the web companion, API docs and admin page (no WhatsApp needed)
 
-1. Open `<service URL>/companion`. A chat opens: pick **English** in the language dropdown → **Continue** → **Agree** (consent) → **Class 10 passed** → **Female** → **Up to ₹10,000** → **SC** → type `Rajasthan` → check the summary → **Proceed**. You see scheme cards (name, State/Central, department, description, eligibility, documents, application link). Tap **View details** → **Share scheme** shows WhatsApp / Email / Copy / Share buttons. (The first load after a pause can take up to 1 minute: the free service was asleep.)
-2. Tap **Share feedback** → pick 1–5 stars → type a comment or `SKIP`. You get your personal share code `REF-…` and links.
-3. Open `<service URL>/companion/demo`. This is a pretend Product 1 page showing the blue **🎓 Find scholarships** button (the embed snippet).
-4. Open `<service URL>/admin`. The browser asks for a login: user name `admin` (anything works), password = **P2_API_KEY**. You see referral counts per source system, sessions by channel and **by entry source**, outreach messages, peer referrers, and recent suggestions (masked numbers, India time).
-5. Open `<service URL>/docs` → click the green **Authorize** button (top right) → paste **P2_API_KEY** into the **X-API-Key** box → **Authorize** → **Close**. Then open **GET /v1/meta** → **Try it out** → **Execute**. You should get the list of states.
+1. Open `<service URL>/companion` on your phone, or on a computer (it looks like a WhatsApp chat). If the service was asleep, a “Waking up the server…” note appears for up to a minute. Tap **English** → **Agree** → type `Raj` and tap **Rajasthan** → type `I am in 2nd year BA` and tap **Yes** at “You mean Graduation (UG)?” → **Male** → **Up to ₹10,000** → **SC** → check the review card (each answer has **Edit**) → **Show my scholarships**. You see the summary (number of scholarships, “Up to ₹X a year” = the biggest single scholarship, your State's schemes first) and scheme cards. Tap a card for details (why you match, one thing to check, documents checklist with “How to get it”, **Listen**, **Share with parent**, **Apply on official site**). The previous page is still available at `<service URL>/companion/classic`.
+2. Tap **Save on WhatsApp** → **18 or above** → enter a verified test number → tick the consent → **Next** → **Open WhatsApp & send Hi**. WhatsApp opens with “Hi, please save my scholarships. Code SAVE-XXXXX”. Send it. The bot replies “✅ Saved!”, and the web page moves on to **Go to My schemes** by itself (tracker, reminder switches, add a last date, Delete my data). From WhatsApp you can type `MY SCHEMES` at any time to get a one-time link back to this page.
+3. Tap **Give feedback** (summary or My schemes) → pick a face → optional comment → **Send feedback** → **Share with friends** shows your personal code `REF-…`, a message preview and **Send on WhatsApp**.
+4. **Languages:** tap the language button at the top (it shows the current language in its own script) → for example **தமிழ்**. The page labels, questions, State names, months and buttons switch to Tamil; scheme names stay in English, as on the official portal. Try Hindi, বাংলা, मराठी, தமிழ், తెలుగు and ಕನ್ನಡ the same way. You can also type a State in the language's script (for example `राजस्थान`). Assamese, Gujarati, Malayalam, Odia and Punjabi have translated questions but English page labels for now.
+5. Open `<service URL>/companion/demo`. This is a pretend Product 1 page showing the blue **🎓 Find scholarships** button (the embed snippet).
+6. Open `<service URL>/admin`. The browser asks for a login: user name `admin` (anything works), password = **P2_API_KEY**. You see referral counts per source system, sessions by channel and **by entry source**, outreach messages, peer referrers, and recent suggestions (masked numbers, India time).
+7. Open `<service URL>/docs` → click the green **Authorize** button (top right) → paste **P2_API_KEY** into the **X-API-Key** box → **Authorize** → **Close**. Then open **GET /v1/meta** → **Try it out** → **Execute**. You should get the list of states.
 
 ## Step 6 – Meta: create the WhatsApp app and get the test number
 
@@ -188,6 +190,25 @@ Meta changes screen labels from time to time. If a label differs slightly, look 
 5. To embed the chat in a Product 1 web app: add one line to the page: `<script src="<service URL>/companion/embed.js" defer></script>`. Put the Product 1 site address in **ALLOWED_ORIGINS** (comma-separated, for example `https://mosje-dashboard.onrender.com`) if they want to call the chat API directly or limit who can embed. See spec section 6.
 6. Their test phones must be added as recipients on the Meta test number (step 6.7; maximum 5 numbers in total).
 
+## Update 3 – new settings (all optional)
+
+Nothing new is required: the service works after a Manual Deploy with the settings you already have. The new tables are created automatically on start-up, and the existing data is kept. If you want to change a default, go to Render → **mosje-p2-api** → **Environment** → **Add Environment Variable**:
+
+| Key | Value | When |
+|---|---|---|
+| `WHATSAPP_WEB_LINK` | `offer` (default) or `off` | `offer`: after a student picks a language on WhatsApp, the bot adds a one-time link to continue on the web page. `off`: never send it. |
+| `ONE_TIME_LINK_TTL_HOURS` | `48` | How long a one-time link / SAVE code / parent OK code stays valid |
+| `P2_RANK_STATE_FIRST` | `true` | Show the student's own State schemes before Central schemes (`false` = old order) |
+| `WHATSAPP_REMINDER_TEMPLATE` | name of an approved Meta utility template | Needed only for reminders to students who have not written in the last 24 hours (integration later) |
+| `SPEECH_ENABLED` | `false` | Keep false until a speech vendor is chosen (see `docs/SPEECH_API.md`) |
+| `SPEECH_PROVIDER`, `SPEECH_API_KEY`, `SPEECH_API_URL` | empty | Speech vendor details (integration later) |
+
+**Translations (please arrange a review).** All non-English text is machine-drafted. Send each reviewer their file from `docs/translations/` (WhatsApp messages) and `docs/translations/companion/` (web page labels and State names). They fill the *reviewer_ok* / *reviewer_suggestion* columns in Excel. Then a developer runs `python tools/companion_translations.py import <code> <file>` (web page) or copies the WhatsApp texts into `app/conversation/i18n/<code>.py`, runs the tests and uploads. Details: `docs/COMPANION_TRANSLATIONS.md`.
+
+**Daily reminders (integration later).** Reminders and new-scheme alerts are sent when someone calls `POST <service URL>/v1/jobs/run-reminders` with header `X-API-Key: <P2_API_KEY>`. The free Render plan has no cron job, so for now you can run it by hand from `/docs` (**Authorize** with P2_API_KEY → **POST /v1/jobs/run-reminders** → Try it out → Execute; use `{"dry_run": true}` to only see what would be sent). Later: a Render Cron Job (paid) or any free external scheduler that calls this URL once a day at about 9:00 IST.
+
+**Scheme last dates.** The V3.0 master has no last-date column, so cards say “Check portal”. To add dates, fill `data/scheme_dates.csv` (copy the columns from `templates/scheme_dates_template.csv`: `scheme_id, last_date (YYYY-MM-DD), renewal (yes/no or a date), amount_per_year, last_verified, notes`), upload it to GitHub and deploy. Students can also type a last date for a saved scheme in My schemes.
+
 ## Step 10 – Important notes
 
 **Free service sleeps.** After 15 minutes without traffic the service sleeps, and the next request wakes it in about 1 minute. The first WhatsApp reply can therefore be slow. Meta retries webhook deliveries, and Product 2 ignores duplicates, so the student still gets exactly one reply. Before a demo, open `/health` to wake it.
@@ -219,3 +240,7 @@ Meta changes screen labels from time to time. If a label differs slightly, look 
 | `whatsapp_link` is null | WHATSAPP_DISPLAY_NUMBER not set and no message received yet | Set WHATSAPP_DISPLAY_NUMBER (step 6.6) |
 | Product 1 gets 401 | Wrong key or P2_API_KEYS not saved | Check P2_API_KEYS spelling `source:key,source:key`, then redeploy |
 | Embedded widget blocked | ALLOWED_ORIGINS set without that site | Add the site's origin (`https://…`, no trailing slash) |
+| WhatsApp reply has no one-time web link | `WHATSAPP_WEB_LINK=off`, or the service has no public URL | Remove `WHATSAPP_WEB_LINK` or set it to `offer`; on Render `PUBLIC_BASE_URL` is filled automatically |
+| “This one-time link was already used or has expired” | Links work once (and for 48 h) | Type `MY SCHEMES` or `Hi` on WhatsApp to get a new link |
+| Save sheet keeps showing “Waiting for your WhatsApp message…” | The Hi + code was not sent from WhatsApp, or WhatsApp is not connected | Send the exact message from the test phone; check `/admin` for the incoming message |
+| Listen uses the phone's voice / mic says “coming soon” | Speech is switched off (default) | Expected until a speech vendor is set up (`docs/SPEECH_API.md`) |

@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,ਸਹਿਮਤ ਹਾਂ,20,9,yes,,
 o_disagree,Don't agree,ਸਹਿਮਤ ਨਹੀਂ,20,10,yes,,
 o_agree_now,I agree now,ਹੁਣ ਸਹਿਮਤ ਹਾਂ,20,13,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",ਸਮਝ ਗਏ 🙏 ਕੋਈ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਨਾ ਪੁੱਛੀ ਜਾਵੇਗੀ ਨਾ ਰੱਖੀ ਜਾਵੇਗੀ। ਸਾਰੇ ਵਜ਼ੀਫ਼ੇ https://scholarships.gov.in/ ’ਤੇ ਦੇਖ ਸਕਦੇ ਹੋ। ਮਨ ਬਦਲੇ ਤਾਂ ਹੇਠਾਂ ਟੈਪ ਕਰੋ ਜਾਂ HI ਲਿਖੋ।,,156,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",ਸਮਝ ਗਏ 🙏 ਕੋਈ ਨਿੱਜੀ ਜਾਣਕਾਰੀ ਨਾ ਪੁੱਛੀ ਜਾਵੇਗੀ ਨਾ ਰੱਖੀ ਜਾਵੇਗੀ। ਸਾਰੇ ਵਜ਼ੀਫ਼ੇ https://scholarships.gov.in/ ’ਤੇ ਦੇਖ ਸਕਦੇ ਹੋ। ਮਨ ਬਦਲੇ ਤਾਂ ਹੇਠਾਂ ਟੈਪ ਕਰੋ ਜਾਂ HI ਲਿਖੋ।,,156,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ਠੀਕ ਹੈ, ਸ�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","ਮੈਨੂੰ ਸਮਝ ਨਹੀਂ ਆਇਆ 🙂 ਹੇਠਾਂ ਕੋਈ ਵਿਕਲਪ ਟੈਪ ਕਰੋ ਜਾਂ ਉਸਦਾ ਨੰਬਰ ਲਿਖੋ। ਤੁਸੀਂ MENU, BACK ਜਾਂ HELP ਵੀ ਲਿਖ ਸਕਦੇ ਹੋ।",,106,,,
 nothing_back,You are at the first step.,ਤੁਸੀਂ ਪਹਿਲੇ ਕਦਮ 'ਤੇ ਹੋ।,,23,,,
 updated,✅ Updated {f}: {v},✅ {f} ਬਦਲਿਆ ਗਿਆ: {v},,20,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","ਹੁਣ ਇਹ ਸੇਵਾ ਜਮਾਤ 1 ਤੋਂ ਪੋਸਟ ਗ੍ਰੈਜੂਏਸ਼ਨ ਤੱਕ ਦੇ ਵਿਦਿਆਰਥੀਆਂ ਲਈ ਹੈ। ਸਾਰੇ ਵਜ਼ੀਫ਼ੇ https://scholarships.gov.in/ ’ਤੇ ਦੇਖੋ।
 ਦੁਬਾਰਾ ਸ਼ੁਰੂ ਕਰਨ ਲਈ ਕਦੇ ਵੀ HI ਲਿਖੋ।",,151,,,
 summary,Your answers: {facts},ਤੁਹਾਡੇ ਜਵਾਬ: {facts},,20,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",ਤੁਹਾਡੇ ਜਵਾਬਾਂ ਦੇ ਆਧਾਰ 'ਤੇ ਤੁਸੀਂ ਇਹ {n} ਵਜ਼ੀਫ਼ੇ ਦੇਖ ਸਕਦੇ ਹੋ ({total} ਵਿੱਚੋਂ {a}–{b}):,,84,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,ਕੋਈ ਯੋਜਨਾ ਤੁਹਾਡੇ ਸਾਰੇ ਜਵਾਬਾਂ ਨਾਲ ਪੱਕੀ ਤਰ੍ਹਾਂ ਮੇਲ ਨਹੀਂ ਖਾਂਦੀ। ਇਹ {n} ਯੋਜਨਾਵਾਂ ਸਿਰਫ਼ ਖ਼ਾਸ ਸਮੂਹਾਂ ਲਈ ਹਨ – ਦੇਖੋ ਕਿ ਕੀ ਤੁਹਾਡੇ 'ਤੇ ਲਾਗੂ ਹੁੰਦੀ ਹੈ ({total} ਵਿੱਚੋਂ {a}–{b}):,,164,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,ਤੁਹਾਡੇ ਸਾਰੇ ਜਵਾਬਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਯੋਜਨਾ ਸਾਡੀ ਸੂਚੀ ਵਿੱਚ ਨਹੀਂ ਮਿਲੀ। ਤੁਸੀਂ ਜਵਾਬ ਬਦਲ ਸਕਦੇ ਹੋ ਜਾਂ https://scholarships.gov.in/ ਦੇਖ ਸਕਦੇ ਹੋ।,,137,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,ਤੁਹਾਡੇ ਸਾਰੇ ਜਵਾਬਾਂ ਨਾਲ ਮੇਲ ਖਾਂਦੀ ਕੋਈ ਯੋਜਨਾ ਸਾਡੀ ਸੂਚੀ ਵਿੱਚ ਨਹੀਂ ਮਿਲੀ। ਤੁਸੀਂ ਜਵਾਬ ਬਦਲ ਸਕਦੇ ਹੋ ਜਾਂ https://scholarships.gov.in/ ਦੇਖ ਸਕਦੇ ਹੋ।,,137,,,
 list_tap,Tap a scheme (or type its number) to see details.,ਵੇਰਵੇ ਦੇਖਣ ਲਈ ਯੋਜਨਾ 'ਤੇ ਟੈਪ ਕਰੋ (ਜਾਂ ਉਸਦਾ ਨੰਬਰ ਲਿਖੋ)।,,53,,,
 check_section,Only for specific groups – check eligibility,ਸਿਰਫ਼ ਖ਼ਾਸ ਸਮੂਹਾਂ ਲਈ – ਯੋਗਤਾ ਜਾਂਚੋ,,34,,,
 only_for,Only for: {groups},ਸਿਰਫ਼: {groups},,15,,,
@@ -182,6 +183,7 @@ sh_email,Email,ਈਮੇਲ,,4,,,
 sh_copy,Copy message,ਸੁਨੇਹਾ ਕਾਪੀ ਕਰੋ,,15,,,
 sh_more,Share…,ਸਾਂਝਾ ਕਰੋ…,,10,,,
 sh_copied,Copied ✓,ਕਾਪੀ ਹੋ ਗਿਆ ✓,,13,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 ਮੈਨੂੰ 2 ਮਿੰਟਾਂ ਵਿੱਚ ਆਪਣੇ ਲਈ ਸਰਕਾਰੀ ਵਜ਼ੀਫ਼ੇ ਮਿਲ ਗਏ – ਮੁਫ਼ਤ, ਜਾਂਚ ਲਈ ਕੋਈ ਦਸਤਾਵੇਜ਼ ਨਹੀਂ ਚਾਹੀਦਾ। ਤੁਸੀਂ ਵੀ ਵਰਤੋ: {link}",,116,,,
 menu_hint,Type MENU for the main menu.,ਮੁੱਖ ਮੀਨੂ ਲਈ MENU ਲਿਖੋ।,,23,,,
 lang_continue,Continue,ਅੱਗੇ ਵਧੋ,,8,,,
 f_class_passed,Education level,ਸਿੱਖਿਆ ਪੱਧਰ,24,11,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ ਪਿਛਲੇ,24,7,yes,,
 wa_page,Page {p} of {n} – choose an option:,ਪੰਨਾ {p} / {n} – ਕੋਈ ਵਿਕਲਪ ਚੁਣੋ:,,32,,,
 choose_next,What would you like to do next?,ਹੁਣ ਤੁਸੀਂ ਕੀ ਕਰਨਾ ਚਾਹੁੰਦੇ ਹੋ?,,29,,,
 unsupported,Please reply with text (a number or a word).,ਕਿਰਪਾ ਕਰਕੇ ਟੈਕਸਟ ਵਿੱਚ ਜਵਾਬ ਦਿਓ (ਨੰਬਰ ਜਾਂ ਸ਼ਬਦ)।,,47,,,
+o_refer,Refer a friend,ਦੋਸਤ ਨੂੰ ਦੱਸੋ,20,13,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 ਕਿਸੇ ਵਿਦਿਆਰਥੀ ਨੂੰ ਇਸਦੀ ਲੋੜ ਹੋ ਸਕਦੀ ਹੈ? ਆਪਣਾ ਨਿੱਜੀ ਲਿੰਕ ਸਾਂਝਾ ਕਰੋ:
+WhatsApp: {wa}
+ਵੈੱਬ: {web}
+ਜਾਂ ਉਨ੍ਹਾਂ ਨੂੰ ਇਸ ਨੰਬਰ 'ਤੇ ਕੋਡ *{code}* ਭੇਜਣ ਲਈ ਕਹੋ।",,147,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 ਵੱਡੀ ਸਕ੍ਰੀਨ 'ਤੇ ਦੇਖਣਾ ਹੈ? ਆਪਣਾ ਇੱਕ-ਵਾਰ ਦਾ ਲਿੰਕ ਖੋਲ੍ਹੋ (ਸਿਰਫ਼ ਤੁਹਾਡੇ ਲਈ, {h} ਘੰਟਿਆਂ ਵਿੱਚ ਖਤਮ):
+{url}",,101,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 ਤੁਹਾਡੀਆਂ ਸੇਵ ਕੀਤੀਆਂ ਯੋਜਨਾਵਾਂ, ਰਿਮਾਈਂਡਰ ਅਤੇ ਅਰਜ਼ੀ ਟ੍ਰੈਕਰ (ਇੱਕ-ਵਾਰ ਦਾ ਲਿੰਕ, ਸਿਰਫ਼ ਤੁਹਾਡੇ ਲਈ):
+{url}",,99,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ ਸੇਵ ਹੋ ਗਿਆ! {n} ਯੋਜਨਾ ਮੇਰੀਆਂ ਯੋਜਨਾਵਾਂ ਵਿੱਚ ਹਨ। ਆਖਰੀ ਮਿਤੀ ਤੋਂ ਪਹਿਲਾਂ ਅਸੀਂ ਯਾਦ ਕਰਾਵਾਂਗੇ। ਕਦੇ ਵੀ STOP ਲਿਖੋ।
+{url}",,112,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ਇਹ ਕੋਡ ਵੈਧ ਨਹੀਂ ਹੈ ਜਾਂ ਮਿਆਦ ਖਤਮ ਹੋ ਗਈ ਹੈ। ਕਿਰਪਾ ਕਰਕੇ ਵੈੱਬ ਪੇਜ 'ਤੇ ਦੁਬਾਰਾ ਸੇਵ ਦਬਾਓ।,,82,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ ਧੰਨਵਾਦ। ਤੁਹਾਡੀ ਸਹਿਮਤੀ ਦਰਜ ਹੋ ਗਈ ਹੈ। ਹੁਣ ਰਿਮਾਈਂਡਰ ਤੁਹਾਡੇ ਬੱਚੇ ਦੇ ਨੰਬਰ 'ਤੇ ਜਾਣਗੇ।,,81,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 ਵੌਇਸ ਨੋਟ ਜਲਦੀ ਆ ਰਹੇ ਹਨ। ਹੁਣੇ ਕਿਰਪਾ ਕਰਕੇ ਆਪਣਾ ਜਵਾਬ ਟਾਈਪ ਕਰੋ।,,61,,,
+voice_heard,🎤 I heard: “{text}”,🎤 ਮੈਂ ਸੁਣਿਆ: “{text}”,,21,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","ਤੁਸੀਂ ਅਜੇ ਕੋਈ ਯੋਜਨਾ ਸੇਵ ਨਹੀਂ ਕੀਤੀ। ਪਹਿਲਾਂ ਵਜ਼ੀਫ਼ੇ ਲੱਭੋ, ਫਿਰ ਵੈੱਬ ਪੇਜ 'ਤੇ ਸੇਵ ਦਬਾਓ।",,82,,,

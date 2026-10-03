@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,सहमत छी,20,7,yes,,
 o_disagree,Don't agree,सहमत नहि छी,20,11,yes,,
 o_agree_now,I agree now,आब सहमत छी,20,10,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.",बुझि गेलहुँ 🙏 कोनो निजी जानकारी नहि पुछल जायत आ नहि राखल जायत। सभ छात्रवृत्ति https://scholarships.gov.in/ पर देखि सकैत छी। मोन बदलय तँ नीचाँ टैप करू वा HI लिखू।,,161,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.",बुझि गेलहुँ 🙏 कोनो निजी जानकारी नहि पुछल जायत आ नहि राखल जायत। सभ छात्रवृत्ति https://scholarships.gov.in/ पर देखि सकैत छी। मोन बदलय तँ नीचाँ टैप करू वा HI लिखू।,,161,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","ठीक अछि, �
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","हम नहि बुझलहुँ 🙂 नीचाँ कोनो विकल्प चुनू वा ओकर नंबर लिखू। अहाँ MENU, BACK वा HELP सेहो लिखि सकैत छी।",,100,,,
 nothing_back,You are at the first step.,अहाँ पहिल चरण पर छी।,,20,,,
 updated,✅ Updated {f}: {v},✅ {f} बदलल गेल: {v},,19,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","अखन ई सेवा कक्षा 1 सँ स्नातकोत्तर धरिक विद्यार्थी सभक लेल अछि। सभ छात्रवृत्ति https://scholarships.gov.in/ पर देखू।
 फेर सँ शुरू करबाक लेल कखनो HI लिखू।",,151,,,
 summary,Your answers: {facts},अहाँक उत्तर: {facts},,20,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",अहाँक उत्तरक आधार पर ई {n} छात्रवृत्ति देखू ({total} मे सँ {a}–{b}):,,68,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,कोनो योजना अहाँक सभ उत्तरसँ पक्का मेल नहि खेलक। ई {n} योजना मात्र किछु खास समूहक लेल अछि – देखू जे अहाँ पर लागू होइत अछि वा नहि ({total} मे सँ {a}–{b}):,,152,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,अहाँक सभ उत्तरसँ मेल खाइत कोनो योजना हमर सूचीमे नहि भेटल। अहाँ उत्तर बदलि सकैत छी वा https://scholarships.gov.in/ देखि सकैत छी।,,127,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,अहाँक सभ उत्तरसँ मेल खाइत कोनो योजना हमर सूचीमे नहि भेटल। अहाँ उत्तर बदलि सकैत छी वा https://scholarships.gov.in/ देखि सकैत छी।,,127,,,
 list_tap,Tap a scheme (or type its number) to see details.,विवरण देखबाक लेल योजना पर टैप करू (वा ओकर नंबर लिखू)।,,53,,,
 check_section,Only for specific groups – check eligibility,मात्र खास समूहक लेल – पात्रता जाँचू,,35,,,
 only_for,Only for: {groups},मात्र: {groups},,15,,,
@@ -182,6 +183,7 @@ sh_email,Email,ईमेल,,4,,,
 sh_copy,Copy message,संदेश कॉपी करू,,14,,,
 sh_more,Share…,शेयर…,,5,,,
 sh_copied,Copied ✓,कॉपी भऽ गेल ✓,,13,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 हमरा 2 मिनटमे अपना लेल सरकारी छात्रवृत्ति भेटि गेल – निःशुल्क, जाँचबाक लेल कोनो कागज नहि चाही। अहूँ देखू: {link}",,114,,,
 menu_hint,Type MENU for the main menu.,मुख्य मेनू लेल MENU लिखू।,,25,,,
 lang_continue,Continue,आगाँ बढ़ू,,9,,,
 f_class_passed,Education level,पढ़ाइक स्तर,24,11,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ पछिला,24,7,yes,,
 wa_page,Page {p} of {n} – choose an option:,पेज {p} / {n} – कोनो विकल्प चुनू:,,33,,,
 choose_next,What would you like to do next?,आब अहाँ की करए चाहैत छी?,,24,,,
 unsupported,Please reply with text (a number or a word).,कृपया टेक्स्टमे उत्तर दिअ (नंबर वा शब्द)।,,41,,,
+o_refer,Refer a friend,मित्रकेँ कहू,20,12,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 कोनो विद्यार्थीकेँ एकर जरूरति भ' सकैत अछि? अपन निजी लिंक शेयर करू:
+WhatsApp: {wa}
+वेब: {web}
+वा हुनकासँ कहू जे एहि नंबर पर कोड *{code}* पठाबथि।",,145,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 पैघ स्क्रीन पर देखबाक अछि? अपन एक-बेरक लिंक खोलू (मात्र अहाँक लेल, {h} घंटामे समाप्त):
+{url}",,94,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 अहाँक सेव कएल योजना, रिमाइंडर आ आवेदन ट्रैकर (एक-बेरक लिंक, मात्र अहाँक लेल):
+{url}",,85,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ सेव भ' गेल! {n} योजना हमर योजनामे अछि। अंतिम तिथिसँ पहिने हम मोन पाड़ब। कखनो STOP लिखू।
+{url}",,95,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,ई कोड मान्य नहि अछि वा समाप्त भ' गेल। वेब पेज पर फेरसँ सेव दबाउ।,,64,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ धन्यवाद। अहाँक सहमति दर्ज भ' गेल। आब रिमाइंडर अहाँक बच्चाक नंबर पर जाएत।,,74,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 वॉइस नोट जल्दी आओत। एखन अपन उत्तर टाइप करू।,,45,,,
+voice_heard,🎤 I heard: “{text}”,🎤 हम सुनलहुँ: “{text}”,,22,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","अहाँ एखन धरि कोनो योजना सेव नहि कएलहुँ। पहिने छात्रवृत्ति खोजू, फेर वेब पेज पर सेव दबाउ।",,88,,,

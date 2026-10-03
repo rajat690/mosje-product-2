@@ -6,6 +6,8 @@ script first, e.g. "বাংলা (Bengali)").
 
 ## Status – please read
 
+* **Web page (`/companion`, Update 3, 2 Oct 2026):** its labels, document help texts and State names have their own files – see [COMPANION_TRANSLATIONS.md](COMPANION_TRANSLATIONS.md) and `docs/translations/companion/`.
+
 * **All non-English texts are machine-drafted and need a native-speaker review before real students use them.**
 * Hindi: 25 of the 57 Hindi strings from the original repo are unchanged. The other 134 Hindi strings are new or
   rewritten for Update 1 (consent, the 5 questions, summary, scheme cards, share and star feedback).

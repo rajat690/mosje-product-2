@@ -51,7 +51,8 @@ consent,"🔒 To find scholarships that may be relevant, I need to use the detai
 o_agree,Agree,சம்மதம்,20,7,yes,,
 o_disagree,Don't agree,சம்மதம் இல்லை,20,13,yes,,
 o_agree_now,I agree now,இப்போது சம்மதம்,20,15,yes,,
-consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships at https://scholarships.gov.in/ . If you change your mind, tap below or reply HI.","புரிந்தது 🙏 எந்தத் தனிப்பட்ட விவரமும் கேட்கப்படாது, வைக்கப்படாது. எல்லா உதவித்தொகைகளையும் https://scholarships.gov.in/ இல் பார்க்கலாம். மனம் மாறினால் கீழே தட்டவும் அல்லது HI என்று எழுதவும்.",,189,,,
+consent_declined,"Understood 🙏 I won't ask for or keep any personal details. You can still explore all scholarships on the National Scholarship Portal: https://scholarships.gov.in/
+If you change your mind, tap below or reply HI.","புரிந்தது 🙏 எந்தத் தனிப்பட்ட விவரமும் கேட்கப்படாது, வைக்கப்படாது. எல்லா உதவித்தொகைகளையும் https://scholarships.gov.in/ இல் பார்க்கலாம். மனம் மாறினால் கீழே தட்டவும் அல்லது HI என்று எழுதவும்.",,189,,,
 summary_title,"📋 Please check your details:
 {facts}
 
@@ -66,13 +67,13 @@ edit_restart,"OK, let's go through the questions again.","சரி, கேள�
 fallback,"I didn't get that 🙂 Please tap an option below or type its number. You can also type MENU, BACK or HELP.","எனக்குப் புரியவில்லை 🙂 கீழே உள்ள ஒரு விருப்பத்தைத் தட்டவும் அல்லது அதன் எண்ணை எழுதவும். MENU, BACK அல்லது HELP என்றும் எழுதலாம்.",,128,,,
 nothing_back,You are at the first step.,நீங்கள் முதல் படியில் இருக்கிறீர்கள்.,,37,,,
 updated,✅ Updated {f}: {v},✅ {f} மாற்றப்பட்டது: {v},,24,,,
-class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/ .
+class_other,"Right now I can help students from Class 1 up to Post Graduation. You can explore all scholarships at https://scholarships.gov.in/
 Reply HI any time to start again.","இப்போது இந்தச் சேவை 1ஆம் வகுப்பு முதல் முதுநிலை வரை உள்ள மாணவர்களுக்கானது. எல்லா உதவித்தொகைகளையும் https://scholarships.gov.in/ இல் பாருங்கள்.
 மீண்டும் தொடங்க எப்போது வேண்டுமானாலும் HI என்று எழுதவும்.",,200,,,
 summary,Your answers: {facts},உங்கள் பதில்கள்: {facts},,24,,,
 results_head,"Based on your answers, here are {n} scholarship(s) you can explore (showing {a}–{b} of {total}):",உங்கள் பதில்களின் அடிப்படையில் நீங்கள் பார்க்கக்கூடிய {n} உதவித்தொகை(கள்) ({total} இல் {a}–{b}):,,96,,,
 results_head_check_only,No scheme matched all your answers for certain. These {n} scheme(s) are only for specific groups – check if one applies to you (showing {a}–{b} of {total}):,எந்தத் திட்டமும் உங்கள் எல்லா பதில்களுடனும் உறுதியாகப் பொருந்தவில்லை. இந்த {n} திட்டம்(கள்) குறிப்பிட்ட குழுக்களுக்கு மட்டும் – உங்களுக்குப் பொருந்துமா எனப் பாருங்கள் ({total} இல் {a}–{b}):,,189,,,
-results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/ .,உங்கள் எல்லா பதில்களுக்கும் பொருந்தும் திட்டம் எங்கள் பட்டியலில் இல்லை. பதில்களை மாற்றலாம் அல்லது https://scholarships.gov.in/ பார்க்கலாம்.,,139,,,
+results_none,I could not find a scheme in our list that matches all your answers. You can change your answers or explore https://scholarships.gov.in/,உங்கள் எல்லா பதில்களுக்கும் பொருந்தும் திட்டம் எங்கள் பட்டியலில் இல்லை. பதில்களை மாற்றலாம் அல்லது https://scholarships.gov.in/ பார்க்கலாம்.,,139,,,
 list_tap,Tap a scheme (or type its number) to see details.,விவரங்களைப் பார்க்க திட்டத்தைத் தட்டவும் (அல்லது அதன் எண்ணை எழுதவும்).,,70,,,
 check_section,Only for specific groups – check eligibility,குறிப்பிட்ட குழுக்களுக்கு மட்டும் – தகுதியைச் சரிபார்க்கவும்,,60,,,
 only_for,Only for: {groups},இவர்களுக்கு மட்டும்: {groups},,29,,,
@@ -182,6 +183,7 @@ sh_email,Email,மின்னஞ்சல்,,10,,,
 sh_copy,Copy message,செய்தியை நகலெடு,,15,,,
 sh_more,Share…,பகிர்…,,6,,,
 sh_copied,Copied ✓,நகலெடுக்கப்பட்டது ✓,,19,,,
+share_invite,"🎓 I found government scholarships for me in 2 minutes – free, and no documents needed to check. Try it: {link}","🎓 2 நிமிடங்களில் எனக்கான அரசு உதவித்தொகைகளைக் கண்டுபிடித்தேன் – இலவசம், சரிபார்க்க எந்த ஆவணமும் தேவையில்லை. நீங்களும் முயலுங்கள்: {link}",,136,,,
 menu_hint,Type MENU for the main menu.,முதன்மை மெனுவுக்கு MENU என்று எழுதவும்.,,39,,,
 lang_continue,Continue,தொடரவும்,,8,,,
 f_class_passed,Education level,கல்வி நிலை,24,10,yes,,
@@ -197,3 +199,25 @@ wa_prev,◀ Previous,◀ முந்தைய,24,9,yes,,
 wa_page,Page {p} of {n} – choose an option:,பக்கம் {p} / {n} – ஒன்றைத் தேர்ந்தெடுக்கவும்:,,45,,,
 choose_next,What would you like to do next?,அடுத்து என்ன செய்ய விரும்புகிறீர்கள்?,,37,,,
 unsupported,Please reply with text (a number or a word).,தயவுசெய்து உரையாகப் பதில் அளியுங்கள் (எண் அல்லது சொல்).,,55,,,
+o_refer,Refer a friend,நண்பரிடம் சொல்க,20,15,yes,,
+refer,"🤝 Know a student who could use this? Share your personal link:
+WhatsApp: {wa}
+Web: {web}
+Or ask them to send the code *{code}* to this number.","🤝 ஒரு மாணவருக்கு இது பயன்படுமா? உங்கள் தனிப்பட்ட இணைப்பைப் பகிருங்கள்:
+WhatsApp: {wa}
+வலை: {web}
+அல்லது இந்த எண்ணுக்கு *{code}* குறியீட்டை அனுப்பச் சொல்லுங்கள்.",,160,,,
+web_link,"📱 Prefer a bigger screen? Open your one-time link (only for you, expires in {h} hours):
+{url}","📱 பெரிய திரையில் பார்க்க வேண்டுமா? உங்கள் ஒருமுறை இணைப்பைத் திறக்கவும் (உங்களுக்கு மட்டும், {h} மணி நேரத்தில் காலாவதி):
+{url}",,125,,,
+my_link,"📋 Your saved schemes, reminders and application tracker (one-time link, only for you):
+{url}","📋 நீங்கள் சேமித்த திட்டங்கள், நினைவூட்டல்கள், விண்ணப்ப நிலை (ஒருமுறை இணைப்பு, உங்களுக்கு மட்டும்):
+{url}",,104,,,
+save_ok,"✅ Saved! {n} scheme(s) are in My schemes. We'll remind you before last dates. Reply STOP anytime.
+{url}","✅ சேமிக்கப்பட்டது! {n} திட்டம்(கள்) என் திட்டங்களில் உள்ளன. கடைசி தேதிக்கு முன் நினைவூட்டுவோம். எப்போது வேண்டுமானாலும் STOP என அனுப்பவும்.
+{url}",,144,,,
+save_bad,This code is not valid or has expired. Please tap Save again on the web page.,இந்தக் குறியீடு செல்லாது அல்லது காலாவதியானது. வலைப் பக்கத்தில் மீண்டும் சேமி அழுத்தவும்.,,88,,,
+parent_ok,✅ Thank you. Your consent is recorded. Reminders will now go to your child's number.,✅ நன்றி. உங்கள் ஒப்புதல் பதிவு செய்யப்பட்டது. இனி நினைவூட்டல்கள் உங்கள் குழந்தையின் எண்ணுக்குச் செல்லும்.,,105,,,
+voice_soon,🎤 Voice notes are coming soon. Please type your answer for now.,🎤 குரல் செய்திகள் விரைவில் வரும். இப்போது உங்கள் பதிலைத் தட்டச்சு செய்யவும்.,,76,,,
+voice_heard,🎤 I heard: “{text}”,🎤 நான் கேட்டது: “{text}”,,24,,,
+no_saved,"You have not saved any schemes yet. Find scholarships first, then tap Save on the web page.","நீங்கள் இன்னும் எந்தத் திட்டத்தையும் சேமிக்கவில்லை. முதலில் உதவித்தொகைகளைத் தேடி, பிறகு வலைப் பக்கத்தில் சேமி அழுத்தவும்.",,121,,,

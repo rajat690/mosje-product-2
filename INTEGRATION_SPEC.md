@@ -1,7 +1,7 @@
 # MoSJE Product 2 – Integration Specification (API v1)
 
 **Scholarship Discovery Assistant – WhatsApp + web companion**
-Version 1.0 · 28 Sep 2026 · Rule version: Scholarship Eligibility Rule V3.0 · Status: prototype (synthetic / test data only)
+Version 1.1 · 2 Oct 2026 (Update 3: mobile companion, Save on WhatsApp, My schemes, feedback, refer a friend, speech provision) · Rule version: Scholarship Eligibility Rule V3.0 · Status: prototype (synthetic / test data only)
 
 This document is the contract between **Product 2** (this service) and any **Product 1** system (the record-linkage and eligibility platform). Two Product 1 builds exist in parallel (for example `p1-rajat` and `p1-teamB`). Both connect in the same way. Product 2 does not import or depend on any Product 1 code.
 
@@ -283,6 +283,46 @@ A live demo page is at `/companion/demo`. Try the companion at `/companion`.
 `ALLOWED_ORIGINS` = comma-separated origins (for example `https://p1-rajat.onrender.com,https://p1-teamb.example.org`). It enables CORS for those origins (option D) and restricts which sites may frame `/companion` (CSP `frame-ancestors`). Empty = no cross-origin API calls, and the companion can be framed anywhere (demo mode).
 `COMPANION_PUBLIC=false` switches off anonymous sessions; then only option C works.
 
+### 6.3 Mobile companion API (Update 3)
+
+`/companion` is now a mobile-first, WhatsApp-style page (Product Vision V1.0). It uses the chat API in 6.1 for the questions, plus the endpoints below. Product 1 teams can use them to build their own screens. Session endpoints need `X-Session-Token`, the token returned by `POST /v1/chat/sessions` (or an API key for sessions of your source system). “My schemes” endpoints need `X-Student-Token`, which is returned once, when a student saves on WhatsApp.
+
+| Method and path | Body / result |
+|---|---|
+| `GET /v1/companion/config` | Languages, States, 6 likely States, `speech` status, WhatsApp number and `wa_hi_link`, save consent text |
+| `POST /v1/companion/open` | `{"code": "WL-…", "entry": {…}}` → new web session for the WhatsApp number that received the one-time link, with that number's answers carried over. `linked: false` (anonymous session, nothing personal shown) if the link was already used, has expired or is unknown. `screen: "my"` for a My-schemes link. |
+| `POST /v1/companion/sessions/{id}/interpret` | `{"text": "I am in 2nd year BA", "key": "class_passed"?}` → `{"understood": true, "value": "UG", "label": "Graduation (UG)", "send": "UG", "also": {…}}`. Use it for a “You mean …?” confirmation, then post `send` as the chat message. |
+| `GET /v1/companion/sessions/{id}/results` | `profile` (5 answers), `summary` (count, eligible, to_check, closing_soon, state_schemes, **`max_per_year`**, `max_scheme_id`, `max_scheme_name`, amounts_known, closest; `total_per_year` is **deprecated** – see note below), `cards` (scheme_id, name, level, state_ut, is_state, amount_per_year, `amount_kind` (`year` / `once` / `total`), last_date, days_left, status `eligible`/`check`, check question, why lines, documents, apply_url, saved) |
+| `GET /v1/companion/sessions/{id}/schemes/{scheme_id}` | One card with full rule details (benefit, education, category, income, age, domicile, documents). `404 scheme_not_found` |
+| `POST /v1/companion/sessions/{id}/events` | `{"name": "apply_clicked", "scheme_id"?, "data"?}`, a funnel event (lower-case name) |
+| `POST /v1/companion/sessions/{id}/feedback` | `{"rating": 1-5, "comment"?, "context": {"screen", "scheme_id"}}` → `201 {"feedback_id", "refer": {share_code, web_link, whatsapp_link, share_message, whatsapp_share_url}}` |
+| `POST /v1/companion/sessions/{id}/referral` | `{"via": "whatsapp"/"copy"/"native"/…, "kind": "refer"/"scheme"/"parent", "scheme_id"?}` → the student's refer-a-friend links (same `REF-` code every time) + `referrals_started`. Each call is logged in `p2_share_events`. |
+| `POST /v1/companion/sessions/{id}/save` | `{"scheme_ids": […] or "scope": "all", "consent": true, "age_band": "18plus"/"u18", "phone"?, "remind": {"deadline", "new", "renew"}}` → `saved` (one tap: the session came from WhatsApp, or `X-Student-Token` was sent) with `student_token`; `confirm_pending` with `code` `SAVE-XXXXX`, `wa_text`, `wa_link` (the student sends that text from WhatsApp, which proves the number; no OTP); or `parent_pending` with `code` `OK-XXXXX` and a ready-made parent message (under 18). `400 consent_required` / `invalid_mobile` / `nothing_to_save` |
+| `GET /v1/companion/sessions/{id}/save-status/{code}` | `pending` / `expired` / `confirmed`. The first `confirmed` answer carries `student_token` and `me`. |
+| `GET /v1/companion/me` | Masked number, answers, `preferences`, `saved` (each with tracker `status`, documents, `last_date`, `days_left`, `renewal_date`), `stats`, `upcoming` reminders, `share_code` |
+| `PUT /v1/companion/me/preferences` | `{"deadline"?, "new"?, "renew"?, "language"?}` |
+| `POST /v1/companion/me/schemes` | `{"scheme_ids": […]}`, add more saved schemes |
+| `PATCH /v1/companion/me/schemes/{scheme_id}` | `{"status": "saved"/"docs"/"applied"/"result"/"approved"/"rejected", "docs_have"?, "last_date"?, "renewal_needed"?, "renewal_date"?}`. Reminders are re-planned: 7 and 2 days before the last date (none once Applied), a result check 30 days after Applied, and renewal 30 days before the renewal date. |
+| `DELETE /v1/companion/me/schemes/{scheme_id}` · `DELETE /v1/companion/me` | Remove one scheme · delete my data (number, answers, saved schemes, reminders, codes) |
+| `POST /v1/companion/me/referral` | Refer-a-friend links for a saved student |
+| `GET /v1/companion/feedback` (API key) | Feedback list + average, only your source system (admin: all or `?source_system=`) |
+| `GET /v1/companion/funnel` (API key) | Sessions by entry source and channel, completed, events (`web_opened`, `scheme_viewed`, `saved`, `apply_clicked`, …), students saved / stopped, tracker counts, reminder counts, feedback average, peer-referral sessions |
+| `POST /v1/jobs/run-reminders` (admin key) | `{"dry_run"?: bool, "date"?: "YYYY-MM-DD"}`. Plans and sends due reminders and new-scheme alerts. Call it once a day. Outside WhatsApp's 24-hour window a reminder needs the approved template `WHATSAPP_REMINDER_TEMPLATE`; otherwise it is marked `NOT_SENT` (integration later). |
+
+**Amounts – “Up to ₹X a year” (2 Oct 2026).** Students are shown **“Up to ₹X a year”**, where X = `summary.max_per_year`: the biggest single **yearly** amount (`amount_kind == "year"`) among the eligible schemes (if no eligible scheme shows a yearly amount, the “check 1 detail” schemes are used). Amounts are never added together. `summary.total_per_year` (the plain sum of all yearly amounts) is still returned so existing integrations don't break, but it is **deprecated** and not shown to students – please switch to `max_per_year`. `amount_kind`: `year` = per year, `once` = one-time award or incentive, `total` = a total for the whole course (e.g. overseas scholarships); a range “₹5,000–₹20,000” is given as its upper end.
+
+**Page languages (2 Oct 2026).** `GET /companion/lang/{code}.json` returns the UI language pack used by the page (`strings`, `docs`, `months`, `states` = State name in the language's script, keyed by the English name). Available: `hi` (States only – Hindi labels are built in), `bn`, `mr`, `ta`, `te`, `kn`; other codes return 404 and the page uses English labels (Bhojpuri / Maithili use Hindi). All API values (State names, scheme names, `profile`) stay in English or in the session language as before. The chat API accepts a State typed in an Indian script (e.g. “राजस्थान”, “தமிழ்நாடு”). Refer-a-friend `share_message` is in the session's (or student's) language.
+
+**The three journeys (Product Vision 3).**
+1. *Outreach link* (`OM-…` code on WhatsApp): the chat runs on WhatsApp. After the language is chosen, the bot adds a one-time link (`/companion?c=WL-…`, valid `ONE_TIME_LINK_TTL_HOURS`, single use) to continue on a bigger screen. On that page, Save is one tap.
+2. *“Hi” on WhatsApp*: the same as 1, without attribution.
+3. *Anonymous web* (`/companion`, embed, or a `REF-`/`OM-` web link): Save asks for the number, then the student sends “Hi … Code SAVE-XXXXX” from that WhatsApp number.
+WhatsApp keywords: `MY SCHEMES` sends a one-time My-schemes link, `REFER` sends the personal refer links, `FEEDBACK` starts the rating, and `STOP` stops all reminders.
+
+### 6.4 Speech provision (integration later)
+
+`GET /v1/speech/status`, `POST /v1/speech/tts` (`{"text", "lang"}` → `audio_base64`/`url`), `POST /v1/speech/stt` (multipart `file`, `lang` → `text`). Speech is off by default and answers `503 speech_not_configured`. Settings, the vendor gateway contract and the WhatsApp voice-note hook are in `docs/SPEECH_API.md`.
+
 ## 7. Entry-source attribution and outreach links
 
 Every session, on both channels, records **how the student arrived** (first touch).
@@ -369,7 +409,7 @@ With a Meta **test** number, only verified recipient phones can chat. Real campa
 
 ### 7.4 Feedback and peer referral
 
-From the results or any scheme card the student can choose **Share feedback**: a 1–5 star rating, then an optional comment (or SKIP). The bot then sends a personal share code `REF-XXXXXX` with WhatsApp and web links. **Share scheme** (on a scheme card) gives a ready-made message with the same personal links, to forward on WhatsApp, email or social media. Sessions started with that code are `PEER_REFERRAL`, and `entry.referrer_share_code` shows the code. The referrer's result shows `share_code`, `feedback` and `peer_referrals_count`. Restarts are not counted twice.
+From the results or any scheme card the student can choose **Share feedback**: a 1–5 star rating, then an optional comment (or SKIP). The bot then sends a personal share code `REF-XXXXXX` with WhatsApp and web links. **Share scheme** (on a scheme card) gives a ready-made message with the same personal links, to forward on WhatsApp, email or social media. Sessions started with that code are `PEER_REFERRAL`, and `entry.referrer_share_code` shows the code. Update 3: the same personal links are offered by **Refer a friend** (web: after feedback, in My schemes and in the menu; WhatsApp: the keyword `REFER` or the Main-menu option after results). The web link format is `/companion?src=referral&ref=REF-XXXXXX`. On a phone, the share button opens WhatsApp's share screen with a ready message (`whatsapp_share_url`). The referrer's result shows `share_code`, `feedback` and `peer_referrals_count`. Restarts are not counted twice.
 
 ## 8. Result object
 
@@ -417,14 +457,17 @@ Errors return JSON: `{"detail": {"error": "<code>", "message": "<human text>"}}`
 | HTTP | `error` | When |
 |---|---|---|
 | 400 | `invalid_source_system`, `invalid_since` | Bad parameter format |
-| 401 | `missing_api_key`, `invalid_api_key`, `invalid_session_token` | No key, unknown key, wrong session token |
+| 401 | `missing_api_key`, `invalid_api_key`, `invalid_session_token`, `invalid_student_token` | No key, unknown key, wrong session token, wrong / deleted My-schemes token |
 | 403 | `forbidden_source_system`, `admin_only` | Key used for another source system; admin-only endpoint |
 | 404 | `referral_not_found`, `outreach_message_not_found`, `session_not_found` | Not found (or belongs to another source system) |
 | 409 | `opted_out` | The student replied STOP |
 | 413 | `batch_too_large`, `file_too_large` | More than 5,000 items / 5 MB |
 | 415 | `unsupported_file_type` | Upload that is not .csv/.xlsx |
 | 422 | `no_mobile` / validation | Referral without mobile for invite; malformed JSON body |
-| 503 | `not_configured` | Server has no API key configured |
+| 400 | `consent_required`, `phone_required`, `invalid_mobile`, `nothing_to_save`, `invalid_event` | Save on WhatsApp / event input problems |
+| 404 | `scheme_not_found`, `code_not_found`, `not_saved` | Companion: unknown scheme, unknown save code, scheme not in My schemes |
+| 429 | `speech_rate_limited` | Too many speech calls from one IP |
+| 503 | `not_configured`, `speech_not_configured`, `speech_provider_not_implemented` | Server has no API key configured; speech is off or the vendor adapter is a placeholder |
 
 ## 11. Limits
 
@@ -437,6 +480,7 @@ Errors return JSON: `{"detail": {"error": "<code>", "message": "<human text>"}}`
 * Links carry only opaque codes (`OM-…`, `R…`, `REF-…`), never names or IDs. A per-recipient link greets the student by first name and shows the pre-filled facts to whoever opens it, so treat it as personal. Use generic links where that is a concern.
 * Mobile numbers are masked in every API response and on the admin page. Full numbers are stored only to recognise WhatsApp users.
 * Tenancy: each source-system key sees only its own data.
+* **Saved students (Update 3):** only the WhatsApp number, language, the 5 answers, saved schemes with tracker status and dates, and alert settings are kept, never a name, Aadhaar, bank details or documents. The number is proven by the student sending a message from it (one tap from WhatsApp, or “Hi + SAVE code”). Under 18, a parent must send “YES … OK-code” from their WhatsApp before anything is stored. One-time links work once and expire. A forwarded link opens an anonymous page. **Delete my data** (My schemes) removes everything about the student, and STOP stops every reminder.
 * STOP opts the student out: the bot stops replying, and invites are refused with `409`. Sending "hi" again opts back in.
 * **Consent (Update 1):** after choosing a language, every student sees a short consent text (SETU wording) with *Agree* / *Don't agree*. The decision, its UTC time and the text version are stored. If the student does not agree, nothing personal is kept (answers and pre-filled facts are deleted; later messages are not stored). The final consent wording and retention period still need legal review (to-do list, section 1). The prototype keeps data until the database is deleted.
 
